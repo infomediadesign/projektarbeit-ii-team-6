@@ -1,0 +1,51 @@
+# Created by https://www.toptal.com/developers/gitignore/api/cmake
+# Edit at https://www.toptal.com/developers/gitignore?templates=cmake
+#### MODIFIED ####
+
+### CMake ###
+# CMake files
+CMakeUserPresets.json
+CMakeCache.txt
+CMakeLists.txt.user
+CMakeFiles/
+CMakeScripts/
+
+# Build files
+Makefile
+
+# CMake install
+cmake_install.cmake
+install_manifest.txt
+
+# Compile utils
+compile_commands.json
+
+Testing/
+CTestTestfile.cmake
+
+# FetchContent directory
+_deps/
+
+# CMake output
+[Bb]uild/
+[Ii]nstall/
+
+### CMake Patch ###
+# External projects
+*-prefix/
+
+### Other stuff ###
+
+# User-specific files
+*.user
+
+# Visual Studio cache/options directory
+.vs/
+
+# Visual Studio Code cache/options directory
+.vscode/
+
+# JetBrains CLion cache/options directory
+.idea/
+
+# End of https://www.toptal.com/developers/gitignore/api/cmake
