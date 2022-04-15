@@ -23,8 +23,8 @@ namespace Redge
 		auto Update() -> void;
 
 		auto Render() const -> void;
-		auto RenderBackground() const -> void;
+		auto RenderWorld() const -> void;
 		auto RenderForeground() const -> void;
 		auto RenderUI() const -> void;
 	};
-}
+} // namespace Redge

@@ -1,7 +1,6 @@
 #include "Game.h"
 
 #include <raylib.h>
-#include <string>
 
 namespace Redge
 {
@@ -17,11 +16,13 @@ namespace Redge
 
 	auto Game::IsRunning() const -> bool
 	{
+		(void)this;
 		return !WindowShouldClose();
 	}
 
 	auto Game::Update() -> void
 	{
+		(void)this;
 	}
 
 	auto Game::Render() const -> void
@@ -29,14 +30,14 @@ namespace Redge
 		BeginDrawing();
 		ClearBackground(PINK);
 
-		RenderBackground();
+		RenderWorld();
 		RenderForeground();
 		RenderUI();
 
 		EndDrawing();
 	}
 
-	auto Game::RenderBackground() const -> void
+	auto Game::RenderWorld() const -> void
 	{
 		(void)this;
 	}
@@ -50,4 +51,4 @@ namespace Redge
 	{
 		(void)this;
 	}
-}
+} // namespace Redge
