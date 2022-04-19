@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Graphics/Tileset.h"
+
 #include <cstdint>
 
 namespace Redge
@@ -21,10 +23,13 @@ namespace Redge
 		[[nodiscard]] auto IsRunning() const -> bool;
 
 		auto Update() -> void;
-
 		auto Render() const -> void;
+
+	private:
 		auto RenderWorld() const -> void;
 		auto RenderForeground() const -> void;
 		auto RenderUI() const -> void;
+
+		Tileset m_Tileset;
 	};
 } // namespace Redge
