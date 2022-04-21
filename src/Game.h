@@ -1,8 +1,9 @@
 #pragma once
 
-#include "Graphics/Tileset.h"
+#include "Scene.h"
 
 #include <cstdint>
+#include <memory>
 
 namespace Redge
 {
@@ -22,14 +23,12 @@ namespace Redge
 
 		[[nodiscard]] auto IsRunning() const -> bool;
 
+		auto SetScene(std::unique_ptr<Scene> newScene) -> std::unique_ptr<Scene>;
+
 		auto Update() -> void;
 		auto Render() const -> void;
 
 	private:
-		auto RenderWorld() const -> void;
-		auto RenderForeground() const -> void;
-		auto RenderUI() const -> void;
-
-		Tileset m_Tileset;
+		std::unique_ptr<Scene> m_Scene;
 	};
 } // namespace Redge
