@@ -81,4 +81,24 @@ namespace Redge
 		rect.height = static_cast<float>(GetTileHeight());
 		DrawTextureRec(m_Texture, rect, position, tint);
 	}
+
+	auto Tileset::DrawTileScaled(uint16_t x, uint16_t y, Vector2 position, float scale, Color tint) const -> void
+	{
+		// Check passed parameters are within bounds
+		assert(x < GetTileCountX());
+		assert(y < GetTileCountY());
+
+		Rectangle rect;
+		rect.x = static_cast<float>(GetTileWidth() * x);
+		rect.y = static_cast<float>(GetTileHeight() * y);
+		rect.width = static_cast<float>(GetTileWidth());
+		rect.height = static_cast<float>(GetTileHeight());
+
+		Rectangle dest;
+		dest.x = position.x;
+		dest.y = position.y;
+		dest.width = rect.width * scale;
+		dest.height = rect.height * scale;
+		DrawTexturePro(m_Texture, rect, dest, Vector2{}, 0, tint);
+	}
 } // namespace Redge

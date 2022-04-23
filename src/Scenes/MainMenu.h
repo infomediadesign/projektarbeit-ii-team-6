@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Scene.h"
+#include "Graphics/Tileset.h"
 
 namespace Redge
 {
@@ -9,10 +10,13 @@ namespace Redge
 	public:
 		explicit MainMenu(Game* host);
 
-		virtual auto Update() -> void;
+		auto Update() -> void override;
 
-		virtual auto RenderWorld() const -> void;
-		virtual auto RenderForeground() const -> void;
-		virtual auto RenderUI() const -> void;
+		auto RenderWorld() const -> void override;
+		auto RenderForeground() const -> void override;
+		auto RenderUI() const -> void override;
+
+	private:
+		Tileset m_FloorTiles;
 	};
 } // namespace Redge

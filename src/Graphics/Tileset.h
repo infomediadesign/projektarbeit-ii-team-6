@@ -26,6 +26,7 @@ namespace Redge
 		[[nodiscard]] auto GetTileCountY() const -> uint16_t;
 
 		auto DrawTile(uint16_t x, uint16_t y, Vector2 position, Color tint = WHITE) const -> void;
+		auto DrawTileScaled(uint16_t x, uint16_t y, Vector2 position, float scale , Color tint = WHITE) const -> void;
 
 	private:
 		Texture2D m_Texture{};
