@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.15)
 
-project("Redge"
+project("Crimson-Mine"
 	DESCRIPTION "A roguelike dungeon crawler in a western fantasy world"
 	HOMEPAGE_URL "https://github.com/infomediadesign/projektarbeit-ii-team-6"
 )
