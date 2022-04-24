@@ -18,5 +18,6 @@ namespace Redge
 
 	private:
 		Tileset m_FloorTiles;
+		Tileset m_Character;
 	};
 } // namespace Redge
