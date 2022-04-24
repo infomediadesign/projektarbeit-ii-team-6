@@ -9,7 +9,6 @@ namespace Redge
 	class Tileset
 	{
 	public:
-		Tileset() = default;
 		Tileset(const char* file, uint16_t tileWidth, uint16_t tileHeight);
 		~Tileset();
 

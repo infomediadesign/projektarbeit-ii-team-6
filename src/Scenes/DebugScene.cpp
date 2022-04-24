@@ -2,9 +2,8 @@
 
 namespace Redge
 {
-	DebugScene::DebugScene(Game* host) : Scene(host)
+	DebugScene::DebugScene(Game* host) : Scene(host), m_FloorTiles("assets/FloorTiles.png", 16, 16)
 	{
-		m_FloorTiles = Tileset("assets/FloorTiles.png", 16, 16);
 	}
 
 	auto DebugScene::Update() -> void
