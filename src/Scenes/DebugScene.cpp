@@ -1,17 +1,17 @@
-#include "MainMenu.h"
+#include "DebugScene.h"
 
 namespace Redge
 {
-	MainMenu::MainMenu(Game* host) : Scene(host)
+	DebugScene::DebugScene(Game* host) : Scene(host)
 	{
 		m_FloorTiles = Tileset("assets/FloorTiles.png", 16, 16);
 	}
 
-	auto MainMenu::Update() -> void
+	auto DebugScene::Update() -> void
 	{
 	}
 
-	auto MainMenu::RenderWorld() const -> void
+	auto DebugScene::RenderWorld() const -> void
 	{
 		Vector2 position{};
 
@@ -29,11 +29,11 @@ namespace Redge
 		}
 	}
 
-	auto MainMenu::RenderForeground() const -> void
+	auto DebugScene::RenderForeground() const -> void
 	{
 	}
 
-	auto MainMenu::RenderUI() const -> void
+	auto DebugScene::RenderUI() const -> void
 	{
 	}
 } // namespace Redge
