@@ -6,6 +6,20 @@ namespace Redge
 	{
 	}
 
+	constexpr int scale = 10;
+
+	auto RoundUp(int value, int multiple) -> int
+	{
+		if (multiple == 0)
+			return value;
+
+		auto remainder = value % multiple;
+		if (remainder == 0)
+			return value;
+
+		return value + multiple - remainder;
+	}
+
 	auto DebugScene::Update() -> void
 	{
 		constexpr auto distancePerSec = 500;
@@ -17,8 +31,11 @@ namespace Redge
 		vertical -= static_cast<int>(IsKeyDown(KEY_UP));
 		vertical += static_cast<int>(IsKeyDown(KEY_DOWN));
 
-		m_Character.Position.x += static_cast<float>(horizontal) * distancePerSec * GetFrameTime();
-		m_Character.Position.y += static_cast<float>(vertical) * distancePerSec * GetFrameTime();
+		m_CharacterPos.x += static_cast<float>(horizontal) * distancePerSec * GetFrameTime();
+		m_CharacterPos.y += static_cast<float>(vertical) * distancePerSec * GetFrameTime();
+
+		m_Character.Position.x = RoundUp(static_cast<int>(m_CharacterPos.x), scale);
+		m_Character.Position.y = RoundUp(static_cast<int>(m_CharacterPos.y), scale);
 
 		switch (horizontal)
 		{
@@ -52,7 +69,6 @@ namespace Redge
 	auto DebugScene::RenderWorld() const -> void
 	{
 		Vector2 position{};
-		constexpr float scale = 10;
 
 		for (auto indexY = 0; indexY < m_FloorTiles.GetTileCountY(); ++indexY)
 		{
