@@ -1,8 +1,8 @@
 <div align="center">
 
-# Codename: Redge
+# Codename: Crimson Mine
 
-*Welcome to the repository of Codename: Redge, a retro pixel-art style roguelike set in a western steampunk world.*
+*Welcome to the repository of Codename: Crimson Mine, a retro pixel-art style roguelike set in a western steampunk world.*
 *This project is done for the **Projektarbeit 2** at the SRH by Linus, Michael, Lucas, Laura and Simon.*
 </div>
 
