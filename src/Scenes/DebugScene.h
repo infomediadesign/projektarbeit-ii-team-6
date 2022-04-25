@@ -20,6 +20,6 @@ namespace Redge
 	private:
 		Tileset m_FloorTiles;
 		Character m_Character;
-		Vector2 m_CharacterPos;
+		Vector2 m_CharacterPos{};
 	};
 } // namespace Redge
