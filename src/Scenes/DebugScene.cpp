@@ -2,19 +2,73 @@
 
 namespace Redge
 {
-	DebugScene::DebugScene(Game* host) :
-		Scene(host), m_FloorTiles("assets/FloorTiles.png", 16, 16), m_Character("assets/dude2.png", 16, 32)
+	DebugScene::DebugScene(Game* host) : Scene(host), m_FloorTiles("assets/FloorTiles.png", 16, 16)
 	{
+	}
+
+	constexpr int scale = 10;
+
+	auto RoundUp(int value, int multiple) -> int
+	{
+		if (multiple == 0)
+			return value;
+
+		auto remainder = value % multiple;
+		if (remainder == 0)
+			return value;
+
+		return value + multiple - remainder;
 	}
 
 	auto DebugScene::Update() -> void
 	{
+		constexpr auto distancePerSec = 500;
+
+		auto horizontal = 0;
+		horizontal -= static_cast<int>(IsKeyDown(KEY_LEFT));
+		horizontal += static_cast<int>(IsKeyDown(KEY_RIGHT));
+		auto vertical = 0;
+		vertical -= static_cast<int>(IsKeyDown(KEY_UP));
+		vertical += static_cast<int>(IsKeyDown(KEY_DOWN));
+
+		m_CharacterPos.x += static_cast<float>(horizontal) * distancePerSec * GetFrameTime();
+		m_CharacterPos.y += static_cast<float>(vertical) * distancePerSec * GetFrameTime();
+
+		m_Character.Position.x = RoundUp(static_cast<int>(m_CharacterPos.x), scale);
+		m_Character.Position.y = RoundUp(static_cast<int>(m_CharacterPos.y), scale);
+
+		switch (horizontal)
+		{
+		case -1:
+			m_Character.Direction = Orientation::Left;
+			break;
+
+		case 1:
+			m_Character.Direction = Orientation::Right;
+			break;
+
+		default:
+			break;
+		}
+
+		switch (vertical)
+		{
+		case -1:
+			m_Character.Direction = Orientation::Up;
+			break;
+
+		case 1:
+			m_Character.Direction = Orientation::Down;
+			break;
+
+		default:
+			break;
+		}
 	}
 
 	auto DebugScene::RenderWorld() const -> void
 	{
 		Vector2 position{};
-		constexpr float scale = 10;
 
 		for (auto indexY = 0; indexY < m_FloorTiles.GetTileCountY(); ++indexY)
 		{
@@ -28,12 +82,7 @@ namespace Redge
 			position.y += static_cast<float>(m_FloorTiles.GetTileHeight()) * scale;
 		}
 
-		position = Vector2{};
-		for (auto i = 0; i < m_Character.GetTileCountX(); i++)
-		{
-			m_Character.DrawTileScaled(i, 0, position, scale);
-			position.x += static_cast<float>(m_Character.GetTileWidth()) * scale;
-		}
+		m_Character.DrawScaled(scale);
 	}
 
 	auto DebugScene::RenderForeground() const -> void

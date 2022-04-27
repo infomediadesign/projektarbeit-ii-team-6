@@ -1,7 +1,8 @@
 #pragma once
 
-#include "Scene.h"
+#include "Character.h"
 #include "Graphics/Tileset.h"
+#include "Scene.h"
 
 namespace Redge
 {
@@ -18,6 +19,7 @@ namespace Redge
 
 	private:
 		Tileset m_FloorTiles;
-		Tileset m_Character;
+		Character m_Character;
+		Vector2 m_CharacterPos{};
 	};
 } // namespace Redge

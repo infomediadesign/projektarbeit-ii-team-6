@@ -13,6 +13,7 @@ namespace Redge
 
 	Game::~Game()
 	{
+		m_Scene = nullptr;
 		CloseWindow();
 	}
 
