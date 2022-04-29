@@ -27,7 +27,7 @@ endif (${CMAKE_FIND_PACKAGE_NAME}_FOUND)
 include(FetchContent)
 
 FetchContent_Declare(${CMAKE_FIND_PACKAGE_NAME}
-    URl "https://github.com/raysan5/raylib/archive/refs/tags/${${CMAKE_FIND_PACKAGE_NAME}_FIND_VERSION}.tar.gz"
+    URL "https://github.com/raysan5/raylib/archive/refs/tags/${${CMAKE_FIND_PACKAGE_NAME}_FIND_VERSION}.tar.gz"
 )
 
 FetchContent_GetProperties(${CMAKE_FIND_PACKAGE_NAME})
