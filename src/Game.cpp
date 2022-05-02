@@ -9,6 +9,7 @@ namespace Redge
 	Game::Game(const uint16_t width, const uint16_t height)
 	{
 		InitWindow(width, height, "Crimson Mine");
+		SetTargetFPS(60);
 	}
 
 	Game::~Game()

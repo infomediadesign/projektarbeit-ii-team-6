@@ -6,15 +6,17 @@ namespace Redge
 {
 	enum class Orientation
 	{
-		Left,
-		Up,
 		Down,
-		Right
+		Up,
+		Right,
+		Left
 	};
 
 	class Character
 	{
 	public:
+		short currentframe = 0;
+		auto NextFrame() -> void;
 		auto Draw() const -> void;
 		auto DrawScaled(float scale) const -> void;
 
@@ -22,6 +24,6 @@ namespace Redge
 		Orientation Direction = Orientation::Down;
 
 	private:
-		Tileset m_Character = Tileset("assets/dude2.png", 16, 32);
+		Tileset m_Character = Tileset("assets/Smallerdudall-Sheet.png", 16, 32);
 	};
 } // namespace Redge

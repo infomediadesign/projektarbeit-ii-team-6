@@ -64,6 +64,24 @@ namespace Redge
 		default:
 			break;
 		}
+
+		static float timeSinceLastDraw = 0;
+		constexpr float timeBetweenFrames = 0.2;
+
+		if (horizontal != 0 || vertical != 0)
+		{
+			timeSinceLastDraw += GetFrameTime();
+			if (timeSinceLastDraw >= timeBetweenFrames)
+			{
+				timeSinceLastDraw -= timeBetweenFrames;
+				m_Character.NextFrame();
+			}
+		}
+		else
+		{
+			timeSinceLastDraw = 0;
+			m_Character.currentframe = 0;
+		}
 	}
 
 	auto DebugScene::RenderWorld() const -> void
