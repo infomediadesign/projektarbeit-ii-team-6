@@ -1,5 +1,7 @@
 #include "DebugScene.h"
 
+#include <raymath.h>
+
 namespace Redge
 {
 	DebugScene::DebugScene(Game* host) : Scene(host), m_FloorTiles("assets/FloorTiles.png", 16, 16)
@@ -24,63 +26,54 @@ namespace Redge
 	{
 		constexpr auto distancePerSec = 500;
 
-		auto horizontal = 0;
-		horizontal -= static_cast<int>(IsKeyDown(KEY_LEFT));
-		horizontal += static_cast<int>(IsKeyDown(KEY_RIGHT));
-		auto vertical = 0;
-		vertical -= static_cast<int>(IsKeyDown(KEY_UP));
-		vertical += static_cast<int>(IsKeyDown(KEY_DOWN));
+		Vector2 movement{};
+		movement.x -= static_cast<float>(IsKeyDown(KEY_LEFT));
+		movement.x += static_cast<float>(IsKeyDown(KEY_RIGHT));
+		movement.y -= static_cast<float>(IsKeyDown(KEY_UP));
+		movement.y += static_cast<float>(IsKeyDown(KEY_DOWN));
 
-		m_CharacterPos.x += static_cast<float>(horizontal) * distancePerSec * GetFrameTime();
-		m_CharacterPos.y += static_cast<float>(vertical) * distancePerSec * GetFrameTime();
+		movement = Vector2Normalize(movement);
+		movement = Vector2Scale(movement, distancePerSec * GetFrameTime());
+		m_CharacterPos = Vector2Add(m_CharacterPos, movement);
 
-		m_Character.Position.x = RoundUp(static_cast<int>(m_CharacterPos.x), scale);
-		m_Character.Position.y = RoundUp(static_cast<int>(m_CharacterPos.y), scale);
+		m_Character.SetPosition(Vector2{
+			static_cast<float>(RoundUp(static_cast<int>(m_CharacterPos.x), scale)),
+			static_cast<float>(RoundUp(static_cast<int>(m_CharacterPos.y), scale))
+		});
 
-		switch (horizontal)
+		if (movement.y < 0)
 		{
-		case -1:
-			m_Character.Direction = Orientation::Left;
-			break;
-
-		case 1:
-			m_Character.Direction = Orientation::Right;
-			break;
-
-		default:
-			break;
+			m_Character.SetDirection(Orientation::Up);
+		}
+		else if (movement.y > 0)
+		{
+			m_Character.SetDirection(Orientation::Down);
+		}
+		else if (movement.x < 0)
+		{
+			m_Character.SetDirection(Orientation::Left);
+		}
+		else if (movement.x > 0)
+		{
+			m_Character.SetDirection(Orientation::Right);
 		}
 
-		switch (vertical)
+		static float s_TimeSinceLastDraw = 0;
+		constexpr float timeBetweenFrames = 0.1;
+
+		if (Vector2Length(movement) != 0)
 		{
-		case -1:
-			m_Character.Direction = Orientation::Up;
-			break;
-
-		case 1:
-			m_Character.Direction = Orientation::Down;
-			break;
-
-		default:
-			break;
-		}
-
-		static float timeSinceLastDraw = 0;
-		constexpr float timeBetweenFrames = 0.2;
-
-		if (horizontal != 0 || vertical != 0)
-		{
-			timeSinceLastDraw += GetFrameTime();
-			if (timeSinceLastDraw >= timeBetweenFrames)
+			s_TimeSinceLastDraw += GetFrameTime();
+			if (s_TimeSinceLastDraw >= timeBetweenFrames)
 			{
-				timeSinceLastDraw -= timeBetweenFrames;
+				s_TimeSinceLastDraw -= timeBetweenFrames;
 				m_Character.NextFrame();
 			}
 		}
 		else
 		{
-			timeSinceLastDraw = 0;
-			m_Character.currentframe = 0;
+			s_TimeSinceLastDraw = 0;
+			m_Character.ResetFrame();
 		}
 	}
 

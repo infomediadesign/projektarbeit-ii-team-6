@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Character.h"
+#include "Entities/Character.h"
 #include "Graphics/Tileset.h"
 #include "Scene.h"
 
