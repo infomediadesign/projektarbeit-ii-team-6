@@ -8,7 +8,7 @@ namespace Redge
 	{
 	}
 
-	constexpr int scale = 10;
+	constexpr float g_Scale = 10;
 
 	auto RoundUp(int value, int multiple) -> int
 	{
@@ -24,22 +24,38 @@ namespace Redge
 
 	auto DebugScene::Update() -> void
 	{
-		constexpr auto distancePerSec = 500;
-
 		Vector2 movement{};
 		movement.x -= static_cast<float>(IsKeyDown(KEY_LEFT));
 		movement.x += static_cast<float>(IsKeyDown(KEY_RIGHT));
 		movement.y -= static_cast<float>(IsKeyDown(KEY_UP));
 		movement.y += static_cast<float>(IsKeyDown(KEY_DOWN));
 
-		movement = Vector2Normalize(movement);
-		movement = Vector2Scale(movement, distancePerSec * GetFrameTime());
-		m_CharacterPos = Vector2Add(m_CharacterPos, movement);
+		constexpr float stepFrequency = 0.02;
+		constexpr float frameFrequency = stepFrequency * 5;
 
-		m_Character.SetPosition(Vector2{
-			static_cast<float>(RoundUp(static_cast<int>(m_CharacterPos.x), scale)),
-			static_cast<float>(RoundUp(static_cast<int>(m_CharacterPos.y), scale))
-		});
+		if (Vector2Length(movement) != 0)
+		{
+			m_TimeSinceLastStep += GetFrameTime();
+			m_TimeSinceLastFrame += GetFrameTime();
+
+			if (m_TimeSinceLastStep >= stepFrequency)
+			{
+				m_TimeSinceLastStep -= stepFrequency;
+				m_Character.SetPosition(Vector2Add(m_Character.GetPosition(), Vector2Scale(movement, g_Scale)));
+			}
+
+			if (m_TimeSinceLastFrame >= frameFrequency)
+			{
+				m_TimeSinceLastFrame -= frameFrequency;
+				m_Character.NextFrame();
+			}
+		}
+		else
+		{
+			m_TimeSinceLastStep = 0;
+			m_TimeSinceLastFrame = 0;
+			m_Character.ResetFrame();
+		}
 
 		if (movement.y < 0)
 		{
@@ -58,23 +74,6 @@ namespace Redge
 			m_Character.SetDirection(Orientation::Right);
 		}
 
-		static float s_TimeSinceLastDraw = 0;
-		constexpr float timeBetweenFrames = 0.1;
-
-		if (Vector2Length(movement) != 0)
-		{
-			s_TimeSinceLastDraw += GetFrameTime();
-			if (s_TimeSinceLastDraw >= timeBetweenFrames)
-			{
-				s_TimeSinceLastDraw -= timeBetweenFrames;
-				m_Character.NextFrame();
-			}
-		}
-		else
-		{
-			s_TimeSinceLastDraw = 0;
-			m_Character.ResetFrame();
-		}
 	}
 
 	auto DebugScene::RenderWorld() const -> void
@@ -85,15 +84,15 @@ namespace Redge
 		{
 			for (auto indexX = 0; indexX < m_FloorTiles.GetTileCountX(); ++indexX)
 			{
-				m_FloorTiles.DrawTileScaled(indexX, indexY, position, scale);
-				position.x += static_cast<float>(m_FloorTiles.GetTileWidth()) * scale;
+				m_FloorTiles.DrawTileScaled(indexX, indexY, position, g_Scale);
+				position.x += static_cast<float>(m_FloorTiles.GetTileWidth()) * g_Scale;
 			}
 
 			position.x = 0;
-			position.y += static_cast<float>(m_FloorTiles.GetTileHeight()) * scale;
+			position.y += static_cast<float>(m_FloorTiles.GetTileHeight()) * g_Scale;
 		}
 
-		m_Character.DrawScaled(scale);
+		m_Character.DrawScaled(g_Scale);
 	}
 
 	auto DebugScene::RenderForeground() const -> void

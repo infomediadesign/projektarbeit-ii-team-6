@@ -20,6 +20,9 @@ namespace Redge
 	private:
 		Tileset m_FloorTiles;
 		Character m_Character;
-		Vector2 m_CharacterPos{};
+
+		bool m_CanMove = true;
+		float m_TimeSinceLastStep = 0;
+		float m_TimeSinceLastFrame = 0;
 	};
 } // namespace Redge
