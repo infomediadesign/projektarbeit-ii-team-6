@@ -1,5 +1,7 @@
 #pragma once
 
+#include <raylib.h>
+
 namespace Redge
 {
 	class Game;
@@ -8,6 +10,8 @@ namespace Redge
 	{
 	public:
 		virtual ~Scene() = default;
+
+		[[nodiscard]] auto GetCamera() const -> Camera2D;
 
 		virtual auto Update() -> void = 0;
 
@@ -19,5 +23,6 @@ namespace Redge
 		explicit Scene(Game* host);
 
 		Game* Host;
+		Camera2D Camera{};
 	};
 } // namespace Redge

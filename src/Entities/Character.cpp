@@ -34,6 +34,14 @@ namespace Redge
 		return m_Direction;
 	}
 
+	auto Character::GetSize() const -> Vector2
+	{
+		return Vector2{
+			static_cast<float>(m_Character.GetTileWidth()),
+			static_cast<float>(m_Character.GetTileHeight())
+		};
+	}
+
 	auto Character::SetPosition(Vector2 pos) -> void
 	{
 		m_Position = pos;

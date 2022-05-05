@@ -46,8 +46,11 @@ namespace Redge
 		BeginDrawing();
 		ClearBackground(PINK);
 
+		BeginMode2D(m_Scene->GetCamera());
 		m_Scene->RenderWorld();
 		m_Scene->RenderForeground();
+		EndMode2D();
+
 		m_Scene->RenderUI();
 
 		EndDrawing();
