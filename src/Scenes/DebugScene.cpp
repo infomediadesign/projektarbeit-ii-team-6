@@ -6,20 +6,7 @@ namespace Redge
 {
 	DebugScene::DebugScene(Game* host) : Scene(host), m_FloorTiles("assets/FloorTiles.png", 16, 16)
 	{
-	}
-
-	constexpr float g_Scale = 10;
-
-	auto RoundUp(int value, int multiple) -> int
-	{
-		if (multiple == 0)
-			return value;
-
-		auto remainder = value % multiple;
-		if (remainder == 0)
-			return value;
-
-		return value + multiple - remainder;
+		Camera.zoom = 5;
 	}
 
 	auto DebugScene::Update() -> void
@@ -29,6 +16,9 @@ namespace Redge
 		movement.x += static_cast<float>(IsKeyDown(KEY_RIGHT));
 		movement.y -= static_cast<float>(IsKeyDown(KEY_UP));
 		movement.y += static_cast<float>(IsKeyDown(KEY_DOWN));
+
+		if (movement.y != 0)
+			movement.x = 0;
 
 		constexpr float stepFrequency = 0.02;
 		constexpr float frameFrequency = stepFrequency * 5;
@@ -41,7 +31,7 @@ namespace Redge
 			if (m_TimeSinceLastStep >= stepFrequency)
 			{
 				m_TimeSinceLastStep -= stepFrequency;
-				m_Character.SetPosition(Vector2Add(m_Character.GetPosition(), Vector2Scale(movement, g_Scale)));
+				m_Character.SetPosition(Vector2Add(m_Character.GetPosition(), movement));
 			}
 
 			if (m_TimeSinceLastFrame >= frameFrequency)
@@ -56,6 +46,10 @@ namespace Redge
 			m_TimeSinceLastFrame = 0;
 			m_Character.ResetFrame();
 		}
+
+		Camera.target = m_Character.GetPosition();
+		Camera.target.x += m_Character.GetSize().x / 2;
+		Camera.target.y += m_Character.GetSize().y / 2;
 
 		if (movement.y < 0)
 		{
@@ -73,7 +67,6 @@ namespace Redge
 		{
 			m_Character.SetDirection(Orientation::Right);
 		}
-
 	}
 
 	auto DebugScene::RenderWorld() const -> void
@@ -84,22 +77,22 @@ namespace Redge
 		{
 			for (auto indexX = 0; indexX < m_FloorTiles.GetTileCountX(); ++indexX)
 			{
-				m_FloorTiles.DrawTileScaled(indexX, indexY, position, g_Scale);
-				position.x += static_cast<float>(m_FloorTiles.GetTileWidth()) * g_Scale;
+				m_FloorTiles.DrawTile(indexX, indexY, position);
+				position.x += static_cast<float>(m_FloorTiles.GetTileWidth());
 			}
 
 			position.x = 0;
-			position.y += static_cast<float>(m_FloorTiles.GetTileHeight()) * g_Scale;
+			position.y += static_cast<float>(m_FloorTiles.GetTileHeight());
 		}
-
-		m_Character.DrawScaled(g_Scale);
 	}
 
 	auto DebugScene::RenderForeground() const -> void
 	{
+		m_Character.Draw();
 	}
 
 	auto DebugScene::RenderUI() const -> void
 	{
+		DrawText("Debug Scene", 10, 10, 50, WHITE);
 	}
 } // namespace Redge

@@ -23,6 +23,7 @@ namespace Redge
 
 		[[nodiscard]] auto GetPosition() const -> Vector2;
 		[[nodiscard]] auto GetDirection() const -> Orientation;
+		[[nodiscard]] auto GetSize() const -> Vector2;
 
 		auto SetPosition(Vector2 pos) -> void;
 		auto SetDirection(Orientation dir) -> void;
