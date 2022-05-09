@@ -12,10 +12,10 @@ namespace Redge
 	auto DebugScene::Update() -> void
 	{
 		Vector2 movement{};
-		movement.x -= static_cast<float>(IsKeyDown(KEY_LEFT));
-		movement.x += static_cast<float>(IsKeyDown(KEY_RIGHT));
-		movement.y -= static_cast<float>(IsKeyDown(KEY_UP));
-		movement.y += static_cast<float>(IsKeyDown(KEY_DOWN));
+		movement.x -= static_cast<float>(IsKeyDown(KEY_A));
+		movement.x += static_cast<float>(IsKeyDown(KEY_D));
+		movement.y -= static_cast<float>(IsKeyDown(KEY_W));
+		movement.y += static_cast<float>(IsKeyDown(KEY_S));
 
 		if (movement.y != 0)
 			movement.x = 0;
