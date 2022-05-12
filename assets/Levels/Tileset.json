@@ -1,0 +1,15 @@
+{
+	"columns": 8,
+	"image": "Tileset.png",
+	"imageheight": 128,
+	"imagewidth": 128,
+	"margin": 0,
+	"name": "CrimsonMineTileset",
+	"spacing": 0,
+	"tilecount": 64,
+	"tiledversion": "1.8.4",
+	"tileheight": 16,
+	"tilewidth": 16,
+	"type": "tileset",
+	"version": "1.8"
+}
