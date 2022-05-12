@@ -48,6 +48,9 @@ target_include_directories(${PROJECT_NAME} PRIVATE "${CMAKE_CURRENT_LIST_DIR}/sr
 find_package(raylib REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE "raylib")
 
+find_package(nlohmann_json REQUIRED)
+target_link_libraries(${PROJECT_NAME} PRIVATE "nlohmann_json::nlohmann_json")
+
 #==========================#
 #=====# Installation #=====#
 #==========================#
