@@ -18,7 +18,7 @@ namespace Redge
 		auto RenderUI() const -> void override;
 
 	private:
-		Tileset m_FloorTiles;
+		Tileset m_Tileset;
 		Character m_Character;
 
 		bool m_CanMove = true;

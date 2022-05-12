@@ -1,11 +1,13 @@
 #include "Tileset.h"
 
 #include <cassert>
-#include <stdexcept>
+#include <fstream>
+
+#include <nlohmann/json.hpp>
 
 namespace Redge
 {
-	Tileset::Tileset(const char* file, const uint16_t tileWidth, const uint16_t tileHeight) :
+	Tileset::Tileset(const char* file, uint16_t tileWidth, uint16_t tileHeight) :
 		m_Texture(LoadTexture(file)), m_TileWidth(tileWidth), m_TileHeight(tileHeight)
 	{
 		// Texture size is a multiple of a tile width
@@ -68,18 +70,9 @@ namespace Redge
 		return m_Texture.height / m_TileHeight;
 	}
 
-	auto Tileset::DrawTile(const uint16_t x, const uint16_t y, const Vector2 position, const Color tint) const -> void
+	auto Tileset::DrawTile(uint16_t x, uint16_t y, Vector2 position, Color tint) const -> void
 	{
-		// Check passed parameters are within bounds
-		assert(x < GetTileCountX());
-		assert(y < GetTileCountY());
-
-		Rectangle rect;
-		rect.x = static_cast<float>(GetTileWidth() * x);
-		rect.y = static_cast<float>(GetTileHeight() * y);
-		rect.width = static_cast<float>(GetTileWidth());
-		rect.height = static_cast<float>(GetTileHeight());
-		DrawTextureRec(m_Texture, rect, position, tint);
+		DrawTileScaled(x, y, position, 1, tint);
 	}
 
 	auto Tileset::DrawTileScaled(uint16_t x, uint16_t y, Vector2 position, float scale, Color tint) const -> void
@@ -100,5 +93,20 @@ namespace Redge
 		dest.width = rect.width * scale;
 		dest.height = rect.height * scale;
 		DrawTexturePro(m_Texture, rect, dest, Vector2{}, 0, tint);
+	}
+
+	auto Tileset::FromTiled(std::filesystem::path filePath) -> Tileset
+	{
+		std::ifstream fileStream(filePath);
+		assert(fileStream.is_open());
+
+		nlohmann::json json;
+		fileStream >> json;
+
+		const auto imagePath = filePath.parent_path()  / json["image"].get<std::string>();
+		const auto tileWidth = json["tilewidth"].get<uint16_t>();
+		const auto tileHeight = json["tileheight"].get<uint16_t>();
+
+		return Tileset{imagePath.string().c_str(), tileWidth, tileHeight};
 	}
 } // namespace Redge

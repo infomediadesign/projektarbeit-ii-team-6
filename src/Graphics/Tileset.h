@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <filesystem>
 
 #include <raylib.h>
 
@@ -26,6 +27,8 @@ namespace Redge
 
 		auto DrawTile(uint16_t x, uint16_t y, Vector2 position, Color tint = WHITE) const -> void;
 		auto DrawTileScaled(uint16_t x, uint16_t y, Vector2 position, float scale , Color tint = WHITE) const -> void;
+
+		static auto FromTiled(std::filesystem::path filePath) -> Tileset;
 
 	private:
 		Texture2D m_Texture{};
