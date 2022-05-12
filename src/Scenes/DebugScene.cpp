@@ -5,7 +5,7 @@
 namespace Redge
 {
 	DebugScene::DebugScene(Game* host) :
-		Scene(host), m_Tileset(Tileset::FromTiled("assets/Levels/Tileset.json"))
+		Scene(host), m_Tilemap(Tilemap::FromTiled("assets/Levels/Tilemap.json"))
 	{
 		Camera.zoom = 5;
 	}
@@ -72,19 +72,7 @@ namespace Redge
 
 	auto DebugScene::RenderWorld() const -> void
 	{
-		Vector2 position{};
-
-		for (auto indexY = 0; indexY < m_Tileset.GetTileCountY(); ++indexY)
-		{
-			for (auto indexX = 0; indexX < m_Tileset.GetTileCountX(); ++indexX)
-			{
-				m_Tileset.DrawTile(indexX, indexY, position);
-				position.x += static_cast<float>(m_Tileset.GetTileWidth());
-			}
-
-			position.x = 0;
-			position.y += static_cast<float>(m_Tileset.GetTileHeight());
-		}
+		m_Tilemap.Draw();
 	}
 
 	auto DebugScene::RenderForeground() const -> void
