@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Entities/Character.h"
-#include "Graphics/Tileset.h"
+#include "Graphics/Tilemap.h"
 #include "Scene.h"
 
 namespace Redge
@@ -18,7 +18,7 @@ namespace Redge
 		auto RenderUI() const -> void override;
 
 	private:
-		Tileset m_FloorTiles;
+		Tilemap m_Tilemap;
 		Character m_Character;
 
 		bool m_CanMove = true;

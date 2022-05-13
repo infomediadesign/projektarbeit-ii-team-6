@@ -4,7 +4,8 @@
 
 namespace Redge
 {
-	DebugScene::DebugScene(Game* host) : Scene(host), m_FloorTiles("assets/FloorTiles.png", 16, 16)
+	DebugScene::DebugScene(Game* host) :
+		Scene(host), m_Tilemap(Tilemap::FromTiled("assets/Levels/Tilemap.json"))
 	{
 		Camera.zoom = 5;
 	}
@@ -71,19 +72,7 @@ namespace Redge
 
 	auto DebugScene::RenderWorld() const -> void
 	{
-		Vector2 position{};
-
-		for (auto indexY = 0; indexY < m_FloorTiles.GetTileCountY(); ++indexY)
-		{
-			for (auto indexX = 0; indexX < m_FloorTiles.GetTileCountX(); ++indexX)
-			{
-				m_FloorTiles.DrawTile(indexX, indexY, position);
-				position.x += static_cast<float>(m_FloorTiles.GetTileWidth());
-			}
-
-			position.x = 0;
-			position.y += static_cast<float>(m_FloorTiles.GetTileHeight());
-		}
+		m_Tilemap.Draw();
 	}
 
 	auto DebugScene::RenderForeground() const -> void
