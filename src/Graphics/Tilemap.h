@@ -9,12 +9,13 @@ namespace Redge
 	struct Layer
 	{
 		std::vector<uint16_t> Data;
+		std::vector<Rectangle> CollisionBoxes;
 
 		int32_t Width;
 		int32_t Height;
 		
 		bool Visible;
-	};
+	};  
 
 	struct Tilemap
 	{
@@ -29,6 +30,7 @@ namespace Redge
 
 		auto Draw() const -> void;
 		auto DrawScaled(float scale) const -> void;
+		auto CheckCollision(Rectangle checkBox) const -> bool;
 
 		static auto FromTiled(std::filesystem::path filePath) -> Tilemap;
 

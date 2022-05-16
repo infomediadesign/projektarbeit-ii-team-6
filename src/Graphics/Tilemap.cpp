@@ -38,6 +38,16 @@ namespace Redge
 		}
 	}
 
+	auto Tilemap::CheckCollision(Rectangle checkBox) const -> bool
+	{
+		for (const auto& layer : Layers)
+			for (const auto& box : layer.CollisionBoxes)
+				if (CheckCollisionRecs(box, checkBox))
+					return true;
+
+		return false;
+	}
+
 	auto Tilemap::FromTiled(std::filesystem::path filePath) -> Tilemap
 	{
 		std::ifstream fileStream(filePath);
@@ -61,6 +71,15 @@ namespace Redge
 			layer.Width = element["width"].get<int32_t>();
 			layer.Height = element["height"].get<int32_t>();
 			layer.Visible = element["visible"].get<bool>();
+
+			for (const auto& object : element["objects"])
+			{
+				auto& box = layer.CollisionBoxes.emplace_back();
+				box.x = object["x"].get<float>();
+				box.y = object["y"].get<float>();
+				box.width = object["width"].get<float>();
+				box.height = object["height"].get<float>();
+			}
 		}
 
 		const auto parentPath = filePath.parent_path();
