@@ -33,8 +33,11 @@ namespace Redge
 			{
 				m_TimeSinceLastStep -= stepFrequency;
 				auto newPosition = Vector2Add(m_Character.GetPosition(), movement);
-				auto boundingBox =
-					Rectangle{newPosition.x, newPosition.y, m_Character.GetSize().x, m_Character.GetSize().y};
+				Rectangle boundingBox{};
+				boundingBox.x = newPosition.x;
+				boundingBox.y = newPosition.y + m_Character.GetSize().y / 2;
+				boundingBox.width = m_Character.GetSize().x;
+				boundingBox.height = m_Character.GetSize().y / 2;
 				if (!m_Tilemap.CheckCollision(boundingBox))
 					m_Character.SetPosition(newPosition);
 			}
