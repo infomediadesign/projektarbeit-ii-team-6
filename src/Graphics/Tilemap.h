@@ -1,8 +1,9 @@
 #pragma once
 
-#include <filesystem>
-
 #include "Tileset.h"
+
+#include <filesystem>
+#include <vector>
 
 namespace Redge
 {
@@ -13,7 +14,7 @@ namespace Redge
 
 		int32_t Width;
 		int32_t Height;
-		
+
 		bool Visible;
 	};  
 

@@ -10,7 +10,7 @@ message(CHECK_START "Searching for ${CMAKE_FIND_PACKAGE_NAME}")
 #=====# Local install #=====#
 #===========================#
 
-find_package(raylib
+find_package(${CMAKE_FIND_PACKAGE_NAME}
     ${${CMAKE_FIND_PACKAGE_NAME}_FIND_VERSION}
     CONFIG
 )
