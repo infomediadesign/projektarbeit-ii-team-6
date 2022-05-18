@@ -32,7 +32,14 @@ namespace Redge
 			if (m_TimeSinceLastStep >= stepFrequency)
 			{
 				m_TimeSinceLastStep -= stepFrequency;
-				m_Character.SetPosition(Vector2Add(m_Character.GetPosition(), movement));
+				auto newPosition = Vector2Add(m_Character.GetPosition(), movement);
+				Rectangle boundingBox{};
+				boundingBox.x = newPosition.x;
+				boundingBox.y = newPosition.y + m_Character.GetSize().y / 2;
+				boundingBox.width = m_Character.GetSize().x;
+				boundingBox.height = m_Character.GetSize().y / 2;
+				if (!m_Tilemap.CheckCollision(boundingBox))
+					m_Character.SetPosition(newPosition);
 			}
 
 			if (m_TimeSinceLastFrame >= frameFrequency)

@@ -5,21 +5,49 @@
 #include <filesystem>
 #include <vector>
 
-namespace Redge
+namespace Tiled
 {
-	struct Layer
+	struct Object
 	{
-		std::vector<uint16_t> Data;
-
-		int32_t Width;
-		int32_t Height;
-
 		bool Visible;
 	};
 
+	struct Rectangle : Object
+	{
+		::Rectangle Value;
+	};
+
+	struct Point : Object
+	{
+		Vector2 Value;
+	};
+
+	struct Ellipse : Object
+	{
+		::Rectangle Value;
+	};
+
+	struct Polygon : Object
+	{
+		std::vector<Vector2> Points;
+	};
+
+	struct Layer : Object
+	{
+		std::vector<uint16_t> Tiles;
+
+		std::vector<Rectangle> Rectangles;
+		std::vector<Point> Points;
+		std::vector<Ellipse> Ellipses;
+		std::vector<Polygon> Polygons;
+	};
+} // namespace Tiled
+
+namespace Redge
+{
 	struct Tilemap
 	{
-		std::vector<Layer> Layers;
+		std::vector<Tiled::Layer> Layers;
 		std::vector<std::pair<uint16_t, Tileset>> Tilesets;
 
 		int32_t Width;
@@ -30,6 +58,8 @@ namespace Redge
 
 		auto Draw() const -> void;
 		auto DrawScaled(float scale) const -> void;
+
+		auto CheckCollision(Rectangle checkBox) const -> bool;
 
 		static auto FromTiled(std::filesystem::path filePath) -> Tilemap;
 
