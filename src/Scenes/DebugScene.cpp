@@ -58,6 +58,8 @@ namespace Redge
 		Camera.target = m_Character.GetPosition();
 		Camera.target.x += m_Character.GetSize().x / 2;
 		Camera.target.y += m_Character.GetSize().y / 2;
+		Camera.offset.x = GetScreenWidth() / 2;
+		Camera.offset.y = GetScreenHeight() / 2;
 
 		if (movement.y < 0)
 		{
