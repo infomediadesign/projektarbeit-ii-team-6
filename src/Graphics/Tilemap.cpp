@@ -160,6 +160,9 @@ namespace Redge
 
 	auto Tilemap::DrawTile(uint16_t index, Vector2 position, float scale) const -> void
 	{
+		if (index <= 0)
+			return;
+
 		for (const auto& [firstIndex, tileset] : Tilesets)
 		{
 			if (index < firstIndex)
