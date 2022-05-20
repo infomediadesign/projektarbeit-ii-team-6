@@ -29,8 +29,8 @@ namespace Redge
 		auto SetDirection(Orientation dir) -> void;
 
 	private:
-		Tileset m_Character = Tileset("assets/Characters/Character.png", 16, 32);
-		Vector2 m_Position = Vector2{64, 48};
+		Tileset m_Character = Tileset("assets/Character.png", 16, 32);
+		Vector2 m_Position = Vector2{0, 0};
 
 		Orientation m_Direction = Orientation::Down;
 		uint16_t m_CurrentFrame = 0;

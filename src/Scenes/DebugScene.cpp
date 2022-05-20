@@ -8,6 +8,10 @@ namespace Redge
 		Scene(host), m_Tilemap(Tilemap::FromTiled("assets/Levels/Tilemap.json"))
 	{
 		Camera.zoom = 4;
+
+		auto offset = Vector2Scale(m_Character.GetSize(), 0.5);
+		auto spawn = Vector2Subtract(m_Tilemap.Spawn, offset);
+		m_Character.SetPosition(spawn);
 	}
 
 	auto DebugScene::Update() -> void

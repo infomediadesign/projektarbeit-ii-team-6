@@ -52,6 +52,16 @@ namespace Redge
 		return false;
 	}
 
+	static auto ConfigureObjectFromTiled(const nlohmann::json& json, Tiled::Object& object) -> void
+	{
+		object.Visible = true;
+		if (auto visible = json.find("visible"); visible != json.end())
+			object.Visible = visible->get<bool>();
+
+		if (auto name = json.find("name"); name != json.end())
+			object.Name = name->get<std::string>();
+	}
+
 	auto Tilemap::FromTiled(std::filesystem::path filePath) -> Tilemap
 	{
 		std::ifstream fileStream(filePath);
@@ -93,13 +103,11 @@ namespace Redge
 
 				for (const auto& object : *objects)
 				{
+
 					if (object.find("ellipse") != object.end())
 					{
 						auto& ellipse = layer.Ellipses.emplace_back();
-
-						ellipse.Visible = true;
-						if (auto visible = object.find("visible"); visible != object.end())
-							ellipse.Visible = visible->get<bool>();
+						ConfigureObjectFromTiled(object, ellipse);
 
 						ellipse.Value.x = object["x"].get<float>();
 						ellipse.Value.y = object["y"].get<float>();
@@ -109,10 +117,7 @@ namespace Redge
 					else if (object.find("polygon") != object.end())
 					{
 						auto& polygon = layer.Polygons.emplace_back();
-
-						polygon.Visible = true;
-						if (auto visible = object.find("visible"); visible != object.end())
-							polygon.Visible = visible->get<bool>();
+						ConfigureObjectFromTiled(object, polygon);
 
 						for (const auto& poly : object["polygon"])
 						{
@@ -124,21 +129,18 @@ namespace Redge
 					else if (object.find("point") != object.end())
 					{
 						auto& point = layer.Points.emplace_back();
-
-						point.Visible = true;
-						if (auto visible = object.find("visible"); visible != object.end())
-							point.Visible = visible->get<bool>();
+						ConfigureObjectFromTiled(object, point);
 
 						point.Value.x = object["x"].get<float>();
 						point.Value.y = object["y"].get<float>();
+
+						if (point.Name == "m_Spawn")
+							map.Spawn = point.Value;
 					}
 					else
 					{
 						auto& rectangle = layer.Rectangles.emplace_back();
-
-						rectangle.Visible = true;
-						if (auto visible = object.find("visible"); visible != object.end())
-							rectangle.Visible = visible->get<bool>();
+						ConfigureObjectFromTiled(object, rectangle);
 
 						rectangle.Value.x = object["x"].get<float>();
 						rectangle.Value.y = object["y"].get<float>();
