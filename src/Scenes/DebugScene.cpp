@@ -12,6 +12,12 @@ namespace Redge
 
 	auto DebugScene::Update() -> void
 	{
+		if (!m_Spawned)
+		{
+			m_Character.SetPosition(m_Tilemap.m_Spawn);
+			m_Spawned = true;
+		}
+
 		Vector2 movement{};
 		movement.x -= static_cast<float>(IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT));
 		movement.x += static_cast<float>(IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT));

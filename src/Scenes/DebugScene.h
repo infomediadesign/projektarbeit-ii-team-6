@@ -21,6 +21,7 @@ namespace Redge
 		Tilemap m_Tilemap;
 		Character m_Character;
 
+		bool m_Spawned = false;
 		bool m_CanMove = true;
 		float m_TimeSinceLastStep = 0;
 		float m_TimeSinceLastFrame = 0;

@@ -123,14 +123,22 @@ namespace Redge
 					}
 					else if (object.find("point") != object.end())
 					{
-						auto& point = layer.Points.emplace_back();
+						if (object["name"].get<std::string>() == "m_Spawn")
+						{
+							map.m_Spawn.x = object["x"].get<float>();
+							map.m_Spawn.y = object["y"].get<float>();			
+						}
+						else
+						{
+							auto& point = layer.Points.emplace_back();
 
-						point.Visible = true;
-						if (auto visible = object.find("visible"); visible != object.end())
-							point.Visible = visible->get<bool>();
+							point.Visible = true;
+							if (auto visible = object.find("visible"); visible != object.end())
+								point.Visible = visible->get<bool>();
 
-						point.Value.x = object["x"].get<float>();
-						point.Value.y = object["y"].get<float>();
+							point.Value.x = object["x"].get<float>();
+							point.Value.y = object["y"].get<float>();
+						}
 					}
 					else
 					{

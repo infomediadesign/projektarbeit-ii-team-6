@@ -56,6 +56,8 @@ namespace Redge
 		int32_t TileWidth;
 		int32_t TileHeight;
 
+		Vector2 m_Spawn;
+
 		auto Draw() const -> void;
 		auto DrawScaled(float scale) const -> void;
 
