@@ -10,6 +10,7 @@ namespace Tiled
 	struct Object
 	{
 		bool Visible;
+		std::string Name;
 	};
 
 	struct Rectangle : Object
@@ -56,7 +57,7 @@ namespace Redge
 		int32_t TileWidth;
 		int32_t TileHeight;
 
-		Vector2 m_Spawn;
+		Vector2 Spawn;
 
 		auto Draw() const -> void;
 		auto DrawScaled(float scale) const -> void;

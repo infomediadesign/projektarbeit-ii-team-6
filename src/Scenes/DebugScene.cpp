@@ -8,16 +8,14 @@ namespace Redge
 		Scene(host), m_Tilemap(Tilemap::FromTiled("assets/Levels/Tilemap.json"))
 	{
 		Camera.zoom = 4;
+
+		auto offset = Vector2Scale(m_Character.GetSize(), 0.5);
+		auto spawn = Vector2Subtract(m_Tilemap.Spawn, offset);
+		m_Character.SetPosition(spawn);
 	}
 
 	auto DebugScene::Update() -> void
 	{
-		if (!m_Spawned)
-		{
-			m_Character.SetPosition(m_Tilemap.m_Spawn);
-			m_Spawned = true;
-		}
-
 		Vector2 movement{};
 		movement.x -= static_cast<float>(IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT));
 		movement.x += static_cast<float>(IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT));
