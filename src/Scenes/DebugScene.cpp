@@ -7,7 +7,7 @@ namespace Redge
 	DebugScene::DebugScene(Game* host) :
 		Scene(host), m_Tilemap(Tilemap::FromTiled("assets/Levels/Tilemap.json"))
 	{
-		Camera.zoom = 5;
+		Camera.zoom = 4;
 	}
 
 	auto DebugScene::Update() -> void
@@ -64,6 +64,8 @@ namespace Redge
 		Camera.target = m_Character.GetPosition();
 		Camera.target.x += m_Character.GetSize().x / 2;
 		Camera.target.y += m_Character.GetSize().y / 2;
+		Camera.offset.x = GetScreenWidth() / 2;
+		Camera.offset.y = GetScreenHeight() / 2;
 
 		if (movement.y < 0)
 		{

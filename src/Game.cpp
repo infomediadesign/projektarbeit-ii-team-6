@@ -9,7 +9,12 @@ namespace Redge
 	Game::Game(const uint16_t width, const uint16_t height)
 	{
 		InitWindow(width, height, "Crimson Mine");
-		SetTargetFPS(60);
+		SetWindowState(FLAG_WINDOW_RESIZABLE);
+
+		// Applicatino icon
+		auto icon = LoadImage("assets/Icon.png");
+		SetWindowIcon(icon);
+		UnloadImage(icon);
 	}
 
 	Game::~Game()
