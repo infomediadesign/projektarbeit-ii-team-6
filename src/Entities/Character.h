@@ -15,8 +15,7 @@ namespace Redge
 	class Character
 	{
 	public:
-		auto Draw() const -> void;
-		auto DrawScaled(float scale) const -> void;
+		auto Render() const -> void;
 
 		auto NextFrame() -> void;
 		auto ResetFrame() -> void;

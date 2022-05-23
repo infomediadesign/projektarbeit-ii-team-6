@@ -59,8 +59,7 @@ namespace Redge
 
 		Vector2 Spawn;
 
-		auto Draw() const -> void;
-		auto DrawScaled(float scale) const -> void;
+		auto Render() const -> void;
 
 		auto CheckCollision(Rectangle checkBox) const -> bool;
 

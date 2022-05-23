@@ -7,12 +7,7 @@
 
 namespace Redge
 {
-	auto Tilemap::Draw() const -> void
-	{
-		DrawScaled(1);
-	}
-
-	auto Tilemap::DrawScaled(float scale) const -> void
+	auto Tilemap::Render() const -> void
 	{
 		for (const auto& layer : Layers)
 		{
@@ -20,19 +15,15 @@ namespace Redge
 				continue;
 
 			Vector2 position{};
-			auto xIndex = 0;
 			for (const auto index : layer.Tiles)
 			{
-				DrawTile(index, position, scale);
-				position.x += static_cast<float>(TileWidth) * scale;
+				DrawTile(index, position, 1);
+				position.x += static_cast<float>(TileWidth);
 
-				++xIndex;
-
-				if (xIndex >= Width)
+				if (position.x >= Width * TileWidth)
 				{
-					position.y += static_cast<float>(TileHeight) * scale;
+					position.y += static_cast<float>(TileHeight);
 					position.x = 0;
-					xIndex = 0;
 				}
 			}
 		}

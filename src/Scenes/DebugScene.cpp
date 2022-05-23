@@ -85,12 +85,12 @@ namespace Redge
 
 	auto DebugScene::RenderWorld() const -> void
 	{
-		m_Tilemap.Draw();
+		m_Tilemap.Render();
 	}
 
 	auto DebugScene::RenderForeground() const -> void
 	{
-		m_Character.Draw();
+		m_Character.Render();
 	}
 
 	auto DebugScene::RenderUI() const -> void

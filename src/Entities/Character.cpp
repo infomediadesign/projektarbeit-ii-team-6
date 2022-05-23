@@ -4,14 +4,9 @@
 
 namespace Redge
 {
-	auto Character::Draw() const -> void
+	auto Character::Render() const -> void
 	{
-		DrawScaled(1);
-	}
-
-	auto Character::DrawScaled(float scale) const -> void
-	{
-		m_Character.DrawTileScaled(m_CurrentFrame, static_cast<uint16_t>(m_Direction), m_Position, scale);
+		m_Character.DrawTile(m_CurrentFrame, static_cast<uint16_t>(m_Direction), m_Position);
 	}
 
 	auto Character::NextFrame() -> void
