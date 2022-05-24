@@ -72,6 +72,6 @@ namespace Redge
 		static auto FromTiled(std::filesystem::path filePath) -> Tilemap;
 
 	private:
-		auto DrawTile(uint16_t index, Vector2 position, float scale) const -> void;
+		auto DrawTile(uint16_t index, Vector2 position) const -> void;
 	};
 } // namespace Redge

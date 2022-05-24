@@ -36,7 +36,7 @@ namespace Redge
 			Vector2 position{};
 			for (const auto index : layer.Tiles)
 			{
-				DrawTile(index, position, 1);
+				DrawTile(index, position);
 				position.x += static_cast<float>(TileWidth);
 
 				if (position.x >= Width * TileWidth)
@@ -61,20 +61,6 @@ namespace Redge
 			for (const auto& entity : layer.Entities)
 				entity->RenderUI();
 		}
-	}
-
-	auto Tilemap::CheckCollision(Rectangle checkBox) const -> bool
-	{
-		for (const auto& layer : Layers)
-		{
-			for (const auto& box : layer.Rectangles)
-			{
-				if (box.Visible && CheckCollisionRecs(box.Value, checkBox))
-					return true;
-			}
-		}
-
-		return false;
 	}
 
 	static auto ConfigureObjectFromTiled(const nlohmann::json& json, Tiled::Object& object) -> void
@@ -103,27 +89,24 @@ namespace Redge
 		map.TileWidth = json["tilewidth"].get<int32_t>();
 		map.TileHeight = json["tileheight"].get<int32_t>();
 
-		for (const auto& element : json["layers"])
+		for (const auto& jsonLayer : json["layers"])
 		{
 			auto& layer = map.Layers.emplace_back();
+			ConfigureObjectFromTiled(jsonLayer, layer);
 
-			auto type = element.find("type");
-			assert(type != element.end());
+			auto type = jsonLayer.find("type");
+			assert(type != jsonLayer.end());
 			auto typeStr = type->get<std::string>();
-
-			layer.Visible = true;
-			if (auto visible = element.find("visible"); visible != element.end())
-				layer.Visible = visible->get<bool>();
 
 			if (typeStr == "tilelayer")
 			{
-				if (auto data = element.find("data"); data != element.end())
+				if (auto data = jsonLayer.find("data"); data != jsonLayer.end())
 					layer.Tiles = data->get<std::vector<uint16_t>>();
 			}
 			else if (typeStr == "objectgroup")
 			{
-				auto objects = element.find("objects");
-				if (objects == element.end())
+				auto objects = jsonLayer.find("objects");
+				if (objects == jsonLayer.end())
 					continue;
 
 				for (const auto& object : *objects)
@@ -183,13 +166,15 @@ namespace Redge
 		return map;
 	}
 
-	auto Tilemap::DrawTile(uint16_t index, Vector2 position, float scale) const -> void
+	auto Tilemap::DrawTile(uint16_t index, Vector2 position) const -> void
 	{
 		if (index <= 0)
 			return;
 
-		for (const auto& [firstIndex, tileset] : Tilesets)
+		for (auto it = Tilesets.rbegin(); it != Tilesets.rend(); ++it)
 		{
+			const auto& [firstIndex, tileset] = *it;
+
 			if (index < firstIndex)
 				continue;
 
@@ -198,6 +183,7 @@ namespace Redge
 			const auto y = index / tileset.GetTileCountX();
 
 			tileset.DrawTile(x, y, position);
+			return;
 		}
 	}
 } // namespace Redge

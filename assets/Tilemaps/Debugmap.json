@@ -205,7 +205,7 @@
                  "y":256
                 }, 
                 {
-                 "height":96,
+                 "height":88,
                  "id":13,
                  "name":"",
                  "rotation":0,
@@ -213,7 +213,7 @@
                  "visible":true,
                  "width":16,
                  "x":96,
-                 "y":128
+                 "y":136
                 }, 
                 {
                  "height":24,
