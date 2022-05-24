@@ -31,7 +31,7 @@ namespace Redge
 
 		auto UpdateDirection(Orientation dir) -> void;
 
-		Tileset m_Character = Tileset("assets/Character.png", 16, 32);
+		Tileset m_Character = Tileset("assets/Entities/Character.png", 16, 32);
 		Vector2 m_Position = Vector2{0, 0};
 
 		Orientation m_Direction = Orientation::Down;
