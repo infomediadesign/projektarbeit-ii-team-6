@@ -1,5 +1,7 @@
 #include "Tilemap.h"
 
+#include "Entities/Character.h"
+
 #include <cassert>
 #include <fstream>
 
@@ -7,6 +9,23 @@
 
 namespace Redge
 {
+	auto Tilemap::Update(Camera2D& camera) -> void
+	{
+		for (auto& layer : Layers)
+		{
+			// NOTE: Possibly update entities even when not visible?
+			if (!layer.Visible)
+				continue;
+
+			for (auto& entity : layer.Entities)
+			{
+				entity->Update(layer);
+				if (auto character = dynamic_cast<Character*>(entity.get()))
+					character->SetCameraTarget(camera);
+			}
+		}
+	}
+
 	auto Tilemap::Render() const -> void
 	{
 		for (const auto& layer : Layers)
@@ -26,6 +45,21 @@ namespace Redge
 					position.x = 0;
 				}
 			}
+
+			for (const auto& entity : layer.Entities)
+				entity->Render();
+		}
+	}
+
+	auto Tilemap::RenderUI() const -> void
+	{
+		for (const auto& layer : Layers)
+		{
+			if (!layer.Visible)
+				continue;
+
+			for (const auto& entity : layer.Entities)
+				entity->RenderUI();
 		}
 	}
 
@@ -124,8 +158,8 @@ namespace Redge
 						point.Value.x = object["x"].get<float>();
 						point.Value.y = object["y"].get<float>();
 
-						if (point.Name == "m_Spawn")
-							map.Spawn = point.Value;
+						if (point.Name == "Character")
+							layer.Entities.push_back(std::make_unique<Character>(point.Value));
 					}
 					else
 					{

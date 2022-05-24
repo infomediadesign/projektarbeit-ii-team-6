@@ -1811,7 +1811,7 @@
 				{
 					"height": 0,
 					"id": 22,
-					"name": "m_Spawn",
+					"name": "Character",
 					"point": true,
 					"rotation": 0,
 					"type": "",
