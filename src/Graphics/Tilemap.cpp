@@ -1,5 +1,7 @@
 #include "Tilemap.h"
 
+#include "Entities/Character.h"
+
 #include <cassert>
 #include <fstream>
 
@@ -7,12 +9,24 @@
 
 namespace Redge
 {
-	auto Tilemap::Draw() const -> void
+	auto Tilemap::Update(Camera2D& camera) -> void
 	{
-		DrawScaled(1);
+		for (auto& layer : Layers)
+		{
+			// NOTE: Possibly update entities even when not visible?
+			if (!layer.Visible)
+				continue;
+
+			for (auto& entity : layer.Entities)
+			{
+				entity->Update(layer);
+				if (auto character = dynamic_cast<Character*>(entity.get()))
+					character->SetCameraTarget(camera);
+			}
+		}
 	}
 
-	auto Tilemap::DrawScaled(float scale) const -> void
+	auto Tilemap::Render() const -> void
 	{
 		for (const auto& layer : Layers)
 		{
@@ -20,21 +34,32 @@ namespace Redge
 				continue;
 
 			Vector2 position{};
-			auto xIndex = 0;
 			for (const auto index : layer.Tiles)
 			{
-				DrawTile(index, position, scale);
-				position.x += static_cast<float>(TileWidth) * scale;
+				DrawTile(index, position, 1);
+				position.x += static_cast<float>(TileWidth);
 
-				++xIndex;
-
-				if (xIndex >= Width)
+				if (position.x >= Width * TileWidth)
 				{
-					position.y += static_cast<float>(TileHeight) * scale;
+					position.y += static_cast<float>(TileHeight);
 					position.x = 0;
-					xIndex = 0;
 				}
 			}
+
+			for (const auto& entity : layer.Entities)
+				entity->Render();
+		}
+	}
+
+	auto Tilemap::RenderUI() const -> void
+	{
+		for (const auto& layer : Layers)
+		{
+			if (!layer.Visible)
+				continue;
+
+			for (const auto& entity : layer.Entities)
+				entity->RenderUI();
 		}
 	}
 
@@ -103,7 +128,6 @@ namespace Redge
 
 				for (const auto& object : *objects)
 				{
-
 					if (object.find("ellipse") != object.end())
 					{
 						auto& ellipse = layer.Ellipses.emplace_back();
@@ -134,8 +158,8 @@ namespace Redge
 						point.Value.x = object["x"].get<float>();
 						point.Value.y = object["y"].get<float>();
 
-						if (point.Name == "m_Spawn")
-							map.Spawn = point.Value;
+						if (point.Name == "Character")
+							layer.Entities.push_back(std::make_unique<Character>(point.Value));
 					}
 					else
 					{
@@ -154,8 +178,7 @@ namespace Redge
 		const auto parentPath = filePath.parent_path();
 		for (const auto& element : json["tilesets"])
 			map.Tilesets.push_back({element["firstgid"].get<uint16_t>(),
-			                        Tileset::FromTiled((parentPath / element["source"]).string().c_str())
-			});
+				Tileset::FromTiled((parentPath / element["source"]).string().c_str())});
 
 		return map;
 	}

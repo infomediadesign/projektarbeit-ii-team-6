@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Entities/Character.h"
 #include "Graphics/Tilemap.h"
 #include "Scene.h"
 
@@ -14,15 +13,9 @@ namespace Redge
 		auto Update() -> void override;
 
 		auto RenderWorld() const -> void override;
-		auto RenderForeground() const -> void override;
 		auto RenderUI() const -> void override;
 
 	private:
 		Tilemap m_Tilemap;
-		Character m_Character;
-
-		bool m_CanMove = true;
-		float m_TimeSinceLastStep = 0;
-		float m_TimeSinceLastFrame = 0;
 	};
 } // namespace Redge

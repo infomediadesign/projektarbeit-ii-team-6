@@ -1,8 +1,10 @@
 #pragma once
 
+#include "Entity.h"
 #include "Tileset.h"
 
 #include <filesystem>
+#include <memory>
 #include <vector>
 
 namespace Tiled
@@ -36,6 +38,7 @@ namespace Tiled
 	struct Layer : Object
 	{
 		std::vector<uint16_t> Tiles;
+		std::vector<std::unique_ptr<Redge::Entity>> Entities;
 
 		std::vector<Rectangle> Rectangles;
 		std::vector<Point> Points;
@@ -59,8 +62,10 @@ namespace Redge
 
 		Vector2 Spawn;
 
-		auto Draw() const -> void;
-		auto DrawScaled(float scale) const -> void;
+		auto Update(Camera2D& camera) -> void;
+
+		auto Render() const -> void;
+		auto RenderUI() const -> void;
 
 		auto CheckCollision(Rectangle checkBox) const -> bool;
 
