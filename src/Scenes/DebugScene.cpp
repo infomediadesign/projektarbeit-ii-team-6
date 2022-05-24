@@ -7,7 +7,7 @@
 namespace Redge
 {
 	DebugScene::DebugScene(Game* host) :
-		Scene(host), m_Tilemap(Tilemap::FromTiled("assets/Levels/Tilemap.json"))
+		Scene(host), m_Tilemap(Tilemap::FromTiled("assets/Tilemaps/Debugmap.json"))
 	{
 		Camera.zoom = 4;
 	}
