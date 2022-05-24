@@ -37,9 +37,9 @@ namespace Redge
 
 				Rectangle boundingBox{};
 				boundingBox.x = newPosition.x;
-				boundingBox.y = newPosition.y + m_Character.GetTileHeight() / 2;
+				boundingBox.y = newPosition.y + m_Character.GetTileHeight() / 8 * 5;
 				boundingBox.width = m_Character.GetTileWidth();
-				boundingBox.height = m_Character.GetTileHeight() / 3;
+				boundingBox.height = m_Character.GetTileHeight() / 8 * 3;
 
 				auto collision = false;
 				for (const auto& rect : layer.Rectangles)
@@ -117,7 +117,6 @@ namespace Redge
 	{
 		m_CurrentFrame = 0;
 	}
-
 
 	auto Character::UpdateDirection(Orientation dir) -> void
 	{
