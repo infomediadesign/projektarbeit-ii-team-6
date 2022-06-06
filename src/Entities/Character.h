@@ -39,5 +39,13 @@ namespace Redge
 
 		float m_TimeSinceLastStep = 0;
 		float m_TimeSinceLastFrame = 0;
+
+		Tileset m_HealthBar = Tileset("assets/UI/HealthBar.png", 189, 19);
+
+		static constexpr float s_MaxAirSupply = 100;
+		float m_AirSupply = s_MaxAirSupply;
+
+		static constexpr float s_MaxHealth = 10;
+		float m_Health = s_MaxHealth;
 	};
 } // namespace Redge

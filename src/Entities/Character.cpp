@@ -87,6 +87,10 @@ namespace Redge
 		{
 			UpdateDirection(Orientation::Right);
 		}
+
+		m_AirSupply -= GetFrameTime();
+		if (IsKeyPressed(KEY_SPACE))
+			m_Health -= 1;
 	}
 
 	auto Character::Render() const -> void
@@ -96,6 +100,20 @@ namespace Redge
 
 	auto Character::RenderUI() const -> void
 	{
+		constexpr auto healthPos = Vector2{30, 30};
+		constexpr auto healthScale = 3;
+
+		m_HealthBar.DrawTileScaled(0, 2, healthPos, healthScale);
+
+		const auto healthWidth = m_HealthBar.GetTileWidth();
+		const auto healthHeight = m_HealthBar.GetTileHeight();
+
+		m_HealthBar.DrawTilePartScaled(0, 1, healthPos,
+			Vector2{static_cast<float>(healthWidth) * (m_Health / s_MaxHealth), static_cast<float>(healthHeight)}, healthScale);
+
+		m_HealthBar.DrawTilePartScaled(0, 0, healthPos,
+			Vector2{static_cast<float>(healthWidth) * (m_AirSupply / s_MaxAirSupply), static_cast<float>(healthHeight)},
+			healthScale);
 	}
 
 	auto Character::SetCameraTarget(Camera2D& camera) const -> void
