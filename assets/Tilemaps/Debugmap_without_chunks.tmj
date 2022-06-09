@@ -672,7 +672,31 @@
          "draworder":"topdown",
          "id":11,
          "name":"entities",
-         "objects":[],
+         "objects":[
+                {
+                 "height":0,
+                 "id":25,
+                 "name":"Character",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":104.333333333333,
+                 "y":144.666666666667
+                }, 
+                {
+                 "height":0,
+                 "id":26,
+                 "name":"Cultist",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":308.666666666667,
+                 "y":155
+                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -723,7 +747,7 @@
          "y":0
         }],
  "nextlayerid":13,
- "nextobjectid":25,
+ "nextobjectid":27,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.8.4",
