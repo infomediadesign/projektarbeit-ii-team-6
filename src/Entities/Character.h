@@ -44,8 +44,9 @@ namespace Redge
 
 		static constexpr float s_MaxAirSupply = 100;
 		float m_AirSupply = s_MaxAirSupply;
+		float m_TimeSinceDamage = 0;
 
-		static constexpr float s_MaxHealth = 10;
+		static constexpr float s_MaxHealth = 9;
 		float m_Health = s_MaxHealth;
 	};
 } // namespace Redge

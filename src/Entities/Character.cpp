@@ -88,9 +88,20 @@ namespace Redge
 			UpdateDirection(Orientation::Right);
 		}
 
-		m_AirSupply -= GetFrameTime();
-		if (IsKeyPressed(KEY_SPACE))
-			m_Health -= 1;
+		if (m_AirSupply > 0)
+			m_AirSupply -= GetFrameTime();
+		else
+		{
+			m_TimeSinceDamage += GetFrameTime();
+			if (m_TimeSinceDamage >= 1)
+			{
+				m_TimeSinceDamage -= 1;
+				m_Health -= 1;
+			}
+		}
+
+		if (m_Health <= 0)
+			; // Kill off player
 	}
 
 	auto Character::Render() const -> void
@@ -109,7 +120,8 @@ namespace Redge
 		const auto healthHeight = m_HealthBar.GetTileHeight();
 
 		m_HealthBar.DrawTilePartScaled(0, 1, healthPos,
-			Vector2{static_cast<float>(healthWidth) * (m_Health / s_MaxHealth), static_cast<float>(healthHeight)}, healthScale);
+			Vector2{static_cast<float>(healthWidth) * (m_Health / s_MaxHealth), static_cast<float>(healthHeight)},
+			healthScale);
 
 		m_HealthBar.DrawTilePartScaled(0, 0, healthPos,
 			Vector2{static_cast<float>(healthWidth) * (m_AirSupply / s_MaxAirSupply), static_cast<float>(healthHeight)},
