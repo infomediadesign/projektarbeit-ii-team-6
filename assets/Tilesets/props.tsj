@@ -8,6 +8,63 @@
  "tilecount":64,
  "tiledversion":"1.8.4",
  "tileheight":16,
+ "tiles":[
+        {
+         "animation":[
+                {
+                 "duration":200,
+                 "tileid":0
+                }, 
+                {
+                 "duration":200,
+                 "tileid":1
+                }, 
+                {
+                 "duration":200,
+                 "tileid":2
+                }, 
+                {
+                 "duration":200,
+                 "tileid":3
+                }, 
+                {
+                 "duration":200,
+                 "tileid":4
+                }, 
+                {
+                 "duration":200,
+                 "tileid":5
+                }],
+         "id":0
+        }, 
+        {
+         "animation":[
+                {
+                 "duration":200,
+                 "tileid":8
+                }, 
+                {
+                 "duration":200,
+                 "tileid":9
+                }, 
+                {
+                 "duration":200,
+                 "tileid":10
+                }, 
+                {
+                 "duration":200,
+                 "tileid":11
+                }, 
+                {
+                 "duration":200,
+                 "tileid":12
+                }, 
+                {
+                 "duration":200,
+                 "tileid":13
+                }],
+         "id":8
+        }],
  "tilewidth":16,
  "type":"tileset",
  "version":"1.8"
