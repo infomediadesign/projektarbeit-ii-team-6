@@ -19,8 +19,8 @@ namespace Redge
 		movement.y -= static_cast<float>(IsKeyDown(KEY_W) || IsKeyDown(KEY_UP));
 		movement.y += static_cast<float>(IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN));
 
-		if (movement.y != 0)
-			movement.x = 0;
+		//if (movement.y != 0)
+		//	movement.x = 0;
 
 		constexpr float stepFrequency = 0.02;
 		constexpr float frameFrequency = stepFrequency * 5;
