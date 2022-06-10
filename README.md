@@ -11,7 +11,7 @@
 ### Prerequisites
 
 - [Git](https://git-scm.com/download) for version control
-- [CMake 3.15+](https://cmake.org/download) for the build system (3.21+ recommended)
+- [CMake 3.19+](https://cmake.org/download) for the build system
 - [Ninja](https://ninja-build.org) as the default CMake generator
 - A C++17 compatible compiler, such as:
 	- [MSVC](https://visualstudio.microsoft.com)
