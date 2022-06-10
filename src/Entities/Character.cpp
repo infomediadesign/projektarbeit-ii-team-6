@@ -2,11 +2,18 @@
 
 #include "Graphics/Tilemap.h"
 
+#include <string>
+
 #include <raylib.h>
 #include <raymath.h>
 
 namespace Redge
 {
+	auto TextureDeleter::operator()(Texture2D* texture) const noexcept -> void
+	{
+		UnloadTexture(*texture);
+	}
+
 	Character::Character(Vector2 position) : m_Position(position)
 	{
 	}
@@ -102,6 +109,9 @@ namespace Redge
 
 		if (m_Health <= 0)
 			; // Kill off player
+
+		if (IsKeyPressed(KEY_C))
+			++m_CrystalCount;
 	}
 
 	auto Character::Render() const -> void
@@ -126,6 +136,26 @@ namespace Redge
 		m_HealthBar.DrawTilePartScaled(0, 0, healthPos,
 			Vector2{static_cast<float>(healthWidth) * (m_AirSupply / s_MaxAirSupply), static_cast<float>(healthHeight)},
 			healthScale);
+
+		constexpr auto fontSize = 50;
+		float crystalScale = fontSize / m_CrystalTexture->height;
+
+		auto position = Vector2{
+			static_cast<float>(GetScreenWidth() - 30),
+			30,
+		};
+		position.x -= m_CrystalTexture->width * crystalScale;
+
+
+		DrawTextureEx(*m_CrystalTexture, position, 0, crystalScale, WHITE);
+
+		auto crystalText = std::to_string(m_CrystalCount);
+
+		position.x -= MeasureText(crystalText.c_str(), fontSize) + 10;
+		position.y += m_CrystalTexture->height * crystalScale / 2;
+		position.y -= fontSize / 2;
+
+		DrawText(crystalText.c_str(), position.x, position.y, fontSize, WHITE);
 	}
 
 	auto Character::SetCameraTarget(Camera2D& camera) const -> void

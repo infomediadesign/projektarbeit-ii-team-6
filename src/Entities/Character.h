@@ -3,8 +3,17 @@
 #include "Entity.h"
 #include "Graphics/Tileset.h"
 
+#include <raylib.h>
+
 namespace Redge
 {
+	struct TextureDeleter
+	{
+		auto operator()(Texture2D* texture) const noexcept -> void;
+	};
+
+	using TexturePtr = std::unique_ptr<Texture2D, TextureDeleter>;
+
 	enum class Orientation
 	{
 		Down,
@@ -48,5 +57,8 @@ namespace Redge
 
 		static constexpr float s_MaxHealth = 9;
 		float m_Health = s_MaxHealth;
+
+		uint32_t m_CrystalCount = 0;
+		TexturePtr m_CrystalTexture = TexturePtr(new Texture2D(LoadTexture("assets/UI/CrystalIcon.png")));
 	};
 } // namespace Redge
