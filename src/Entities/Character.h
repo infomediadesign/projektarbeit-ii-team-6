@@ -31,7 +31,7 @@ namespace Redge
 
 		auto UpdateDirection(Orientation dir) -> void;
 
-		float m_MovementSpeed = 2;
+		float m_MovementSpeed = 5;
 
 		Tileset m_Character = Tileset("assets/Entities/Character.png", 16, 24);
 		Vector2 m_Position = Vector2{0, 0};
