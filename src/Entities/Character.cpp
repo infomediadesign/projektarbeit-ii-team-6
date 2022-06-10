@@ -18,45 +18,42 @@ namespace Redge
 		movement.x += static_cast<float>(IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT));
 		movement.y -= static_cast<float>(IsKeyDown(KEY_W) || IsKeyDown(KEY_UP));
 		movement.y += static_cast<float>(IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN));
+		movement = Vector2Normalize(movement);
+		movement = Vector2Scale(movement, m_MovementSpeed);
 
 		//if (movement.y != 0)
 		//	movement.x = 0;
 
-		constexpr float stepFrequency = 0.02;
-		constexpr float frameFrequency = stepFrequency * 5;
+		constexpr float frameFrequency = 0.1;
 
 		if (Vector2Length(movement) != 0)
 		{
 			m_TimeSinceLastStep += GetFrameTime();
 			m_TimeSinceLastFrame += GetFrameTime();
 
-			if (m_TimeSinceLastStep >= stepFrequency)
+			auto newPosition = Vector2Add(m_Position, movement);
+
+			Rectangle boundingBox{};
+			boundingBox.x = newPosition.x;
+			boundingBox.y = newPosition.y + m_Character.GetTileHeight() / 8 * 5;
+			boundingBox.width = m_Character.GetTileWidth();
+			boundingBox.height = m_Character.GetTileHeight() / 8 * 3;
+
+			auto collision = false;
+			for (const auto& rect : layer.Rectangles)
 			{
-				m_TimeSinceLastStep -= stepFrequency;
-				auto newPosition = Vector2Add(m_Position, movement);
+				if (!rect.Visible)
+					continue;
 
-				Rectangle boundingBox{};
-				boundingBox.x = newPosition.x;
-				boundingBox.y = newPosition.y + m_Character.GetTileHeight() / 8 * 5;
-				boundingBox.width = m_Character.GetTileWidth();
-				boundingBox.height = m_Character.GetTileHeight() / 8 * 3;
-
-				auto collision = false;
-				for (const auto& rect : layer.Rectangles)
+				if (CheckCollisionRecs(boundingBox, rect.Value))
 				{
-					if (!rect.Visible)
-						continue;
-
-					if (CheckCollisionRecs(boundingBox, rect.Value))
-					{
-						collision = true;
-						break;
-					}
+					collision = true;
+					break;
 				}
-
-				if (!collision)
-					m_Position = newPosition;
 			}
+
+			if (!collision)
+				m_Position = newPosition;
 
 			if (m_TimeSinceLastFrame >= frameFrequency)
 			{
