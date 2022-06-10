@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.19)
 
 project("Crimson-Mine"
 	DESCRIPTION "A roguelike dungeon crawler in a western fantasy world"
@@ -21,12 +21,12 @@ target_sources(${PROJECT_NAME} PRIVATE ${PROJECT_SOURCE_FILES})
 source_group(TREE "${CMAKE_CURRENT_LIST_DIR}/assets" PREFIX "Assets" FILES ${PROJECT_ASSET_FILES})
 source_group(TREE "${CMAKE_CURRENT_LIST_DIR}/src" PREFIX "Source" FILES ${PROJECT_SOURCE_FILES})
 
-# Copy assets to output
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-	COMMAND ${CMAKE_COMMAND}
-	ARGS -E copy_directory "${CMAKE_CURRENT_LIST_DIR}/assets" "$<TARGET_FILE_DIR:${PROJECT_NAME}>/assets"
+add_custom_target(${PROJECT_NAME}_assets
+	COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_CURRENT_LIST_DIR}/assets" "$<TARGET_FILE_DIR:${PROJECT_NAME}>/assets"
 	COMMENT "Copying asset directory to project output"
 )
+
+add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}_assets)
 
 #======================#
 #=====# Metadata #=====#
