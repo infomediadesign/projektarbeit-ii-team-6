@@ -1,0 +1,14 @@
+{ "columns":3,
+ "image":"mud_floor.png",
+ "imageheight":48,
+ "imagewidth":48,
+ "margin":0,
+ "name":"mud_floor",
+ "spacing":0,
+ "tilecount":9,
+ "tiledversion":"1.8.4",
+ "tileheight":16,
+ "tilewidth":16,
+ "type":"tileset",
+ "version":"1.8"
+}
