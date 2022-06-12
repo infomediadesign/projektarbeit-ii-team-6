@@ -95,6 +95,33 @@ namespace Redge
 		DrawTexturePro(m_Texture, rect, dest, Vector2{}, 0, tint);
 	}
 
+	auto Tileset::DrawTilePart(uint16_t x, uint16_t y, Vector2 position, Vector2 section, Color tint) const -> void
+	{
+		DrawTilePartScaled(x, y, position, section, 1, tint);
+	}
+
+	auto Tileset::DrawTilePartScaled(uint16_t x, uint16_t y, Vector2 position, Vector2 section, float scale, Color tint) const -> void
+	{
+		// Check passed parameters are within bounds
+		assert(x < GetTileCountX());
+		assert(y < GetTileCountY());
+		assert(section.x <= GetTileWidth());
+		assert(section.y <= GetTileHeight());
+
+		Rectangle rect;
+		rect.x = static_cast<float>(GetTileWidth() * x);
+		rect.y = static_cast<float>(GetTileHeight() * y);
+		rect.width = section.x;
+		rect.height = section.y;
+
+		Rectangle dest;
+		dest.x = position.x;
+		dest.y = position.y;
+		dest.width = rect.width * scale;
+		dest.height = rect.height * scale;
+		DrawTexturePro(m_Texture, rect, dest, Vector2{}, 0, tint);
+	}
+
 	auto Tileset::FromTiled(std::filesystem::path filePath) -> Tileset
 	{
 		std::ifstream fileStream(filePath);
