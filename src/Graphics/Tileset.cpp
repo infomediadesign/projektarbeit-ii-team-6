@@ -122,15 +122,15 @@ namespace Redge
 		DrawTexturePro(m_Texture, rect, dest, Vector2{}, 0, tint);
 	}
 
-	auto Tileset::FromTiled(std::filesystem::path filePath) -> Tileset
+	auto Tileset::FromFile(const std::filesystem::path& file) -> Tileset
 	{
-		std::ifstream fileStream(filePath);
+		std::ifstream fileStream(file);
 		assert(fileStream.is_open());
 
 		nlohmann::json json;
 		fileStream >> json;
 
-		const auto imagePath = filePath.parent_path()  / json["image"].get<std::string>();
+		const auto imagePath = file.parent_path()  / json["image"].get<std::string>();
 		const auto tileWidth = json["tilewidth"].get<uint16_t>();
 		const auto tileHeight = json["tileheight"].get<uint16_t>();
 

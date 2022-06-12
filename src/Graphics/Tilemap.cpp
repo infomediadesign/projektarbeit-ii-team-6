@@ -161,7 +161,7 @@ namespace Redge
 		const auto parentPath = filePath.parent_path();
 		for (const auto& element : json["tilesets"])
 			map.Tilesets.push_back({element["firstgid"].get<uint16_t>(),
-				Tileset::FromTiled((parentPath / element["source"]).string().c_str())});
+				Tileset::FromFile((parentPath / element["source"]).string().c_str())});
 
 		return map;
 	}
