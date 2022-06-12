@@ -1,0 +1,14 @@
+{ "columns":5,
+ "image":"..\/..\/Entities\/golem.png",
+ "imageheight":64,
+ "imagewidth":128,
+ "margin":0,
+ "name":"golem",
+ "spacing":0,
+ "tilecount":10,
+ "tiledversion":"1.8.4",
+ "tileheight":32,
+ "tilewidth":24,
+ "type":"tileset",
+ "version":"1.8"
+}
