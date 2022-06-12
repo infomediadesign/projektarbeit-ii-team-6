@@ -121,41 +121,46 @@ namespace Redge
 
 	auto Character::RenderUI() const -> void
 	{
-		constexpr auto healthPos = Vector2{30, 30};
+		auto topLeft = Vector2{30, 30};
+		auto topRight = Vector2{static_cast<float>(GetScreenWidth()) - 30, 30};
+		auto bottomLeft = Vector2{30, static_cast<float>(GetScreenHeight()) - 30};
+		auto bottomRight = Vector2{static_cast<float>(GetScreenHeight()) - 30, static_cast<float>(GetScreenWidth()) - 30};
+
+		// Health bar (top left)
+
 		constexpr auto healthScale = 3;
 
-		m_HealthBar.DrawTileScaled(0, 2, healthPos, healthScale);
+		m_HealthBar.DrawTileScaled(0, 2, topLeft, healthScale);
 
 		const auto healthWidth = m_HealthBar.GetTileWidth();
 		const auto healthHeight = m_HealthBar.GetTileHeight();
 
-		m_HealthBar.DrawTilePartScaled(0, 1, healthPos,
+		m_HealthBar.DrawTilePartScaled(0, 1, topLeft,
 			Vector2{static_cast<float>(healthWidth) * (m_Health / s_MaxHealth), static_cast<float>(healthHeight)},
 			healthScale);
 
-		m_HealthBar.DrawTilePartScaled(0, 0, healthPos,
+		m_HealthBar.DrawTilePartScaled(0, 0, topLeft,
 			Vector2{static_cast<float>(healthWidth) * (m_AirSupply / s_MaxAirSupply), static_cast<float>(healthHeight)},
 			healthScale);
+
+		topLeft.x += healthWidth;
+		topLeft.y += healthHeight;
+
+		// Crystal count (top right)
 
 		constexpr auto fontSize = 50;
 		float crystalScale = fontSize / m_CrystalTexture->height;
 
-		auto position = Vector2{
-			static_cast<float>(GetScreenWidth() - 30),
-			30,
-		};
-		position.x -= m_CrystalTexture->width * crystalScale;
+		topRight = Vector2Subtract(topRight, Vector2{m_CrystalTexture->width * crystalScale, 0});
 
-
-		DrawTextureEx(*m_CrystalTexture, position, 0, crystalScale, WHITE);
+		DrawTextureEx(*m_CrystalTexture, topRight, 0, crystalScale, WHITE);
 
 		auto crystalText = std::to_string(m_CrystalCount);
 
-		position.x -= MeasureText(crystalText.c_str(), fontSize) + 10;
-		position.y += m_CrystalTexture->height * crystalScale / 2;
-		position.y -= fontSize / 2;
+		topRight.x -= MeasureText(crystalText.c_str(), fontSize) + 10;
+		topRight.y += m_CrystalTexture->height * crystalScale / 2 - fontSize / 2;
 
-		DrawText(crystalText.c_str(), position.x, position.y, fontSize, WHITE);
+		DrawText(crystalText.c_str(), topRight.x, topRight.y, fontSize, WHITE);
 	}
 
 	auto Character::SetCameraTarget(Camera2D& camera) const -> void
