@@ -129,7 +129,7 @@ namespace Redge
 		auto topRight = Vector2{static_cast<float>(GetScreenWidth()) - 30, 30};
 		auto bottomLeft = Vector2{30, static_cast<float>(GetScreenHeight()) - 30};
 		auto bottomRight =
-			Vector2{static_cast<float>(GetScreenHeight()) - 30, static_cast<float>(GetScreenWidth()) - 30};
+			Vector2{static_cast<float>(GetScreenWidth()) - 30, static_cast<float>(GetScreenHeight()) - 30};
 
 		// Health bar (top left)
 
@@ -180,6 +180,19 @@ namespace Redge
 		}
 
 		DrawTextureEx(*m_WeaponSlotTexture, bottomLeft, 0, itemSlotsScale, WHITE);
+
+		// Inventory (bottom right)
+
+		constexpr float inventoryScale = 4;
+
+		bottomRight.y -= m_InventoryTexture->height * inventoryScale;
+
+		for (const auto& item : m_Items)
+		{
+			bottomRight.x -= m_InventoryTexture->width * inventoryScale;
+			DrawTextureEx(*m_InventoryTexture, bottomRight, 0, inventoryScale, WHITE);
+			bottomRight.x -= 10;
+		}
 	}
 
 	auto Character::SetCameraTarget(Camera2D& camera) const -> void
