@@ -2,6 +2,9 @@
 
 #include "Entity.h"
 #include "Graphics/Tileset.h"
+#include "Entities/Weapon.h"
+
+#include <array>
 
 #include <raylib.h>
 
@@ -60,5 +63,9 @@ namespace Redge
 
 		uint32_t m_CrystalCount = 0;
 		TexturePtr m_CrystalTexture = TexturePtr(new Texture2D(LoadTexture("assets/UI/CrystalIcon.png")));
+
+		std::array<std::unique_ptr<Weapon>, 2> m_Weapons{};
+		TexturePtr m_WeaponSlotTexture = TexturePtr(new Texture2D(LoadTexture("assets/UI/WeaponSlots.png")));
+		bool m_PrimaryWeapon = true;
 	};
 } // namespace Redge

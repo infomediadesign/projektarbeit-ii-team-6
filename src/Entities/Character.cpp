@@ -113,6 +113,9 @@ namespace Redge
 
 		if (IsKeyPressed(KEY_C))
 			++m_CrystalCount;
+
+		if (IsKeyPressed(KEY_SPACE))
+			m_PrimaryWeapon = !m_PrimaryWeapon;
 	}
 
 	auto Character::Render() const -> void
@@ -125,7 +128,8 @@ namespace Redge
 		auto topLeft = Vector2{30, 30};
 		auto topRight = Vector2{static_cast<float>(GetScreenWidth()) - 30, 30};
 		auto bottomLeft = Vector2{30, static_cast<float>(GetScreenHeight()) - 30};
-		auto bottomRight = Vector2{static_cast<float>(GetScreenHeight()) - 30, static_cast<float>(GetScreenWidth()) - 30};
+		auto bottomRight =
+			Vector2{static_cast<float>(GetScreenHeight()) - 30, static_cast<float>(GetScreenWidth()) - 30};
 
 		// Health bar (top left)
 
@@ -162,6 +166,20 @@ namespace Redge
 		topRight.y += m_CrystalTexture->height * crystalScale / 2 - fontSize / 2;
 
 		DrawText(crystalText.c_str(), topRight.x, topRight.y, fontSize, WHITE);
+
+		// Weapons (bottom left)
+		float itemSlotsScale = 3;
+
+		bottomLeft.y -= m_WeaponSlotTexture->height * itemSlotsScale;
+
+		if (!m_PrimaryWeapon) // HACK: need to mirror the image only horizontal, this mirrors both axis
+		{
+			bottomLeft = Vector2Add(bottomLeft,
+				Vector2{m_WeaponSlotTexture->width * itemSlotsScale, m_WeaponSlotTexture->height * itemSlotsScale});
+			itemSlotsScale *= -1;
+		}
+
+		DrawTextureEx(*m_WeaponSlotTexture, bottomLeft, 0, itemSlotsScale, WHITE);
 	}
 
 	auto Character::SetCameraTarget(Camera2D& camera) const -> void
