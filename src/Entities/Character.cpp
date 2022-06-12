@@ -12,6 +12,7 @@ namespace Redge
 	auto TextureDeleter::operator()(Texture2D* texture) const noexcept -> void
 	{
 		UnloadTexture(*texture);
+		delete texture;
 	}
 
 	Character::Character(Vector2 position) : m_Position(position)
