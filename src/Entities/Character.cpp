@@ -42,9 +42,9 @@ namespace Redge
 			auto newPosition = Vector2Add(m_Position, movement);
 
 			Rectangle boundingBox{};
-			boundingBox.x = newPosition.x;
+			boundingBox.x = newPosition.x + m_Character.GetTileWidth() / 6 * 1;
 			boundingBox.y = newPosition.y + m_Character.GetTileHeight() / 8 * 5;
-			boundingBox.width = m_Character.GetTileWidth();
+			boundingBox.width = m_Character.GetTileWidth() / 3 * 2;
 			boundingBox.height = m_Character.GetTileHeight() / 8 * 3;
 
 			auto collision = false;
