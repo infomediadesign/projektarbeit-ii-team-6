@@ -10,7 +10,7 @@ namespace Tiled
 	struct Map
 	{
 		std::vector<Property> Properties;
-		std::map<uint16_t, std::unique_ptr<Layer>> Layers;
+		std::vector<std::unique_ptr<Layer>> Layers;
 		std::map<uint16_t, Redge::Tileset> Tilesets;
 		Color BackgroundColor;
 		int Width;
@@ -21,6 +21,8 @@ namespace Tiled
 		auto Update(Redge::Scene* scene) -> void;
 		auto Render() const -> void;
 		auto RenderUI() const -> void;
+
+		auto DrawTile(uint16_t index, Vector2 position) const -> void;
 
 		static auto FromFile(const std::filesystem::path& file) -> Map;
 	};

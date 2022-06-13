@@ -1,12 +1,14 @@
 #include "Layer.h"
 
+#include "Tiled/Map.h"
+
 namespace Tiled
 {
 	auto Layer::Update(Redge::Scene* scene) -> void
 	{
 	}
 
-	auto Layer::Render() const -> void
+	auto Layer::Render(const Map& map) const -> void
 	{
 	}
 
@@ -14,12 +16,64 @@ namespace Tiled
 	{
 	}
 
-	auto TileLayer::Render() const -> void
+	auto TileLayer::Render(const Map& map) const -> void
 	{
 		if (!Visible)
 			return;
 
-		// TODO: render tiles & chunks
+		RenderTiles(map);
+		RenderChunks(map);
+	}
+
+	auto TileLayer::RenderTiles(const Map& map) const -> void
+	{
+		auto position = Vector2{
+			static_cast<float>(OffsetX),
+			static_cast<float>(OffsetY),
+		};
+
+		auto column = 0;
+		for (const auto& index : Data)
+		{
+			map.DrawTile(index, position);
+
+			position.x += map.TileWidth;
+			++column;
+
+			if (column >= Width)
+			{
+				position.x -= map.TileWidth * column;
+				position.y += map.TileHeight;
+				column = 0;
+			}
+		}
+	}
+
+	auto TileLayer::RenderChunks(const Map& map) const -> void
+	{
+		for (const auto& chunk : Chunks)
+		{
+			auto position = Vector2{
+				static_cast<float>(chunk.X) * map.TileWidth,
+				static_cast<float>(chunk.Y) * map.TileHeight,
+			};
+
+			auto column = 0;
+			for (const auto& index : chunk.Data)
+			{
+				map.DrawTile(index, position);
+
+				position.x += map.TileWidth;
+				++column;
+
+				if (column >= chunk.Width)
+				{
+					position.x -= map.TileWidth * column;
+					position.y += map.TileHeight;
+					column = 0;
+				}
+			}
+		}
 	}
 
 	auto ObjectLayer::Update(Redge::Scene* scene) -> void
@@ -32,7 +86,7 @@ namespace Tiled
 			object->Update(scene, *this);
 	}
 
-	auto ObjectLayer::Render() const -> void
+	auto ObjectLayer::Render(const Map& map) const -> void
 	{
 		if (!Visible)
 			return;
@@ -52,7 +106,7 @@ namespace Tiled
 			object->RenderUI();
 	}
 
-	auto ImageLayer::Render() const -> void
+	auto ImageLayer::Render(const Map& map) const -> void
 	{
 		if (!Visible)
 			return;
@@ -70,13 +124,13 @@ namespace Tiled
 			layer->Update(scene);
 	}
 
-	auto GroupLayer::Render() const -> void
+	auto GroupLayer::Render(const Map& map) const -> void
 	{
 		if (!Visible)
 			return;
 
 		for (const auto& [_, layer] : Layers)
-			layer->Render();
+			layer->Render(map);
 	}
 
 	auto GroupLayer::RenderUI() const -> void
@@ -88,7 +142,6 @@ namespace Tiled
 			layer->RenderUI();
 	}
 } // namespace Tiled
-
 
 auto nlohmann::adl_serializer<Tiled::DrawOrder>::from_json(const json& json) -> Tiled::DrawOrder
 {
@@ -141,7 +194,7 @@ auto nlohmann::adl_serializer<Tiled::TileLayer>::from_json(const json& json) -> 
 	if (const auto chunks = json.find("chunks"); chunks != json.end())
 		returnValue.Chunks = chunks->get<std::vector<Tiled::Chunk>>();
 
-	if (const auto data = json.find("chunks"); data != json.end())
+	if (const auto data = json.find("data"); data != json.end())
 		returnValue.Data = data->get<std::vector<int>>();
 
 	const auto startX = json.find("startx");
@@ -170,8 +223,8 @@ auto nlohmann::adl_serializer<Tiled::ObjectLayer>::from_json(const json& json) -
 
 	if (const auto objects = json.find("objects"); objects != json.end())
 	{
-		for (const auto& entry : *objects)
-			returnValue.Objects.emplace(entry["id"].get<uint16_t>(), objects->get<std::unique_ptr<Tiled::Object>>());
+		// for (const auto& entry : *objects)
+		//	returnValue.Objects.emplace(entry["id"].get<uint16_t>(), objects->get<std::unique_ptr<Tiled::Object>>());
 	}
 
 	return returnValue;
@@ -209,7 +262,8 @@ auto nlohmann::adl_serializer<Tiled::GroupLayer>::from_json(const json& json) ->
 	return returnValue;
 }
 
-auto nlohmann::adl_serializer<std::unique_ptr<Tiled::Layer>>::from_json(const json& json) -> std::unique_ptr<Tiled::Layer>
+auto nlohmann::adl_serializer<std::unique_ptr<Tiled::Layer>>::from_json(const json& json)
+	-> std::unique_ptr<Tiled::Layer>
 {
 	const auto type = json.find("type");
 	if (type == json.end())

@@ -7,20 +7,40 @@ namespace Tiled
 {
 	auto Map::Update(Redge::Scene* scene) -> void
 	{
-		for (auto& [_, layer] : Layers)
+		for (auto& layer : Layers)
 			layer->Update(scene);
 	}
 
 	auto Map::Render() const -> void
 	{
-		for (auto& [_, layer] : Layers)
-			layer->Render();
+		for (auto& layer : Layers)
+			layer->Render(*this);
 	}
 
 	auto Map::RenderUI() const -> void
 	{
-		for (auto& [_, layer] : Layers)
+		for (auto& layer : Layers)
 			layer->RenderUI();
+	}
+
+	auto Map::DrawTile(uint16_t index, Vector2 position) const -> void
+	{
+		if (index == 0)
+			return;
+
+		for (auto it = Tilesets.rbegin(); it != Tilesets.rend(); ++it)
+		{
+			const auto& [firstgid, tileset] = *it;
+
+			if (index < firstgid)
+				continue;
+
+			index -= firstgid;
+			const auto x = index % tileset.GetTileCountX();
+			const auto y = index / tileset.GetTileCountX();
+			tileset.DrawTile(x, y, position);
+			return;
+		}
 	}
 
 	auto Map::FromFile(const std::filesystem::path& file) -> Map
@@ -54,7 +74,7 @@ auto nlohmann::adl_serializer<Tiled::Map>::from_json(const json& json) -> Tiled:
 		returnValue.Properties = properties->get<std::vector<Tiled::Property>>();
 
 	for (const auto& entry : json["layers"])
-		returnValue.Layers.emplace(entry["id"].get<uint16_t>(), entry.get<std::unique_ptr<Tiled::Layer>>());
+		returnValue.Layers.push_back(entry.get<std::unique_ptr<Tiled::Layer>>());
 
 	// Tilesets uses relative paths from the file, so they can't be added here
 
