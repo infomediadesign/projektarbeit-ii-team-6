@@ -7,8 +7,6 @@
 
 namespace Redge
 {
-	class Time;
-
 	class Game final
 	{
 	public:

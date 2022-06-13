@@ -8,9 +8,4 @@ namespace Redge
 		Camera.offset.y = static_cast<float>(GetScreenHeight()) / 2;
 		Camera.zoom = 1;
 	}
-
-	auto Scene::GetCamera() const -> Camera2D
-	{
-		return Camera;
-	}
 } // namespace Redge

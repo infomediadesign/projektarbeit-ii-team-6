@@ -1,5 +1,95 @@
 #include "Layer.h"
 
+namespace Tiled
+{
+	auto Layer::Update(Redge::Scene* scene) -> void
+	{
+	}
+
+	auto Layer::Render() const -> void
+	{
+	}
+
+	auto Layer::RenderUI() const -> void
+	{
+	}
+
+	auto TileLayer::Render() const -> void
+	{
+		if (!Visible)
+			return;
+
+		// TODO: render tiles & chunks
+	}
+
+	auto ObjectLayer::Update(Redge::Scene* scene) -> void
+	{
+		// NOTE: Should the layers update even if not visible?
+		if (!Visible)
+			return;
+
+		for (auto& [_, object] : Objects)
+			object->Update(scene, *this);
+	}
+
+	auto ObjectLayer::Render() const -> void
+	{
+		if (!Visible)
+			return;
+
+		// TODO: DrawOrder is currently ignored
+		for (const auto& [_, object] : Objects)
+			object->Render();
+	}
+
+	auto ObjectLayer::RenderUI() const -> void
+	{
+		if (!Visible)
+			return;
+
+		// TODO: DrawOrder is currently ignored
+		for (const auto& [_, object] : Objects)
+			object->RenderUI();
+	}
+
+	auto ImageLayer::Render() const -> void
+	{
+		if (!Visible)
+			return;
+
+		// TODO: Render image
+	}
+
+	auto GroupLayer::Update(Redge::Scene* scene) -> void
+	{
+		// NOTE: Should the layers update even if not visible?
+		if (!Visible)
+			return;
+
+		for (auto& [_, layer] : Layers)
+			layer->Update(scene);
+	}
+
+	auto GroupLayer::Render() const -> void
+	{
+		if (!Visible)
+			return;
+
+		for (const auto& [_, layer] : Layers)
+			layer->Render();
+	}
+
+	auto GroupLayer::RenderUI() const -> void
+	{
+		if (!Visible)
+			return;
+
+		for (const auto& [_, layer] : Layers)
+			layer->RenderUI();
+	}
+} // namespace Tiled
+
+
 auto nlohmann::adl_serializer<Tiled::DrawOrder>::from_json(const json& json) -> Tiled::DrawOrder
 {
 	if (json.get<std::string>() == "topdown")

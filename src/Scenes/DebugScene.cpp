@@ -1,33 +1,32 @@
 #include "DebugScene.h"
 
-#include "Entities/Character.h"
-
 #include <string>
 
 #include <raymath.h>
 
 namespace Redge
 {
-	DebugScene::DebugScene(Game* host) : Scene(host), m_Tilemap(Tilemap::FromTiled("assets/Tilemaps/level1.tmj"))
+	DebugScene::DebugScene(Game* host) : Scene(host),
+		m_Level(Tiled::Map::FromFile("assets/Tilemaps/level1.tmj"))
 	{
 		Camera.zoom = 4;
 	}
 
 	auto DebugScene::Update() -> void
 	{
-		m_Tilemap.Update(Camera);
+		m_Level.Update(this);
 	}
 
 	auto DebugScene::RenderWorld() const -> void
 	{
-		m_Tilemap.Render();
+		m_Level.Render();
 	}
 
 	auto DebugScene::RenderUI() const -> void
 	{
-		constexpr auto fontSize = 50;
+		m_Level.RenderUI();
 
-		m_Tilemap.RenderUI();
+		constexpr auto fontSize = 50;
 		DrawText("Debug Scene", 10, 10, fontSize, WHITE);
 
 		auto topLeft = Vector2{

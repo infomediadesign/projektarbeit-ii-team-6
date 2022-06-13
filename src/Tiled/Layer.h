@@ -1,8 +1,9 @@
 #pragma once
 
+#include "Scene.h"
+#include "Tiled/Chunk.h"
 #include "Tiled/Object.h"
 #include "Tiled/Property.h"
-#include "Tiled/Chunk.h"
 
 #include <filesystem>
 
@@ -17,6 +18,10 @@ namespace Tiled
 	struct Layer
 	{
 		virtual ~Layer() = default;
+
+		virtual auto Update(Redge::Scene* scene) -> void;
+		virtual auto Render() const -> void;
+		virtual auto RenderUI() const -> void;
 
 		std::string Name;
 		std::vector<Property> Properties;
@@ -37,12 +42,18 @@ namespace Tiled
 		int StartY;
 		int Width;
 		int Height;
+
+		auto Render() const -> void override;
 	};
 
 	struct ObjectLayer final : Layer
 	{
 		DrawOrder DrawOrder;
 		std::map<uint16_t, std::unique_ptr<Object>> Objects;
+
+		auto Update(Redge::Scene* scene) -> void override;
+		auto Render() const -> void override;
+		auto RenderUI() const -> void override;
 	};
 
 	struct ImageLayer final : Layer
@@ -50,11 +61,17 @@ namespace Tiled
 		std::filesystem::path Image;
 		bool RepeatX;
 		bool RepeatY;
+
+		auto Render() const -> void override;
 	};
 
 	struct GroupLayer final : Layer
 	{
 		std::map<uint16_t, std::unique_ptr<Layer>> Layers;
+
+		auto Update(Redge::Scene* scene) -> void override;
+		auto Render() const -> void override;
+		auto RenderUI() const -> void override;
 	};
 } // namespace Tiled
 

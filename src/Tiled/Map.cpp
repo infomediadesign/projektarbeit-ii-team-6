@@ -3,27 +3,47 @@
 #include <fstream>
 #include <cassert>
 
-auto Tiled::Map::FromFile(const std::filesystem::path& file) -> Map
+namespace Tiled
 {
-	const auto parentPath = file.parent_path();
-
-	std::ifstream fileStream(file);
-	assert(fileStream.is_open());
-
-	nlohmann::json json;
-	fileStream >> json;
-
-	auto map = json.get<Map>();
-
-	for (const auto& entry : json["tilesets"])
+	auto Map::Update(Redge::Scene* scene) -> void
 	{
-		const auto firstgid = entry["firstgid"].get<uint16_t>();
-		const auto tilesetPath = parentPath / entry["source"].get<std::filesystem::path>();
-		map.Tilesets.emplace(firstgid, Redge::Tileset::FromFile(tilesetPath));
+		for (auto& [_, layer] : Layers)
+			layer->Update(scene);
 	}
 
-	return map;
-}
+	auto Map::Render() const -> void
+	{
+		for (auto& [_, layer] : Layers)
+			layer->Render();
+	}
+
+	auto Map::RenderUI() const -> void
+	{
+		for (auto& [_, layer] : Layers)
+			layer->RenderUI();
+	}
+
+	auto Map::FromFile(const std::filesystem::path& file) -> Map
+	{
+		const auto parentPath = file.parent_path();
+
+		std::ifstream fileStream(file);
+		assert(fileStream.is_open());
+
+		nlohmann::json json;
+		fileStream >> json;
+
+		auto map = json.get<Map>();
+
+		for (const auto& entry : json["tilesets"])
+		{
+			const auto firstgid = entry["firstgid"].get<uint16_t>();
+			const auto tilesetPath = parentPath / entry["source"].get<std::filesystem::path>();
+			map.Tilesets.emplace(firstgid, Redge::Tileset::FromFile(tilesetPath));
+		}
+
+		return map;
+	}
 } // namespace Tiled
 
 auto nlohmann::adl_serializer<Tiled::Map>::from_json(const json& json) -> Tiled::Map

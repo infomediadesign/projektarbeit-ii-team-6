@@ -18,6 +18,10 @@ namespace Tiled
 		int TileWidth;
 		int TileHeight;
 
+		auto Update(Redge::Scene* scene) -> void;
+		auto Render() const -> void;
+		auto RenderUI() const -> void;
+
 		static auto FromFile(const std::filesystem::path& file) -> Map;
 	};
 } // namespace Tiled
