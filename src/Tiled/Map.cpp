@@ -24,22 +24,34 @@ auto Tiled::Map::FromFile(const std::filesystem::path& file) -> Map
 
 	return map;
 }
+} // namespace Tiled
 
 auto nlohmann::adl_serializer<Tiled::Map>::from_json(const json& json) -> Tiled::Map
 {
-	auto map = Tiled::Map{
-		json["properties"].get<std::vector<Tiled::Property>>(),
-		std::map<uint16_t, std::unique_ptr<Tiled::Layer>>(),
-		std::map<uint16_t, Redge::Tileset>(), // This uses relative paths from the file
-		json["backgroundcolor"].get<Color>(),
-		json["width"].get<int>(),
-		json["height"].get<int>(),
-		json["tilewidth"].get<int>(),
-		json["tileheight"].get<int>(),
-	};
+	Tiled::Map returnValue;
+
+	if (const auto properties = json.find("properties"); properties != json.end())
+		returnValue.Properties = properties->get<std::vector<Tiled::Property>>();
 
 	for (const auto& entry : json["layers"])
-		map.Layers.emplace(entry["id"].get<uint16_t>(), entry.get<std::unique_ptr<Tiled::Layer>>());
+		returnValue.Layers.emplace(entry["id"].get<uint16_t>(), entry.get<std::unique_ptr<Tiled::Layer>>());
 
-	return map;
+	// Tilesets uses relative paths from the file, so they can't be added here
+
+	const auto background = json.find("backgroundcolor");
+	returnValue.BackgroundColor = background != json.end() ? background->get<Color>() : Color{};
+
+	const auto width = json.find("width");
+	returnValue.Width = width != json.end() ? width->get<int>() : 0;
+
+	const auto height = json.find("height");
+	returnValue.Height = height != json.end() ? height->get<int>() : 0;
+
+	const auto tileWidth = json.find("tilewidth");
+	returnValue.TileWidth = tileWidth != json.end() ? tileWidth->get<int>() : 0;
+
+	const auto tileHeight = json.find("tileheight");
+	returnValue.TileHeight = tileHeight != json.end() ? tileHeight->get<int>() : 0;
+
+	return returnValue;
 }
