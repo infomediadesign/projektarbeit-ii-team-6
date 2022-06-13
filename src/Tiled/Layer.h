@@ -42,7 +42,7 @@ namespace Tiled
 	struct ObjectLayer final : Layer
 	{
 		DrawOrder DrawOrder;
-		std::vector<std::unique_ptr<Object>> Objects;
+		std::map<uint16_t, std::unique_ptr<Object>> Objects;
 	};
 
 	struct ImageLayer final : Layer
@@ -54,7 +54,7 @@ namespace Tiled
 
 	struct GroupLayer final : Layer
 	{
-		std::vector<std::unique_ptr<Layer>> Layers;
+		std::map<uint16_t, std::unique_ptr<Layer>> Layers;
 	};
 } // namespace Tiled
 

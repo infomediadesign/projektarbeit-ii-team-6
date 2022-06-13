@@ -26,7 +26,7 @@ auto nlohmann::adl_serializer<Tiled::Layer>::from_json(const json& json) -> Tile
 
 	const auto tint = json.find("tintcolor");
 	returnValue.Tint = tint != json.end() ? tint->get<Color>() : WHITE;
-	
+
 	const auto posX = json.find("x");
 	returnValue.X = posX != json.end() ? posX->get<int>() : 0;
 
@@ -79,7 +79,10 @@ auto nlohmann::adl_serializer<Tiled::ObjectLayer>::from_json(const json& json) -
 	returnValue.DrawOrder = order != json.end() ? order->get<Tiled::DrawOrder>() : Tiled::DrawOrder::Index;
 
 	if (const auto objects = json.find("objects"); objects != json.end())
-		returnValue.Objects = objects->get<std::vector<std::unique_ptr<Tiled::Object>>>();
+	{
+		for (const auto& entry : *objects)
+			returnValue.Objects.emplace(entry["id"].get<uint16_t>(), objects->get<std::unique_ptr<Tiled::Object>>());
+	}
 
 	return returnValue;
 }
@@ -108,7 +111,10 @@ auto nlohmann::adl_serializer<Tiled::GroupLayer>::from_json(const json& json) ->
 	static_cast<Tiled::Layer&>(returnValue) = json.get<Tiled::Layer>();
 
 	if (const auto layers = json.find("objects"); layers != json.end())
-		returnValue.Layers = layers->get<std::vector<std::unique_ptr<Tiled::Layer>>>();
+	{
+		for (const auto& entry : *layers)
+			returnValue.Layers.emplace(entry["id"].get<uint16_t>(), entry.get<std::unique_ptr<Tiled::Layer>>());
+	}
 
 	return returnValue;
 }
