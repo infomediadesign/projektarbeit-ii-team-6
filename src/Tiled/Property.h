@@ -1,26 +1,23 @@
 #pragma once
 
-#include <variant>
-#include <string>
 #include <filesystem>
-
-#include <raylib.h>
+#include <string>
+#include <variant>
 
 #include <nlohmann/json.hpp>
+#include <raylib.h>
+
 
 namespace Tiled
 {
-	struct Property
-	{
-		std::string Name;
-		std::variant<std::string, int, float, bool, Color, std::filesystem::path/*, TODO: object, class*/> Value;
-	};
+	using PropertyMap = std::unordered_map<std::string,
+		std::variant<std::string, int, float, bool, Color, std::filesystem::path /*, TODO: object, class*/>>;
 } // namespace Tiled
 
 template <>
-struct nlohmann::adl_serializer<Tiled::Property>
+struct nlohmann::adl_serializer<Tiled::PropertyMap>
 {
-	static auto from_json(const json& json) -> Tiled::Property;
+	static auto from_json(const json& json) -> Tiled::PropertyMap;
 };
 
 template <>

@@ -1,58 +1,30 @@
 #include "Property.h"
 
-auto nlohmann::adl_serializer<Tiled::Property>::from_json(const json& json) -> Tiled::Property
+auto nlohmann::adl_serializer<Tiled::PropertyMap>::from_json(const json& json) -> Tiled::PropertyMap
 {
-	const auto type = json["type"].get<std::string>();
+	Tiled::PropertyMap properties;
 
-	if (type == "string")
+	for (const auto& entry : json)
 	{
-		return Tiled::Property{
-			json["name"].get<std::string>(),
-			json["value"].get<std::string>(),
-		};
+		const auto type = json["type"].get<std::string>();
+
+		if (type == "string")
+			properties.emplace(json["name"].get<std::string>(), json["value"].get<std::string>());
+		else if (type == "int")
+			properties.emplace(json["name"].get<std::string>(), json["value"].get<int>());
+		else if (type == "float")
+			properties.emplace(json["name"].get<std::string>(), json["value"].get<float>());
+		else if (type == "bool")
+			properties.emplace(json["name"].get<std::string>(), json["value"].get<bool>());
+		else if (type == "color")
+			properties.emplace(json["name"].get<std::string>(), json["value"].get<Color>());
+		else if (type == "file")
+			properties.emplace(json["name"].get<std::string>(), json["value"].get<std::filesystem::path>());
+		else
+			throw std::runtime_error("Uknown property type");
 	}
 
-	if (type == "int")
-	{
-		return Tiled::Property{
-			json["name"].get<std::string>(),
-			json["value"].get<int>(),
-		};
-	}
-
-	if (type == "float")
-	{
-		return Tiled::Property{
-			json["name"].get<std::string>(),
-			json["value"].get<float>(),
-		};
-	}
-
-	if (type == "bool")
-	{
-		return Tiled::Property{
-			json["name"].get<std::string>(),
-			json["value"].get<bool>(),
-		};
-	}
-
-	if (type == "color")
-	{
-		return Tiled::Property{
-			json["name"].get<std::string>(),
-			json["value"].get<Color>(),
-		};
-	}
-
-	if (type == "file")
-	{
-		return Tiled::Property{
-			json["name"].get<std::string>(),
-			json["value"].get<std::filesystem::path>(),
-		};
-	}
-
-	throw std::runtime_error("Unsupported property type");
+	return properties;
 }
 
 auto nlohmann::adl_serializer<Color>::from_json(const json& json) -> Color

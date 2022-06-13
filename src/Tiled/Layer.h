@@ -26,7 +26,7 @@ namespace Tiled
 		virtual auto RenderUI() const -> void;
 
 		std::string Name;
-		std::vector<Property> Properties;
+		PropertyMap Properties;
 		bool Visible;
 		double Opacity;
 		Color Tint;

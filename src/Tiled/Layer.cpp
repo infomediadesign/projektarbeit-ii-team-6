@@ -159,7 +159,7 @@ auto nlohmann::adl_serializer<Tiled::Layer>::from_json(const json& json) -> Tile
 	returnValue.Name = name != json.end() ? name->get<std::string>() : "";
 
 	if (const auto properties = json.find("properties"); properties != json.end())
-		returnValue.Properties = properties->get<std::vector<Tiled::Property>>();
+		returnValue.Properties = properties->get<Tiled::PropertyMap>();
 
 	const auto visible = json.find("visible");
 	returnValue.Visible = visible != json.end() ? visible->get<bool>() : true;

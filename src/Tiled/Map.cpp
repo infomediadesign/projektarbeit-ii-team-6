@@ -71,7 +71,7 @@ auto nlohmann::adl_serializer<Tiled::Map>::from_json(const json& json) -> Tiled:
 	Tiled::Map returnValue;
 
 	if (const auto properties = json.find("properties"); properties != json.end())
-		returnValue.Properties = properties->get<std::vector<Tiled::Property>>();
+		returnValue.Properties = properties->get<Tiled::PropertyMap>();
 
 	for (const auto& entry : json["layers"])
 		returnValue.Layers.push_back(entry.get<std::unique_ptr<Tiled::Layer>>());

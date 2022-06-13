@@ -9,7 +9,7 @@ namespace Tiled
 {
 	struct Map
 	{
-		std::vector<Property> Properties;
+		PropertyMap Properties;
 		std::vector<std::unique_ptr<Layer>> Layers;
 		std::map<uint16_t, Redge::Tileset> Tilesets;
 		Color BackgroundColor;
