@@ -54,7 +54,7 @@ namespace Tiled
 
 	struct ObjectLayer final : Layer
 	{
-		DrawOrder DrawOrder;
+		DrawOrder Order;
 		std::map<uint16_t, std::unique_ptr<Object>> Objects;
 
 		auto Update(Redge::Scene* scene) -> void override;

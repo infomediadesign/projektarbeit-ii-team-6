@@ -219,7 +219,7 @@ auto nlohmann::adl_serializer<Tiled::ObjectLayer>::from_json(const json& json) -
 	static_cast<Tiled::Layer&>(returnValue) = json.get<Tiled::Layer>();
 
 	const auto order = json.find("draworder");
-	returnValue.DrawOrder = order != json.end() ? order->get<Tiled::DrawOrder>() : Tiled::DrawOrder::Index;
+	returnValue.Order = order != json.end() ? order->get<Tiled::DrawOrder>() : Tiled::DrawOrder::Index;
 
 	if (const auto objects = json.find("objects"); objects != json.end())
 	{
