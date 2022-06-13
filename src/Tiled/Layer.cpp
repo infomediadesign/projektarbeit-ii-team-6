@@ -223,8 +223,8 @@ auto nlohmann::adl_serializer<Tiled::ObjectLayer>::from_json(const json& json) -
 
 	if (const auto objects = json.find("objects"); objects != json.end())
 	{
-		// for (const auto& entry : *objects)
-		//	returnValue.Objects.emplace(entry["id"].get<uint16_t>(), objects->get<std::unique_ptr<Tiled::Object>>());
+		for (const auto& entry : *objects)
+			returnValue.Objects.emplace(entry["id"].get<uint16_t>(), entry.get<std::unique_ptr<Tiled::Object>>());
 	}
 
 	return returnValue;
