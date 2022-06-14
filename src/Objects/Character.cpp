@@ -21,13 +21,13 @@ namespace Redge
 		movement.y += static_cast<float>(IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN));
 
 		if (movement.y < 0)
-			SetAnimation(Animation::Up);
+			m_Animation = Animation::Up;
 		else if (movement.y > 0)
-			SetAnimation(Animation::Down);
+			m_Animation = Animation::Down;
 		else if (movement.x < 0)
-			SetAnimation(Animation::Left);
+			m_Animation = Animation::Left;
 		else if (movement.x > 0)
-			SetAnimation(Animation::Right);
+			m_Animation = Animation::Right;
 
 		if (Vector2Length(movement) == 0)
 		{
@@ -98,17 +98,6 @@ namespace Redge
 	auto Character::IsColliding(const Vector2& point) const -> bool
 	{
 		return CheckCollisionPointRec(point, GetHitBox());
-	}
-
-	auto Character::SetAnimation(Animation animation) -> void
-	{
-		if (m_Animation == animation)
-			return;
-
-		m_Animation = animation;
-
-		m_CurrentFrame = 0;
-		m_CurrentFrameTime = 0;
 	}
 
 	auto Character::SetNextAnimationFrame() -> void

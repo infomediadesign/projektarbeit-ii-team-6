@@ -32,7 +32,6 @@ namespace Redge
 		auto IsColliding(const Vector2& point) const -> bool override;
 
 	private:
-		auto SetAnimation(Animation animation) -> void;
 		auto SetNextAnimationFrame() -> void;
 
 		auto GetHitBox() const -> Rectangle;
