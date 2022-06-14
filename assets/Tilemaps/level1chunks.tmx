@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="1" nextlayerid="18" nextobjectid="1266">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="1" nextlayerid="18" nextobjectid="1270">
  <tileset firstgid="1" source="../Tilesets/floor.tsj"/>
  <tileset firstgid="2" source="../Tilesets/flora.tsj"/>
  <tileset firstgid="38" source="../Tilesets/mud_floor.tsj"/>
@@ -10811,6 +10811,14 @@
    <point/>
   </object>
   <object id="1260" name="arrow_trap" x="824" y="568">
+   <point/>
+  </object>
+  <object id="1266" name="stone_hitbox" x="-768" y="-63" width="16" height="8"/>
+  <object id="1267" name="stone" x="-760" y="-59">
+   <point/>
+  </object>
+  <object id="1268" name="stone_hitbox" x="-720" y="113" width="16" height="8"/>
+  <object id="1269" name="stone" x="-712" y="117">
    <point/>
   </object>
  </objectgroup>
