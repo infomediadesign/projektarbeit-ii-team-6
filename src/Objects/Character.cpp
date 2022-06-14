@@ -115,7 +115,7 @@ namespace Redge
 	{
 		++m_CurrentFrame;
 		if (m_CurrentFrame >= m_Animations.GetTileCountX())
-			m_CurrentFrame = 0;
+			m_CurrentFrame = 1;
 	}
 
 	auto Character::GetHitBox() const -> Rectangle

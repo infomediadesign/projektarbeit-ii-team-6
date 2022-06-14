@@ -32,6 +32,6 @@ auto nlohmann::adl_serializer<std::unique_ptr<Tiled::Object>>::from_json(const j
 	if (name == "charakter")
 		return std::make_unique<Redge::Character>(json.get<Redge::Character>());
 
-	assert(!"Unhandled object type");
+	// TOOD: assert(!"Unhandled object type");
 	return std::make_unique<NullObject>();
 }
