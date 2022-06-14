@@ -111,12 +111,13 @@ namespace Redge
 	{
 		auto offset = GetTextureOffset();
 
-		return Rectangle{
-			m_CurrentPosition.x + offset.x,
-			m_CurrentPosition.y + offset.y,
-			static_cast<float>(m_Animations.GetTileWidth()),
-			static_cast<float>(m_Animations.GetTileHeight()),
-		};
+		float width = m_Animations.GetTileWidth() * 0.8;
+		float height = m_Animations.GetTileHeight() + offset.y;
+
+		float posX = m_CurrentPosition.x - width / 2;
+		float posY = m_CurrentPosition.y;
+
+		return Rectangle{posX, posY, width, height};
 	}
 
 	auto Character::GetTextureOffset() const -> Vector2
