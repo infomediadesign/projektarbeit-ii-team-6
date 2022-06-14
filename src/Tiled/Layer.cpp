@@ -1,6 +1,7 @@
 #include "Layer.h"
 
 #include "Tiled/Map.h"
+#include "Objects/Types/Collidable.h"
 
 namespace Tiled
 {
@@ -82,8 +83,40 @@ namespace Tiled
 		if (!Visible)
 			return;
 
+		std::vector<std::shared_ptr<Object>> objects;
+
 		for (auto& [_, object] : Objects)
+			objects.emplace_back(object);
+
+		for (auto& object : objects)
 			object->Update(scene, *this);
+
+		for (auto i = 0; i < objects.size(); ++i)
+		{
+			auto& object1 = objects[i];
+
+			auto collidable1 = dynamic_cast<Redge::ICollidable*>(object1.get());
+			if (collidable1 == nullptr)
+				continue;
+
+			for (auto j = i + 1; j < objects.size(); ++j)
+			{
+				auto& object2 = objects[j];
+
+				auto collidable2 = dynamic_cast<Redge::ICollidable*>(object2.get());
+				if (collidable2 == nullptr)
+					continue;
+
+				if (!collidable1->CheckCollision(collidable2))
+					continue;
+
+				collidable1->OnCollision(*object2);
+				collidable2->OnCollision(*object1);
+			}
+		}
+
+		for (auto& object : objects)
+			object->LateUpdate(scene, *this);
 	}
 
 	auto ObjectLayer::Render(const Map& map) const -> void

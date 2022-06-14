@@ -13,6 +13,8 @@ namespace Tiled
 		virtual ~Object() = default;
 
 		virtual auto Update(Redge::Scene* scene, struct ObjectLayer& layer) -> void = 0;
+		virtual auto LateUpdate(Redge::Scene* scene, struct ObjectLayer& layer) -> void = 0;
+
 		virtual auto Render() const -> void = 0;
 		virtual auto RenderUI() const -> void = 0;
 	};
