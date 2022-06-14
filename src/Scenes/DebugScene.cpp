@@ -6,8 +6,7 @@
 
 namespace Redge
 {
-	DebugScene::DebugScene(Game* host) : Scene(host),
-		m_Level(Tiled::Map::FromFile("assets/Tilemaps/level1.tmj"))
+	DebugScene::DebugScene(Game* host) : Scene(host), m_Level(Tiled::Map::FromFile("assets/Tilemaps/level1chunks.tmj"))
 	{
 		Camera.zoom = 4;
 	}
@@ -19,11 +18,15 @@ namespace Redge
 
 	auto DebugScene::RenderWorld() const -> void
 	{
+		auto topLeft = GetScreenToWorld2D(Vector2{0, 0}, Camera);
+		auto bottomRight = GetScreenToWorld2D(
+			Vector2{static_cast<float>(GetScreenWidth()), static_cast<float>(GetScreenHeight())}, Camera);
+
 		m_Level.Render(Rectangle{
-			Camera.target.x + Camera.offset.x,
-			Camera.target.y + Camera.offset.y,
-			GetScreenWidth() / Camera.zoom,
-			GetScreenHeight() / Camera.zoom,
+			topLeft.x,
+			topLeft.y,
+			bottomRight.x - topLeft.x,
+			bottomRight.y - topLeft.y,
 		});
 	}
 
