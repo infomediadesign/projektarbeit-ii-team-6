@@ -67,8 +67,8 @@ namespace Redge
 
 	auto Character::Render() const -> void
 	{
-		const auto position = Vector2Add(m_CurrentPosition, GetTextureOffset());
-		m_Animations.DrawTile(m_CurrentFrame, static_cast<uint16_t>(m_Animation), position);
+		m_Animations.DrawTile(m_CurrentFrame, static_cast<uint16_t>(m_Animation),
+			Vector2Add(m_CurrentPosition, GetTextureOffset()));
 	}
 
 	auto Character::RenderUI() const -> void
