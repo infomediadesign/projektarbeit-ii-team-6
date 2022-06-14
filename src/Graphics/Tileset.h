@@ -31,7 +31,7 @@ namespace Redge
 		auto DrawTilePart(uint16_t x, uint16_t y, Vector2 position, Vector2 section, Color tint = WHITE) const -> void;
 		auto DrawTilePartScaled(uint16_t x, uint16_t y, Vector2 position, Vector2 section, float scale, Color tint = WHITE) const -> void;
 
-		static auto FromTiled(std::filesystem::path filePath) -> Tileset;
+		static auto FromFile(const std::filesystem::path& file) -> Tileset;
 
 	private:
 		Texture2D m_Texture{};

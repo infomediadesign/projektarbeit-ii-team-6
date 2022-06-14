@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Graphics/Tilemap.h"
+#include "Tiled/Map.h"
 #include "Scene.h"
 
 namespace Redge
@@ -16,6 +16,6 @@ namespace Redge
 		auto RenderUI() const -> void override;
 
 	private:
-		Tilemap m_Tilemap;
+		Tiled::Map m_Level;
 	};
 } // namespace Redge

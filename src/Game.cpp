@@ -51,7 +51,7 @@ namespace Redge
 		BeginDrawing();
 		ClearBackground(PINK);
 
-		BeginMode2D(m_Scene->GetCamera());
+		BeginMode2D(m_Scene->Camera);
 		m_Scene->RenderWorld();
 		EndMode2D();
 
