@@ -21025,6 +21025,19 @@
                  "width":0,
                  "x":-712,
                  "y":117
+                },
+            
+                {
+                 "height":0,
+                 "id":1270,
+                 "name":"charakter",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-1428,
+                 "y":-50
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -25922,7 +25935,7 @@
          "y":0
         }],
  "nextlayerid":18,
- "nextobjectid":1270,
+ "nextobjectid":1271,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.8.4",
