@@ -17,7 +17,7 @@ namespace Redge
 	class Character final : public Tiled::Object, public ICollidable
 	{
 	public:
-		Character(Vector2 position, float speed);
+		Character(Vector2 position, float speed, float maxHealth, float maxOxygen);
 
 		auto Update(Scene* scene, Tiled::ObjectLayer& layer) -> void override;
 		auto LateUpdate(Scene* scene, Tiled::ObjectLayer& layer) -> void override;
@@ -50,6 +50,12 @@ namespace Redge
 
 		float m_CharacterSpeed;
 		float m_SpeedMultiplier = 1;
+
+		Tileset m_HealthBar = Tileset("assets/UI/HealthBar.png", 189, 19);
+		float m_MaxHealth;
+		float m_Health;
+		float m_MaxOxygen;
+		float m_Oxygen;
 	};
 } // namespace Redge
 

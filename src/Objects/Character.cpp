@@ -7,8 +7,9 @@
 
 namespace Redge
 {
-	Character::Character(Vector2 position, float speed) :
-		m_CurrentPosition(position), m_PreviousPosition(position), m_CharacterSpeed(speed)
+	Character::Character(Vector2 position, float speed, float maxHealth, float maxOxygen) :
+		m_CurrentPosition(position), m_PreviousPosition(position), m_CharacterSpeed(speed), m_Health(maxHealth),
+		m_MaxHealth(maxHealth), m_Oxygen(maxOxygen), m_MaxOxygen(maxOxygen)
 	{
 	}
 
@@ -33,7 +34,6 @@ namespace Redge
 		{
 			m_CurrentFrame = 0;
 			m_CurrentFrameTime = 0;
-			return;
 		}
 		else
 		{
@@ -60,6 +60,23 @@ namespace Redge
 			m_Collided = false;
 		}
 
+		if (m_Oxygen > 0)
+			m_Oxygen -= GetFrameTime();
+		else if (m_Health > 0)
+			m_Health -= GetFrameTime();
+		else
+		{
+			// Delete character
+			for (auto it = layer.Objects.begin(); it != layer.Objects.end(); ++it)
+			{
+				if (it->second.get() == this)
+				{
+					layer.Objects.erase(it);
+					break;
+				}
+			}
+		}
+
 		scene->Camera.target = m_CurrentPosition;
 		scene->Camera.offset.x = GetScreenWidth() / 2;
 		scene->Camera.offset.y = GetScreenHeight() / 2;
@@ -73,6 +90,24 @@ namespace Redge
 
 	auto Character::RenderUI() const -> void
 	{
+		constexpr auto healthBarPos = Vector2{20, 20};
+		constexpr auto healthBarScale = 3;
+
+		m_HealthBar.DrawTileScaled(0, 2, healthBarPos, healthBarScale);
+
+		const auto healthPercent = m_Health / m_MaxHealth;
+		const auto healthPart = Vector2{
+			static_cast<float>(m_HealthBar.GetTileWidth()) * healthPercent,
+			static_cast<float>(m_HealthBar.GetTileHeight()),
+		};
+		m_HealthBar.DrawTilePartScaled(0, 1, healthBarPos, healthPart, healthBarScale);
+
+		const auto oxygenPercent = m_Oxygen / m_MaxOxygen;
+		const auto oxygenPart = Vector2{
+			static_cast<float>(m_HealthBar.GetTileWidth()) * oxygenPercent,
+			static_cast<float>(m_HealthBar.GetTileHeight()),
+		};
+		m_HealthBar.DrawTilePartScaled(0, 0, healthBarPos, oxygenPart, healthBarScale);
 	}
 
 	auto Character::OnCollision(Tiled::Object& other) -> void
@@ -134,18 +169,26 @@ auto nlohmann::adl_serializer<Redge::Character>::from_json(const json& json) -> 
 	assert(json["point"].get<bool>());
 
 	auto speed = 100.f;
+	auto health = 100.f;
+	auto oxygen = 100.f;
 
 	if (const auto properties = json.find("properties"); properties != json.end())
 	{
 		const auto propertyMap = properties->get<Tiled::PropertyMap>();
 		if (const auto speedEntry = propertyMap.find("Speed"); speedEntry != propertyMap.end())
 			speed = std::get<float>(speedEntry->second);
+
+		if (const auto healthEntry = propertyMap.find("health"); healthEntry != propertyMap.end())
+			health = std::get<float>(healthEntry->second);
+
+		if (const auto oxygenEntry = propertyMap.find("oxygen"); oxygenEntry != propertyMap.end())
+			oxygen = std::get<float>(oxygenEntry->second);
 	}
 
-	return Redge::Character(
-		Vector2{
-			json["x"].get<float>(),
-			json["y"].get<float>(),
-		},
-		speed);
+	const auto pos = Vector2{
+		json["x"].get<float>(),
+		json["y"].get<float>(),
+	};
+
+	return Redge::Character(pos, speed, health, oxygen);
 }
