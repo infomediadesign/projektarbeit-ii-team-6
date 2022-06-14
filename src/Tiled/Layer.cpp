@@ -9,7 +9,7 @@ namespace Tiled
 	{
 	}
 
-	auto Layer::Render(const Map& map) const -> void
+	auto Layer::Render(const Map& map, Rectangle viewArea) const -> void
 	{
 	}
 
@@ -17,13 +17,13 @@ namespace Tiled
 	{
 	}
 
-	auto TileLayer::Render(const Map& map) const -> void
+	auto TileLayer::Render(const Map& map, Rectangle viewArea) const -> void
 	{
 		if (!Visible)
 			return;
 
 		RenderTiles(map);
-		RenderChunks(map);
+		RenderChunks(map, viewArea);
 	}
 
 	auto TileLayer::RenderTiles(const Map& map) const -> void
@@ -50,7 +50,7 @@ namespace Tiled
 		}
 	}
 
-	auto TileLayer::RenderChunks(const Map& map) const -> void
+	auto TileLayer::RenderChunks(const Map& map, Rectangle viewArea) const -> void
 	{
 		for (const auto& chunk : Chunks)
 		{
@@ -58,6 +58,16 @@ namespace Tiled
 				static_cast<float>(chunk.X) * map.TileWidth,
 				static_cast<float>(chunk.Y) * map.TileHeight,
 			};
+
+			auto area = Rectangle{
+				position.x,
+				position.y,
+				static_cast<float>(chunk.Width) * map.TileWidth,
+				static_cast<float>(chunk.Height) * map.TileHeight,
+			};
+
+			if (!CheckCollisionRecs(viewArea, area))
+				continue;
 
 			auto column = 0;
 			for (const auto& index : chunk.Data)
@@ -119,7 +129,7 @@ namespace Tiled
 			object->LateUpdate(scene, *this);
 	}
 
-	auto ObjectLayer::Render(const Map& map) const -> void
+	auto ObjectLayer::Render(const Map& map, Rectangle viewArea) const -> void
 	{
 		if (!Visible)
 			return;
@@ -139,7 +149,7 @@ namespace Tiled
 			object->RenderUI();
 	}
 
-	auto ImageLayer::Render(const Map& map) const -> void
+	auto ImageLayer::Render(const Map& map, Rectangle viewArea) const -> void
 	{
 		if (!Visible)
 			return;
@@ -157,13 +167,13 @@ namespace Tiled
 			layer->Update(scene);
 	}
 
-	auto GroupLayer::Render(const Map& map) const -> void
+	auto GroupLayer::Render(const Map& map, Rectangle viewArea) const -> void
 	{
 		if (!Visible)
 			return;
 
 		for (const auto& [_, layer] : Layers)
-			layer->Render(map);
+			layer->Render(map, viewArea);
 	}
 
 	auto GroupLayer::RenderUI() const -> void

@@ -22,7 +22,7 @@ namespace Tiled
 		virtual ~Layer() = default;
 
 		virtual auto Update(Redge::Scene* scene) -> void;
-		virtual auto Render(const Map& map) const -> void;
+		virtual auto Render(const Map& map, Rectangle viewArea) const -> void;
 		virtual auto RenderUI() const -> void;
 
 		std::string Name;
@@ -45,11 +45,11 @@ namespace Tiled
 		int Width;
 		int Height;
 
-		auto Render(const Map& map) const -> void override;
+		auto Render(const Map& map, Rectangle viewArea) const -> void override;
 
 	private:
 		auto RenderTiles(const Map& map) const -> void;
-		auto RenderChunks(const Map& map) const -> void;
+		auto RenderChunks(const Map& map, Rectangle viewArea) const -> void;
 	};
 
 	struct ObjectLayer final : Layer
@@ -58,7 +58,7 @@ namespace Tiled
 		std::map<uint16_t, std::shared_ptr<Object>> Objects;
 
 		auto Update(Redge::Scene* scene) -> void override;
-		auto Render(const Map& map) const -> void override;
+		auto Render(const Map& map, Rectangle viewArea) const -> void override;
 		auto RenderUI() const -> void override;
 	};
 
@@ -68,7 +68,7 @@ namespace Tiled
 		bool RepeatX;
 		bool RepeatY;
 
-		auto Render(const Map& map) const -> void override;
+		auto Render(const Map& map, Rectangle viewArea) const -> void override;
 	};
 
 	struct GroupLayer final : Layer
@@ -76,7 +76,7 @@ namespace Tiled
 		std::map<uint16_t, std::unique_ptr<Layer>> Layers;
 
 		auto Update(Redge::Scene* scene) -> void override;
-		auto Render(const Map& map) const -> void override;
+		auto Render(const Map& map, Rectangle viewArea) const -> void override;
 		auto RenderUI() const -> void override;
 	};
 } // namespace Tiled

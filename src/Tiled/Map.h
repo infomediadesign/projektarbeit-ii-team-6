@@ -19,7 +19,7 @@ namespace Tiled
 		int TileHeight;
 
 		auto Update(Redge::Scene* scene) -> void;
-		auto Render() const -> void;
+		auto Render(Rectangle viewArea) const -> void;
 		auto RenderUI() const -> void;
 
 		auto DrawTile(uint16_t index, Vector2 position) const -> void;

@@ -11,10 +11,10 @@ namespace Tiled
 			layer->Update(scene);
 	}
 
-	auto Map::Render() const -> void
+	auto Map::Render(Rectangle viewArea) const -> void
 	{
 		for (auto& layer : Layers)
-			layer->Render(*this);
+			layer->Render(*this, viewArea);
 	}
 
 	auto Map::RenderUI() const -> void

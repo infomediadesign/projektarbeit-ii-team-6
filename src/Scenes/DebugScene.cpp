@@ -19,7 +19,12 @@ namespace Redge
 
 	auto DebugScene::RenderWorld() const -> void
 	{
-		m_Level.Render();
+		m_Level.Render(Rectangle{
+			Camera.target.x + Camera.offset.x,
+			Camera.target.y + Camera.offset.y,
+			GetScreenWidth() / Camera.zoom,
+			GetScreenHeight() / Camera.zoom,
+		});
 	}
 
 	auto DebugScene::RenderUI() const -> void
