@@ -1,6 +1,7 @@
 #include "Object.h"
 
 #include "Objects/Character.h"
+#include "Objects/UpgradeStation.h"
 #include "Objects/Wall.h"
 
 #include <cassert>
@@ -35,6 +36,9 @@ auto nlohmann::adl_serializer<std::unique_ptr<Tiled::Object>>::from_json(const j
 
 	if (name == "wall_hitbox")
 		return std::make_unique<Redge::Wall>(json.get<Redge::Wall>());
+
+	if (name == "upgrade")
+		return std::make_unique<Redge::UpgradeStation>(json.get<Redge::UpgradeStation>());
 
 	// TOOD: assert(!"Unhandled object type");
 	return std::make_unique<NullObject>();
