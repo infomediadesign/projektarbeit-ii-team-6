@@ -1,59 +1,51 @@
-{ "columns":10,
- "image":"nebel.png",
- "imageheight":16,
- "imagewidth":160,
+{ "columns":8,
+ "image":"..\/..\/Entities\/water_imp.png",
+ "imageheight":32,
+ "imagewidth":192,
  "margin":0,
- "name":"nebel",
+ "name":"WasserElementar",
  "spacing":0,
- "tilecount":10,
+ "tilecount":8,
  "tiledversion":"1.8.4",
- "tileheight":16,
+ "tileheight":32,
  "tiles":[
         {
          "animation":[
                 {
-                 "duration":200,
+                 "duration":100,
                  "tileid":0
                 }, 
                 {
-                 "duration":200,
+                 "duration":100,
                  "tileid":1
                 }, 
                 {
-                 "duration":200,
+                 "duration":100,
                  "tileid":2
                 }, 
                 {
-                 "duration":200,
+                 "duration":100,
                  "tileid":3
                 }, 
                 {
-                 "duration":200,
+                 "duration":100,
                  "tileid":4
                 }, 
                 {
-                 "duration":200,
+                 "duration":100,
                  "tileid":5
                 }, 
                 {
-                 "duration":200,
+                 "duration":100,
                  "tileid":6
                 }, 
                 {
-                 "duration":200,
+                 "duration":100,
                  "tileid":7
-                }, 
-                {
-                 "duration":200,
-                 "tileid":8
-                }, 
-                {
-                 "duration":200,
-                 "tileid":9
                 }],
          "id":0
         }],
- "tilewidth":16,
+ "tilewidth":24,
  "type":"tileset",
  "version":"1.8"
 }

@@ -1,13 +1,13 @@
-{ "columns":6,
- "image":"..\/..\/Entities\/Fledermaus.png",
- "imageheight":16,
- "imagewidth":96,
+{ "columns":8,
+ "image":"..\/..\/Entities\/plant_imp.png",
+ "imageheight":32,
+ "imagewidth":192,
  "margin":0,
- "name":"Fledermaus",
+ "name":"PflanzenElementar",
  "spacing":0,
- "tilecount":6,
+ "tilecount":8,
  "tiledversion":"1.8.4",
- "tileheight":16,
+ "tileheight":32,
  "tiles":[
         {
          "animation":[
@@ -34,10 +34,18 @@
                 {
                  "duration":100,
                  "tileid":5
+                }, 
+                {
+                 "duration":100,
+                 "tileid":6
+                }, 
+                {
+                 "duration":100,
+                 "tileid":7
                 }],
          "id":0
         }],
- "tilewidth":16,
+ "tilewidth":24,
  "type":"tileset",
  "version":"1.8"
 }

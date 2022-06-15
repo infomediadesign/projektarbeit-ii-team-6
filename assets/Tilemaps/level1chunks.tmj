@@ -5883,7 +5883,7 @@
                 }],
          "height":112,
          "id":6,
-         "name":"blutkristalle",
+         "name":"bloodcrystals",
          "opacity":1,
          "startx":-96,
          "starty":-64,
@@ -7375,7 +7375,7 @@
                 }],
          "height":112,
          "id":7,
-         "name":"bodenleisten",
+         "name":"bottombar",
          "opacity":1,
          "startx":-96,
          "starty":-64,
@@ -10658,7 +10658,7 @@
                 }],
          "height":96,
          "id":10,
-         "name":"gegner",
+         "name":"entities",
          "opacity":1,
          "startx":-96,
          "starty":-48,
@@ -11157,7 +11157,7 @@
                 }],
          "height":80,
          "id":11,
-         "name":"nebel",
+         "name":"fog",
          "opacity":0.1,
          "startx":-96,
          "starty":-32,
@@ -25963,7 +25963,7 @@
         }, 
         {
          "firstgid":329,
-         "source":"..\/Tilesets\/bodenleisten.tsj"
+         "source":"..\/Tilesets\/bottombar.tsj"
         }, 
         {
          "firstgid":353,
@@ -25975,40 +25975,40 @@
         }, 
         {
          "firstgid":409,
-         "source":"..\/Tilesets\/entities\/WasserElementar.tsj"
+         "source":"..\/Tilesets\/entities\/water_imp.tsj"
         }, 
         {
          "firstgid":417,
-         "source":"..\/Tilesets\/entities\/Slime.tsj"
+         "source":"..\/Tilesets\/entities\/slime.tsj"
         }, 
         {
          "firstgid":425,
-         "source":"..\/Tilesets\/entities\/PflanzenElementar.tsj"
+         "source":"..\/Tilesets\/entities\/plant_imp.tsj"
         }, 
         {
          "firstgid":433,
-         "source":"..\/Tilesets\/entities\/Wendigo.tsj"
+         "source":"..\/Tilesets\/entities\/wendigo.tsj"
         }, 
         {
          "firstgid":457,
-         "source":"..\/Tilesets\/entities\/FeuerElementar.tsj"
+         "source":"..\/Tilesets\/entities\/fire_imp.tsj"
         }, 
         {
          "firstgid":465,
-         "source":"..\/Tilesets\/entities\/Fledermaus.tsj"
+         "source":"..\/Tilesets\/entities\/bat.tsj"
         }, 
         {
          "firstgid":471,
-         "source":"..\/Tilesets\/entities\/Cultist.tsj"
+         "source":"..\/Tilesets\/entities\/cultist.tsj"
         }, 
         {
          "firstgid":487,
-         "source":"..\/Tilesets\/nebel.tsj"
+         "source":"..\/Tilesets\/fog.tsj"
         },
     
         {
          "firstgid":497,
-         "source":"..\/Tilesets\/nebel_holz.tsj"
+         "source":"..\/Tilesets\/fog_wood.tsj"
         }],
  "tilewidth":16,
  "type":"map",
