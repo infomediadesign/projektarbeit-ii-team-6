@@ -63,6 +63,9 @@ namespace Redge
 
 		Tileset m_InventoryIcon = Tileset("assets/UI/InventoryItem.png", 16, 17);
 		std::array<std::unique_ptr<Item>, 5> m_Items{};
+
+		Tileset m_WeaponSlots = Tileset("assets/UI/WeaponSlots.png", 58, 26);
+		bool m_PrimaryWeaponSelected = false;
 	};
 } // namespace Redge
 

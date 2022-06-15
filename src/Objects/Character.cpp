@@ -145,6 +145,23 @@ namespace Redge
 			m_InventoryIcon.DrawTileScaled(0, 0, inventoryPos, inventoryScale);
 			inventoryPos.x -= elementPadding;
 		}
+
+		// Weapon slots
+
+		auto weaponPos = Vector2{20, static_cast<float>(GetScreenHeight() - 20)};
+		auto weaponScale = 3;
+
+		weaponPos.y -= m_WeaponSlots.GetTileHeight() * weaponScale;
+
+		if (!m_PrimaryWeaponSelected)
+		{
+			// HACK: Invert image
+			weaponPos.x += m_WeaponSlots.GetTileWidth() * weaponScale;
+			weaponPos.y += m_WeaponSlots.GetTileHeight() * weaponScale;
+			weaponScale *= -1;
+		}
+
+		m_WeaponSlots.DrawTileScaled(0, 0, weaponPos, weaponScale);
 	}
 
 	auto Character::OnCollision(Tiled::Object& other) -> void
