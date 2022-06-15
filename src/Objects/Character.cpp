@@ -129,6 +129,22 @@ namespace Redge
 		crystalCountPos.y += m_CrystalIcon.GetTileHeight() * crystalIconScale / 2;
 		crystalCountPos.y -= crystalCountSize / 2;
 		DrawText(crystalCount.c_str(), crystalCountPos.x, crystalCountPos.y, crystalCountSize, WHITE);
+
+		// Inventory items
+
+		auto inventoryPos = Vector2{
+			static_cast<float>(GetScreenWidth() - 20),
+			static_cast<float>(GetScreenHeight() - 20),
+		};
+		const auto inventoryScale = 4;
+
+		inventoryPos.y -= m_InventoryIcon.GetTileHeight() * inventoryScale;
+		for (const auto& item : m_Items)
+		{
+			inventoryPos.x -= m_InventoryIcon.GetTileWidth() * inventoryScale;
+			m_InventoryIcon.DrawTileScaled(0, 0, inventoryPos, inventoryScale);
+			inventoryPos.x -= elementPadding;
+		}
 	}
 
 	auto Character::OnCollision(Tiled::Object& other) -> void

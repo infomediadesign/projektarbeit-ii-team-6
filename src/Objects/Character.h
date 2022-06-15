@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Graphics/Tileset.h"
+#include "Objects/Items/Item.h"
 #include "Objects/Types/Collidable.h"
 #include "Tiled/Object.h"
 
@@ -59,6 +60,9 @@ namespace Redge
 
 		Tileset m_CrystalIcon = Tileset("assets/UI/CrystalIcon.png", 13, 13);
 		uint32_t m_CrystalCount = 0;
+
+		Tileset m_InventoryIcon = Tileset("assets/UI/InventoryItem.png", 16, 17);
+		std::array<std::unique_ptr<Item>, 5> m_Items{};
 	};
 } // namespace Redge
 
