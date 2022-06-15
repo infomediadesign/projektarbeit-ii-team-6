@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Graphics/Tileset.h"
+#include "Objects/Items/Item.h"
 #include "Objects/Types/Collidable.h"
 #include "Tiled/Object.h"
 
@@ -17,7 +18,7 @@ namespace Redge
 	class Character final : public Tiled::Object, public ICollidable
 	{
 	public:
-		Character(Vector2 position, float speed);
+		Character(Vector2 position, float speed, float maxHealth, float maxOxygen);
 
 		auto Update(Scene* scene, Tiled::ObjectLayer& layer) -> void override;
 		auto LateUpdate(Scene* scene, Tiled::ObjectLayer& layer) -> void override;
@@ -32,7 +33,6 @@ namespace Redge
 		auto IsColliding(const Vector2& point) const -> bool override;
 
 	private:
-		auto SetAnimation(Animation animation) -> void;
 		auto SetNextAnimationFrame() -> void;
 
 		auto GetHitBox() const -> Rectangle;
@@ -51,6 +51,21 @@ namespace Redge
 
 		float m_CharacterSpeed;
 		float m_SpeedMultiplier = 1;
+
+		Tileset m_HealthBar = Tileset("assets/UI/HealthBar.png", 189, 19);
+		float m_MaxHealth;
+		float m_Health;
+		float m_MaxOxygen;
+		float m_Oxygen;
+
+		Tileset m_CrystalIcon = Tileset("assets/UI/CrystalIcon.png", 13, 13);
+		uint32_t m_CrystalCount = 0;
+
+		Tileset m_InventoryIcon = Tileset("assets/UI/InventoryItem.png", 16, 17);
+		std::array<std::unique_ptr<Item>, 5> m_Items{};
+
+		Tileset m_WeaponSlots = Tileset("assets/UI/WeaponSlots.png", 58, 26);
+		bool m_PrimaryWeaponSelected = false;
 	};
 } // namespace Redge
 

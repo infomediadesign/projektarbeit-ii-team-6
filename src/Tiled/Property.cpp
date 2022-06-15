@@ -6,20 +6,20 @@ auto nlohmann::adl_serializer<Tiled::PropertyMap>::from_json(const json& json) -
 
 	for (const auto& entry : json)
 	{
-		const auto type = json["type"].get<std::string>();
+		const auto type = entry["type"].get<std::string>();
 
 		if (type == "string")
-			properties.emplace(json["name"].get<std::string>(), json["value"].get<std::string>());
+			properties.emplace(entry["name"].get<std::string>(), entry["value"].get<std::string>());
 		else if (type == "int")
-			properties.emplace(json["name"].get<std::string>(), json["value"].get<int>());
+			properties.emplace(entry["name"].get<std::string>(), entry["value"].get<int>());
 		else if (type == "float")
-			properties.emplace(json["name"].get<std::string>(), json["value"].get<float>());
+			properties.emplace(entry["name"].get<std::string>(), entry["value"].get<float>());
 		else if (type == "bool")
-			properties.emplace(json["name"].get<std::string>(), json["value"].get<bool>());
+			properties.emplace(entry["name"].get<std::string>(), entry["value"].get<bool>());
 		else if (type == "color")
-			properties.emplace(json["name"].get<std::string>(), json["value"].get<Color>());
+			properties.emplace(entry["name"].get<std::string>(), entry["value"].get<Color>());
 		else if (type == "file")
-			properties.emplace(json["name"].get<std::string>(), json["value"].get<std::filesystem::path>());
+			properties.emplace(entry["name"].get<std::string>(), entry["value"].get<std::filesystem::path>());
 		else
 			throw std::runtime_error("Uknown property type");
 	}
