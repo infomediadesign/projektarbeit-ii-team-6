@@ -1,6 +1,7 @@
 #include "Object.h"
 
 #include "Objects/Character.h"
+#include "Objects/Torch.h"
 
 #include <cassert>
 
@@ -31,6 +32,8 @@ auto nlohmann::adl_serializer<std::unique_ptr<Tiled::Object>>::from_json(const j
 
 	if (name == "charakter")
 		return std::make_unique<Redge::Character>(json.get<Redge::Character>());
+	if (name == "torch")
+		return std::make_unique<Redge::Torch>(json.get<Redge::Torch>());
 
 	// TOOD: assert(!"Unhandled object type");
 	return std::make_unique<NullObject>();

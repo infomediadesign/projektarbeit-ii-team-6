@@ -69,6 +69,11 @@ namespace Redge
 	{
 		const auto position = Vector2Add(m_CurrentPosition, GetTextureOffset());
 		m_Animations.DrawTile(m_CurrentFrame, static_cast<uint16_t>(m_Animation), position);
+		Vector2 CenterPosition = Vector2Add(position,
+			{static_cast<float>(m_Animations.GetTileWidth()) / 2, static_cast<float>(m_Animations.GetTileHeight() / 2)});
+		BeginBlendMode(BLEND_MULTIPLIED);
+		DrawCircle(CenterPosition.x, CenterPosition.y, 75, Color{255, 255, 255, 75});
+		EndBlendMode();
 	}
 
 	auto Character::RenderUI() const -> void
