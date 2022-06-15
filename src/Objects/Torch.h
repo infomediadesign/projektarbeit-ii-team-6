@@ -21,7 +21,7 @@ namespace Redge
 
 	private:
 		Vector2 position;
-		Tileset m_Animation = Tileset("assets/Tilsets/objects/torch.png", 16, 16);
+		Tileset m_Animation = Tileset("assets/Tilesets/objects/torch.png", 16, 16);
 		uint16_t m_AnimationFrame = 0;
 		static constexpr float s_FrameDuration = 0.2;
 		float m_Frametime = 0;
