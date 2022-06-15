@@ -33,9 +33,10 @@ namespace Redge
 		static constexpr float s_FrameDuration = 0.2;
 		float m_FrameTime = 0;
 
-		uint8_t m_AnimationFrame = 0;
 		Tileset m_Column = Tileset("assets/Tilesets/objects/upgradeStand.png", 16, 16);
 		Tileset m_Ghosts = Tileset("assets/Tilesets/objects/upgradeGhosts.png", 16, 16);
+		uint8_t m_AnimationFrame = 0;
+		uint8_t m_AnimationColor;
 	};
 } // namespace Redge
 

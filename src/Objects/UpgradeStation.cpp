@@ -4,7 +4,8 @@
 
 namespace Redge
 {
-	UpgradeStation::UpgradeStation(Vector2 position) : m_Position(position)
+	UpgradeStation::UpgradeStation(Vector2 position) :
+		m_Position(position), m_AnimationColor(GetRandomValue(0, m_Ghosts.GetTileCountY() - 1))
 	{
 	}
 
@@ -33,7 +34,7 @@ namespace Redge
 		m_Column.DrawTile(0, 0, position);
 
 		position.y -= m_Ghosts.GetTileHeight();
-		m_Ghosts.DrawTile(m_AnimationFrame, 0, position);
+		m_Ghosts.DrawTile(m_AnimationFrame, m_AnimationColor, position);
 	}
 
 	auto UpgradeStation::RenderUI() const -> void
