@@ -99,6 +99,10 @@ namespace Redge
 	{
 		m_Animations.DrawTile(m_CurrentFrame, static_cast<uint16_t>(m_Animation),
 			Vector2Add(m_CurrentPosition, GetTextureOffset()));
+
+		BeginBlendMode(BLEND_MULTIPLIED);
+		DrawCircle(m_CurrentPosition.x, m_CurrentPosition.y, 75, Color{255, 255, 255, 75});
+		EndBlendMode();
 	}
 
 	constexpr auto elementPadding = 10;
