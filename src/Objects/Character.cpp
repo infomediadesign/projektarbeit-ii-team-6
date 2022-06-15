@@ -88,8 +88,12 @@ namespace Redge
 			Vector2Add(m_CurrentPosition, GetTextureOffset()));
 	}
 
+	constexpr auto elementPadding = 10;
+
 	auto Character::RenderUI() const -> void
 	{
+		// Health bar
+
 		constexpr auto healthBarPos = Vector2{20, 20};
 		constexpr auto healthBarScale = 3;
 
@@ -108,6 +112,23 @@ namespace Redge
 			static_cast<float>(m_HealthBar.GetTileHeight()),
 		};
 		m_HealthBar.DrawTilePartScaled(0, 0, healthBarPos, oxygenPart, healthBarScale);
+
+		// Crystal count
+
+		auto crystalIconPos = Vector2{static_cast<float>(GetScreenWidth() - 20), 20};
+		constexpr auto crystalIconScale = 4;
+
+		crystalIconPos.x -= m_CrystalIcon.GetTileWidth() * crystalIconScale;
+		m_CrystalIcon.DrawTileScaled(0, 0, crystalIconPos, crystalIconScale);
+
+		auto crystalCountPos = Vector2{crystalIconPos.x - elementPadding, crystalIconPos.y};
+		constexpr int crystalCountSize = 50;
+
+		const auto crystalCount = std::to_string(m_CrystalCount);
+		crystalCountPos.x -= MeasureText(crystalCount.c_str(), 50);
+		crystalCountPos.y += m_CrystalIcon.GetTileHeight() * crystalIconScale / 2;
+		crystalCountPos.y -= crystalCountSize / 2;
+		DrawText(crystalCount.c_str(), crystalCountPos.x, crystalCountPos.y, crystalCountSize, WHITE);
 	}
 
 	auto Character::OnCollision(Tiled::Object& other) -> void

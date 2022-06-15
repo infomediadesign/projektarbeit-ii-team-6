@@ -56,6 +56,9 @@ namespace Redge
 		float m_Health;
 		float m_MaxOxygen;
 		float m_Oxygen;
+
+		Tileset m_CrystalIcon = Tileset("assets/UI/CrystalIcon.png", 13, 13);
+		uint32_t m_CrystalCount = 0;
 	};
 } // namespace Redge
 
