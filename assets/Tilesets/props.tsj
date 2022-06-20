@@ -204,6 +204,26 @@
                  "tileid":167
                 }],
          "id":164
+        }, 
+        {
+         "animation":[
+                {
+                 "duration":200,
+                 "tileid":168
+                }, 
+                {
+                 "duration":200,
+                 "tileid":169
+                }, 
+                {
+                 "duration":200,
+                 "tileid":170
+                }, 
+                {
+                 "duration":200,
+                 "tileid":171
+                }],
+         "id":168
         }],
  "tilewidth":16,
  "type":"tileset",
