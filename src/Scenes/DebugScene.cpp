@@ -6,7 +6,7 @@
 
 namespace Redge
 {
-	DebugScene::DebugScene(Game* host) : Scene(host), m_Level(Tiled::Map::FromFile("assets/Tilemaps/level1chunks.tmj"))
+	DebugScene::DebugScene(Game* host) : Scene(host), m_Level(Tiled::Map::FromFile("assets/Tilemaps/hub_test.tmj"))
 	{
 		Camera.zoom = 4;
 	}
@@ -32,7 +32,7 @@ namespace Redge
 
 	auto DebugScene::RenderUI() const -> void
 	{
-		DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Color{0, 0, 0, 128});
+	//	DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Color{0, 0, 0, 128});
 		m_Level.RenderUI();
 		return; // NOTE: remove for debug info
 

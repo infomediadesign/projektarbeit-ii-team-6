@@ -1,0 +1,14 @@
+{ "columns":2,
+ "image":"hub_test.png",
+ "imageheight":16,
+ "imagewidth":32,
+ "margin":0,
+ "name":"hub_test",
+ "spacing":0,
+ "tilecount":2,
+ "tiledversion":"1.8.5",
+ "tileheight":16,
+ "tilewidth":16,
+ "type":"tileset",
+ "version":"1.8"
+}

@@ -35,7 +35,8 @@ auto nlohmann::adl_serializer<std::unique_ptr<Tiled::Object>>::from_json(const j
 
 	if (name == "charakter")
 		return std::make_unique<Redge::Character>(json.get<Redge::Character>());
-	if (name == "torch")
+
+//	if (name == "torch")
 		return std::make_unique<Redge::Torch>(json.get<Redge::Torch>());
 
 	if (name == "wall_hitbox")
