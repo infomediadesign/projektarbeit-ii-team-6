@@ -32,6 +32,8 @@ namespace Redge
 		auto IsColliding(const Vector2& center, float radius) const -> bool override;
 		auto IsColliding(const Vector2& point) const -> bool override;
 
+		auto GetPosition() const -> Vector2;
+
 	private:
 		auto SetNextAnimationFrame() -> void;
 

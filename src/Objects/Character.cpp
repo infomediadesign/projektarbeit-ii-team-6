@@ -206,6 +206,11 @@ namespace Redge
 		return CheckCollisionPointRec(point, GetHitBox());
 	}
 
+	auto Character::GetPosition() const -> Vector2
+	{
+		return Vector2(m_CurrentPosition);
+	}
+
 	auto Character::SetNextAnimationFrame() -> void
 	{
 		++m_CurrentFrame;

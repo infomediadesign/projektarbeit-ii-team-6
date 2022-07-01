@@ -3,6 +3,7 @@
 #include "Objects/Character.h"
 #include "Objects/Spikes.h"
 #include "Objects/Torch.h"
+#include "Objects/Slime.h"
 #include "Objects/UpgradeStation.h"
 #include "Objects/Wall.h"
 
@@ -35,6 +36,10 @@ auto nlohmann::adl_serializer<std::unique_ptr<Tiled::Object>>::from_json(const j
 
 	if (name == "charakter")
 		return std::make_unique<Redge::Character>(json.get<Redge::Character>());
+
+	if (name == "slime")
+		return std::make_unique<Redge::Slime>(json.get<Redge::Slime>());
+
 	if (name == "torch")
 		return std::make_unique<Redge::Torch>(json.get<Redge::Torch>());
 

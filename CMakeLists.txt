@@ -11,7 +11,7 @@ list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 add_executable(${PROJECT_NAME})
 
 file(GLOB_RECURSE PROJECT_SOURCE_FILES CONFIGURE_DEPENDS "${CMAKE_CURRENT_LIST_DIR}/src/*")
-target_sources(${PROJECT_NAME} PRIVATE ${PROJECT_SOURCE_FILES})
+target_sources(${PROJECT_NAME} PRIVATE ${PROJECT_SOURCE_FILES} "src/Objects/Slime.h" "src/Objects/Slime.cpp")
 source_group(TREE "${CMAKE_CURRENT_LIST_DIR}/src" PREFIX "Source" FILES ${PROJECT_SOURCE_FILES})
 
 add_custom_target(${PROJECT_NAME}_assets
@@ -20,7 +20,7 @@ add_custom_target(${PROJECT_NAME}_assets
 )
 
 file(GLOB_RECURSE PROJECT_ASSET_FILES CONFIGURE_DEPENDS "${CMAKE_CURRENT_LIST_DIR}/assets/*")
-target_sources(${PROJECT_NAME}_assets PRIVATE ${PROJECT_ASSET_FILES})
+target_sources(${PROJECT_NAME}_assets PRIVATE ${PROJECT_ASSET_FILES} "src/Objects/Slime.h" "src/Objects/Slime.cpp")
 source_group(TREE "${CMAKE_CURRENT_LIST_DIR}/assets" PREFIX "Assets" FILES ${PROJECT_ASSET_FILES})
 
 add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}_assets)
