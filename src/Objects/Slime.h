@@ -24,7 +24,7 @@ namespace Redge
 		std::shared_ptr<Character> character;
 		Vector2 s_Current_Position;
 		Vector2 s_Previous_Position;
-		float s_Speed = 0.75;
+		float s_Speed = 0.5;
 		Tileset m_Animation = Tileset("assets/Entities/slime.png", 24, 24);
 		uint16_t m_AnimationFrame = 0;
 		static constexpr float s_FrameDuration = 0.15;
