@@ -1,12 +1,11 @@
 #pragma once
 
-#include "Tiled/Object.h"
+#include "raylib.h"
 #include "Raylib/Tileset.h"
+#include "raymath.h"
+#include "Tiled/Object.h"
 
 #include <array>
-
-#include <raylib.h>
-#include <raymath.h>
 
 namespace Redge
 {

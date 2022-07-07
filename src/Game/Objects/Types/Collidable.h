@@ -1,8 +1,7 @@
 #pragma once
 
+#include "raylib.h"
 #include "Tiled/Object.h"
-
-#include <raylib.h>
 
 namespace Redge
 {

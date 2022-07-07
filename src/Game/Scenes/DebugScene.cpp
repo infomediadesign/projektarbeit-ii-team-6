@@ -1,8 +1,8 @@
 #include "DebugScene.h"
 
-#include <string>
+#include "raymath.h"
 
-#include <raymath.h>
+#include <string>
 
 namespace Redge
 {

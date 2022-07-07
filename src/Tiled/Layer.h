@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Scene.h"
+#include "Game/Scene.h"
 #include "Tiled/Chunk.h"
 #include "Tiled/Object.h"
 #include "Tiled/Property.h"

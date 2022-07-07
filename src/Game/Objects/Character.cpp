@@ -1,9 +1,8 @@
 #include "Character.h"
 
+#include "raymath.h"
 #include "Tiled/Layer.h"
 #include "Tiled/Property.h"
-
-#include <raymath.h>
 
 namespace Redge
 {

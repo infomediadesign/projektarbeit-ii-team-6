@@ -1,10 +1,10 @@
 #include "Object.h"
 
-#include "Objects/Character.h"
-#include "Objects/Spikes.h"
-#include "Objects/Torch.h"
-#include "Objects/UpgradeStation.h"
-#include "Objects/Wall.h"
+#include "Game/Objects/Character.h"
+#include "Game/Objects/Spikes.h"
+#include "Game/Objects/Torch.h"
+#include "Game/Objects/UpgradeStation.h"
+#include "Game/Objects/Wall.h"
 
 #include <cassert>
 

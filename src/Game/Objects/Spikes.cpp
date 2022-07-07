@@ -1,6 +1,6 @@
 #include "Spikes.h"
 
-#include <raymath.h>
+#include "raymath.h"
 
 namespace Redge
 {

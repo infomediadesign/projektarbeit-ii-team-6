@@ -1,8 +1,8 @@
 #include "Game.h"
 
-#include <string>
+#include "raylib.h"
 
-#include <raylib.h>
+#include <string>
 
 namespace Redge
 {

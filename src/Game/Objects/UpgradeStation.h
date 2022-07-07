@@ -1,10 +1,9 @@
 #pragma once
 
+#include "Game/Objects/Types/Collidable.h"
+#include "raylib.h"
 #include "Raylib/Tileset.h"
-#include "Objects/Types/Collidable.h"
 #include "Tiled/Object.h"
-
-#include <raylib.h>
 
 namespace Redge
 {

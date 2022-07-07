@@ -1,4 +1,4 @@
-#include "Objects/Torch.h"
+#include "Torch.h"
 
 namespace Redge
 {

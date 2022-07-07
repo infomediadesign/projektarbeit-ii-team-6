@@ -1,7 +1,7 @@
 #pragma once
 
+#include "Game/Scene.h"
 #include "Tiled/Map.h"
-#include "Scene.h"
 
 namespace Redge
 {
