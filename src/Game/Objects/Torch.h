@@ -20,7 +20,7 @@ namespace Redge
 
 	private:
 		Vector2 position;
-		Raylib::Tileset m_Animation = Raylib::Tileset("assets/Tilesets/objects/torch.png", 6, 1);
+		Raylib::Tileset m_Animation = Raylib::Tileset("assets/Tilesets/Objects/Torch.png", 6, 1);
 		uint16_t m_AnimationFrame = 0;
 		static constexpr float s_FrameDuration = 0.2;
 		float m_Frametime = 0;

@@ -1,39 +1,31 @@
-{ "columns":6,
- "image":"..\/..\/Entities\/bat.png",
- "imageheight":16,
- "imagewidth":96,
+{ "columns":4,
+ "image":"..\/..\/Entities\/Cultist.png",
+ "imageheight":96,
+ "imagewidth":64,
  "margin":0,
- "name":"Fledermaus",
+ "name":"cultist",
  "spacing":0,
- "tilecount":6,
+ "tilecount":16,
  "tiledversion":"1.8.4",
- "tileheight":16,
+ "tileheight":24,
  "tiles":[
         {
          "animation":[
                 {
                  "duration":100,
                  "tileid":0
-                }, 
+                },
                 {
                  "duration":100,
                  "tileid":1
-                }, 
+                },
                 {
                  "duration":100,
                  "tileid":2
-                }, 
+                },
                 {
                  "duration":100,
                  "tileid":3
-                }, 
-                {
-                 "duration":100,
-                 "tileid":4
-                }, 
-                {
-                 "duration":100,
-                 "tileid":5
                 }],
          "id":0
         }],

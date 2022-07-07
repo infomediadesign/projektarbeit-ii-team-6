@@ -32,8 +32,8 @@ namespace Redge
 		static constexpr float s_FrameDuration = 0.2;
 		float m_FrameTime = 0;
 
-		Raylib::Tileset m_Column = Raylib::Tileset("assets/Tilesets/objects/upgradeStand.png", 1, 1);
-		Raylib::Tileset m_Ghosts = Raylib::Tileset("assets/Tilesets/objects/upgradeGhosts.png", 4, 5);
+		Raylib::Tileset m_Column = Raylib::Tileset("assets/Tilesets/Objects/UpgradeStand.png", 1, 1);
+		Raylib::Tileset m_Ghosts = Raylib::Tileset("assets/Tilesets/Objects/UpgradeGhosts.png", 4, 5);
 		uint8_t m_AnimationFrame = 0;
 		uint8_t m_AnimationColor;
 	};

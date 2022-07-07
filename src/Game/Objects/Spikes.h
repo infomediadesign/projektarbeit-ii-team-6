@@ -24,7 +24,7 @@ namespace Redge
 		float m_LoopTime = 0;
 
 		uint8_t m_AnimationFrame = 0;
-		Raylib::Tileset m_Spikes = Raylib::Tileset("assets/Tilesets/objects/spikes.png", 3, 1);
+		Raylib::Tileset m_Spikes = Raylib::Tileset("assets/Tilesets/Objects/Spikes.png", 3, 1);
 
 		Vector2 m_Position;
 	};
