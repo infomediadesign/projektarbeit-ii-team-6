@@ -6,7 +6,7 @@
 
 namespace Redge
 {
-	DebugScene::DebugScene(Game* host) : Scene(host), m_Level(Tiled::Map::FromFile("assets/Tilemaps/level1chunks.tmj"))
+	DebugScene::DebugScene(Game* host) : Scene(host), m_Level(Tiled::Map::FromFile("assets/Tilemaps/Level1.tmj"))
 	{
 		Camera.zoom = 4;
 	}
