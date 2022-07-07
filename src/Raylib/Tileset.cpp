@@ -5,7 +5,7 @@
 
 #include <nlohmann/json.hpp>
 
-namespace Redge
+namespace Raylib
 {
 	Tileset::Tileset(const char* file, uint16_t tileCountX, uint16_t timeCountY) :
 		m_Texture(LoadTexture(file)), m_TileCountX(tileCountX), m_TileCountY(timeCountY)
@@ -136,4 +136,4 @@ namespace Redge
 
 		return Tileset(imagePath.string().c_str(), columns, rows);
 	}
-} // namespace Redge
+} // namespace Raylib

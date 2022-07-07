@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Graphics/Tileset.h"
+#include "Raylib/Tileset.h"
 #include "Objects/Types/Collidable.h"
 #include "Tiled/Object.h"
 
@@ -25,7 +25,7 @@ namespace Redge
 		float m_LoopTime = 0;
 
 		uint8_t m_AnimationFrame = 0;
-		Tileset m_Spikes = Tileset("assets/Tilesets/objects/spikes.png", 3, 1);
+		Raylib::Tileset m_Spikes = Raylib::Tileset("assets/Tilesets/objects/spikes.png", 3, 1);
 
 		Vector2 m_Position;
 	};

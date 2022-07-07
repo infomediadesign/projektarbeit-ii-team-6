@@ -5,7 +5,7 @@
 
 #include <raylib.h>
 
-namespace Redge
+namespace Raylib
 {
 	class Tileset
 	{
@@ -38,4 +38,4 @@ namespace Redge
 		uint16_t m_TileCountX{};
 		uint16_t m_TileCountY{};
 	};
-} // namespace Redge
+} // namespace Raylib
