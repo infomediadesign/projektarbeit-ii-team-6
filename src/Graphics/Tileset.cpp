@@ -7,29 +7,29 @@
 
 namespace Redge
 {
-	Tileset::Tileset(const char* file, uint16_t tileWidth, uint16_t tileHeight) :
-		m_Texture(LoadTexture(file)), m_TileWidth(tileWidth), m_TileHeight(tileHeight)
+	Tileset::Tileset(const char* file, uint16_t tileCountX, uint16_t timeCountY) :
+		m_Texture(LoadTexture(file)), m_TileCountX(tileCountX), m_TileCountY(timeCountY)
 	{
 		// Texture size is a multiple of a tile width
-		assert(m_Texture.width % m_TileWidth == 0);
+		assert(m_Texture.width % GetTileWidth() == 0);
 		// Texture size is a multiple of a tile height
-		assert(m_Texture.height % m_TileHeight == 0);
+		assert(m_Texture.height % GetTileHeight() == 0);
 	}
 
 	Tileset::~Tileset()
 	{
 		UnloadTexture(m_Texture);
 		m_Texture = Texture2D{};
-		m_TileWidth = 0;
-		m_TileHeight = 0;
+		m_TileCountX = 0;
+		m_TileCountY = 0;
 	}
 
 	Tileset::Tileset(Tileset&& other) noexcept :
-		m_Texture(other.m_Texture), m_TileWidth(other.m_TileWidth), m_TileHeight(other.m_TileHeight)
+		m_Texture(other.m_Texture), m_TileCountX(other.m_TileCountX), m_TileCountY(other.m_TileCountY)
 	{
 		other.m_Texture = Texture2D{};
-		other.m_TileWidth = 0;
-		other.m_TileHeight = 0;
+		other.m_TileCountX = 0;
+		other.m_TileCountY = 0;
 	}
 
 	auto Tileset::operator=(Tileset&& other) noexcept -> Tileset&
@@ -40,34 +40,34 @@ namespace Redge
 		UnloadTexture(m_Texture);
 
 		m_Texture = other.m_Texture;
-		m_TileWidth = other.m_TileWidth;
-		m_TileHeight = other.m_TileHeight;
+		m_TileCountX = other.m_TileCountX;
+		m_TileCountY = other.m_TileCountY;
 
 		other.m_Texture = Texture2D{};
-		other.m_TileWidth = 0;
-		other.m_TileHeight = 0;
+		other.m_TileCountX = 0;
+		other.m_TileCountY = 0;
 
 		return *this;
 	}
 
 	auto Tileset::GetTileWidth() const -> uint16_t
 	{
-		return m_TileWidth;
+		return m_Texture.width / GetTileCountX();
 	}
 
 	auto Tileset::GetTileHeight() const -> uint16_t
 	{
-		return m_TileHeight;
+		return m_Texture.height / GetTileCountY();
 	}
 
 	auto Tileset::GetTileCountX() const -> uint16_t
 	{
-		return m_Texture.width / m_TileWidth;
+		return m_TileCountX;
 	}
 
 	auto Tileset::GetTileCountY() const -> uint16_t
 	{
-		return m_Texture.height / m_TileHeight;
+		return m_TileCountY;
 	}
 
 	auto Tileset::DrawTile(uint16_t x, uint16_t y, Vector2 position, Color tint) const -> void
@@ -131,9 +131,9 @@ namespace Redge
 		fileStream >> json;
 
 		const auto imagePath = file.parent_path()  / json["image"].get<std::string>();
-		const auto tileWidth = json["tilewidth"].get<uint16_t>();
-		const auto tileHeight = json["tileheight"].get<uint16_t>();
+		const auto columns = json["columns"].get<uint16_t>();
+		const auto rows = json["tilecount"].get<uint16_t>() / columns;
 
-		return Tileset{imagePath.string().c_str(), tileWidth, tileHeight};
+		return Tileset(imagePath.string().c_str(), columns, rows);
 	}
 } // namespace Redge

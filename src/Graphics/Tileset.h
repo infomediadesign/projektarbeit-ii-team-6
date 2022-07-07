@@ -10,7 +10,7 @@ namespace Redge
 	class Tileset
 	{
 	public:
-		Tileset(const char* file, uint16_t tileWidth, uint16_t tileHeight);
+		Tileset(const char* file, uint16_t tileCountX, uint16_t timeCountY);
 		~Tileset();
 
 		Tileset(const Tileset&) = delete;
@@ -35,7 +35,7 @@ namespace Redge
 
 	private:
 		Texture2D m_Texture{};
-		uint16_t m_TileWidth{};
-		uint16_t m_TileHeight{};
+		uint16_t m_TileCountX{};
+		uint16_t m_TileCountY{};
 	};
 } // namespace Redge

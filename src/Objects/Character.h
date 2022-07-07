@@ -38,7 +38,7 @@ namespace Redge
 		auto GetHitBox() const -> Rectangle;
 		auto GetTextureOffset() const -> Vector2;
 
-		Tileset m_Animations = Tileset("assets/Entities/Character.png", 16, 24);
+		Tileset m_Animations = Tileset("assets/Entities/Character.png", 5, 4);
 		Animation m_Animation = Animation::Down;
 
 		uint16_t m_CurrentFrame = 0;
@@ -52,19 +52,19 @@ namespace Redge
 		float m_CharacterSpeed;
 		float m_SpeedMultiplier = 1;
 
-		Tileset m_HealthBar = Tileset("assets/UI/HealthBar.png", 189, 19);
+		Tileset m_HealthBar = Tileset("assets/UI/HealthBar.png", 1, 3);
 		float m_MaxHealth;
 		float m_Health;
 		float m_MaxOxygen;
 		float m_Oxygen;
 
-		Tileset m_CrystalIcon = Tileset("assets/UI/CrystalIcon.png", 13, 13);
+		Tileset m_CrystalIcon = Tileset("assets/UI/CrystalIcon.png", 1, 1);
 		uint32_t m_CrystalCount = 0;
 
-		Tileset m_InventoryIcon = Tileset("assets/UI/InventoryItem.png", 16, 17);
+		Tileset m_InventoryIcon = Tileset("assets/UI/InventoryItem.png", 1, 1);
 		std::array<std::unique_ptr<Item>, 5> m_Items{};
 
-		Tileset m_WeaponSlots = Tileset("assets/UI/WeaponSlots.png", 58, 26);
+		Tileset m_WeaponSlots = Tileset("assets/UI/WeaponSlots.png", 1, 1);
 		bool m_PrimaryWeaponSelected = false;
 	};
 } // namespace Redge

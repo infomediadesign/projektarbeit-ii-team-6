@@ -25,7 +25,7 @@ namespace Redge
 		float m_LoopTime = 0;
 
 		uint8_t m_AnimationFrame = 0;
-		Tileset m_Spikes = Tileset("assets/Tilesets/objects/spikes.png", 16, 16);
+		Tileset m_Spikes = Tileset("assets/Tilesets/objects/spikes.png", 3, 1);
 
 		Vector2 m_Position;
 	};
