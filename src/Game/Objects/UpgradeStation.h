@@ -27,8 +27,6 @@ namespace Redge
 	private:
 		auto GetHitBox() const -> Rectangle;
 
-		Vector2 m_Position;
-
 		static constexpr float s_FrameDuration = 0.2;
 		float m_FrameTime = 0;
 

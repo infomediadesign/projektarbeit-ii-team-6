@@ -25,8 +25,6 @@ namespace Redge
 
 		uint8_t m_AnimationFrame = 0;
 		Raylib::Tileset m_Spikes = Raylib::Tileset("assets/Tilesets/Objects/Spikes.png", 3, 1);
-
-		Vector2 m_Position;
 	};
 } // namespace Redge
 

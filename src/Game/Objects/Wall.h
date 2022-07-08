@@ -9,7 +9,7 @@ namespace Redge
 	class Wall final : public Tiled::Object, public ICollidable
 	{
 	public:
-		explicit Wall(Rectangle area);
+		explicit Wall(Vector2 position, Vector2 dimensions);
 
 		auto Update(Scene* scene, Tiled::ObjectLayer& layer) -> void override;
 		auto LateUpdate(Scene* scene, Tiled::ObjectLayer& layer) -> void override;
@@ -19,12 +19,14 @@ namespace Redge
 		auto OnCollision(Tiled::Object& other) -> void override;
 		auto CheckCollision(ICollidable* other) const -> bool override;
 
-		auto IsColliding(const Rectangle& rect) const -> bool override;
-		auto IsColliding(const Vector2& center, float radius) const -> bool override;
-		auto IsColliding(const Vector2& point) const -> bool override;
+		[[nodiscard]] auto IsColliding(const Rectangle& rect) const -> bool override;
+		[[nodiscard]] auto IsColliding(const Vector2& center, float radius) const -> bool override;
+		[[nodiscard]] auto IsColliding(const Vector2& point) const -> bool override;
 
 	private:
-		Rectangle m_Area;
+		auto GetHitbox() const -> Rectangle;
+
+		Vector2 m_Dimensions;
 	};
 } // namespace Redge
 

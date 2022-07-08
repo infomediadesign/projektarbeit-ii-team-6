@@ -4,7 +4,7 @@
 
 namespace Redge
 {
-	Spikes::Spikes(Vector2 position) : m_Position(position)
+	Spikes::Spikes(Vector2 position) : Tiled::Object(position)
 	{
 	}
 
@@ -34,7 +34,7 @@ namespace Redge
 			static_cast<float>(-m_Spikes.GetTileHeight()) / 2,
 		};
 
-		m_Spikes.DrawTile(m_AnimationFrame, 0, Vector2Add(m_Position, offset));
+		m_Spikes.DrawTile(m_AnimationFrame, 0, Vector2Add(Position, offset));
 	}
 
 	auto Spikes::RenderUI() const -> void

@@ -2,6 +2,10 @@
 
 namespace Redge
 {
+	Torch::Torch(Vector2 position) : Tiled::Object(position)
+	{
+	}
+
 	auto Torch::Update(Scene* scene, Tiled::ObjectLayer& layer) -> void
 	{
 		m_Frametime += GetFrameTime();
@@ -19,13 +23,13 @@ namespace Redge
 	auto Torch::Render() const -> void
 	{
 		m_Animation.DrawTile(m_AnimationFrame, 0,
-			Vector2Add(position,
+			Vector2Add(Position,
 				Vector2{
 					static_cast<float>(-m_Animation.GetTileWidth()) / 2,
 					static_cast<float>(-m_Animation.GetTileHeight()) / 2,
 				}));
 		BeginBlendMode(BLEND_MULTIPLIED);
-		DrawCircleV(position, 30, Color{255, 255, 255, 75});
+		DrawCircleV(Position, 30, Color{255, 255, 255, 75});
 		EndBlendMode();
 	}
 

@@ -8,8 +8,24 @@
 
 #include <cassert>
 
+namespace Tiled
+{
+	Object::Object(Vector2 position) : Position(position)
+	{
+	}
+
+	auto Object::GetPosition() const -> Vector2
+	{
+		return Position;
+	}
+} // namespace Tiled
+
 struct NullObject final : Tiled::Object
 {
+	NullObject() : Tiled::Object({})
+	{
+	}
+
 	auto Update(Redge::Scene* scene, Tiled::ObjectLayer& layer) -> void override
 	{
 	}
@@ -35,6 +51,7 @@ auto nlohmann::adl_serializer<std::unique_ptr<Tiled::Object>>::from_json(const j
 
 	if (name == "charakter")
 		return std::make_unique<Redge::Character>(json.get<Redge::Character>());
+
 	if (name == "torch")
 		return std::make_unique<Redge::Torch>(json.get<Redge::Torch>());
 

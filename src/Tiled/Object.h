@@ -8,8 +8,10 @@
 
 namespace Tiled
 {
-	struct Object
+	class Object
 	{
+	public:
+		Object(Vector2 position);
 		virtual ~Object() = default;
 
 		virtual auto Update(Redge::Scene* scene, struct ObjectLayer& layer) -> void = 0;
@@ -17,6 +19,11 @@ namespace Tiled
 
 		virtual auto Render() const -> void = 0;
 		virtual auto RenderUI() const -> void = 0;
+
+		[[nodiscard]] auto GetPosition() const -> Vector2;
+
+	protected:
+		Vector2 Position;
 	};
 } // namespace Tiled
 

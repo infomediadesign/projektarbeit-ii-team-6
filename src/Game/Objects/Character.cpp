@@ -7,7 +7,7 @@
 namespace Redge
 {
 	Character::Character(Vector2 position, float speed, float maxHealth, float maxOxygen) :
-		m_CurrentPosition(position), m_PreviousPosition(position), m_CharacterSpeed(speed), m_Health(maxHealth),
+		Tiled::Object(position), m_PreviousPosition(position), m_CharacterSpeed(speed), m_Health(maxHealth),
 		m_MaxHealth(maxHealth), m_Oxygen(maxOxygen), m_MaxOxygen(maxOxygen)
 	{
 	}
@@ -52,8 +52,8 @@ namespace Redge
 			movement = Vector2Normalize(movement);
 			movement = Vector2Scale(movement, m_CharacterSpeed * m_SpeedMultiplier * GetFrameTime());
 
-			m_PreviousPosition = m_CurrentPosition;
-			m_CurrentPosition = Vector2Add(m_CurrentPosition, movement);
+			m_PreviousPosition = Position;
+			Position = Vector2Add(Position, movement);
 
 			m_CurrentFrameTime += GetFrameTime();
 			if (m_CurrentFrameTime >= s_FrameDuration)
@@ -68,7 +68,7 @@ namespace Redge
 	{
 		if (m_Collided)
 		{
-			m_CurrentPosition = m_PreviousPosition;
+			Position = m_PreviousPosition;
 			m_Collided = false;
 		}
 
@@ -89,7 +89,7 @@ namespace Redge
 			}
 		}
 
-		scene->Camera.target = m_CurrentPosition;
+		scene->Camera.target = Position;
 		scene->Camera.offset.x = GetScreenWidth() / 2;
 		scene->Camera.offset.y = GetScreenHeight() / 2;
 	}
@@ -97,10 +97,10 @@ namespace Redge
 	auto Character::Render() const -> void
 	{
 		m_Animations.DrawTile(m_CurrentFrame, static_cast<uint16_t>(m_Animation),
-			Vector2Add(m_CurrentPosition, GetTextureOffset()));
+			Vector2Add(Position, GetTextureOffset()));
 
 		BeginBlendMode(BLEND_MULTIPLIED);
-		DrawCircle(m_CurrentPosition.x, m_CurrentPosition.y, 75, Color{255, 255, 255, 75});
+		DrawCircle(Position.x, Position.y, 75, Color{255, 255, 255, 75});
 		EndBlendMode();
 	}
 
@@ -219,8 +219,8 @@ namespace Redge
 		float width = m_Animations.GetTileWidth() * 0.8;
 		float height = m_Animations.GetTileHeight() + offset.y;
 
-		float posX = m_CurrentPosition.x - width / 2;
-		float posY = m_CurrentPosition.y;
+		float posX = Position.x - width / 2;
+		float posY = Position.y;
 
 		return Rectangle{posX, posY, width, height};
 	}
