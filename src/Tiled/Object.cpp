@@ -49,7 +49,7 @@ auto nlohmann::adl_serializer<std::unique_ptr<Tiled::Object>>::from_json(const j
 	// TODO: Create objects from Tiled map data
 	const auto name = json["name"].get<std::string>();
 
-	if (name == "charakter")
+	if (name == "character")
 		return std::make_unique<Redge::Character>(json.get<Redge::Character>());
 
 	if (name == "torch")
