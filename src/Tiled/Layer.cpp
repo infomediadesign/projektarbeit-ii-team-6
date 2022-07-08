@@ -1,7 +1,7 @@
 #include "Layer.h"
 
 #include "Tiled/Map.h"
-#include "Objects/Types/Collidable.h"
+#include "Game/Objects/Types/Collidable.h"
 
 namespace Tiled
 {

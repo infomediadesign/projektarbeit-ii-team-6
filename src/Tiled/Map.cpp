@@ -59,7 +59,7 @@ namespace Tiled
 		{
 			const auto firstgid = entry["firstgid"].get<uint16_t>();
 			const auto tilesetPath = parentPath / entry["source"].get<std::filesystem::path>();
-			map.Tilesets.emplace(firstgid, Redge::Tileset::FromFile(tilesetPath));
+			map.Tilesets.emplace(firstgid, Raylib::Tileset::FromFile(tilesetPath));
 		}
 
 		return map;
