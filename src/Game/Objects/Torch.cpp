@@ -16,11 +16,7 @@ namespace Redge
 		}
 	}
 
-	auto Torch::LateUpdate(Scene* scene, Tiled::ObjectLayer& layer) -> void
-	{
-	}
-
-	auto Torch::Render() const -> void
+	auto Torch::RenderBelow() const -> void
 	{
 		m_Animation.DrawTile(m_AnimationFrame, 0,
 			Vector2Add(Position,
@@ -31,10 +27,6 @@ namespace Redge
 		BeginBlendMode(BLEND_MULTIPLIED);
 		DrawCircleV(Position, 30, Color{255, 255, 255, 75});
 		EndBlendMode();
-	}
-
-	auto Torch::RenderUI() const -> void
-	{
 	}
 } // namespace Redge
 

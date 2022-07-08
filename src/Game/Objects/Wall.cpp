@@ -7,22 +7,6 @@ namespace Redge
 	{
 	}
 
-	auto Wall::Update(Redge::Scene* scene, Tiled::ObjectLayer& layer) -> void
-	{
-	}
-
-	auto Wall::LateUpdate(Redge::Scene* scene, Tiled::ObjectLayer& layer) -> void
-	{
-	}
-
-	auto Wall::Render() const -> void
-	{
-	}
-
-	auto Wall::RenderUI() const -> void
-	{
-	}
-
 	auto Wall::OnCollision(Tiled::Object& other) -> void
 	{
 	}

@@ -14,9 +14,7 @@ namespace Redge
 	public:
 		Torch(Vector2 position);
 		auto Update(Scene* scene, Tiled::ObjectLayer& layer) -> void override;
-		auto LateUpdate(Scene* scene, Tiled::ObjectLayer& layer) -> void override;
-		auto Render() const -> void override;
-		auto RenderUI() const -> void override;
+		auto RenderBelow() const -> void override;
 
 	private:
 		Raylib::Tileset m_Animation = Raylib::Tileset("assets/Tilesets/Objects/Torch.png", 6, 1);

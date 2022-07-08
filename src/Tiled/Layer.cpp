@@ -149,7 +149,13 @@ namespace Tiled
 		}
 
 		for (const auto& object : objects)
+			object->RenderBelow();
+
+		for (const auto& object : objects)
 			object->Render();
+
+		for (const auto& object : objects)
+			object->RenderAbove();
 	}
 
 	auto ObjectLayer::RenderUI() const -> void

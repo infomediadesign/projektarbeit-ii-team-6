@@ -13,9 +13,7 @@ namespace Redge
 		explicit Spikes(Vector2 position);
 
 		auto Update(Scene* scene, Tiled::ObjectLayer& layer) -> void override;
-		auto LateUpdate(Scene* scene, Tiled::ObjectLayer& layer) -> void override;
-		auto Render() const -> void override;
-		auto RenderUI() const -> void override;
+		auto RenderBelow() const -> void override;
 
 	private:
 		static constexpr float s_LoopDuration = 5;

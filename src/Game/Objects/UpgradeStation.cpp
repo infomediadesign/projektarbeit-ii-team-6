@@ -19,10 +19,6 @@ namespace Redge
 		}
 	}
 
-	auto UpgradeStation::LateUpdate(Scene* scene, Tiled::ObjectLayer& layer) -> void
-	{
-	}
-
 	auto UpgradeStation::Render() const -> void
 	{
 		auto offset = Vector2{
@@ -35,10 +31,6 @@ namespace Redge
 
 		position.y -= m_Ghosts.GetTileHeight();
 		m_Ghosts.DrawTile(m_AnimationFrame, m_AnimationColor, position);
-	}
-
-	auto UpgradeStation::RenderUI() const -> void
-	{
 	}
 
 	auto UpgradeStation::OnCollision(Tiled::Object& other) -> void

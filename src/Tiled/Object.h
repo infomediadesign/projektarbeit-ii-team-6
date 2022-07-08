@@ -14,11 +14,13 @@ namespace Tiled
 		Object(Vector2 position);
 		virtual ~Object() = default;
 
-		virtual auto Update(Redge::Scene* scene, struct ObjectLayer& layer) -> void = 0;
-		virtual auto LateUpdate(Redge::Scene* scene, struct ObjectLayer& layer) -> void = 0;
+		virtual auto Update(Redge::Scene* scene, struct ObjectLayer& layer) -> void{}
+		virtual auto LateUpdate(Redge::Scene* scene, struct ObjectLayer& layer) -> void{}
 
-		virtual auto Render() const -> void = 0;
-		virtual auto RenderUI() const -> void = 0;
+		virtual auto RenderBelow() const -> void{}
+		virtual auto Render() const -> void{}
+		virtual auto RenderAbove() const -> void{}
+		virtual auto RenderUI() const -> void{}
 
 		[[nodiscard]] auto GetPosition() const -> Vector2;
 
