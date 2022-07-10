@@ -1,16 +1,32 @@
 #include "Object.h"
 
-#include "Objects/Character.h"
-#include "Objects/Spikes.h"
-#include "Objects/Torch.h"
-#include "Objects/Slime.h"
-#include "Objects/UpgradeStation.h"
-#include "Objects/Wall.h"
+#include "Game/Objects/Character.h"
+#include "Game/Objects/Slime.h"
+#include "Game/Objects/Spikes.h"
+#include "Game/Objects/Torch.h"
+#include "Game/Objects/UpgradeStation.h"
+#include "Game/Objects/Wall.h"
 
 #include <cassert>
 
+namespace Tiled
+{
+	Object::Object(Vector2 position) : Position(position)
+	{
+	}
+
+	auto Object::GetPosition() const -> Vector2
+	{
+		return Position;
+	}
+} // namespace Tiled
+
 struct NullObject final : Tiled::Object
 {
+	NullObject() : Tiled::Object({})
+	{
+	}
+
 	auto Update(Redge::Scene* scene, Tiled::ObjectLayer& layer) -> void override
 	{
 	}
@@ -34,7 +50,7 @@ auto nlohmann::adl_serializer<std::unique_ptr<Tiled::Object>>::from_json(const j
 	// TODO: Create objects from Tiled map data
 	const auto name = json["name"].get<std::string>();
 
-	if (name == "charakter")
+	if (name == "character")
 		return std::make_unique<Redge::Character>(json.get<Redge::Character>());
 
 	if (name == "slime")

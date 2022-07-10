@@ -1,7 +1,7 @@
 #include "Layer.h"
 
+#include "Game/Objects/Types/Collidable.h"
 #include "Tiled/Map.h"
-#include "Objects/Types/Collidable.h"
 
 namespace Tiled
 {
@@ -105,7 +105,7 @@ namespace Tiled
 		{
 			auto& object1 = objects[i];
 
-			auto collidable1 = dynamic_cast<Redge::ICollidable*>(object1.get());
+			auto* collidable1 = dynamic_cast<Redge::ICollidable*>(object1.get());
 			if (collidable1 == nullptr)
 				continue;
 
@@ -113,7 +113,7 @@ namespace Tiled
 			{
 				auto& object2 = objects[j];
 
-				auto collidable2 = dynamic_cast<Redge::ICollidable*>(object2.get());
+				auto* collidable2 = dynamic_cast<Redge::ICollidable*>(object2.get());
 				if (collidable2 == nullptr)
 					continue;
 
@@ -134,9 +134,28 @@ namespace Tiled
 		if (!Visible)
 			return;
 
-		// TODO: DrawOrder is currently ignored
+		std::vector<std::shared_ptr<Object>> objects;
+
 		for (const auto& [_, object] : Objects)
+			objects.emplace_back(object);
+
+		if (Order == DrawOrder::TopDown)
+		{
+			std::sort(objects.begin(), objects.end(),
+				[](const std::shared_ptr<Object>& lhs, const std::shared_ptr<Object>& rhs)
+				{
+					return lhs->GetPosition().y < rhs->GetPosition().y;
+				});
+		}
+
+		for (const auto& object : objects)
+			object->RenderBelow();
+
+		for (const auto& object : objects)
 			object->Render();
+
+		for (const auto& object : objects)
+			object->RenderAbove();
 	}
 
 	auto ObjectLayer::RenderUI() const -> void
@@ -144,7 +163,6 @@ namespace Tiled
 		if (!Visible)
 			return;
 
-		// TODO: DrawOrder is currently ignored
 		for (const auto& [_, object] : Objects)
 			object->RenderUI();
 	}

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Tiled/Layer.h"
-#include "Graphics/Tileset.h"
+#include "Raylib/Tileset.h"
 
 #include <nlohmann/json.hpp>
 
@@ -11,7 +11,7 @@ namespace Tiled
 	{
 		PropertyMap Properties;
 		std::vector<std::unique_ptr<Layer>> Layers;
-		std::map<uint16_t, Redge::Tileset> Tilesets;
+		std::map<uint16_t, Raylib::Tileset> Tilesets;
 		Color BackgroundColor;
 		int Width;
 		int Height;
