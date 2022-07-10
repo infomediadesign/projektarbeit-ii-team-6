@@ -34,7 +34,7 @@ namespace Redge
 	{
 		DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Color{0, 0, 0, 128});
 		m_Level.RenderUI();
-		return; // NOTE: remove for debug info
+		//return; // NOTE: remove for debug info
 
 		constexpr auto fontSize = 50;
 		DrawText("Debug Scene", 10, 10, fontSize, WHITE);

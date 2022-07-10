@@ -5,7 +5,7 @@
 namespace Redge
 {
 	UpgradeStation::UpgradeStation(Vector2 position) :
-		m_Position(position), m_AnimationColor(GetRandomValue(0, m_Ghosts.GetTileCountY() - 1))
+		Tiled::Object(position), m_AnimationColor(GetRandomValue(0, m_Ghosts.GetTileCountY() - 1))
 	{
 	}
 
@@ -19,10 +19,6 @@ namespace Redge
 		}
 	}
 
-	auto UpgradeStation::LateUpdate(Scene* scene, Tiled::ObjectLayer& layer) -> void
-	{
-	}
-
 	auto UpgradeStation::Render() const -> void
 	{
 		auto offset = Vector2{
@@ -30,15 +26,11 @@ namespace Redge
 			static_cast<float>(-m_Column.GetTileHeight()) / 2,
 		};
 
-		auto position = Vector2Add(m_Position, offset);
+		auto position = Vector2Add(Position, offset);
 		m_Column.DrawTile(0, 0, position);
 
 		position.y -= m_Ghosts.GetTileHeight();
 		m_Ghosts.DrawTile(m_AnimationFrame, m_AnimationColor, position);
-	}
-
-	auto UpgradeStation::RenderUI() const -> void
-	{
 	}
 
 	auto UpgradeStation::OnCollision(Tiled::Object& other) -> void
@@ -73,8 +65,8 @@ namespace Redge
 		};
 
 		return Rectangle{
-			m_Position.x + offset.x,
-			m_Position.y + offset.y,
+			Position.x + offset.x,
+			Position.y + offset.y,
 			static_cast<float>(m_Column.GetTileWidth()),
 			static_cast<float>(m_Column.GetTileHeight()),
 		};

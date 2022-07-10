@@ -4,7 +4,7 @@
 
 namespace Redge
 {
-	Spikes::Spikes(Vector2 position) : m_Position(position)
+	Spikes::Spikes(Vector2 position) : Tiled::Object(position)
 	{
 	}
 
@@ -23,22 +23,14 @@ namespace Redge
 			m_AnimationFrame = 1;
 	}
 
-	auto Spikes::LateUpdate(Scene* scene, Tiled::ObjectLayer& layer) -> void
-	{
-	}
-
-	auto Spikes::Render() const -> void
+	auto Spikes::RenderBelow() const -> void
 	{
 		auto offset = Vector2{
 			static_cast<float>(-m_Spikes.GetTileWidth()) / 2,
 			static_cast<float>(-m_Spikes.GetTileHeight()) / 2,
 		};
 
-		m_Spikes.DrawTile(m_AnimationFrame, 0, Vector2Add(m_Position, offset));
-	}
-
-	auto Spikes::RenderUI() const -> void
-	{
+		m_Spikes.DrawTile(m_AnimationFrame, 0, Vector2Add(Position, offset));
 	}
 } // namespace Redge
 

@@ -13,9 +13,7 @@ namespace Redge
 		explicit Spikes(Vector2 position);
 
 		auto Update(Scene* scene, Tiled::ObjectLayer& layer) -> void override;
-		auto LateUpdate(Scene* scene, Tiled::ObjectLayer& layer) -> void override;
-		auto Render() const -> void override;
-		auto RenderUI() const -> void override;
+		auto RenderBelow() const -> void override;
 
 	private:
 		static constexpr float s_LoopDuration = 5;
@@ -25,8 +23,6 @@ namespace Redge
 
 		uint8_t m_AnimationFrame = 0;
 		Raylib::Tileset m_Spikes = Raylib::Tileset("assets/Tilesets/Objects/Spikes.png", 3, 1);
-
-		Vector2 m_Position;
 	};
 } // namespace Redge
 

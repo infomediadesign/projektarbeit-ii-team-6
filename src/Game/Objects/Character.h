@@ -45,7 +45,6 @@ namespace Redge
 		constexpr static float s_FrameDuration = 0.2;
 		float m_CurrentFrameTime = 0;
 
-		Vector2 m_CurrentPosition;
 		Vector2 m_PreviousPosition;
 		bool m_Collided = false;
 
