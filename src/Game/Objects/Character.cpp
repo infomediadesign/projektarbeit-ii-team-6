@@ -100,7 +100,7 @@ namespace Redge
 			Vector2Add(Position, GetTextureOffset()));
 
 		BeginBlendMode(BLEND_MULTIPLIED);
-		DrawCircle(Position.x, Position.y, 75, Color{255, 255, 255, 75});
+		DrawCircle(Position.x, Position.y, 75, Color{255, 150, 150, 50});
 		EndBlendMode();
 	}
 
