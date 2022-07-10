@@ -27,7 +27,8 @@ namespace Redge
 			if (Vector2Distance(Position, character->GetPosition()) < 75)
 			{
 				Position = Vector2Add(Position,
-					Vector2Scale(Vector2Normalize(Vector2Subtract(character->GetPosition(), Position)), s_Speed));
+					Vector2Scale(Vector2Normalize(Vector2Subtract(character->GetPosition(), Position)),
+						s_Speed * GetFrameTime()));
 				m_Frametime += GetFrameTime();
 			}
 		}
