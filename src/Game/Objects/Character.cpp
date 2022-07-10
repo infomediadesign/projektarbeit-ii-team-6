@@ -98,9 +98,12 @@ namespace Redge
 	{
 		m_Animations.DrawTile(m_CurrentFrame, static_cast<uint16_t>(m_Animation),
 			Vector2Add(Position, GetTextureOffset()));
+	}
 
+	auto Character::RenderBelow() const -> void
+	{
 		BeginBlendMode(BLEND_MULTIPLIED);
-		DrawCircle(Position.x, Position.y, 75, Color{255, 150, 150, 50});
+		DrawCircle(Position.x, Position.y, 75, Color{255, 200, 150, 50});
 		EndBlendMode();
 	}
 

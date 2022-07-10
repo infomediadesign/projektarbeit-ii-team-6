@@ -25,7 +25,7 @@ namespace Redge
 					static_cast<float>(-m_Animation.GetTileHeight()) / 2,
 				}));
 		BeginBlendMode(BLEND_MULTIPLIED);
-		DrawCircleV(Position, 30, Color{255, 150, 150, 50});
+		DrawCircleV(Position, 30, Color{255, 200, 150, 50});
 		EndBlendMode();
 	}
 } // namespace Redge
