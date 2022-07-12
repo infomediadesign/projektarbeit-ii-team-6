@@ -25,7 +25,7 @@ namespace Redge
 					static_cast<float>(-m_Animation.GetTileHeight()) / 2,
 				}));
 		BeginBlendMode(BLEND_ADDITIVE);
-		DrawTexture(m_Mask, Position.x - m_Mask.width/2, Position.y - m_Mask.height/2, WHITE);
+		DrawTexture(m_Mask, Position.x - m_Mask.width / 2, Position.y - m_Mask.height / 2, Color{214, 65, 96, 70});
 		EndBlendMode();
 	}
 } // namespace Redge
