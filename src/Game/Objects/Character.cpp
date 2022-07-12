@@ -100,7 +100,7 @@ namespace Redge
 			Vector2Add(Position, GetTextureOffset()));
 
 		BeginBlendMode(BLEND_ADDITIVE);
-		DrawTexture(m_Mask, Position.x - m_Mask.width / 2, Position.y - m_Mask.height / 2, Color{214, 65, 96, 70});
+		DrawTexture(m_Mask, Position.x - m_Mask.width / 2, Position.y - m_Mask.height / 2, Color{242, 211, 161, 30});
 		EndBlendMode();
 	}
 
