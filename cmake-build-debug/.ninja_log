@@ -1,110 +1,60 @@
 # ninja log v5
-3	31	0	C:/Users/sbinz/OneDrive/Desktop/SRH/Projektarbeiten/Projektarbeit II/projektarbeit-ii-team-6/cmake-build-debug/CMakeFiles/cmake.verify_globs	327f4fe6fec9150d
-1	113	0	CMakeFiles/Crimson-Mine_assets	9963906e198f2c3f
-1	113	0	C:/Users/sbinz/OneDrive/Desktop/SRH/Projektarbeiten/Projektarbeit II/projektarbeit-ii-team-6/cmake-build-debug/CMakeFiles/Crimson-Mine_assets	9963906e198f2c3f
+4568	4687	6793233548433106	_deps/raylib-build/raylib/external/glfw/src/libglfw3.a	4c52783f1031ff00
+114	580	6793233507340546	CMakeFiles/Crimson-Mine.dir/src/Game/Game.cpp.obj	aa0e659cf4896b0
+61	1626	6793246425561534	CMakeFiles/Crimson-Mine.dir/src/Game/Scenes/DebugScene.cpp.obj	f7447f04faf6add2
+3	33	6793497721101694	C:/Users/sbinz/OneDrive/Desktop/SRH/Projektarbeiten/Projektarbeit II/projektarbeit-ii-team-6/cmake-build-debug/CMakeFiles/cmake.verify_globs	327f4fe6fec9150d
+2257	4335	6793454627833882	Crimson-Mine.exe	5fc567581350d427
+781	2663	6793233528170840	CMakeFiles/Crimson-Mine.dir/src/Game/Objects/Wall.cpp.obj	6d1162c6f5cecbe
+16	93	0	CMakeFiles/Crimson-Mine_assets	9963906e198f2c3f
+27	779	6793233509333850	_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/win32_init.c.obj	ab85f559bfb556d2
+3512	4312	6793233544685580	_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/egl_context.c.obj	b6d261e1e161a155
+7	527	6793233506812295	_deps/raylib-build/raylib/CMakeFiles/raylib.dir/rtext.c.obj	c1ffbc063d18aed4
+3508	4282	6793233544366648	_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/wgl_context.c.obj	27b70ddd15539350
+20	806	6793233509612912	_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/win32_thread.c.obj	79df7ec56ca93bac
+16	93	0	C:/Users/sbinz/OneDrive/Desktop/SRH/Projektarbeiten/Projektarbeit II/projektarbeit-ii-team-6/cmake-build-debug/CMakeFiles/Crimson-Mine_assets	9963906e198f2c3f
 13	119	6793233502745893	_deps/raylib-build/raylib/CMakeFiles/raylib.dir/utils.c.obj	c3dc28abd10b9370
 11	254	6793233504081419	_deps/raylib-build/raylib/CMakeFiles/raylib.dir/rshapes.c.obj	7275c36b14022cf5
-7	527	6793233506812295	_deps/raylib-build/raylib/CMakeFiles/raylib.dir/rtext.c.obj	c1ffbc063d18aed4
-114	580	6793233507340546	CMakeFiles/Crimson-Mine.dir/src/Game/Game.cpp.obj	aa0e659cf4896b0
-27	779	6793233509333850	_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/win32_init.c.obj	ab85f559bfb556d2
-20	806	6793233509612912	_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/win32_thread.c.obj	79df7ec56ca93bac
 23	833	6793233509882014	_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/win32_time.c.obj	42139dc61c61b3fe
 17	864	6793233510190982	_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/win32_monitor.c.obj	d40971a9a8344c6a
-864	940	6793233510938492	CMakeFiles/Crimson-Mine.dir/src/Game/Scene.cpp.obj	9ed7f5b65830f14b
 9	986	6793233511386991	_deps/raylib-build/raylib/CMakeFiles/raylib.dir/rtextures.c.obj	3d2e3540c7d86bb5
+864	940	6793233510938492	CMakeFiles/Crimson-Mine.dir/src/Game/Scene.cpp.obj	9ed7f5b65830f14b
 3	1182	6793233513340445	_deps/raylib-build/raylib/CMakeFiles/raylib.dir/rcore.c.obj	971b09dddf3da9cc
 5	1448	6793233516021479	_deps/raylib-build/raylib/CMakeFiles/raylib.dir/rmodels.c.obj	74ff1bd2ce166099
+1449	4630	6793233547805152	CMakeFiles/Crimson-Mine.dir/src/Raylib/Tileset.cpp.obj	6b6f0ccb9d8605d6
 255	2217	6793233523715736	CMakeFiles/Crimson-Mine.dir/src/Game/Objects/Spikes.cpp.obj	dd1e5d338220b296
-120	2539	6793233526905069	CMakeFiles/Crimson-Mine.dir/src/Game/Objects/Character.cpp.obj	ea54c1c4b8d3390e
+57	1824	6793246427524965	CMakeFiles/Crimson-Mine.dir/src/Game/Objects/Character.cpp.obj	ea54c1c4b8d3390e
 581	2615	6793233527692435	CMakeFiles/Crimson-Mine.dir/src/Game/Objects/UpgradeStation.cpp.obj	8a964524a77944d3
-781	2663	6793233528170840	CMakeFiles/Crimson-Mine.dir/src/Game/Objects/Wall.cpp.obj	6d1162c6f5cecbe
-527	2669	6793233528230632	CMakeFiles/Crimson-Mine.dir/src/Game/Objects/Slime.cpp.obj	9f173498b3924d30
-806	2698	6793233528519672	CMakeFiles/Crimson-Mine.dir/src/Game/Objects/Torch.cpp.obj	9300a08d6937249a
+55	1619	6793246425491778	CMakeFiles/Crimson-Mine.dir/src/Game/Objects/Slime.cpp.obj	9f173498b3924d30
+93	2257	6793454607145814	CMakeFiles/Crimson-Mine.dir/src/Game/Objects/Torch.cpp.obj	9300a08d6937249a
 986	2957	6793233531101032	CMakeFiles/Crimson-Mine.dir/src/Tiled/Chunk.cpp.obj	8fe2e29d0885e722
-833	2961	6793233531101032	CMakeFiles/Crimson-Mine.dir/src/Game/Scenes/DebugScene.cpp.obj	f7447f04faf6add2
+2957	3917	6793233540718853	_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/input.c.obj	f3efc2f2e5229e97
 940	3128	6793233532815294	CMakeFiles/Crimson-Mine.dir/src/Game/main.cpp.obj	1e6abb26a74abc96
 2663	3466	6793233536203963	_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/win32_joystick.c.obj	6a53980fba2cd9fa
 2699	3508	6793233536622555	_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/monitor.c.obj	28e8745f81fe28ef
 2670	3511	6793233536652458	_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/context.c.obj	10db19a0d7ab66db
+3825	4509	6793233546658986	_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/osmesa_context.c.obj	e7c43680c4ef263b
 15	3713	6793233538595957	_deps/raylib-build/raylib/CMakeFiles/raylib.dir/raudio.c.obj	205071aeef651940
 2961	3825	6793233539801927	_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/init.c.obj	44a8af6379871cf
-2957	3917	6793233540718853	_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/input.c.obj	f3efc2f2e5229e97
 3129	3995	6793233541506220	_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/window.c.obj	6022a56132138185
 3466	4157	6793233543100895	_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/vulkan.c.obj	3cee3dfc55042c51
-3508	4282	6793233544366648	_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/wgl_context.c.obj	27b70ddd15539350
-3512	4312	6793233544685580	_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/egl_context.c.obj	b6d261e1e161a155
-3825	4509	6793233546658986	_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/osmesa_context.c.obj	e7c43680c4ef263b
 3713	4567	6793233547237043	_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/win32_window.c.obj	361182e02c1fb897
-1449	4630	6793233547805152	CMakeFiles/Crimson-Mine.dir/src/Raylib/Tileset.cpp.obj	6b6f0ccb9d8605d6
 1182	4642	6793233547924768	CMakeFiles/Crimson-Mine.dir/src/Tiled/Layer.cpp.obj	a4e7c245008c3f78
 2218	4646	6793233547994527	CMakeFiles/Crimson-Mine.dir/src/Tiled/Property.cpp.obj	31a7a8ea87d73c2d
-2539	4678	6793233548333448	CMakeFiles/Crimson-Mine.dir/src/Tiled/Object.cpp.obj	4cb33c26d92bf54e
-4568	4687	6793233548433106	_deps/raylib-build/raylib/external/glfw/src/libglfw3.a	4c52783f1031ff00
+63	1782	6793246427106370	CMakeFiles/Crimson-Mine.dir/src/Tiled/Object.cpp.obj	4cb33c26d92bf54e
 4687	4775	6793233549310123	_deps/raylib-build/raylib/libraylib.a	4d93798aee1c8d4
 2615	5795	6793233559441312	CMakeFiles/Crimson-Mine.dir/src/Tiled/Map.cpp.obj	2badaee52b96404
-5795	7580	6793233577274866	Crimson-Mine.exe	5fc567581350d427
-3	25	0	C:/Users/sbinz/OneDrive/Desktop/SRH/Projektarbeiten/Projektarbeit II/projektarbeit-ii-team-6/cmake-build-debug/CMakeFiles/cmake.verify_globs	327f4fe6fec9150d
-4	64	0	CMakeFiles/Crimson-Mine_assets	9963906e198f2c3f
-4	64	0	C:/Users/sbinz/OneDrive/Desktop/SRH/Projektarbeiten/Projektarbeit II/projektarbeit-ii-team-6/cmake-build-debug/CMakeFiles/Crimson-Mine_assets	9963906e198f2c3f
-64	1217	6793233885822125	CMakeFiles/Crimson-Mine.dir/src/Game/Objects/Torch.cpp.obj	9300a08d6937249a
-1217	2940	6793233902952628	Crimson-Mine.exe	5fc567581350d427
-3	25	0	C:/Users/sbinz/OneDrive/Desktop/SRH/Projektarbeiten/Projektarbeit II/projektarbeit-ii-team-6/cmake-build-debug/CMakeFiles/cmake.verify_globs	327f4fe6fec9150d
-4	56	0	CMakeFiles/Crimson-Mine_assets	9963906e198f2c3f
-4	56	0	C:/Users/sbinz/OneDrive/Desktop/SRH/Projektarbeiten/Projektarbeit II/projektarbeit-ii-team-6/cmake-build-debug/CMakeFiles/Crimson-Mine_assets	9963906e198f2c3f
-56	1158	6793234112727728	CMakeFiles/Crimson-Mine.dir/src/Game/Objects/Torch.cpp.obj	9300a08d6937249a
-1158	2860	6793234129660112	Crimson-Mine.exe	5fc567581350d427
-2	25	0	C:/Users/sbinz/OneDrive/Desktop/SRH/Projektarbeiten/Projektarbeit II/projektarbeit-ii-team-6/cmake-build-debug/CMakeFiles/cmake.verify_globs	327f4fe6fec9150d
+33	1161	6793497731649300	build.ninja	eaa99276b326d058
+1	25	0	C:/Users/sbinz/OneDrive/Desktop/SRH/Projektarbeiten/Projektarbeit II/projektarbeit-ii-team-6/cmake-build-debug/CMakeFiles/cmake.verify_globs	327f4fe6fec9150d
 4	60	0	CMakeFiles/Crimson-Mine_assets	9963906e198f2c3f
 4	60	0	C:/Users/sbinz/OneDrive/Desktop/SRH/Projektarbeiten/Projektarbeit II/projektarbeit-ii-team-6/cmake-build-debug/CMakeFiles/Crimson-Mine_assets	9963906e198f2c3f
-60	1155	6793234807559529	CMakeFiles/Crimson-Mine.dir/src/Game/Objects/Torch.cpp.obj	9300a08d6937249a
-1155	2857	6793234824505298	Crimson-Mine.exe	5fc567581350d427
-3	25	0	C:/Users/sbinz/OneDrive/Desktop/SRH/Projektarbeiten/Projektarbeit II/projektarbeit-ii-team-6/cmake-build-debug/CMakeFiles/cmake.verify_globs	327f4fe6fec9150d
-3	57	0	CMakeFiles/Crimson-Mine_assets	9963906e198f2c3f
-3	57	0	C:/Users/sbinz/OneDrive/Desktop/SRH/Projektarbeiten/Projektarbeit II/projektarbeit-ii-team-6/cmake-build-debug/CMakeFiles/Crimson-Mine_assets	9963906e198f2c3f
-58	1162	6793238136731668	CMakeFiles/Crimson-Mine.dir/src/Game/Objects/Torch.cpp.obj	9300a08d6937249a
-60	1372	6793238138834633	CMakeFiles/Crimson-Mine.dir/src/Tiled/Object.cpp.obj	4cb33c26d92bf54e
-1372	3084	6793238155882282	Crimson-Mine.exe	5fc567581350d427
-3	26	0	C:/Users/sbinz/OneDrive/Desktop/SRH/Projektarbeiten/Projektarbeit II/projektarbeit-ii-team-6/cmake-build-debug/CMakeFiles/cmake.verify_globs	327f4fe6fec9150d
-4	58	0	CMakeFiles/Crimson-Mine_assets	9963906e198f2c3f
-4	58	0	C:/Users/sbinz/OneDrive/Desktop/SRH/Projektarbeiten/Projektarbeit II/projektarbeit-ii-team-6/cmake-build-debug/CMakeFiles/Crimson-Mine_assets	9963906e198f2c3f
-58	1593	6793238654036947	CMakeFiles/Crimson-Mine.dir/src/Game/Objects/Character.cpp.obj	ea54c1c4b8d3390e
-1593	3295	6793238670980251	Crimson-Mine.exe	5fc567581350d427
-2	25	0	C:/Users/sbinz/OneDrive/Desktop/SRH/Projektarbeiten/Projektarbeit II/projektarbeit-ii-team-6/cmake-build-debug/CMakeFiles/cmake.verify_globs	327f4fe6fec9150d
-3	57	0	CMakeFiles/Crimson-Mine_assets	9963906e198f2c3f
-3	57	0	C:/Users/sbinz/OneDrive/Desktop/SRH/Projektarbeiten/Projektarbeit II/projektarbeit-ii-team-6/cmake-build-debug/CMakeFiles/Crimson-Mine_assets	9963906e198f2c3f
-57	1167	6793238986062104	CMakeFiles/Crimson-Mine.dir/src/Game/Objects/Torch.cpp.obj	9300a08d6937249a
-1167	2863	6793239002938519	Crimson-Mine.exe	5fc567581350d427
-3	26	0	C:/Users/sbinz/OneDrive/Desktop/SRH/Projektarbeiten/Projektarbeit II/projektarbeit-ii-team-6/cmake-build-debug/CMakeFiles/cmake.verify_globs	327f4fe6fec9150d
-4	58	0	CMakeFiles/Crimson-Mine_assets	9963906e198f2c3f
-4	58	0	C:/Users/sbinz/OneDrive/Desktop/SRH/Projektarbeiten/Projektarbeit II/projektarbeit-ii-team-6/cmake-build-debug/CMakeFiles/Crimson-Mine_assets	9963906e198f2c3f
-58	1174	6793239385643803	CMakeFiles/Crimson-Mine.dir/src/Game/Objects/Torch.cpp.obj	9300a08d6937249a
-1174	2888	6793239402706834	Crimson-Mine.exe	5fc567581350d427
-2	25	0	C:/Users/sbinz/OneDrive/Desktop/SRH/Projektarbeiten/Projektarbeit II/projektarbeit-ii-team-6/cmake-build-debug/CMakeFiles/cmake.verify_globs	327f4fe6fec9150d
-4	56	0	CMakeFiles/Crimson-Mine_assets	9963906e198f2c3f
-4	56	0	C:/Users/sbinz/OneDrive/Desktop/SRH/Projektarbeiten/Projektarbeit II/projektarbeit-ii-team-6/cmake-build-debug/CMakeFiles/Crimson-Mine_assets	9963906e198f2c3f
-56	1186	6793239586315990	CMakeFiles/Crimson-Mine.dir/src/Game/Objects/Torch.cpp.obj	9300a08d6937249a
-1186	2904	6793239603393360	Crimson-Mine.exe	5fc567581350d427
-3	26	0	C:/Users/sbinz/OneDrive/Desktop/SRH/Projektarbeiten/Projektarbeit II/projektarbeit-ii-team-6/cmake-build-debug/CMakeFiles/cmake.verify_globs	327f4fe6fec9150d
-4	59	0	CMakeFiles/Crimson-Mine_assets	9963906e198f2c3f
-4	59	0	C:/Users/sbinz/OneDrive/Desktop/SRH/Projektarbeiten/Projektarbeit II/projektarbeit-ii-team-6/cmake-build-debug/CMakeFiles/Crimson-Mine_assets	9963906e198f2c3f
-59	1205	6793239858241731	CMakeFiles/Crimson-Mine.dir/src/Game/Objects/Torch.cpp.obj	9300a08d6937249a
-1206	2933	6793239875441935	Crimson-Mine.exe	5fc567581350d427
-3	25	0	C:/Users/sbinz/OneDrive/Desktop/SRH/Projektarbeiten/Projektarbeit II/projektarbeit-ii-team-6/cmake-build-debug/CMakeFiles/cmake.verify_globs	327f4fe6fec9150d
-3	65	0	CMakeFiles/Crimson-Mine_assets	9963906e198f2c3f
-3	65	0	C:/Users/sbinz/OneDrive/Desktop/SRH/Projektarbeiten/Projektarbeit II/projektarbeit-ii-team-6/cmake-build-debug/CMakeFiles/Crimson-Mine_assets	9963906e198f2c3f
-65	1175	6793241409711510	CMakeFiles/Crimson-Mine.dir/src/Game/Objects/Torch.cpp.obj	9300a08d6937249a
-1175	2893	6793241426821281	Crimson-Mine.exe	5fc567581350d427
-5	33	0	C:/Users/sbinz/OneDrive/Desktop/SRH/Projektarbeiten/Projektarbeit II/projektarbeit-ii-team-6/cmake-build-debug/CMakeFiles/cmake.verify_globs	327f4fe6fec9150d
-3	64	0	CMakeFiles/Crimson-Mine_assets	9963906e198f2c3f
-3	64	0	C:/Users/sbinz/OneDrive/Desktop/SRH/Projektarbeiten/Projektarbeit II/projektarbeit-ii-team-6/cmake-build-debug/CMakeFiles/Crimson-Mine_assets	9963906e198f2c3f
-64	1534	6793242626617142	CMakeFiles/Crimson-Mine.dir/src/Game/Scenes/DebugScene.cpp.obj	f7447f04faf6add2
-1534	3255	6793242643750770	Crimson-Mine.exe	5fc567581350d427
-3	26	0	C:/Users/sbinz/OneDrive/Desktop/SRH/Projektarbeiten/Projektarbeit II/projektarbeit-ii-team-6/cmake-build-debug/CMakeFiles/cmake.verify_globs	327f4fe6fec9150d
-3	55	0	CMakeFiles/Crimson-Mine_assets	9963906e198f2c3f
-3	55	0	C:/Users/sbinz/OneDrive/Desktop/SRH/Projektarbeiten/Projektarbeit II/projektarbeit-ii-team-6/cmake-build-debug/CMakeFiles/Crimson-Mine_assets	9963906e198f2c3f
-59	1502	6793246424285780	CMakeFiles/Crimson-Mine.dir/src/Game/Objects/Torch.cpp.obj	9300a08d6937249a
-55	1619	6793246425491778	CMakeFiles/Crimson-Mine.dir/src/Game/Objects/Slime.cpp.obj	9f173498b3924d30
-61	1626	6793246425561534	CMakeFiles/Crimson-Mine.dir/src/Game/Scenes/DebugScene.cpp.obj	f7447f04faf6add2
-63	1782	6793246427106370	CMakeFiles/Crimson-Mine.dir/src/Tiled/Object.cpp.obj	4cb33c26d92bf54e
-57	1824	6793246427524965	CMakeFiles/Crimson-Mine.dir/src/Game/Objects/Character.cpp.obj	ea54c1c4b8d3390e
-1824	3556	6793246444785534	Crimson-Mine.exe	5fc567581350d427
+60	1360	6793497746335533	CMakeFiles/Crimson-Mine.dir/src/Game/Objects/Slime.cpp.obj	9f173498b3924d30
+64	1503	6793497747756296	CMakeFiles/Crimson-Mine.dir/src/Tiled/Object.cpp.obj	4cb33c26d92bf54e
+63	1532	6793497748056674	CMakeFiles/Crimson-Mine.dir/src/Game/Objects/Character.cpp.obj	ea54c1c4b8d3390e
+1532	3310	6793497765689792	Crimson-Mine.exe	5fc567581350d427
+2	30	0	C:/Users/sbinz/OneDrive/Desktop/SRH/Projektarbeiten/Projektarbeit II/projektarbeit-ii-team-6/cmake-build-debug/CMakeFiles/cmake.verify_globs	327f4fe6fec9150d
+4	65	0	CMakeFiles/Crimson-Mine_assets	9963906e198f2c3f
+4	65	0	C:/Users/sbinz/OneDrive/Desktop/SRH/Projektarbeiten/Projektarbeit II/projektarbeit-ii-team-6/cmake-build-debug/CMakeFiles/Crimson-Mine_assets	9963906e198f2c3f
+68	1483	6793498108206205	CMakeFiles/Crimson-Mine.dir/src/Game/Objects/Slime.cpp.obj	9f173498b3924d30
+70	1600	6793498109379226	CMakeFiles/Crimson-Mine.dir/src/Tiled/Object.cpp.obj	4cb33c26d92bf54e
+66	1636	6793498109728065	CMakeFiles/Crimson-Mine.dir/src/Game/Objects/Character.cpp.obj	ea54c1c4b8d3390e
+1636	3378	6793498127080005	Crimson-Mine.exe	5fc567581350d427
