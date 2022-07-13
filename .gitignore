@@ -29,6 +29,7 @@ _deps/
 # CMake output
 [Bb]uild/
 [Ii]nstall/
+cmake-build-*/
 
 ### CMake Patch ###
 # External projects
