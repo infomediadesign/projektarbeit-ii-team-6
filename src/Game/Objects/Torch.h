@@ -18,6 +18,7 @@ namespace Redge
 
 	private:
 		Raylib::Tileset m_Animation = Raylib::Tileset("assets/Tilesets/Objects/Torch.png", 6, 1);
+		Texture2D m_Mask = LoadTexture("assets/Lighting/torch_mask.png");
 		uint16_t m_AnimationFrame = 0;
 		static constexpr float s_FrameDuration = 0.2;
 		float m_Frametime = 0;

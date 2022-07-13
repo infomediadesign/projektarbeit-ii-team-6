@@ -102,8 +102,8 @@ namespace Redge
 
 	auto Character::RenderBelow() const -> void
 	{
-		BeginBlendMode(BLEND_MULTIPLIED);
-		DrawCircle(Position.x, Position.y, 75, Color{255, 200, 150, 50});
+		BeginBlendMode(BLEND_ADDITIVE);
+		DrawTexture(m_Mask, Position.x - m_Mask.width / 2, Position.y - m_Mask.height / 2, Color{242, 211, 161, 30});
 		EndBlendMode();
 	}
 

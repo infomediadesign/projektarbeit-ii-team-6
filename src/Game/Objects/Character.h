@@ -40,6 +40,7 @@ namespace Redge
 		auto GetTextureOffset() const -> Vector2;
 
 		Raylib::Tileset m_Animations = Raylib::Tileset("assets/Entities/Character.png", 5, 4);
+		Texture2D m_Mask = LoadTexture("assets/Lighting/player_mask.png");
 		Animation m_Animation = Animation::Down;
 
 		uint16_t m_CurrentFrame = 0;
