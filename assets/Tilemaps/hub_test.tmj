@@ -660,31 +660,8 @@
         }, 
         {
          "draworder":"topdown",
-         "id":2,
-         "name":"player",
-         "objects":[
-                {
-                 "class":"",
-                 "height":0,
-                 "id":3,
-                 "name":"charakter",
-                 "point":true,
-                 "rotation":0,
-                 "visible":true,
-                 "width":0,
-                 "x":432,
-                 "y":512
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
-        {
-         "draworder":"topdown",
          "id":6,
-         "name":"objects",
+         "name":"stuff",
          "objects":[
                 {
                  "class":"",
@@ -1171,6 +1148,18 @@
                  "width":104,
                  "x":908,
                  "y":640
+                }, 
+                {
+                 "class":"",
+                 "height":0,
+                 "id":121,
+                 "name":"character",
+                 "point":true,
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":432,
+                 "y":519
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1451,13 +1440,13 @@
          "startx":16,
          "starty":0,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":64,
          "x":0,
          "y":0
         }],
  "nextlayerid":7,
- "nextobjectid":121,
+ "nextobjectid":122,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.0",
