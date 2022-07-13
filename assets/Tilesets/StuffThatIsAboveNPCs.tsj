@@ -1,0 +1,14 @@
+{ "columns":7,
+ "image":"StuffThatIsAboveNPCs.png",
+ "imageheight":64,
+ "imagewidth":112,
+ "margin":0,
+ "name":"stuffThatIsAboveNPCs",
+ "spacing":0,
+ "tilecount":28,
+ "tiledversion":"1.9.0",
+ "tileheight":16,
+ "tilewidth":16,
+ "type":"tileset",
+ "version":"1.8"
+}
