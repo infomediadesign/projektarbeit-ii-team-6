@@ -5,10 +5,10 @@
 
 namespace Redge
 {
-	class DebugScene final : public Scene
+	class TiledScene final : public Scene
 	{
 	public:
-		explicit DebugScene(Game* host);
+		explicit TiledScene(Game* host);
 
 		auto Update() -> void override;
 

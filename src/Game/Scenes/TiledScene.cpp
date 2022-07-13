@@ -1,4 +1,4 @@
-#include "DebugScene.h"
+#include "TiledScene.h"
 
 #include "raymath.h"
 
@@ -6,17 +6,17 @@
 
 namespace Redge
 {
-	DebugScene::DebugScene(Game* host) : Scene(host), m_Level(Tiled::Map::FromFile("assets/Tilemaps/Level1.tmj"))
+	TiledScene::TiledScene(Game* host) : Scene(host), m_Level(Tiled::Map::FromFile("assets/Tilemaps/Level1.tmj"))
 	{
 		Camera.zoom = 4;
 	}
 
-	auto DebugScene::Update() -> void
+	auto TiledScene::Update() -> void
 	{
 		m_Level.Update(this);
 	}
 
-	auto DebugScene::RenderWorld() const -> void
+	auto TiledScene::RenderWorld() const -> void
 	{
 		auto topLeft = GetScreenToWorld2D(Vector2{0, 0}, Camera);
 		auto bottomRight = GetScreenToWorld2D(
@@ -30,7 +30,7 @@ namespace Redge
 		});
 	}
 
-	auto DebugScene::RenderUI() const -> void
+	auto TiledScene::RenderUI() const -> void
 	{
 		m_Level.RenderUI();
 		return; // NOTE: remove for debug info
