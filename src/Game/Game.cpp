@@ -23,40 +23,31 @@ namespace Redge
 		CloseWindow();
 	}
 
-	auto Game::IsRunning() const -> bool
+	auto Game::SetScene(std::shared_ptr<Scene> newScene) -> std::shared_ptr<Scene>
 	{
-		return m_Scene && !WindowShouldClose();
+		m_Scene.swap(newScene);
+		return newScene;
 	}
 
-	auto Game::SetScene(std::unique_ptr<Scene> newScene) -> std::unique_ptr<Scene>
+	auto Game::Run() -> void
 	{
-		auto oldScene = std::move(m_Scene);
-		m_Scene = std::move(newScene);
-		return oldScene;
-	}
+		while (!WindowShouldClose())
+		{
+			auto scene = m_Scene;
+			if (!scene)
+				break;
 
-	auto Game::Update() -> void
-	{
-		if (!m_Scene)
-			return;
+			scene->Update();
 
-		m_Scene->Update();
-	}
+			BeginDrawing();
+			ClearBackground(PINK);
 
-	auto Game::Render() const -> void
-	{
-		if (!m_Scene)
-			return;
+			BeginMode2D(scene->Camera);
+			scene->RenderWorld();
+			EndMode2D();
 
-		BeginDrawing();
-		ClearBackground(PINK);
-
-		BeginMode2D(m_Scene->Camera);
-		m_Scene->RenderWorld();
-		EndMode2D();
-
-		m_Scene->RenderUI();
-
-		EndDrawing();
+			scene->RenderUI();
+			EndDrawing();
+		}
 	}
 } // namespace Redge
