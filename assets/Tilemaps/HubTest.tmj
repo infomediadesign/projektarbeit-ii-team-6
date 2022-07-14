@@ -840,8 +840,8 @@
                  "name":"wall_hitbox",
                  "rotation":0,
                  "visible":true,
-                 "width":23,
-                 "x":784,
+                 "width":21,
+                 "x":786,
                  "y":416
                 }, 
                 {
@@ -851,19 +851,19 @@
                  "name":"wall_hitbox",
                  "rotation":0,
                  "visible":true,
-                 "width":23,
+                 "width":21,
                  "x":729,
                  "y":416
                 }, 
                 {
                  "class":"",
-                 "height":32,
+                 "height":28,
                  "id":58,
                  "name":"wall_hitbox",
                  "rotation":0,
                  "visible":true,
-                 "width":32,
-                 "x":752,
+                 "width":36,
+                 "x":750,
                  "y":416
                 }, 
                 {
@@ -873,8 +873,8 @@
                  "name":"wall_hitbox",
                  "rotation":0,
                  "visible":true,
-                 "width":7,
-                 "x":752,
+                 "width":9,
+                 "x":750,
                  "y":480
                 }, 
                 {
@@ -884,7 +884,7 @@
                  "name":"wall_hitbox",
                  "rotation":0,
                  "visible":true,
-                 "width":7,
+                 "width":9,
                  "x":777,
                  "y":480
                 }, 
@@ -1223,28 +1223,6 @@
                 }, 
                 {
                  "class":"",
-                 "height":11,
-                 "id":128,
-                 "name":"wall_hitbox",
-                 "rotation":0,
-                 "visible":true,
-                 "width":3,
-                 "x":759,
-                 "y":480
-                }, 
-                {
-                 "class":"",
-                 "height":11,
-                 "id":129,
-                 "name":"wall_hitbox",
-                 "rotation":0,
-                 "visible":true,
-                 "width":3,
-                 "x":774,
-                 "y":480
-                }, 
-                {
-                 "class":"",
                  "height":0,
                  "id":139,
                  "name":"Cactus1",
@@ -1254,8 +1232,7 @@
                  "width":0,
                  "x":528,
                  "y":288
-                },
-            
+                }, 
                 {
                  "class":"",
                  "height":0,
@@ -1279,7 +1256,8 @@
                  "width":0,
                  "x":388,
                  "y":600
-                }, 
+                },
+            
                 {
                  "class":"",
                  "height":0,
@@ -1447,8 +1425,7 @@
                  "width":0,
                  "x":356,
                  "y":608
-                },
-            
+                }, 
                 {
                  "class":"",
                  "height":0,
@@ -1472,7 +1449,8 @@
                  "width":0,
                  "x":628,
                  "y":336
-                }, 
+                },
+            
                 {
                  "class":"",
                  "height":0,
@@ -1640,8 +1618,7 @@
                  "width":0,
                  "x":580,
                  "y":476
-                },
-            
+                }, 
                 {
                  "class":"",
                  "height":0,
@@ -1665,7 +1642,8 @@
                  "width":0,
                  "x":404,
                  "y":604
-                }, 
+                },
+            
                 {
                  "class":"",
                  "height":0,
@@ -1833,8 +1811,7 @@
                  "width":0,
                  "x":1164,
                  "y":700
-                },
-            
+                }, 
                 {
                  "class":"",
                  "height":0,
@@ -1858,7 +1835,8 @@
                  "width":0,
                  "x":1184,
                  "y":304
-                }, 
+                },
+            
                 {
                  "class":"",
                  "height":0,
@@ -2180,7 +2158,7 @@
          "y":0
         }],
  "nextlayerid":8,
- "nextobjectid":207,
+ "nextobjectid":213,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.0",
