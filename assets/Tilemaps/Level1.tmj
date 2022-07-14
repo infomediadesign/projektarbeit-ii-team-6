@@ -24344,43 +24344,11 @@
         {
          "firstgid":329,
          "source":"..\/Tilesets\/Bottombar.tsj"
-        }, 
-        {
-         "firstgid":353,
-         "source":"..\/Tilesets\/Entities\/Golem.tsj"
-        }, 
+        },
         {
          "firstgid":361,
          "source":"..\/Tilesets\/Plank.tsj"
-        }, 
-        {
-         "firstgid":409,
-         "source":"..\/Tilesets\/Entities\/ImpWater.tsj"
-        }, 
-        {
-         "firstgid":417,
-         "source":"..\/Tilesets\/Entities\/Slime.tsj"
-        }, 
-        {
-         "firstgid":425,
-         "source":"..\/Tilesets\/Entities\/ImpPlant.tsj"
-        }, 
-        {
-         "firstgid":433,
-         "source":"..\/Tilesets\/Entities\/Wendigo.tsj"
-        }, 
-        {
-         "firstgid":457,
-         "source":"..\/Tilesets\/Entities\/ImpFire.tsj"
-        }, 
-        {
-         "firstgid":465,
-         "source":"..\/Tilesets\/Entities\/Bat.tsj"
-        }, 
-        {
-         "firstgid":471,
-         "source":"..\/Tilesets\/Entities\/Cultist.tsj"
-        }, 
+        },  
         {
          "firstgid":487,
          "source":"..\/Tilesets\/Fog.tsj"
