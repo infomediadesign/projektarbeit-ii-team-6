@@ -26,6 +26,7 @@ namespace Tiled
 
 	protected:
 		Vector2 Position;
+		Vector2 PreviousPosition;
 	};
 } // namespace Tiled
 

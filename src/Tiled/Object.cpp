@@ -1,6 +1,8 @@
 #include "Object.h"
 
 #include "Game/Objects/Character.h"
+#include "Game/Objects/Bat.h"
+#include "Game/Objects/Cultist.h"
 #include "Game/Objects/Slime.h"
 #include "Game/Objects/Spikes.h"
 #include "Game/Objects/Torch.h"
@@ -55,6 +57,12 @@ auto nlohmann::adl_serializer<std::unique_ptr<Tiled::Object>>::from_json(const j
 
 	if (name == "slime")
 		return std::make_unique<Redge::Slime>(json.get<Redge::Slime>());
+
+	if (name == "cultist")
+		return std::make_unique<Redge::Cultist>(json.get<Redge::Cultist>());
+
+	if (name == "bat")
+		return std::make_unique<Redge::Bat>(json.get<Redge::Bat>());
 
 	if (name == "torch")
 		return std::make_unique<Redge::Torch>(json.get<Redge::Torch>());
