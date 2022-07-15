@@ -39,15 +39,19 @@ namespace Redge
 			++m_AnimationFrame %= m_Animation.GetTileCountX();
 		}
 
-		float down = abs(Position.y - PreviousPosition.y);
-		float up = abs(Position.y - PreviousPosition.y);
-		float right = abs(Position.x - PreviousPosition.x);
-		float left = abs(Position.x - PreviousPosition.x);
+		float vertical = Position.y - PreviousPosition.y;
+		float horizontal  = Position.x - PreviousPosition.x;
 
-		if (down > up && down > right && down > left) {m_Direction = Animation::Down;}
-		else if (up > down && up > right && up > left) {m_Direction = Animation::Up;}
-		else if (right > up && right > down && right > left) {m_Direction = Animation::Right;}
-		else if (left > up && left > right && left > down) {m_Direction = Animation::Left;}
+		if(abs(vertical) > abs(horizontal))
+		{
+			if(vertical > 0)  m_Direction = Animation::Down;
+			else m_Direction = Animation::Up;
+		}
+		else if(abs(vertical) < abs(horizontal))
+		{
+			if(horizontal > 0) m_Direction = Animation::Right;
+			else m_Direction = Animation::Left;
+		}
 		else {m_Direction = Animation::Down; m_AnimationFrame = 0;}
 
 		PreviousPosition = Position;
