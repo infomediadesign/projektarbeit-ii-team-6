@@ -8,7 +8,7 @@ namespace Redge
 	class TiledScene final : public Scene
 	{
 	public:
-		explicit TiledScene(Game* host);
+		explicit TiledScene(Game* host, const char* levelFile);
 
 		auto Update() -> void override;
 

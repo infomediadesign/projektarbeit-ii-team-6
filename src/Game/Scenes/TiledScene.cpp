@@ -6,7 +6,7 @@
 
 namespace Redge
 {
-	TiledScene::TiledScene(Game* host) : Scene(host), m_Level(Tiled::Map::FromFile("assets/Tilemaps/Level1.tmj"))
+	TiledScene::TiledScene(Game* host, const char* levelFile) : Scene(host), m_Level(Tiled::Map::FromFile(levelFile))
 	{
 		Camera.zoom = 4;
 	}
