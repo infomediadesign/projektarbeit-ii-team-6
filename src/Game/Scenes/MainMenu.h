@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Game/Scene.h"
+#include "Raylib/Button.h"
 #include "Raylib/Tileset.h"
 
 namespace Redge
@@ -17,5 +18,9 @@ namespace Redge
 
 	private:
 		Raylib::Tileset m_Background = Raylib::Tileset("assets/Background/CrimsonMenu.png", 1, 1);
+
+		Raylib::Button m_Play;
+		Raylib::Button m_Settings;
+		Raylib::Button m_Exit;
 	};
 } // namespace Redge
