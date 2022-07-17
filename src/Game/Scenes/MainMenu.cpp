@@ -18,7 +18,7 @@ namespace Redge
 		buttonArea.width = 500;
 		buttonArea.height = 100;
 		buttonArea.x = GetScreenWidth() / 2 - buttonArea.width / 2;
-		buttonArea.y = 200;
+		buttonArea.y = GetScreenHeight() / 2 - 200;
 
 		m_Play.SetArea(buttonArea);
 		buttonArea.y += buttonArea.height + 50;
