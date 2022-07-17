@@ -77,6 +77,16 @@ namespace Raylib
 
 	auto Tileset::DrawTileScaled(uint16_t x, uint16_t y, Vector2 position, float scale, Color tint) const -> void
 	{
+		Rectangle dest;
+		dest.x = position.x;
+		dest.y = position.y;
+		dest.width = GetTileWidth() * scale;
+		dest.height = GetTileHeight() * scale;
+		DrawTileTo(x, y, dest, tint);
+	}
+
+	auto Tileset::DrawTileTo(uint16_t x, uint16_t y, Rectangle destination, Color tint) const -> void
+	{
 		// Check passed parameters are within bounds
 		assert(x < GetTileCountX());
 		assert(y < GetTileCountY());
@@ -87,12 +97,7 @@ namespace Raylib
 		rect.width = static_cast<float>(GetTileWidth());
 		rect.height = static_cast<float>(GetTileHeight());
 
-		Rectangle dest;
-		dest.x = position.x;
-		dest.y = position.y;
-		dest.width = rect.width * scale;
-		dest.height = rect.height * scale;
-		DrawTexturePro(m_Texture, rect, dest, Vector2{}, 0, tint);
+		DrawTexturePro(m_Texture, rect, destination, Vector2{}, 0, tint);
 	}
 
 	auto Tileset::DrawTilePart(uint16_t x, uint16_t y, Vector2 position, Vector2 section, Color tint) const -> void
