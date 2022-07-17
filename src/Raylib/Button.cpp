@@ -29,7 +29,7 @@ namespace Raylib
 		if (CheckCollisionPointRec(GetMousePosition(), GetArea()))
 			m_State = ButtonState::Hovered;
 
-		if (GetState() == ButtonState::Hovered && IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+		if (GetState() == ButtonState::Hovered && IsMouseButtonDown(MOUSE_BUTTON_LEFT))
 			m_State = ButtonState::Pressed;
 	}
 
