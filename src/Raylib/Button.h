@@ -18,7 +18,7 @@ namespace Raylib
 	class Button
 	{
 	public:
-		Button(const char* background, const char* foreground, Rectangle area);
+		Button(const char* foreground, const char* background, Rectangle area);
 
 		[[nodiscard]] auto GetArea() const -> Rectangle;
 		auto SetArea(Rectangle rectangle) -> void;
@@ -29,8 +29,8 @@ namespace Raylib
 		auto Render() const -> void;
 
 	private:
-		Tileset m_Background;
 		Tileset m_Foreground;
+		Tileset m_Background;
 		Rectangle m_Area{};
 		ButtonState m_State = ButtonState::Default;
 	};

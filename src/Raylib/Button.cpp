@@ -2,8 +2,8 @@
 
 namespace Raylib
 {
-	Button::Button(const char* background, const char* foreground, Rectangle area) :
-		m_Background(background, 1, 3), m_Foreground(foreground, 1, 3), m_Area(area)
+	Button::Button(const char* foreground, const char* background, Rectangle area) :
+		m_Foreground(foreground, 1, 3), m_Background(background, 1, 3), m_Area(area)
 	{
 	}
 
