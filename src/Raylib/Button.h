@@ -25,7 +25,7 @@ namespace Raylib
 
 		[[nodiscard]] auto GetState() const -> ButtonState;
 
-		auto Update() -> void;
+		[[nodiscard]] auto Update() -> bool;
 		auto Render() const -> void;
 
 	private:

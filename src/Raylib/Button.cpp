@@ -22,8 +22,12 @@ namespace Raylib
 		return m_State;
 	}
 
-	auto Button::Update() -> void
+	auto Button::Update() -> bool
 	{
+		auto rv = false;
+		if (GetState() == ButtonState::Pressed && IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
+			rv = true;
+
 		m_State = ButtonState::Default;
 
 		if (CheckCollisionPointRec(GetMousePosition(), GetArea()))
@@ -31,6 +35,8 @@ namespace Raylib
 
 		if (GetState() == ButtonState::Hovered && IsMouseButtonDown(MOUSE_BUTTON_LEFT))
 			m_State = ButtonState::Pressed;
+
+		return rv;
 	}
 
 	auto Button::Render() const -> void
