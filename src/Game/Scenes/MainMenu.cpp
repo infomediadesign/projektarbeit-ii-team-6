@@ -2,6 +2,7 @@
 
 #include "Game/Game.h"
 #include "Game/Scenes/TiledScene.h"
+#include "Game/Scenes/SettingsMenu.h"
 
 namespace Redge
 {
@@ -10,6 +11,7 @@ namespace Redge
 		m_Settings("assets/Buttons/Settings.png", "assets/Buttons/MenuButton.png", Rectangle{}),
 		m_Exit("assets/Buttons/Exit.png", "assets/Buttons/MenuButton.png", Rectangle{})
 	{
+		SetTargetFPS(60);
 	}
 
 	auto MainMenu::Update() -> void
@@ -28,7 +30,10 @@ namespace Redge
 		m_Settings.SetArea(buttonArea);
 		buttonArea.y += buttonArea.height + 50;
 		if (m_Settings.Update())
-			(void)0; // TODO: add a settings menu
+		{
+			auto settingsScene = std::make_shared<SettingsMenu>(Host);
+			settingsScene->SetBackScene(Host->SetScene(settingsScene));
+		}
 
 		m_Exit.SetArea(buttonArea);
 		buttonArea.y += buttonArea.height + 50;
