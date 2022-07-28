@@ -3,6 +3,7 @@
 #include <memory>
 
 #include "Game/Scene.h"
+#include "Raylib/Tileset.h"
 
 namespace Redge
 {
@@ -20,5 +21,7 @@ namespace Redge
 
 	private:
 		std::shared_ptr<Scene> m_BackScene{};
+
+		Raylib::Tileset m_Background = Raylib::Tileset("assets/Background/CrimsonMenu.png", 1, 1);
 	};
 } // namespace Redge
