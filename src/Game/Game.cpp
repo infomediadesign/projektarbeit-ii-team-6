@@ -10,6 +10,7 @@ namespace Redge
 	{
 		InitWindow(width, height, "Crimson Mine");
 		SetWindowState(FLAG_WINDOW_RESIZABLE);
+		SetExitKey(KEY_NULL); // Disable esc to exit
 
 		// Applicatino icon
 		auto icon = LoadImage("assets/Icon.png");

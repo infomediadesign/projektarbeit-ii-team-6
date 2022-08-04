@@ -14,7 +14,7 @@ namespace Redge
 
 	auto SettingsMenu::RenderWorld() const -> void
 	{
-		if (IsKeyPressed(KEY_SPACE))
+		if (IsKeyPressed(KEY_ESCAPE))
 			Host->SetScene(m_BackScene);
 	}
 
