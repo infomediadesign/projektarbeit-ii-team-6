@@ -1,15 +1,12 @@
 #include "MainMenu.h"
 
 #include "Game/Game.h"
-#include "Game/Scenes/TiledScene.h"
 #include "Game/Scenes/SettingsMenu.h"
+#include "Game/Scenes/TiledScene.h"
 
 namespace Redge
 {
-	MainMenu::MainMenu(Game* host) :
-		Scene(host), m_Play("assets/Buttons/Play.png", "assets/Buttons/MenuButton.png", Rectangle{}),
-		m_Settings("assets/Buttons/Settings.png", "assets/Buttons/MenuButton.png", Rectangle{}),
-		m_Exit("assets/Buttons/Exit.png", "assets/Buttons/MenuButton.png", Rectangle{})
+	MainMenu::MainMenu(Game* host) : Scene(host)
 	{
 		SetTargetFPS(60);
 	}
@@ -20,7 +17,7 @@ namespace Redge
 		buttonArea.width = 500;
 		buttonArea.height = 100;
 		buttonArea.x = GetScreenWidth() / 2 - buttonArea.width / 2;
-		buttonArea.y = GetScreenHeight() / 2 - 200;
+		buttonArea.y = GetScreenHeight() / 2 - 50;
 
 		m_Play.SetArea(buttonArea);
 		buttonArea.y += buttonArea.height + 50;
@@ -52,6 +49,13 @@ namespace Redge
 		auto scale = std::max(scaleWidth, scaleHeight) * 1.01f;
 		m_Background.DrawTileScaled(0, 0, {}, scale);
 
+		Rectangle logoArea{};
+		logoArea.height = 120;
+		logoArea.width = m_Logo.GetTileWidth() / m_Logo.GetTileHeight() * logoArea.height;
+		logoArea.x = GetScreenWidth() / 2 - logoArea.width / 2;
+		logoArea.y = 150;
+
+		m_Logo.DrawTileTo(0, 0, logoArea);
 		m_Play.Render();
 		m_Settings.Render();
 		m_Exit.Render();

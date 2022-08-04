@@ -18,9 +18,10 @@ namespace Redge
 
 	private:
 		Raylib::Tileset m_Background = Raylib::Tileset("assets/Background/CrimsonMenu.png", 1, 1);
+		Raylib::Tileset m_Logo = Raylib::Tileset("assets/Logo.png", 1, 1);
 
-		Raylib::Button m_Play;
-		Raylib::Button m_Settings;
-		Raylib::Button m_Exit;
+		Raylib::Button m_Play{"assets/Buttons/Play.png", "assets/Buttons/MenuButton.png", Rectangle{}};
+		Raylib::Button m_Settings{"assets/Buttons/Settings.png", "assets/Buttons/MenuButton.png", Rectangle{}};
+		Raylib::Button m_Exit{"assets/Buttons/Exit.png", "assets/Buttons/MenuButton.png", Rectangle{}};
 	};
 } // namespace Redge

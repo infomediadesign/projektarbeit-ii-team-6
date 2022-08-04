@@ -3,7 +3,7 @@
 
 auto main() -> int
 {
-	auto game = Redge::Game(1280, 720);
+	auto game = Redge::Game(1600, 900);
 	game.SetScene(std::make_shared<Redge::MainMenu>(&game));
 	game.Run();
 }
