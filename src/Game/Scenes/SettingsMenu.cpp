@@ -17,7 +17,7 @@ namespace Redge
 
 		Rectangle settingArea{};
 		settingArea.width = 800;
-		settingArea.height = 60;
+		settingArea.height = 45;
 		settingArea.x = static_cast<float>(GetScreenWidth() / 2 - settingArea.width / 2);
 		settingArea.y = 400;
 
@@ -65,10 +65,9 @@ namespace Redge
 			}
 		}
 
-		auto volumeArea = Rectangle{
-			.width = 400,
-			.height =  m_VolumeArea.height / 2,
-		};
+		Rectangle volumeArea{};
+		volumeArea.height = m_VolumeArea.height / 2;
+		volumeArea.width = m_Volume.GetIdealWidth(volumeArea.height);
 		volumeArea.x = m_VolumeArea.x + m_VolumeArea.width - volumeArea.width;
 		volumeArea.y = m_VolumeArea.y + volumeArea.height / 2,
 		m_Volume.SetArea(volumeArea);

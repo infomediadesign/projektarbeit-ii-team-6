@@ -16,6 +16,9 @@ namespace Raylib
 		auto Update() -> bool;
 		auto Render() const -> void;
 
+		[[nodiscard]] auto GetIdealWidth(float height) const -> float;
+		[[nodiscard]] auto GetIdealHeight(float width) const -> float;
+
 	private:
 		Tileset m_Slider = Tileset("assets/Buttons/Slider.png", 1, 2);
 		Tileset m_Crystal = Tileset("assets/Buttons/SliderCrystal.png", 1, 1);
