@@ -2,6 +2,7 @@
 
 #include "raylib.h"
 
+#include <cassert>
 #include <string>
 
 namespace Redge
@@ -54,5 +55,16 @@ namespace Redge
 			scene->RenderUI();
 			EndDrawing();
 		}
+	}
+
+	auto Game::GetVolume() const -> float
+	{
+		return m_Volume;
+	}
+
+	auto Game::SetVolume(float volumen) -> void
+	{
+		assert(0 <= volumen && volumen <= 1);
+		m_Volume = volumen;
 	}
 } // namespace Redge

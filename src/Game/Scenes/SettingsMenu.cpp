@@ -24,6 +24,8 @@ namespace Redge
 		m_FullscreenArea = settingArea;
 		settingArea.y += settingArea.height + 50;
 		m_VerticalSyncArea = settingArea;
+		settingArea.y += settingArea.height + 50;
+		m_VolumeArea = settingArea;
 
 		m_Fullscreen.SetArea(Rectangle{
 			.x = m_FullscreenArea.x + m_FullscreenArea.width - m_FullscreenArea.height,
@@ -62,6 +64,17 @@ namespace Redge
 				ClearWindowState(FLAG_VSYNC_HINT);
 			}
 		}
+
+		auto volumeArea = Rectangle{
+			.width = 400,
+			.height =  m_VolumeArea.height / 2,
+		};
+		volumeArea.x = m_VolumeArea.x + m_VolumeArea.width - volumeArea.width;
+		volumeArea.y = m_VolumeArea.y + volumeArea.height / 2,
+		m_Volume.SetArea(volumeArea);
+		m_Volume.SetPercentage(Host->GetVolume());
+		if (m_Volume.Update())
+			Host->SetVolume(m_Volume.GetPercentage());
 	}
 
 	auto SettingsMenu::RenderWorld() const -> void
@@ -86,6 +99,9 @@ namespace Redge
 
 		DrawText("Vertical Sync: ", m_VerticalSyncArea.x, m_VerticalSyncArea.y, m_VerticalSyncArea.height, WHITE);
 		m_VerticalSync.Render();
+
+		DrawText("Volume: ", m_VolumeArea.x, m_VolumeArea.y, m_VolumeArea.height, WHITE);
+		m_Volume.Render();
 	}
 
 	auto SettingsMenu::SetBackScene(std::shared_ptr<Scene> scene) -> std::shared_ptr<Scene>

@@ -23,7 +23,12 @@ namespace Redge
 
 		auto Run() -> void;
 
+		[[nodiscard]] auto GetVolume() const -> float;
+		auto SetVolume(float volumen) -> void;
+
 	private:
 		std::shared_ptr<Scene> m_Scene;
+
+		float m_Volume = 1;
 	};
 } // namespace Redge

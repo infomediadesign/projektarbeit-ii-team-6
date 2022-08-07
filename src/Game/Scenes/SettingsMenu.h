@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Game/Scene.h"
+#include "Raylib/Slider.h"
 #include "Raylib/Tileset.h"
 #include "Raylib/Toggle.h"
 
@@ -30,5 +31,8 @@ namespace Redge
 
 		Rectangle m_VerticalSyncArea{};
 		Raylib::Toggle m_VerticalSync;
+
+		Rectangle m_VolumeArea{};
+		Raylib::Slider m_Volume;
 	};
 } // namespace Redge
