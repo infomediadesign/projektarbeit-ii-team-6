@@ -9,10 +9,13 @@ namespace Redge
 	Game::Game(const uint16_t width, const uint16_t height)
 	{
 		InitWindow(width, height, "Crimson Mine");
+		InitAudioDevice();
+
 		SetWindowState(FLAG_WINDOW_RESIZABLE);
+		SetWindowState(FLAG_VSYNC_HINT);
 		SetExitKey(KEY_NULL); // Disable esc to exit
 
-		// Applicatino icon
+		// Application icon
 		auto icon = LoadImage("assets/Icon.png");
 		SetWindowIcon(icon);
 		UnloadImage(icon);
@@ -21,6 +24,7 @@ namespace Redge
 	Game::~Game()
 	{
 		m_Scene = nullptr;
+		CloseAudioDevice();
 		CloseWindow();
 	}
 

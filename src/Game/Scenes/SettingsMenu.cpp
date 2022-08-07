@@ -2,6 +2,8 @@
 
 #include "Game/Game.h"
 
+#include <string>
+
 namespace Redge
 {
 	SettingsMenu::SettingsMenu(Game* host) : Scene(host)
@@ -10,20 +12,80 @@ namespace Redge
 
 	auto SettingsMenu::Update() -> void
 	{
+		if (IsKeyPressed(KEY_ESCAPE))
+			Host->SetScene(m_BackScene);
+
+		Rectangle settingArea{};
+		settingArea.width = 800;
+		settingArea.height = 60;
+		settingArea.x = static_cast<float>(GetScreenWidth() / 2 - settingArea.width / 2);
+		settingArea.y = 400;
+
+		m_FullscreenArea = settingArea;
+		settingArea.y += settingArea.height + 50;
+		m_VerticalSyncArea = settingArea;
+
+		m_Fullscreen.SetArea(Rectangle{
+			.x = m_FullscreenArea.x + m_FullscreenArea.width - m_FullscreenArea.height,
+			.y = m_FullscreenArea.y,
+			.width = m_FullscreenArea.height,
+			.height = m_FullscreenArea.height,
+		});
+		m_Fullscreen.SetState(IsWindowFullscreen());
+		if (m_Fullscreen.Update())
+		{
+			if (m_Fullscreen.GetState())
+			{
+				SetWindowState(FLAG_FULLSCREEN_MODE);
+			}
+			else
+			{
+				ClearWindowState(FLAG_FULLSCREEN_MODE);
+			}
+		}
+
+		m_VerticalSync.SetArea(Rectangle{
+			.x = m_VerticalSyncArea.x + m_VerticalSyncArea.width - m_VerticalSyncArea.height,
+			.y = m_VerticalSyncArea.y,
+			.width = m_VerticalSyncArea.height,
+			.height = m_VerticalSyncArea.height,
+		});
+		m_VerticalSync.SetState(IsWindowState(FLAG_VSYNC_HINT));
+		if (m_VerticalSync.Update())
+		{
+			if (m_VerticalSync.GetState())
+			{
+				SetWindowState(FLAG_VSYNC_HINT);
+			}
+			else
+			{
+				ClearWindowState(FLAG_VSYNC_HINT);
+			}
+		}
 	}
 
 	auto SettingsMenu::RenderWorld() const -> void
 	{
-		if (IsKeyPressed(KEY_ESCAPE))
-			Host->SetScene(m_BackScene);
 	}
 
 	auto SettingsMenu::RenderUI() const -> void
 	{
 		auto scaleWidth = static_cast<float>(GetScreenWidth()) / m_Background.GetTileWidth();
 		auto scaleHeight = static_cast<float>(GetScreenHeight()) / m_Background.GetTileHeight();
-		auto scale = std::max(scaleWidth, scaleHeight) * 1.01f;
+		auto scale = std::max(scaleWidth, scaleHeight) * 1.01F;
 		m_Background.DrawTileScaled(0, 0, {}, scale);
+
+		const char* settingsText = "Settings";
+		static constexpr auto s_TitleSize = 100;
+
+		auto titleWidth = MeasureText(settingsText, s_TitleSize);
+		DrawText(settingsText, GetScreenWidth() / 2 - titleWidth / 2, 150, s_TitleSize, WHITE);
+
+		DrawText("Fullscreen: ", m_FullscreenArea.x, m_FullscreenArea.y, m_FullscreenArea.height, WHITE);
+		m_Fullscreen.Render();
+
+		DrawText("Vertical Sync: ", m_VerticalSyncArea.x, m_VerticalSyncArea.y, m_VerticalSyncArea.height, WHITE);
+		m_VerticalSync.Render();
 	}
 
 	auto SettingsMenu::SetBackScene(std::shared_ptr<Scene> scene) -> std::shared_ptr<Scene>

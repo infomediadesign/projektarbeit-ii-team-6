@@ -1,9 +1,10 @@
 #pragma once
 
-#include <memory>
-
 #include "Game/Scene.h"
 #include "Raylib/Tileset.h"
+#include "Raylib/Toggle.h"
+
+#include <memory>
 
 namespace Redge
 {
@@ -23,5 +24,11 @@ namespace Redge
 		std::shared_ptr<Scene> m_BackScene{};
 
 		Raylib::Tileset m_Background = Raylib::Tileset("assets/Background/CrimsonMenu.png", 1, 1);
+
+		Rectangle m_FullscreenArea{};
+		Raylib::Toggle m_Fullscreen;
+
+		Rectangle m_VerticalSyncArea{};
+		Raylib::Toggle m_VerticalSync;
 	};
 } // namespace Redge

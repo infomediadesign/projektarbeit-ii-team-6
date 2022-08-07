@@ -8,7 +8,6 @@ namespace Redge
 {
 	MainMenu::MainMenu(Game* host) : Scene(host)
 	{
-		SetTargetFPS(60);
 	}
 
 	auto MainMenu::Update() -> void
