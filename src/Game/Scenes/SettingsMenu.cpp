@@ -90,7 +90,7 @@ namespace Redge
 		const char* settingsText = "Settings";
 		static constexpr auto s_TitleSize = 100;
 
-		DrawText("[ESC] to go back", 30, 30, 25, GRAY);
+		DrawText("[ESC] to go back", 30, 30, 30, GRAY);
 
 		auto titleWidth = MeasureText(settingsText, s_TitleSize);
 		DrawText(settingsText, GetScreenWidth() / 2 - titleWidth / 2, 150, s_TitleSize, WHITE);
