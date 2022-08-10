@@ -28,10 +28,10 @@ namespace Redge
 		m_VolumeArea = settingArea;
 
 		m_Fullscreen.SetArea(Rectangle{
-			.x = m_FullscreenArea.x + m_FullscreenArea.width - m_FullscreenArea.height,
-			.y = m_FullscreenArea.y,
-			.width = m_FullscreenArea.height,
-			.height = m_FullscreenArea.height,
+			m_FullscreenArea.x + m_FullscreenArea.width - m_FullscreenArea.height,
+			m_FullscreenArea.y,
+			m_FullscreenArea.height,
+			m_FullscreenArea.height,
 		});
 		m_Fullscreen.SetState(IsWindowFullscreen());
 		if (m_Fullscreen.Update())
@@ -47,10 +47,10 @@ namespace Redge
 		}
 
 		m_VerticalSync.SetArea(Rectangle{
-			.x = m_VerticalSyncArea.x + m_VerticalSyncArea.width - m_VerticalSyncArea.height,
-			.y = m_VerticalSyncArea.y,
-			.width = m_VerticalSyncArea.height,
-			.height = m_VerticalSyncArea.height,
+			m_VerticalSyncArea.x + m_VerticalSyncArea.width - m_VerticalSyncArea.height,
+			m_VerticalSyncArea.y,
+			m_VerticalSyncArea.height,
+			m_VerticalSyncArea.height,
 		});
 		m_VerticalSync.SetState(IsWindowState(FLAG_VSYNC_HINT));
 		if (m_VerticalSync.Update())
