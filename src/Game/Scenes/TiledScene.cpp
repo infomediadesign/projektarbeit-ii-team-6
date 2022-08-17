@@ -1,5 +1,7 @@
 #include "TiledScene.h"
 
+#include "Game/Game.h"
+#include "PauseScene.h"
 #include "raymath.h"
 
 #include <string>
@@ -14,6 +16,12 @@ namespace Redge
 	auto TiledScene::Update() -> void
 	{
 		m_Level.Update(this);
+
+		if (IsKeyPressed(KEY_ESCAPE))
+		{
+			auto pauseScene = std::make_shared<PauseScene>(Host);
+			pauseScene->SetBackScene(Host->SetScene(pauseScene));
+		}
 	}
 
 	auto TiledScene::RenderWorld() const -> void
