@@ -22,9 +22,8 @@ namespace Redge
 	private:
 		std::shared_ptr<Scene> m_BackScene{};
 
-		// TODO: replace button text with correct text once available
-		Raylib::Button m_Resume{"assets/Buttons/Play.png", "assets/Buttons/MenuButton.png", Rectangle{}};
+		Raylib::Button m_Resume{"assets/Buttons/Resume.png", "assets/Buttons/MenuButton.png", Rectangle{}};
 		Raylib::Button m_Settings{"assets/Buttons/Settings.png", "assets/Buttons/MenuButton.png", Rectangle{}};
-		Raylib::Button m_MainMenu{"assets/Buttons/Exit.png", "assets/Buttons/MenuButton.png", Rectangle{}};
+		Raylib::Button m_MainMenu{"assets/Buttons/MainMenu.png", "assets/Buttons/MenuButton.png", Rectangle{}};
 	};
 } // namespace Redge

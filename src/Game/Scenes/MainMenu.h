@@ -22,6 +22,6 @@ namespace Redge
 
 		Raylib::Button m_Play{"assets/Buttons/Play.png", "assets/Buttons/MenuButton.png", Rectangle{}};
 		Raylib::Button m_Settings{"assets/Buttons/Settings.png", "assets/Buttons/MenuButton.png", Rectangle{}};
-		Raylib::Button m_Exit{"assets/Buttons/Exit.png", "assets/Buttons/MenuButton.png", Rectangle{}};
+		Raylib::Button m_Exit{"assets/Buttons/Quit.png", "assets/Buttons/MenuButton.png", Rectangle{}};
 	};
 } // namespace Redge
