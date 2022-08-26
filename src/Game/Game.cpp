@@ -2,6 +2,7 @@
 
 #include "raylib.h"
 
+#include <cassert>
 #include <string>
 
 namespace Redge
@@ -9,9 +10,13 @@ namespace Redge
 	Game::Game(const uint16_t width, const uint16_t height)
 	{
 		InitWindow(width, height, "Crimson Mine");
-		SetWindowState(FLAG_WINDOW_RESIZABLE);
+		InitAudioDevice();
 
-		// Applicatino icon
+		SetWindowState(FLAG_WINDOW_RESIZABLE);
+		SetWindowState(FLAG_VSYNC_HINT);
+		SetExitKey(KEY_NULL); // Disable esc to exit
+
+		// Application icon
 		auto icon = LoadImage("assets/Icon.png");
 		SetWindowIcon(icon);
 		UnloadImage(icon);
@@ -20,43 +25,46 @@ namespace Redge
 	Game::~Game()
 	{
 		m_Scene = nullptr;
+		CloseAudioDevice();
 		CloseWindow();
 	}
 
-	auto Game::IsRunning() const -> bool
+	auto Game::SetScene(std::shared_ptr<Scene> newScene) -> std::shared_ptr<Scene>
 	{
-		return m_Scene && !WindowShouldClose();
+		m_Scene.swap(newScene);
+		return newScene;
 	}
 
-	auto Game::SetScene(std::unique_ptr<Scene> newScene) -> std::unique_ptr<Scene>
+	auto Game::Run() -> void
 	{
-		auto oldScene = std::move(m_Scene);
-		m_Scene = std::move(newScene);
-		return oldScene;
+		while (!WindowShouldClose())
+		{
+			auto scene = m_Scene;
+			if (!scene)
+				break;
+
+			scene->Update();
+
+			BeginDrawing();
+			ClearBackground(PINK);
+
+			BeginMode2D(scene->Camera);
+			scene->RenderWorld();
+			EndMode2D();
+
+			scene->RenderUI();
+			EndDrawing();
+		}
 	}
 
-	auto Game::Update() -> void
+	auto Game::GetVolume() const -> float
 	{
-		if (!m_Scene)
-			return;
-
-		m_Scene->Update();
+		return m_Volume;
 	}
 
-	auto Game::Render() const -> void
+	auto Game::SetVolume(float volumen) -> void
 	{
-		if (!m_Scene)
-			return;
-
-		BeginDrawing();
-		ClearBackground(PINK);
-
-		BeginMode2D(m_Scene->Camera);
-		m_Scene->RenderWorld();
-		EndMode2D();
-
-		m_Scene->RenderUI();
-
-		EndDrawing();
+		assert(0 <= volumen && volumen <= 1);
+		m_Volume = volumen;
 	}
 } // namespace Redge

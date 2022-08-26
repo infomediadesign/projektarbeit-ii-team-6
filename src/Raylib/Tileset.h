@@ -28,6 +28,9 @@ namespace Raylib
 		auto DrawTile(uint16_t x, uint16_t y, Vector2 position, Color tint = WHITE) const -> void;
 		auto DrawTileScaled(uint16_t x, uint16_t y, Vector2 position, float scale, Color tint = WHITE) const -> void;
 
+		auto DrawTileTo(uint16_t x, uint16_t y, Rectangle destination, Color tint = WHITE) const -> void;
+		auto DrawTilePartTo(uint16_t x, uint16_t y, Rectangle destination, Vector2 section, Color tint = WHITE) const -> void;
+
 		auto DrawTilePart(uint16_t x, uint16_t y, Vector2 position, Vector2 section, Color tint = WHITE) const -> void;
 		auto DrawTilePartScaled(uint16_t x, uint16_t y, Vector2 position, Vector2 section, float scale, Color tint = WHITE) const -> void;
 
