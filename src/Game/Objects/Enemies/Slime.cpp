@@ -49,6 +49,35 @@ namespace Redge
 					static_cast<float>(-m_Animation.GetTileHeight()) / 2,
 				}));
 	}
+	static float Size = 6;
+	auto Slime::OnCollision(Tiled::Object& other, CollisionType collisionType) -> void
+	{
+	}
+
+	auto Slime::CheckCollision(ICollidable* other) const -> bool
+	{
+		return other->IsColliding(Position, Size);
+	}
+
+	auto Slime::GetCollisionType() const -> CollisionType
+	{
+		return CollisionTypeEnemy;
+	}
+
+	auto Slime::IsColliding(const Rectangle& rect) const -> bool
+	{
+		return CheckCollisionCircleRec(Position, Size,rect);
+	}
+
+	auto Slime::IsColliding(const Vector2& center, float radius) const -> bool
+	{
+		return CheckCollisionCircles(center, radius, Position, Size);
+	}
+
+	auto Slime::IsColliding(const Vector2& point) const -> bool
+	{
+		return CheckCollisionPointCircle(point, Position, Size);
+	}
 } // namespace Redge
 
 auto nlohmann::adl_serializer<Redge::Slime>::from_json(const json& json) -> Redge::Slime

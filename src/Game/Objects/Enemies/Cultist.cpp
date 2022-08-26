@@ -66,6 +66,35 @@ namespace Redge
 					static_cast<float>(-m_Animation.GetTileHeight()) / 2,
 				}));
 	}
+	static float Size = 6;
+	auto Cultist::OnCollision(Tiled::Object& other, CollisionType collisionType) -> void
+	{
+	}
+
+	auto Cultist::CheckCollision(ICollidable* other) const -> bool
+	{
+		return other->IsColliding(Position, Size);
+	}
+
+	auto Cultist::GetCollisionType() const -> CollisionType
+	{
+		return CollisionTypeEnemy;
+	}
+
+	auto Cultist::IsColliding(const Rectangle& rect) const -> bool
+	{
+		return CheckCollisionCircleRec(Position, Size,rect);
+	}
+
+	auto Cultist::IsColliding(const Vector2& center, float radius) const -> bool
+	{
+		return CheckCollisionCircles(center, radius, Position, Size);
+	}
+
+	auto Cultist::IsColliding(const Vector2& point) const -> bool
+	{
+		return CheckCollisionPointCircle(point, Position, Size);
+	}
 } // namespace Redge
 
 auto nlohmann::adl_serializer<Redge::Cultist>::from_json(const json& json) -> Redge::Cultist

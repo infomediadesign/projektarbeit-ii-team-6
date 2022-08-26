@@ -2,7 +2,6 @@
 
 #include "raylib.h"
 #include "memory"
-#include "Game/Game.h"
 
 namespace Redge
 {

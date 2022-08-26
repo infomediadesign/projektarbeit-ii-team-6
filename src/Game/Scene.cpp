@@ -1,4 +1,5 @@
 #include "Scene.h"
+#include "Game/Game.h"
 
 namespace Redge
 {
