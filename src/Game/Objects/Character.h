@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Game/Objects/Items/Item.h"
+#include "Game/Objects/Weapons/Weapon.h"
 #include "Game/Objects/Types/Collidable.h"
 #include "Raylib/Tileset.h"
 #include "Tiled/Object.h"
@@ -69,7 +70,7 @@ namespace Redge
 		std::array<std::unique_ptr<Item>, 5> m_Items{};
 
 		Raylib::Tileset m_WeaponSlots = Raylib::Tileset("assets/UI/WeaponSlots.png", 1, 1);
-		bool m_PrimaryWeaponSelected = false;
+		std::array<std::unique_ptr<Weapon>, 3> m_Weapons{};
 	};
 } // namespace Redge
 
