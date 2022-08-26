@@ -1,9 +1,9 @@
 #include "Object.h"
 
 #include "Game/Objects/Character.h"
-#include "Game/Objects/Bat.h"
-#include "Game/Objects/Cultist.h"
-#include "Game/Objects/Slime.h"
+#include "Game/Objects/Enemies/Bat.h"
+#include "Game/Objects/Enemies/Cultist.h"
+#include "Game/Objects/Enemies/Slime.h"
 #include "Game/Objects/Spikes.h"
 #include "Game/Objects/Torch.h"
 #include "Game/Objects/UpgradeStation.h"

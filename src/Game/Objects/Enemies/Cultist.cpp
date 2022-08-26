@@ -1,4 +1,4 @@
-#include "Game/Objects/Cultist.h"
+#include "Cultist.h"
 
 #include "Tiled/Layer.h"
 

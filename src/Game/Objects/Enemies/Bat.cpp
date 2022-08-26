@@ -1,14 +1,14 @@
-#include "Game/Objects/Slime.h"
+#include "Bat.h"
 
 #include "Tiled/Layer.h"
 
 namespace Redge
 {
-	Slime::Slime(Vector2 position) : Object(position)
+	Bat::Bat(Vector2 position) : Object(position)
 	{
 	}
 
-	auto Slime::Update(Scene* scene, Tiled::ObjectLayer& layer) -> void
+	auto Bat::Update(Scene* scene, Tiled::ObjectLayer& layer) -> void
 	{
 		if (character == nullptr)
 		{
@@ -40,7 +40,7 @@ namespace Redge
 		}
 	}
 
-	auto Slime::Render() const -> void
+	auto Bat::Render() const -> void
 	{
 		m_Animation.DrawTile(m_AnimationFrame, 0,
 			Vector2Add(Position,
@@ -51,8 +51,8 @@ namespace Redge
 	}
 } // namespace Redge
 
-auto nlohmann::adl_serializer<Redge::Slime>::from_json(const json& json) -> Redge::Slime
+auto nlohmann::adl_serializer<Redge::Bat>::from_json(const json& json) -> Redge::Bat
 {
 	assert(json["point"].get<bool>());
-	return Redge::Slime(Vector2{json["x"].get<float>(), json["y"].get<float>()});
+	return Redge::Bat(Vector2{json["x"].get<float>(), json["y"].get<float>()});
 }
