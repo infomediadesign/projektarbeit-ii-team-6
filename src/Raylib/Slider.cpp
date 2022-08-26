@@ -1,5 +1,6 @@
 #include "Slider.h"
 
+#include <algorithm>
 #include <cassert>
 
 namespace Raylib
