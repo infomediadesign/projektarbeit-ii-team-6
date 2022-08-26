@@ -1,9 +1,10 @@
 #include "Character.h"
 
+#include "Game/Game.h"
+#include "Game/Scenes/CombatScene.h"
 #include "raymath.h"
 #include "Tiled/Layer.h"
 #include "Tiled/Property.h"
-#include "Game/Game.h"
 
 namespace Redge
 {
@@ -72,9 +73,11 @@ namespace Redge
 			Position = m_PreviousPosition;
 			m_DontMove = false;
 		}
+
 		if(m_StartCombat)
 		{
-			scene->SetScene(nullptr);
+			auto combatScene = std::make_shared<CombatScene>(scene->Host);
+			combatScene->SetBackScene(scene->Host->SetScene(combatScene));
 		}
 
 		if (m_Oxygen > 0)

@@ -16,13 +16,11 @@ namespace Redge
 
 		virtual auto RenderWorld() const -> void = 0;
 		virtual auto RenderUI() const -> void = 0;
-		auto SetScene(std::shared_ptr<Scene> scene) -> std::shared_ptr<Scene>;
 
+		Game* const Host;
 		Camera2D Camera{};
 
 	protected:
 		explicit Scene(Game* host);
-
-		Game* Host;
 	};
 } // namespace Redge
