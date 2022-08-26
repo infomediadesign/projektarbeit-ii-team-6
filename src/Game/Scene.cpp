@@ -8,4 +8,9 @@ namespace Redge
 		Camera.offset.y = static_cast<float>(GetScreenHeight()) / 2;
 		Camera.zoom = 1;
 	}
+	auto Scene::SetScene(std::shared_ptr<Scene> scene) -> std::shared_ptr<Scene>
+	{
+		return Host->SetScene(scene);
+	}
+
 } // namespace Redge

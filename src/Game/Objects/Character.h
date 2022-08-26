@@ -51,6 +51,7 @@ namespace Redge
 
 		Vector2 m_PreviousPosition;
 		bool m_DontMove = false;
+		bool m_StartCombat = false;
 
 		float m_CharacterSpeed;
 		float m_SpeedMultiplier = 1;

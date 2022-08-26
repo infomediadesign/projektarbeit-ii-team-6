@@ -1,6 +1,8 @@
 #pragma once
 
 #include "raylib.h"
+#include "memory"
+#include "Game/Game.h"
 
 namespace Redge
 {
@@ -15,6 +17,7 @@ namespace Redge
 
 		virtual auto RenderWorld() const -> void = 0;
 		virtual auto RenderUI() const -> void = 0;
+		auto SetScene(std::shared_ptr<Scene> scene) -> std::shared_ptr<Scene>;
 
 		Camera2D Camera{};
 

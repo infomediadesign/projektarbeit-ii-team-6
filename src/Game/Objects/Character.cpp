@@ -3,6 +3,7 @@
 #include "raymath.h"
 #include "Tiled/Layer.h"
 #include "Tiled/Property.h"
+#include "Game/Game.h"
 
 namespace Redge
 {
@@ -70,6 +71,10 @@ namespace Redge
 		{
 			Position = m_PreviousPosition;
 			m_DontMove = false;
+		}
+		if(m_StartCombat)
+		{
+			scene->SetScene(nullptr);
 		}
 
 		if (m_Oxygen > 0)
@@ -187,6 +192,8 @@ namespace Redge
 	{
 		if ((collisionType & CollisionTypeSolid) == CollisionTypeSolid)
 			m_DontMove = true;
+		if((collisionType & CollisionTypeEnemy) == CollisionTypeEnemy)
+			m_StartCombat = true;
 	}
 
 	auto Character::CheckCollision(ICollidable* other) const -> bool
