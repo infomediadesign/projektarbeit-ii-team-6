@@ -77,6 +77,23 @@ namespace Raylib
 
 	auto Tileset::DrawTileScaled(uint16_t x, uint16_t y, Vector2 position, float scale, Color tint) const -> void
 	{
+		Rectangle dest;
+		dest.x = position.x;
+		dest.y = position.y;
+		dest.width = GetTileWidth() * scale;
+		dest.height = GetTileHeight() * scale;
+		DrawTileTo(x, y, dest, tint);
+	}
+
+	auto Tileset::DrawTileTo(uint16_t x, uint16_t y, Rectangle destination, Color tint) const -> void
+	{
+		DrawTilePartTo(x, y, destination,
+			Vector2{static_cast<float>(GetTileWidth()), static_cast<float>(GetTileHeight())}, tint);
+	}
+
+	auto Tileset::DrawTilePartTo(uint16_t x, uint16_t y, Rectangle destination, Vector2 section, Color tint) const
+		-> void
+	{
 		// Check passed parameters are within bounds
 		assert(x < GetTileCountX());
 		assert(y < GetTileCountY());
@@ -84,15 +101,10 @@ namespace Raylib
 		Rectangle rect;
 		rect.x = static_cast<float>(GetTileWidth() * x);
 		rect.y = static_cast<float>(GetTileHeight() * y);
-		rect.width = static_cast<float>(GetTileWidth());
-		rect.height = static_cast<float>(GetTileHeight());
+		rect.width = section.x;
+		rect.height = section.y;
 
-		Rectangle dest;
-		dest.x = position.x;
-		dest.y = position.y;
-		dest.width = rect.width * scale;
-		dest.height = rect.height * scale;
-		DrawTexturePro(m_Texture, rect, dest, Vector2{}, 0, tint);
+		DrawTexturePro(m_Texture, rect, destination, Vector2{}, 0, tint);
 	}
 
 	auto Tileset::DrawTilePart(uint16_t x, uint16_t y, Vector2 position, Vector2 section, Color tint) const -> void
@@ -100,7 +112,8 @@ namespace Raylib
 		DrawTilePartScaled(x, y, position, section, 1, tint);
 	}
 
-	auto Tileset::DrawTilePartScaled(uint16_t x, uint16_t y, Vector2 position, Vector2 section, float scale, Color tint) const -> void
+	auto Tileset::DrawTilePartScaled(uint16_t x, uint16_t y, Vector2 position, Vector2 section, float scale,
+		Color tint) const -> void
 	{
 		// Check passed parameters are within bounds
 		assert(x < GetTileCountX());
@@ -130,7 +143,7 @@ namespace Raylib
 		nlohmann::json json;
 		fileStream >> json;
 
-		const auto imagePath = file.parent_path()  / json["image"].get<std::string>();
+		const auto imagePath = file.parent_path() / json["image"].get<std::string>();
 		const auto columns = json["columns"].get<uint16_t>();
 		const auto rows = json["tilecount"].get<uint16_t>() / columns;
 

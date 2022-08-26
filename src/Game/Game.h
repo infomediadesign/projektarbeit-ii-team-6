@@ -19,14 +19,16 @@ namespace Redge
 		auto operator=(const Game&) -> Game& = delete;
 		auto operator=(Game&&) -> Game& = delete;
 
-		[[nodiscard]] auto IsRunning() const -> bool;
+		auto SetScene(std::shared_ptr<Scene> newScene) -> std::shared_ptr<Scene>;
 
-		auto SetScene(std::unique_ptr<Scene> newScene) -> std::unique_ptr<Scene>;
+		auto Run() -> void;
 
-		auto Update() -> void;
-		auto Render() const -> void;
+		[[nodiscard]] auto GetVolume() const -> float;
+		auto SetVolume(float volumen) -> void;
 
 	private:
-		std::unique_ptr<Scene> m_Scene;
+		std::shared_ptr<Scene> m_Scene;
+
+		float m_Volume = 1;
 	};
 } // namespace Redge
