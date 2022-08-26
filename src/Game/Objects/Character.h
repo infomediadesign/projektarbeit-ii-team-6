@@ -26,8 +26,10 @@ namespace Redge
 		auto RenderBelow() const -> void override;
 		auto RenderUI() const -> void override;
 
-		auto OnCollision(Tiled::Object& other) -> void override;
+		auto OnCollision(Tiled::Object& other, CollisionType collisionType) -> void override;
 		auto CheckCollision(ICollidable* other) const -> bool override;
+
+		[[nodiscard]] auto GetCollisionType() const -> CollisionType override;
 
 		auto IsColliding(const Rectangle& rect) const -> bool override;
 		auto IsColliding(const Vector2& center, float radius) const -> bool override;
@@ -48,7 +50,7 @@ namespace Redge
 		float m_CurrentFrameTime = 0;
 
 		Vector2 m_PreviousPosition;
-		bool m_Collided = false;
+		bool m_DontMove = false;
 
 		float m_CharacterSpeed;
 		float m_SpeedMultiplier = 1;

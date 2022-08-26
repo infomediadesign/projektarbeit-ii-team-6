@@ -11,8 +11,10 @@ namespace Redge
 	public:
 		explicit Wall(Vector2 position, Vector2 dimensions);
 
-		auto OnCollision(Tiled::Object& other) -> void override;
+		auto OnCollision(Tiled::Object& other, CollisionType collisionType) -> void override;
 		auto CheckCollision(ICollidable* other) const -> bool override;
+
+		[[nodiscard]] auto GetCollisionType() const -> CollisionType override;
 
 		[[nodiscard]] auto IsColliding(const Rectangle& rect) const -> bool override;
 		[[nodiscard]] auto IsColliding(const Vector2& center, float radius) const -> bool override;

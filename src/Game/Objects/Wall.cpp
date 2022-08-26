@@ -7,13 +7,18 @@ namespace Redge
 	{
 	}
 
-	auto Wall::OnCollision(Tiled::Object& other) -> void
+	auto Wall::OnCollision(Tiled::Object& other, CollisionType collisionType) -> void
 	{
 	}
 
 	auto Wall::CheckCollision(ICollidable* other) const -> bool
 	{
 		return other->IsColliding(GetHitbox());
+	}
+
+	auto Wall::GetCollisionType() const -> CollisionType
+	{
+		return CollisionTypeSolid;
 	}
 
 	auto Wall::IsColliding(const Rectangle& rect) const -> bool

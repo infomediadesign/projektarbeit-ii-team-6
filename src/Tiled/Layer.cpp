@@ -120,8 +120,8 @@ namespace Tiled
 				if (!collidable1->CheckCollision(collidable2))
 					continue;
 
-				collidable1->OnCollision(*object2);
-				collidable2->OnCollision(*object1);
+				collidable1->OnCollision(*object2, collidable2->GetCollisionType());
+				collidable2->OnCollision(*object1, collidable1->GetCollisionType());
 			}
 		}
 

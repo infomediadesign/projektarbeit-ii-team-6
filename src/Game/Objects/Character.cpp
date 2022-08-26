@@ -66,10 +66,10 @@ namespace Redge
 
 	auto Character::LateUpdate(Scene* scene, Tiled::ObjectLayer& layer) -> void
 	{
-		if (m_Collided)
+		if (m_DontMove)
 		{
 			Position = m_PreviousPosition;
-			m_Collided = false;
+			m_DontMove = false;
 		}
 
 		if (m_Oxygen > 0)
@@ -183,14 +183,20 @@ namespace Redge
 		m_WeaponSlots.DrawTileScaled(0, 0, weaponPos, weaponScale);
 	}
 
-	auto Character::OnCollision(Tiled::Object& other) -> void
+	auto Character::OnCollision(Tiled::Object& other, CollisionType collisionType) -> void
 	{
-		m_Collided = true;
+		if ((collisionType & CollisionTypeSolid) == CollisionTypeSolid)
+			m_DontMove = true;
 	}
 
 	auto Character::CheckCollision(ICollidable* other) const -> bool
 	{
 		return other->IsColliding(GetHitBox());
+	}
+
+	auto Character::GetCollisionType() const -> CollisionType
+	{
+		return CollisionTypeNone;
 	}
 
 	auto Character::IsColliding(const Rectangle& rect) const -> bool

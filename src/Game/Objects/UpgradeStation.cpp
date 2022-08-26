@@ -33,13 +33,18 @@ namespace Redge
 		m_Ghosts.DrawTile(m_AnimationFrame, m_AnimationColor, position);
 	}
 
-	auto UpgradeStation::OnCollision(Tiled::Object& other) -> void
+	auto UpgradeStation::OnCollision(Tiled::Object& other, CollisionType collisionType) -> void
 	{
 	}
 
 	auto UpgradeStation::CheckCollision(ICollidable* other) const -> bool
 	{
 		return other->IsColliding(GetHitBox());
+	}
+
+	auto UpgradeStation::GetCollisionType() const -> CollisionType
+	{
+		return CollisionTypeSolid;
 	}
 
 	auto UpgradeStation::IsColliding(const Rectangle& rect) const -> bool
