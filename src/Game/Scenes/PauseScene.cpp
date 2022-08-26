@@ -52,6 +52,8 @@ namespace Redge
 		if (m_BackScene)
 			m_BackScene->RenderUI();
 
+		DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Color{0, 0, 0, 150});
+
 		m_Resume.Render();
 		m_Settings.Render();
 		m_MainMenu.Render();
