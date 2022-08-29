@@ -18,7 +18,7 @@ namespace Redge
 	{
 		// NOTE: utility key binds for now
 		if (IsKeyPressed(KEY_TAB))
-			m_PrimaryWeaponSelected = !m_PrimaryWeaponSelected;
+			//m_PrimaryWeaponSelected = !m_PrimaryWeaponSelected;
 
 		if (IsKeyPressed(KEY_C))
 			++m_CrystalCount;
@@ -180,13 +180,13 @@ namespace Redge
 
 		weaponPos.y -= m_WeaponSlots.GetTileHeight() * weaponScale;
 
-		if (!m_PrimaryWeaponSelected)
+		/*if (!m_PrimaryWeaponSelected)
 		{
 			// HACK: Invert image
 			weaponPos.x += m_WeaponSlots.GetTileWidth() * weaponScale;
 			weaponPos.y += m_WeaponSlots.GetTileHeight() * weaponScale;
 			weaponScale *= -1;
-		}
+		}*/
 
 		m_WeaponSlots.DrawTileScaled(0, 0, weaponPos, weaponScale);
 	}

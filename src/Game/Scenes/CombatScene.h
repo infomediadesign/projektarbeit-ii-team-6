@@ -1,5 +1,6 @@
 #pragma once
 #include "Game/Scene.h"
+#include "Raylib/Tileset.h"
 
 namespace Redge
 {
@@ -12,9 +13,39 @@ namespace Redge
 		auto RenderWorld() const -> void override;
 		auto RenderUI() const -> void override;
 
+		auto RelocateUI() -> void;
+
 		auto SetBackScene(std::shared_ptr<Scene> scene) -> std::shared_ptr<Scene>;
 
 	private:
+
+		bool weaponswap = false;
+
+		uint16_t uiScale = 4;
+
+		Vector2 PosWeaponslot;
+		Raylib::Tileset weaponslot = Raylib::Tileset("assets/UI/Combat/Weaponslot.png", 4 ,1);
+		uint16_t weaponslotframe = 0;
+		float TSLweaponslot = 0; //TSL -> Time since last
+		float FDweaponslot = 0.17; //FD -> Frame Duration
+
+		Vector2 PosPointdisplay;
+		Raylib::Tileset pointdisplay = Raylib::Tileset("assets/UI/Combat/PointDisplay.png", 17, 1);
+		uint16_t pointdisplayframe = 0;
+		float TSLpointdisplay = 0;
+		float FDpointdisplay = 0.10;
+
+		Vector2 PosAttackButton1;
+		Vector2 PosAttackButton2;
+		Raylib::Tileset attackbutton = Raylib::Tileset("assets/UI/Combat/AttackButton.png",1,3);
+		uint16_t ABS1 = 0; //ABS -> Attack button state
+		uint16_t ABS2 = 0;
+
+		Vector2 PosHealslot;
+		Raylib::Tileset healslot = Raylib::Tileset("assets/UI/Combat/HealSlot.png", 2, 1);
+		bool healslottriggered = false;
+
+		Texture2D background = LoadTexture("assets/UI/Combat/CombatBackground.png");
 		std::shared_ptr<Scene> m_BackScene{};
 	};
 } // namespace Redge
