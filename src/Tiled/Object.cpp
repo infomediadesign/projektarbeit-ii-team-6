@@ -1,8 +1,9 @@
 #include "Object.h"
 
-#include "Game/Objects/Character.h"
 #include "Game/Objects/Bat.h"
+#include "Game/Objects/Character.h"
 #include "Game/Objects/Cultist.h"
+#include "Game/Objects/Mud.h"
 #include "Game/Objects/Slime.h"
 #include "Game/Objects/Spikes.h"
 #include "Game/Objects/Torch.h"
@@ -69,6 +70,9 @@ auto nlohmann::adl_serializer<std::unique_ptr<Tiled::Object>>::from_json(const j
 
 	if (name == "wall_hitbox")
 		return std::make_unique<Redge::Wall>(json.get<Redge::Wall>());
+
+	if (name == "mudFloor")
+		return std::make_unique<Redge::Mud>(json.get<Redge::Mud>());
 
 	if (name == "upgrade")
 		return std::make_unique<Redge::UpgradeStation>(json.get<Redge::UpgradeStation>());
