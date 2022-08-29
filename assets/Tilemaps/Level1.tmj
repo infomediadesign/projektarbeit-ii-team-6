@@ -21705,7 +21705,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -22199,7 +22199,7 @@
          "height":80,
          "id":11,
          "name":"fog",
-         "opacity":0.1,
+         "opacity":0.13,
          "startx":-96,
          "starty":-32,
          "type":"tilelayer",
