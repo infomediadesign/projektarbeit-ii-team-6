@@ -857,7 +857,7 @@
                 }, 
                 {
                  "class":"",
-                 "height":28,
+                 "height":30,
                  "id":58,
                  "name":"wall_hitbox",
                  "rotation":0,
