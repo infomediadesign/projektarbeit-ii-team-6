@@ -147,3 +147,13 @@ auto Redge::CombatScene::RelocateUI() -> void
 	PosHPBarPlayer = {static_cast<float>(pointdisplay.GetTileHeight()*uiScale/4),static_cast<float>(pointdisplay.GetTileHeight()*uiScale/4)};
 	PosHPBarEnemy = {static_cast<float>(GetScreenWidth()-HPBarEnemy.GetTileWidth()*uiScale - pointdisplay.GetTileWidth()*uiScale/4), static_cast<float>(PosHPBarPlayer.y + (HPBarPlayer.GetTileHeight()/2 - HPBarEnemy.GetTileHeight()/2)*uiScale)};
 }
+
+auto Redge::CombatScene::SetCharacter(std::shared_ptr<Character> character) -> void
+{
+	m_Character = std::move(character);
+}
+
+auto Redge::CombatScene::SetEnemy(std::shared_ptr<Tiled::Object> enemy) -> void
+{
+	m_Enemy = std::move(enemy);
+}

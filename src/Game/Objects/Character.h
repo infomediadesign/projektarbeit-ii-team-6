@@ -56,7 +56,9 @@ namespace Redge
 
 		Vector2 m_PreviousPosition;
 		bool m_DontMove = false;
-		bool m_StartCombat = false;
+
+		uint16_t m_EnemyId{};
+		std::shared_ptr<Tiled::Object> m_Enemy{};
 
 		float m_CharacterSpeed;
 		float m_SpeedMultiplier = 1;

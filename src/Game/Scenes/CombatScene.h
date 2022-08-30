@@ -11,6 +11,9 @@ namespace Redge
 		CombatScene(Game* Host);
 		auto Update() -> void override;
 
+		auto SetCharacter(std::shared_ptr<Character> character) -> void;
+		auto SetEnemy(std::shared_ptr<Tiled::Object> enemy) -> void;
+
 		auto RenderWorld() const -> void override;
 		auto RenderUI() const -> void override;
 
@@ -19,6 +22,9 @@ namespace Redge
 		auto SetBackScene(std::shared_ptr<Scene> scene) -> std::shared_ptr<Scene>;
 
 	private:
+		std::shared_ptr<Character> m_Character{};
+		std::shared_ptr<Tiled::Object> m_Enemy{};
+
 		float OldScreenWidth;
 		float OldScreenHeight;
 

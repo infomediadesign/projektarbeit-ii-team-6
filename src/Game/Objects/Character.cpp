@@ -80,10 +80,19 @@ namespace Redge
 			m_DontMove = false;
 		}
 
-		if (m_StartCombat)
+		if (m_Enemy)
 		{
 			auto combatScene = std::make_shared<CombatScene>(scene->Host);
 			combatScene->SetBackScene(scene->Host->SetScene(combatScene));
+
+			combatScene->SetCharacter(shared_from_this());
+			combatScene->SetEnemy(m_Enemy);
+
+			// NOTE: Possibly do this when exiting combat?
+			layer.Objects.erase(m_EnemyId);
+
+			m_EnemyId = 0;
+			m_Enemy = nullptr;
 		}
 
 		if (m_Oxygen > 0)
@@ -202,8 +211,12 @@ namespace Redge
 	{
 		if ((collisionType & CollisionTypeSolid) == CollisionTypeSolid)
 			m_DontMove = true;
+
 		if ((collisionType & CollisionTypeEnemy) == CollisionTypeEnemy)
-			m_StartCombat = true;
+		{
+			m_EnemyId = id;
+			m_Enemy = other;
+		}
 	}
 
 	auto Character::CheckCollision(ICollidable* other) const -> bool
