@@ -19,6 +19,9 @@ namespace Redge
 
 	private:
 
+		float OldScreenWidth;
+		float OldScreenHeight;
+
 		bool weaponswap = false;
 
 		uint16_t uiScale = 4;

@@ -1,5 +1,6 @@
 #include "CombatScene.h"
 #include "Game/Game.h"
+#include "PauseScene.h"
 
 Redge::CombatScene::CombatScene(Redge::Game* Host) : Scene(Host)
 {
@@ -8,20 +9,39 @@ Redge::CombatScene::CombatScene(Redge::Game* Host) : Scene(Host)
 
 auto Redge::CombatScene::Update() -> void
 {
-	DrawTexturePro(background,
-		{0, 0, static_cast<float>(background.width), static_cast<float>(background.height)},
-		{0,0, static_cast<float>(GetScreenWidth()), static_cast<float>(GetScreenHeight())},
-		{0,0},
-		0,
-		WHITE);
+	if(OldScreenWidth != GetScreenWidth() || OldScreenHeight != GetScreenHeight()) RelocateUI();
+	if (IsKeyPressed(KEY_ESCAPE))
+	{
+		auto pauseScene = std::make_shared<PauseScene>(Host);
+		pauseScene->SetBackScene(Host->SetScene(pauseScene));
+	}
 
-	if(IsKeyDown(KEY_H)) healslottriggered = true;
+	if(IsKeyDown(KEY_H)|| (CheckCollisionPointRec(GetMousePosition(),{PosHealslot.x,PosHealslot.y, static_cast<float>(healslot.GetTileWidth()*uiScale),static_cast<float>(healslot.GetTileHeight()*uiScale)}) && IsMouseButtonDown(MOUSE_BUTTON_LEFT))) healslottriggered = true;
 	else healslottriggered = false;
 
 	if(IsKeyDown(KEY_TAB) && weaponslotframe == 0) weaponswap = true;
 	else if(weaponslotframe != 0) weaponswap = true;
 	else weaponswap = false;
 
+	if(CheckCollisionPointRec(GetMousePosition(),{PosAttackButton1.x,PosAttackButton1.y, static_cast<float>(attackbutton.GetTileWidth()*uiScale),static_cast<float>(attackbutton.GetTileHeight()*uiScale)}) && IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+	{
+		ABS1 = 2;
+	}
+	else if(CheckCollisionPointRec(GetMousePosition(),{PosAttackButton1.x,PosAttackButton1.y, static_cast<float>(attackbutton.GetTileWidth()*uiScale),static_cast<float>(attackbutton.GetTileHeight()*uiScale)}))
+	{
+		ABS1 = 1;
+	}
+	else ABS1 = 0;
+
+	if(CheckCollisionPointRec(GetMousePosition(),{PosAttackButton2.x,PosAttackButton2.y, static_cast<float>(attackbutton.GetTileWidth()*uiScale),static_cast<float>(attackbutton.GetTileHeight()*uiScale)}) && IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+	{
+		ABS2 = 2;
+	}
+	else if(CheckCollisionPointRec(GetMousePosition(),{PosAttackButton2.x,PosAttackButton2.y, static_cast<float>(attackbutton.GetTileWidth()*uiScale),static_cast<float>(attackbutton.GetTileHeight()*uiScale)}))
+	{
+		ABS2 = 1;
+	}
+	else ABS2 = 0;
 
 	TSLweaponslot += GetFrameTime();
 	TSLpointdisplay += GetFrameTime();
@@ -37,13 +57,20 @@ auto Redge::CombatScene::Update() -> void
 		TSLpointdisplay -= FDpointdisplay;
 		pointdisplayframe = (pointdisplayframe + 1) % pointdisplay.GetTileCountX();
 	}
-
+	OldScreenHeight = GetScreenHeight();
+	OldScreenWidth = GetScreenWidth();
 }
 auto Redge::CombatScene::RenderWorld() const -> void
 {
 }
 auto Redge::CombatScene::RenderUI() const -> void
 {
+	DrawTexturePro(background,
+		{0, 0, static_cast<float>(background.width), static_cast<float>(background.height)},
+		{0,0, static_cast<float>(GetScreenWidth()), static_cast<float>(GetScreenHeight())},
+		{0,0},
+		0,
+		WHITE);
 	weaponslot.DrawTileScaled(weaponslotframe,
 		0,
 		PosWeaponslot,
