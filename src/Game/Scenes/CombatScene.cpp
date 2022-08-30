@@ -9,6 +9,14 @@ Redge::CombatScene::CombatScene(Redge::Game* Host) : Scene(Host)
 
 auto Redge::CombatScene::Update() -> void
 {
+	m_MaxHealth = m_Character->GetMaxHealth();
+	m_Health  = m_Character->GetHealth();
+	m_MaxOxygen = m_Character->GetMaxOxygen();
+	m_Oxygen = m_Character->GetOxygen();
+
+	HPBarPlayerPercent = m_Health/m_MaxHealth;
+	HPBarPlayerO2Percent = m_Oxygen/m_MaxOxygen;
+
 	if(OldScreenWidth != GetScreenWidth() || OldScreenHeight != GetScreenHeight()) RelocateUI();
 	if (IsKeyPressed(KEY_ESCAPE))
 	{
@@ -112,22 +120,23 @@ auto Redge::CombatScene::RenderUI() const -> void
 		HPBarEnemyState,
 		uiScale,
 		WHITE);
-
 	HPBarPlayer.DrawTileScaled(0,
 		2,
 		PosHPBarPlayer,
 		uiScale,
 		WHITE);
+	Vector2 HPBarPlayerState = {static_cast<float>(HPBarPlayer.GetTileWidth()* HPBarPlayerPercent), static_cast<float>(HPBarPlayer.GetTileHeight())};
 	HPBarPlayer.DrawTilePartScaled(0,
 		1,
 		PosHPBarPlayer,
-		HPBarPlayerO2State,
+		HPBarPlayerState,
 		uiScale,
 		WHITE);
+	Vector2 HPBarPlayerO2State = {static_cast<float>(HPBarPlayer.GetTileWidth()* HPBarPlayerO2Percent), static_cast<float>(HPBarPlayer.GetTileHeight())};
 	HPBarPlayer.DrawTilePartScaled(0,
 		0,
 		PosHPBarPlayer,
-		HPBarPlayerState,
+		HPBarPlayerO2State,
 		uiScale,
 		WHITE);
 }

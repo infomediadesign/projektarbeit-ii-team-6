@@ -271,6 +271,22 @@ namespace Redge
 			static_cast<float>(-m_Animations.GetTileHeight()) / 2,
 		};
 	}
+	auto Character::GetMaxHealth() const -> float
+	{
+		return m_MaxHealth;
+	}
+	auto Character::GetMaxOxygen() const -> float
+	{
+		return m_MaxOxygen;
+	}
+	auto Character::GetHealth() const -> float
+	{
+		return m_Health;
+	}
+	auto Character::GetOxygen() const -> float
+	{
+		return m_Oxygen;
+	}
 } // namespace Redge
 
 auto nlohmann::adl_serializer<std::shared_ptr<Redge::Character>>::from_json(const json& json)

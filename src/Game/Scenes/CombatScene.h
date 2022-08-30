@@ -23,6 +23,11 @@ namespace Redge
 
 	private:
 		std::shared_ptr<Character> m_Character{};
+		float m_MaxHealth;
+		float m_Health;
+		float m_MaxOxygen;
+		float m_Oxygen;
+
 		std::shared_ptr<Tiled::Object> m_Enemy{};
 
 		float OldScreenWidth;
@@ -63,8 +68,6 @@ namespace Redge
 		Raylib::Tileset HPBarPlayer = Raylib::Tileset("assets/UI/Combat/HpBarCombat.png", 1 ,3);
 		float HPBarPlayerO2Percent = 1.f;
 		float HPBarPlayerPercent = 1.f;
-		Vector2 HPBarPlayerO2State = {static_cast<float>(HPBarPlayer.GetTileWidth()* HPBarPlayerO2Percent), static_cast<float>(HPBarPlayer.GetTileHeight())};
-		Vector2 HPBarPlayerState = {static_cast<float>(HPBarPlayer.GetTileWidth()* HPBarPlayerPercent), static_cast<float>(HPBarPlayer.GetTileHeight())};
 
 		Texture2D background = LoadTexture("assets/UI/Combat/CombatBackground.png");
 		std::shared_ptr<Scene> m_BackScene{};
