@@ -8,6 +8,12 @@
 
 namespace Redge
 {
+	auto Character::Create(Vector2 position, float speed, float maxHealth, float maxOxygen)
+		-> std::shared_ptr<Character>
+	{
+		return std::shared_ptr<Character>(new Character(position, speed, maxHealth, maxOxygen));
+	}
+
 	Character::Character(Vector2 position, float speed, float maxHealth, float maxOxygen) :
 		Tiled::Object(position), m_PreviousPosition(position), m_CharacterSpeed(speed), m_Health(maxHealth),
 		m_MaxHealth(maxHealth), m_Oxygen(maxOxygen), m_MaxOxygen(maxOxygen)
@@ -18,10 +24,10 @@ namespace Redge
 	{
 		// NOTE: utility key binds for now
 		if (IsKeyPressed(KEY_TAB))
-			//m_PrimaryWeaponSelected = !m_PrimaryWeaponSelected;
+			// m_PrimaryWeaponSelected = !m_PrimaryWeaponSelected;
 
-		if (IsKeyPressed(KEY_C))
-			++m_CrystalCount;
+			if (IsKeyPressed(KEY_C))
+				++m_CrystalCount;
 
 		if (IsKeyPressed(KEY_R))
 		{
@@ -74,7 +80,7 @@ namespace Redge
 			m_DontMove = false;
 		}
 
-		if(m_StartCombat)
+		if (m_StartCombat)
 		{
 			auto combatScene = std::make_shared<CombatScene>(scene->Host);
 			combatScene->SetBackScene(scene->Host->SetScene(combatScene));
@@ -191,11 +197,12 @@ namespace Redge
 		m_WeaponSlots.DrawTileScaled(0, 0, weaponPos, weaponScale);
 	}
 
-	auto Character::OnCollision(uint16_t id, const std::shared_ptr<Tiled::Object>& other, CollisionType collisionType) -> void
+	auto Character::OnCollision(uint16_t id, const std::shared_ptr<Tiled::Object>& other, CollisionType collisionType)
+		-> void
 	{
 		if ((collisionType & CollisionTypeSolid) == CollisionTypeSolid)
 			m_DontMove = true;
-		if((collisionType & CollisionTypeEnemy) == CollisionTypeEnemy)
+		if ((collisionType & CollisionTypeEnemy) == CollisionTypeEnemy)
 			m_StartCombat = true;
 	}
 
@@ -253,7 +260,8 @@ namespace Redge
 	}
 } // namespace Redge
 
-auto nlohmann::adl_serializer<Redge::Character>::from_json(const json& json) -> Redge::Character
+auto nlohmann::adl_serializer<std::shared_ptr<Redge::Character>>::from_json(const json& json)
+	-> std::shared_ptr<Redge::Character>
 {
 	assert(json["point"].get<bool>());
 
@@ -279,5 +287,5 @@ auto nlohmann::adl_serializer<Redge::Character>::from_json(const json& json) -> 
 		json["y"].get<float>(),
 	};
 
-	return Redge::Character(pos, speed, health, oxygen);
+	return Redge::Character::Create(pos, speed, health, oxygen);
 }

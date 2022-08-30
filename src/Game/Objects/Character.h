@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Game/Objects/Items/Item.h"
-#include "Game/Objects/Weapons/Weapon.h"
 #include "Game/Objects/Types/Collidable.h"
+#include "Game/Objects/Weapons/Weapon.h"
 #include "Raylib/Tileset.h"
 #include "Tiled/Object.h"
 
@@ -16,10 +16,11 @@ namespace Redge
 		Left,
 	};
 
-	class Character final : public Tiled::Object, public ICollidable
+	class Character final : public Tiled::Object, public ICollidable, public std::enable_shared_from_this<Character>
 	{
 	public:
-		Character(Vector2 position, float speed, float maxHealth, float maxOxygen);
+		static auto Create(Vector2 position, float speed, float maxHealth, float maxOxygen)
+			-> std::shared_ptr<Character>;
 
 		auto Update(Scene* scene, Tiled::ObjectLayer& layer) -> void override;
 		auto LateUpdate(Scene* scene, Tiled::ObjectLayer& layer) -> void override;
@@ -27,7 +28,8 @@ namespace Redge
 		auto RenderBelow() const -> void override;
 		auto RenderUI() const -> void override;
 
-		auto OnCollision(uint16_t id, const std::shared_ptr<Tiled::Object>& other, CollisionType collisionType) -> void override;
+		auto OnCollision(uint16_t id, const std::shared_ptr<Tiled::Object>& other, CollisionType collisionType)
+			-> void override;
 		auto CheckCollision(ICollidable* other) const -> bool override;
 
 		[[nodiscard]] auto GetCollisionType() const -> CollisionType override;
@@ -37,6 +39,8 @@ namespace Redge
 		auto IsColliding(const Vector2& point) const -> bool override;
 
 	private:
+		Character(Vector2 position, float speed, float maxHealth, float maxOxygen);
+
 		auto SetNextAnimationFrame() -> void;
 
 		auto GetHitBox() const -> Rectangle;
@@ -75,7 +79,7 @@ namespace Redge
 } // namespace Redge
 
 template <>
-struct nlohmann::adl_serializer<Redge::Character>
+struct nlohmann::adl_serializer<std::shared_ptr<Redge::Character>>
 {
-	static auto from_json(const json& json) -> Redge::Character;
+	static auto from_json(const json& json) -> std::shared_ptr<Redge::Character>;
 };
