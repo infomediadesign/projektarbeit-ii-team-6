@@ -47,12 +47,15 @@ namespace Redge
 
 		Vector2 PosHPBarEnemy;
 		Raylib::Tileset HPBarEnemy = Raylib::Tileset("assets/UI/Combat/HpBarCombatEnemy.png", 1,2 );
-		float HPBarEnemyState = 1;
+		float HPBarEnemyPercent = 1.f;
+		Vector2 HPBarEnemyState = {static_cast<float>(HPBarEnemy.GetTileWidth()* HPBarEnemyPercent, static_cast<float>(HPBarEnemy.GetTileHeight()))};
 
 		Vector2 PosHPBarPlayer;
 		Raylib::Tileset HPBarPlayer = Raylib::Tileset("assets/UI/Combat/HpBarCombat.png", 1 ,3);
-		float HPBarPlayerO2State = 1;
-		float HPBarPlayerState = 1;
+		float HPBarPlayerO2Percent = 1.f;
+		float HPBarPlayerPercent = 1.f;
+		Vector2 HPBarPlayerO2State = {static_cast<float>(HPBarPlayer.GetTileWidth()* HPBarPlayerO2Percent, static_cast<float>(HPBarPlayer.GetTileHeight()))};
+		Vector2 HPBarPlayerState = {static_cast<float>(HPBarPlayer.GetTileWidth()* HPBarPlayerPercent, static_cast<float>(HPBarPlayer.GetTileHeight()))};
 
 		Texture2D background = LoadTexture("assets/UI/Combat/CombatBackground.png");
 		std::shared_ptr<Scene> m_BackScene{};

@@ -79,9 +79,10 @@ auto Redge::CombatScene::RenderUI() const -> void
 		PosHPBarEnemy,
 		uiScale,
 		WHITE);
-	HPBarEnemy.DrawTileScaled(0,
+	HPBarEnemy.DrawTilePartScaled(0,
 		0,
 		PosHPBarEnemy,
+		HPBarEnemyState,
 		uiScale,
 		WHITE);
 
@@ -90,14 +91,16 @@ auto Redge::CombatScene::RenderUI() const -> void
 		PosHPBarPlayer,
 		uiScale,
 		WHITE);
-	HPBarPlayer.DrawTileScaled(0,
+	HPBarPlayer.DrawTilePartScaled(0,
 		1,
 		PosHPBarPlayer,
+		HPBarPlayerO2State,
 		uiScale,
 		WHITE);
-	HPBarPlayer.DrawTileScaled(0,
+	HPBarPlayer.DrawTilePartScaled(0,
 		0,
 		PosHPBarPlayer,
+		HPBarPlayerState,
 		uiScale,
 		WHITE);
 }
