@@ -45,6 +45,15 @@ namespace Redge
 		Raylib::Tileset healslot = Raylib::Tileset("assets/UI/Combat/HealSlot.png", 2, 1);
 		bool healslottriggered = false;
 
+		Vector2 PosHPBarEnemy;
+		Raylib::Tileset HPBarEnemy = Raylib::Tileset("assets/UI/Combat/HpBarCombatEnemy.png", 1,2 );
+		float HPBarEnemyState = 1;
+
+		Vector2 PosHPBarPlayer;
+		Raylib::Tileset HPBarPlayer = Raylib::Tileset("assets/UI/Combat/HpBarCombat.png", 1 ,3);
+		float HPBarPlayerO2State = 1;
+		float HPBarPlayerState = 1;
+
 		Texture2D background = LoadTexture("assets/UI/Combat/CombatBackground.png");
 		std::shared_ptr<Scene> m_BackScene{};
 	};

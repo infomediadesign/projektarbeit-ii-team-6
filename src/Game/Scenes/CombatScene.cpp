@@ -4,8 +4,8 @@
 Redge::CombatScene::CombatScene(Redge::Game* Host) : Scene(Host)
 {
 	RelocateUI();
-
 }
+
 auto Redge::CombatScene::Update() -> void
 {
 	DrawTexturePro(background,
@@ -18,21 +18,19 @@ auto Redge::CombatScene::Update() -> void
 	if(IsKeyDown(KEY_H)) healslottriggered = true;
 	else healslottriggered = false;
 
-	if(IsKeyPressed(KEY_TAB) && weaponslotframe == 0) weaponswap = true;
+	if(IsKeyDown(KEY_TAB) && weaponslotframe == 0) weaponswap = true;
 	else if(weaponslotframe != 0) weaponswap = true;
 	else weaponswap = false;
+
 
 	TSLweaponslot += GetFrameTime();
 	TSLpointdisplay += GetFrameTime();
 
-	if(weaponswap)
-	{
 		if (TSLweaponslot >= FDweaponslot)
 		{
 			TSLweaponslot -= FDweaponslot;
-			weaponslotframe = (weaponslotframe + 1) % weaponslot.GetTileCountX();
+			if(weaponswap){weaponslotframe = (weaponslotframe + 1) % weaponslot.GetTileCountX();}
 		}
-	}
 
 	if (TSLpointdisplay >= FDpointdisplay)
 	{
@@ -75,7 +73,35 @@ auto Redge::CombatScene::RenderUI() const -> void
 		PosHealslot,
 		uiScale,
 		WHITE);
+
+	HPBarEnemy.DrawTileScaled(0,
+		1,
+		PosHPBarEnemy,
+		uiScale,
+		WHITE);
+	HPBarEnemy.DrawTileScaled(0,
+		0,
+		PosHPBarEnemy,
+		uiScale,
+		WHITE);
+
+	HPBarPlayer.DrawTileScaled(0,
+		2,
+		PosHPBarPlayer,
+		uiScale,
+		WHITE);
+	HPBarPlayer.DrawTileScaled(0,
+		1,
+		PosHPBarPlayer,
+		uiScale,
+		WHITE);
+	HPBarPlayer.DrawTileScaled(0,
+		0,
+		PosHPBarPlayer,
+		uiScale,
+		WHITE);
 }
+
 auto Redge::CombatScene::SetBackScene(std::shared_ptr<Scene> scene) -> std::shared_ptr<Scene>
 {
 	m_BackScene.swap(scene);
@@ -88,4 +114,6 @@ auto Redge::CombatScene::RelocateUI() -> void
 	PosAttackButton1 = {PosPointdisplay.x + pointdisplay.GetTileWidth()*uiScale, PosPointdisplay.y - attackbutton.GetTileHeight()/2*uiScale};
 	PosAttackButton2 = {PosPointdisplay.x + pointdisplay.GetTileWidth()*uiScale, PosPointdisplay.y + (pointdisplay.GetTileHeight() - attackbutton.GetTileHeight()/2)*uiScale};
 	PosHealslot = {PosPointdisplay.x - pointdisplay.GetTileWidth()*uiScale, static_cast<float>(PosPointdisplay.y + (pointdisplay.GetTileHeight()/2-healslot.GetTileHeight()/1.5)*uiScale)};
+	PosHPBarPlayer = {static_cast<float>(pointdisplay.GetTileHeight()*uiScale/4),static_cast<float>(pointdisplay.GetTileHeight()*uiScale/4)};
+	PosHPBarEnemy = {static_cast<float>(GetScreenWidth()-HPBarEnemy.GetTileWidth()*uiScale - pointdisplay.GetTileWidth()*uiScale/4), static_cast<float>(PosHPBarPlayer.y + (HPBarPlayer.GetTileHeight()/2 - HPBarEnemy.GetTileHeight()/2)*uiScale)};
 }
