@@ -1,6 +1,7 @@
 #pragma once
 #include "Game/Scene.h"
 #include "Raylib/Tileset.h"
+#include "Game/Objects/Character.h"
 
 namespace Redge
 {
@@ -18,7 +19,6 @@ namespace Redge
 		auto SetBackScene(std::shared_ptr<Scene> scene) -> std::shared_ptr<Scene>;
 
 	private:
-
 		float OldScreenWidth;
 		float OldScreenHeight;
 
