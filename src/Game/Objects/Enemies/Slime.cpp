@@ -50,7 +50,7 @@ namespace Redge
 				}));
 	}
 	static float Size = 6;
-	auto Slime::OnCollision(Tiled::Object& other, CollisionType collisionType) -> void
+	auto Slime::OnCollision(uint16_t id, const std::shared_ptr<Tiled::Object>& other, CollisionType collisionType) -> void
 	{
 	}
 

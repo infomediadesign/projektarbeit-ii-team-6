@@ -67,7 +67,7 @@ namespace Redge
 				}));
 	}
 	static float Size = 6;
-	auto Cultist::OnCollision(Tiled::Object& other, CollisionType collisionType) -> void
+	auto Cultist::OnCollision(uint16_t id, const std::shared_ptr<Tiled::Object>& other, CollisionType collisionType) -> void
 	{
 	}
 

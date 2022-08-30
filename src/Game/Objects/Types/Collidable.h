@@ -22,7 +22,7 @@ namespace Redge
 	public:
 		virtual ~ICollidable() = default;
 
-		virtual auto OnCollision(Tiled::Object& other, CollisionType collisionType) -> void = 0;
+		virtual auto OnCollision(uint16_t id, const std::shared_ptr<Tiled::Object>& other, CollisionType collisionType) -> void = 0;
 		virtual auto CheckCollision(ICollidable* other) const -> bool = 0;
 
 		[[nodiscard]] virtual auto GetCollisionType() const -> CollisionType = 0;

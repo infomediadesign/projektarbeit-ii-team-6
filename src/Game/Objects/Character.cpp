@@ -191,7 +191,7 @@ namespace Redge
 		m_WeaponSlots.DrawTileScaled(0, 0, weaponPos, weaponScale);
 	}
 
-	auto Character::OnCollision(Tiled::Object& other, CollisionType collisionType) -> void
+	auto Character::OnCollision(uint16_t id, const std::shared_ptr<Tiled::Object>& other, CollisionType collisionType) -> void
 	{
 		if ((collisionType & CollisionTypeSolid) == CollisionTypeSolid)
 			m_DontMove = true;

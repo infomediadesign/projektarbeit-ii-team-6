@@ -27,7 +27,7 @@ namespace Redge
 		auto RenderBelow() const -> void override;
 		auto RenderUI() const -> void override;
 
-		auto OnCollision(Tiled::Object& other, CollisionType collisionType) -> void override;
+		auto OnCollision(uint16_t id, const std::shared_ptr<Tiled::Object>& other, CollisionType collisionType) -> void override;
 		auto CheckCollision(ICollidable* other) const -> bool override;
 
 		[[nodiscard]] auto GetCollisionType() const -> CollisionType override;

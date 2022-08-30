@@ -50,7 +50,7 @@ namespace Redge
 				}));
 	}
 	static float Size = 2;
-	auto Bat::OnCollision(Tiled::Object& other, CollisionType collisionType) -> void
+	auto Bat::OnCollision(uint16_t id, const std::shared_ptr<Tiled::Object>& other, CollisionType collisionType) -> void
 	{
 	}
 

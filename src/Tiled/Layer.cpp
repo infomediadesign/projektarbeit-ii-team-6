@@ -93,39 +93,36 @@ namespace Tiled
 		if (!Visible)
 			return;
 
-		std::vector<std::shared_ptr<Object>> objects;
+		auto objects = Objects;
 
-		for (auto& [_, object] : Objects)
-			objects.emplace_back(object);
-
-		for (auto& object : objects)
+		for (auto& [id, object] : objects)
 			object->Update(scene, *this);
 
-		for (auto i = 0; i < objects.size(); ++i)
+		for (auto it1 = objects.begin(); it1 != objects.end(); it1++)
 		{
-			auto& object1 = objects[i];
+			auto& [id1, obj1] = *it1;
 
-			auto* collidable1 = dynamic_cast<Redge::ICollidable*>(object1.get());
+			auto* collidable1 = dynamic_cast<Redge::ICollidable*>(obj1.get());
 			if (collidable1 == nullptr)
 				continue;
 
-			for (auto j = i + 1; j < objects.size(); ++j)
+			for (auto it2 = std::next(it1); it2 != objects.end(); it2++)
 			{
-				auto& object2 = objects[j];
+				auto& [id2, obj2] = *it2;
 
-				auto* collidable2 = dynamic_cast<Redge::ICollidable*>(object2.get());
+				auto* collidable2 = dynamic_cast<Redge::ICollidable*>(obj2.get());
 				if (collidable2 == nullptr)
 					continue;
 
 				if (!collidable1->CheckCollision(collidable2))
 					continue;
 
-				collidable1->OnCollision(*object2, collidable2->GetCollisionType());
-				collidable2->OnCollision(*object1, collidable1->GetCollisionType());
+				collidable1->OnCollision(id2, obj2, collidable2->GetCollisionType());
+				collidable2->OnCollision(id1, obj1, collidable1->GetCollisionType());
 			}
 		}
 
-		for (auto& object : objects)
+		for (auto& [id, object] : objects)
 			object->LateUpdate(scene, *this);
 	}
 

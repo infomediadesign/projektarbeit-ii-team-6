@@ -7,7 +7,7 @@ namespace Redge
 	{
 	}
 
-	auto Wall::OnCollision(Tiled::Object& other, CollisionType collisionType) -> void
+	auto Wall::OnCollision(uint16_t id, const std::shared_ptr<Tiled::Object>& other, CollisionType collisionType) -> void
 	{
 	}
 
