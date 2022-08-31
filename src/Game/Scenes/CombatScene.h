@@ -24,8 +24,10 @@ namespace Redge
 	private:
 
 		bool nextphase = false;
-		bool prepphase = 1;
+		bool prepphase = true;
 		uint16_t actionpoints = 3;
+		uint16_t damagemove1 = 20;
+		uint16_t damagemove2 = 0;
 
 
 		std::shared_ptr<Character> m_Character{};
@@ -33,6 +35,9 @@ namespace Redge
 		float m_Health;
 		float m_MaxOxygen;
 		float m_Oxygen;
+
+		float m_EnemyHealth;
+		float m_EnemyMaxHealth;
 
 		std::shared_ptr<Enemy> m_Enemy{};
 
@@ -68,7 +73,6 @@ namespace Redge
 		Vector2 PosHPBarEnemy;
 		Raylib::Tileset HPBarEnemy = Raylib::Tileset("assets/UI/Combat/HpBarCombatEnemy.png", 1,2 );
 		float HPBarEnemyPercent = 1.f;
-		Vector2 HPBarEnemyState = {static_cast<float>(HPBarEnemy.GetTileWidth()* HPBarEnemyPercent), static_cast<float>(HPBarEnemy.GetTileHeight())};
 
 		Vector2 PosHPBarPlayer;
 		Raylib::Tileset HPBarPlayer = Raylib::Tileset("assets/UI/Combat/HpBarCombat.png", 1 ,3);

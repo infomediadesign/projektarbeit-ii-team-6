@@ -1,5 +1,6 @@
 #include "CombatScene.h"
 #include "Game/Game.h"
+#include "MainMenu.h"
 #include "PauseScene.h"
 
 Redge::CombatScene::CombatScene(Redge::Game* Host) : Scene(Host)
@@ -10,71 +11,119 @@ Redge::CombatScene::CombatScene(Redge::Game* Host) : Scene(Host)
 auto Redge::CombatScene::Update() -> void
 {
 	m_MaxHealth = m_Character->GetMaxHealth();
-	m_Health  = m_Character->GetHealth();
+	m_Health = m_Character->GetHealth();
 	m_MaxOxygen = m_Character->GetMaxOxygen();
 	m_Oxygen = m_Character->GetOxygen();
 
-	HPBarPlayerPercent = m_Health/m_MaxHealth;
-	HPBarPlayerO2Percent = m_Oxygen/m_MaxOxygen;
+	HPBarPlayerPercent = m_Health / m_MaxHealth;
+	HPBarPlayerO2Percent = m_Oxygen / m_MaxOxygen;
 
-	if(OldScreenWidth != GetScreenWidth() || OldScreenHeight != GetScreenHeight()) RelocateUI();
+	m_EnemyMaxHealth = m_Enemy->GetMaximumHp();
+	m_EnemyHealth = m_Enemy->GetCurrentHp();
+
+	HPBarEnemyPercent = m_EnemyHealth/ m_EnemyMaxHealth;
+
+	if (OldScreenWidth != GetScreenWidth() || OldScreenHeight != GetScreenHeight())
+		RelocateUI();
 	if (IsKeyPressed(KEY_ESCAPE))
 	{
 		auto pauseScene = std::make_shared<PauseScene>(Host);
 		pauseScene->SetBackScene(Host->SetScene(pauseScene));
 	}
 
-	if(IsKeyDown(KEY_H)|| (CheckCollisionPointRec(GetMousePosition(),{PosHealslot.x,PosHealslot.y, static_cast<float>(healslot.GetTileWidth()*uiScale),static_cast<float>(healslot.GetTileHeight()*uiScale)}) && IsMouseButtonDown(MOUSE_BUTTON_LEFT))) healslottriggered = true;
-	else healslottriggered = false;
+	if (IsKeyDown(KEY_H) ||
+		(CheckCollisionPointRec(GetMousePosition(),
+			 {PosHealslot.x, PosHealslot.y, static_cast<float>(healslot.GetTileWidth() * uiScale),
+				 static_cast<float>(healslot.GetTileHeight() * uiScale)}) &&
+			IsMouseButtonDown(MOUSE_BUTTON_LEFT)))
+		healslottriggered = true;
+	else
+		healslottriggered = false;
 
-	if(IsKeyDown(KEY_TAB) && weaponslotframe == 0) weaponswap = true;
-	else if(weaponslotframe != 0) weaponswap = true;
-	else weaponswap = false;
+	if (IsKeyDown(KEY_TAB) && weaponslotframe == 0)
+		weaponswap = true;
+	else if (weaponslotframe != 0)
+		weaponswap = true;
+	else
+		weaponswap = false;
 
-	if(CheckCollisionPointRec(GetMousePosition(),{PosAttackButton1.x,PosAttackButton1.y, static_cast<float>(attackbutton.GetTileWidth()*uiScale),static_cast<float>(attackbutton.GetTileHeight()*uiScale)}) && IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+	if (CheckCollisionPointRec(GetMousePosition(),
+			{PosAttackButton1.x, PosAttackButton1.y, static_cast<float>(attackbutton.GetTileWidth() * uiScale),
+				static_cast<float>(attackbutton.GetTileHeight() * uiScale)}) &&
+		IsMouseButtonDown(MOUSE_BUTTON_LEFT))
 	{
 		ABS1 = 2;
 	}
-	else if(CheckCollisionPointRec(GetMousePosition(),{PosAttackButton1.x,PosAttackButton1.y, static_cast<float>(attackbutton.GetTileWidth()*uiScale),static_cast<float>(attackbutton.GetTileHeight()*uiScale)}))
+	else if (CheckCollisionPointRec(GetMousePosition(),
+				 {PosAttackButton1.x, PosAttackButton1.y, static_cast<float>(attackbutton.GetTileWidth() * uiScale),
+					 static_cast<float>(attackbutton.GetTileHeight() * uiScale)}))
 	{
 		ABS1 = 1;
 	}
-	else ABS1 = 0;
+	else
+		ABS1 = 0;
 
-	if(CheckCollisionPointRec(GetMousePosition(),{PosAttackButton2.x,PosAttackButton2.y, static_cast<float>(attackbutton.GetTileWidth()*uiScale),static_cast<float>(attackbutton.GetTileHeight()*uiScale)}) && IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+	if (CheckCollisionPointRec(GetMousePosition(),
+			{PosAttackButton2.x, PosAttackButton2.y, static_cast<float>(attackbutton.GetTileWidth() * uiScale),
+				static_cast<float>(attackbutton.GetTileHeight() * uiScale)}) &&
+		IsMouseButtonDown(MOUSE_BUTTON_LEFT))
 	{
 		ABS2 = 2;
 	}
-	else if(CheckCollisionPointRec(GetMousePosition(),{PosAttackButton2.x,PosAttackButton2.y, static_cast<float>(attackbutton.GetTileWidth()*uiScale),static_cast<float>(attackbutton.GetTileHeight()*uiScale)}))
+	else if (CheckCollisionPointRec(GetMousePosition(),
+				 {PosAttackButton2.x, PosAttackButton2.y, static_cast<float>(attackbutton.GetTileWidth() * uiScale),
+					 static_cast<float>(attackbutton.GetTileHeight() * uiScale)}))
 	{
 		ABS2 = 1;
 	}
-	else ABS2 = 0;
+	else
+		ABS2 = 0;
 
-	if(nextphase)
+	if (nextphase)
 	{
 		nextphase = false;
 		prepphase = !prepphase;
 	}
 
-	if(prepphase)
+	if (prepphase)
 	{
-		if(IsKeyPressed(KEY_ENTER) && actionpoints == 0)
+		if (IsKeyPressed(KEY_ENTER) && actionpoints == 3)
 			nextphase = true;
 	}
 	else
 	{
-	actionpoints = 3;
+		if (m_Character->GetInitiative() > m_Enemy->GetInitiative())
+		{
+			m_Enemy->TakeDamage(damagemove1+damagemove2);
+			if(m_Enemy->GetCurrentHp()<= 0) Host->SetScene(m_BackScene);
+			m_Character->SetHealth(m_Character->GetHealth()-m_Enemy->GetDamage());
+			if(m_Character->GetHealth() <=0) Host->SetScene(std::make_shared<MainMenu>(Host));
+		}
+		else
+		{
+			m_Character->SetHealth(m_Character->GetHealth()-m_Enemy->GetDamage());
+			if(m_Character->GetHealth() <=0) Host->SetScene(std::make_shared<MainMenu>(Host));
+			m_Enemy->TakeDamage(damagemove1+damagemove2);
+			if(m_Enemy->GetCurrentHp()<= 0) Host->SetScene(m_BackScene);
+
+		}
+		if(m_Character->GetOxygen()>0)m_Character->SetOxygen(m_Character->GetOxygen()-1); //Oxygen hardcoded
+		else m_Character->SetHealth(m_Character->GetHealth()-1);
+		actionpoints = 3;
+		nextphase = true;
 	}
 
 	TSLweaponslot += GetFrameTime();
 	TSLpointdisplay += GetFrameTime();
 
-		if (TSLweaponslot >= FDweaponslot)
+	if (TSLweaponslot >= FDweaponslot)
+	{
+		TSLweaponslot -= FDweaponslot;
+		if (weaponswap)
 		{
-			TSLweaponslot -= FDweaponslot;
-			if(weaponswap){weaponslotframe = (weaponslotframe + 1) % weaponslot.GetTileCountX();}
+			weaponslotframe = (weaponslotframe + 1) % weaponslot.GetTileCountX();
 		}
+	}
 
 	if (TSLpointdisplay >= FDpointdisplay)
 	{
@@ -140,6 +189,7 @@ auto Redge::CombatScene::RenderUI() const -> void
 		PosHPBarEnemy,
 		uiScale,
 		WHITE);
+	Vector2 HPBarEnemyState = {static_cast<float>(HPBarEnemy.GetTileWidth()* HPBarEnemyPercent), static_cast<float>(HPBarEnemy.GetTileHeight())};
 	HPBarEnemy.DrawTilePartScaled(0,
 		0,
 		PosHPBarEnemy,
