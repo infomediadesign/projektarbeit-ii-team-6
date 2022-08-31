@@ -12,6 +12,7 @@ namespace Redge
 		InitWindow(width, height, "Crimson Mine");
 		InitAudioDevice();
 
+		SetWindowMinSize(1280, 720);
 		SetWindowState(FLAG_WINDOW_RESIZABLE);
 		SetWindowState(FLAG_VSYNC_HINT);
 		SetExitKey(KEY_NULL); // Disable esc to exit
