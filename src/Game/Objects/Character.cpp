@@ -2,6 +2,7 @@
 
 #include "Game/Game.h"
 #include "Game/Scenes/CombatScene.h"
+#include "Game/Scenes/MainMenu.h"
 #include "raymath.h"
 #include "Tiled/Layer.h"
 #include "Tiled/Property.h"
@@ -101,15 +102,8 @@ namespace Redge
 			m_Health -= GetFrameTime();
 		else
 		{
-			// Delete character
-			for (auto it = layer.Objects.begin(); it != layer.Objects.end(); ++it)
-			{
-				if (it->second.get() == this)
-				{
-					layer.Objects.erase(it);
-					break;
-				}
-			}
+			// TODO: replace with death scene
+			scene->Host->SetScene(std::make_shared<MainMenu>(scene->Host));
 		}
 
 		scene->Camera.target = Position;
