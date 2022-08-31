@@ -44,6 +44,7 @@ namespace Redge
 		auto GetMaxOxygen() const -> float;
 		auto GetHealth() const -> float;
 		auto GetOxygen() const -> float;
+		auto GetInitiative() const -> float;
 
 		//Combat Setter-Functions
 		auto SetHealth(float health) -> void;
@@ -80,6 +81,7 @@ namespace Redge
 		float m_Health;
 		float m_MaxOxygen;
 		float m_Oxygen;
+		float m_Initiative;
 
 		Raylib::Tileset m_CrystalIcon = Raylib::Tileset("assets/UI/CrystalIcon.png", 1, 1);
 		uint32_t m_CrystalCount = 0;

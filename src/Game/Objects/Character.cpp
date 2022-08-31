@@ -279,6 +279,10 @@ namespace Redge
 	{
 		m_Oxygen = oxygen;
 	}
+	auto Character::GetInitiative() const -> float
+	{
+		return m_Initiative;
+	}
 } // namespace Redge
 
 auto nlohmann::adl_serializer<std::shared_ptr<Redge::Character>>::from_json(const json& json)
