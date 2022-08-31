@@ -12,7 +12,7 @@ namespace Redge
 		auto Update() -> void override;
 
 		auto SetCharacter(std::shared_ptr<Character> character) -> void;
-		auto SetEnemy(std::shared_ptr<Tiled::Object> enemy) -> void;
+		auto SetEnemy(std::shared_ptr<Enemy> enemy) -> void;
 
 		auto RenderWorld() const -> void override;
 		auto RenderUI() const -> void override;
@@ -33,7 +33,7 @@ namespace Redge
 		float m_MaxOxygen;
 		float m_Oxygen;
 
-		std::shared_ptr<Tiled::Object> m_Enemy{};
+		std::shared_ptr<Enemy> m_Enemy{};
 
 		float OldScreenWidth;
 		float OldScreenHeight;

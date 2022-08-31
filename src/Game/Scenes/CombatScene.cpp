@@ -179,7 +179,7 @@ auto Redge::CombatScene::SetCharacter(std::shared_ptr<Character> character) -> v
 	m_Character = std::move(character);
 }
 
-auto Redge::CombatScene::SetEnemy(std::shared_ptr<Tiled::Object> enemy) -> void
+auto Redge::CombatScene::SetEnemy(std::shared_ptr<Enemy> enemy) -> void
 {
 	m_Enemy = std::move(enemy);
 }

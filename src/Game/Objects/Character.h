@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Game/Objects/Enemies/Enemy.h"
 #include "Game/Objects/Items/Item.h"
 #include "Game/Objects/Types/Collidable.h"
 #include "Game/Objects/Weapons/Weapon.h"
@@ -69,7 +70,7 @@ namespace Redge
 		bool m_DontMove = false;
 
 		uint16_t m_EnemyId{};
-		std::shared_ptr<Tiled::Object> m_Enemy{};
+		std::shared_ptr<Enemy> m_Enemy{};
 
 		float m_CharacterSpeed;
 		float m_SpeedMultiplier = 1;

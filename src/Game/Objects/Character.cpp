@@ -198,7 +198,8 @@ namespace Redge
 		if ((collisionType & CollisionTypeEnemy) == CollisionTypeEnemy)
 		{
 			m_EnemyId = id;
-			m_Enemy = other;
+			m_Enemy = std::dynamic_pointer_cast<Enemy>(other);
+			assert(m_Enemy != nullptr);
 		}
 	}
 
