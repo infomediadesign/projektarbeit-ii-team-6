@@ -4,7 +4,7 @@
 
 namespace Redge
 {
-	Bat::Bat(Vector2 position) : Object(position)
+	Bat::Bat(Vector2 position) : Enemy(position, 50, 15, 10)
 	{
 	}
 
@@ -59,14 +59,9 @@ namespace Redge
 		return other->IsColliding(Position, Size);
 	}
 
-	auto Bat::GetCollisionType() const -> CollisionType
-	{
-		return CollisionTypeEnemy;
-	}
-
 	auto Bat::IsColliding(const Rectangle& rect) const -> bool
 	{
-		return CheckCollisionCircleRec(Position, Size,rect);
+		return CheckCollisionCircleRec(Position, Size, rect);
 	}
 
 	auto Bat::IsColliding(const Vector2& center, float radius) const -> bool
@@ -77,6 +72,11 @@ namespace Redge
 	auto Bat::IsColliding(const Vector2& point) const -> bool
 	{
 		return CheckCollisionPointCircle(point, Position, Size);
+	}
+
+	auto Bat::DrawSprite(Rectangle destination) const -> void
+	{
+		// TODO: Draw sprite
 	}
 } // namespace Redge
 

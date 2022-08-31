@@ -4,7 +4,7 @@
 
 namespace Redge
 {
-	Slime::Slime(Vector2 position) : Object(position)
+	Slime::Slime(Vector2 position) : Enemy(position, 75, 5, 10)
 	{
 	}
 
@@ -59,11 +59,6 @@ namespace Redge
 		return other->IsColliding(Position, Size);
 	}
 
-	auto Slime::GetCollisionType() const -> CollisionType
-	{
-		return CollisionTypeEnemy;
-	}
-
 	auto Slime::IsColliding(const Rectangle& rect) const -> bool
 	{
 		return CheckCollisionCircleRec(Position, Size,rect);
@@ -77,6 +72,11 @@ namespace Redge
 	auto Slime::IsColliding(const Vector2& point) const -> bool
 	{
 		return CheckCollisionPointCircle(point, Position, Size);
+	}
+
+	auto Slime::DrawSprite(Rectangle destination) const -> void
+	{
+		// TODO: Draw sprite
 	}
 } // namespace Redge
 

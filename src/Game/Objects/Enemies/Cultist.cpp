@@ -4,7 +4,8 @@
 
 namespace Redge
 {
-	Cultist::Cultist(Vector2 position) : Object(position)
+	// NOTE: Culitst has 2 types of attacks and can't do damage via "Enemy" class
+	Cultist::Cultist(Vector2 position) : Enemy(position, 100, 15, 0)
 	{
 	}
 
@@ -76,11 +77,6 @@ namespace Redge
 		return other->IsColliding(Position, Size);
 	}
 
-	auto Cultist::GetCollisionType() const -> CollisionType
-	{
-		return CollisionTypeEnemy;
-	}
-
 	auto Cultist::IsColliding(const Rectangle& rect) const -> bool
 	{
 		return CheckCollisionCircleRec(Position, Size,rect);
@@ -94,6 +90,11 @@ namespace Redge
 	auto Cultist::IsColliding(const Vector2& point) const -> bool
 	{
 		return CheckCollisionPointCircle(point, Position, Size);
+	}
+
+	auto Cultist::DrawSprite(Rectangle destination) const -> void
+	{
+		// TODO: Draw sprite
 	}
 } // namespace Redge
 
