@@ -86,7 +86,6 @@ namespace Redge
 		Raylib::Tileset m_InventoryIcon = Raylib::Tileset("assets/UI/InventoryItem.png", 1, 1);
 		std::array<std::unique_ptr<Item>, 5> m_Items{};
 
-		Raylib::Tileset m_WeaponSlots = Raylib::Tileset("assets/UI/WeaponSlots.png", 1, 1);
 		std::array<std::unique_ptr<Weapon>, 3> m_Weapons{};
 	};
 } // namespace Redge

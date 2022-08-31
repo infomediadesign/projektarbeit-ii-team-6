@@ -187,15 +187,6 @@ namespace Redge
 			m_InventoryIcon.DrawTileScaled(0, 0, inventoryPos, inventoryScale);
 			inventoryPos.x -= elementPadding;
 		}
-
-		// Weapon slots
-
-		auto weaponPos = Vector2{20, static_cast<float>(GetScreenHeight() - 20)};
-		auto weaponScale = 3;
-
-		weaponPos.y -= m_WeaponSlots.GetTileHeight() * weaponScale;
-
-		m_WeaponSlots.DrawTileScaled(0, 0, weaponPos, weaponScale);
 	}
 
 	auto Character::OnCollision(uint16_t id, const std::shared_ptr<Tiled::Object>& other, CollisionType collisionType)
