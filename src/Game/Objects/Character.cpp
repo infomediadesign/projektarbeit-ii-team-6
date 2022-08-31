@@ -72,6 +72,14 @@ namespace Redge
 			m_DontMove = false;
 		}
 
+		if (m_SlowMove)
+		{
+			auto delta = Vector2Subtract(Position, m_PreviousPosition);
+			delta = Vector2Scale(delta, 0.5);
+			Position = Vector2Add(m_PreviousPosition, delta);
+			m_SlowMove = false;
+		}
+
 		if (m_Oxygen > 0)
 			m_Oxygen -= GetFrameTime();
 		else if (m_Health > 0)
@@ -187,6 +195,9 @@ namespace Redge
 	{
 		if ((collisionType & CollisionTypeSolid) == CollisionTypeSolid)
 			m_DontMove = true;
+
+		if ((collisionType & CollisionTypeSlow) == CollisionTypeSlow)
+			m_SlowMove = true;
 	}
 
 	auto Character::CheckCollision(ICollidable* other) const -> bool

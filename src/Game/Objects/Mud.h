@@ -1,0 +1,34 @@
+#pragma once
+
+#include "Game/Objects/Types/Collidable.h"
+#include "raylib.h"
+#include "Tiled/Object.h"
+
+namespace Redge
+{
+	class Mud final : public Tiled::Object, public ICollidable
+	{
+	public:
+		explicit Mud(Vector2 position, Vector2 dimensions);
+
+		auto OnCollision(Tiled::Object& other, CollisionType collisionType) -> void override;
+		auto CheckCollision(ICollidable* other) const -> bool override;
+
+		[[nodiscard]] auto GetCollisionType() const -> CollisionType override;
+
+		[[nodiscard]] auto IsColliding(const Rectangle& rect) const -> bool override;
+		[[nodiscard]] auto IsColliding(const Vector2& center, float radius) const -> bool override;
+		[[nodiscard]] auto IsColliding(const Vector2& point) const -> bool override;
+
+	private:
+		auto GetHitbox() const -> Rectangle;
+
+		Vector2 m_Dimensions;
+	};
+} // namespace Redge
+
+template <>
+struct nlohmann::adl_serializer<Redge::Mud>
+{
+	static auto from_json(const json& json) -> Redge::Mud;
+};

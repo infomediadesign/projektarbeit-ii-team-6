@@ -14,6 +14,7 @@ namespace Redge
 	{
 		CollisionTypeNone = 0,
 		CollisionTypeSolid = bit(0),
+		CollisionTypeSlow = bit(1),
 	};
 
 	class ICollidable
