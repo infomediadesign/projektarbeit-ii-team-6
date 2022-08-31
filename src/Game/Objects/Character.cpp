@@ -195,14 +195,6 @@ namespace Redge
 
 		weaponPos.y -= m_WeaponSlots.GetTileHeight() * weaponScale;
 
-		/*if (!m_PrimaryWeaponSelected)
-		{
-			// HACK: Invert image
-			weaponPos.x += m_WeaponSlots.GetTileWidth() * weaponScale;
-			weaponPos.y += m_WeaponSlots.GetTileHeight() * weaponScale;
-			weaponScale *= -1;
-		}*/
-
 		m_WeaponSlots.DrawTileScaled(0, 0, weaponPos, weaponScale);
 	}
 
@@ -286,6 +278,14 @@ namespace Redge
 	auto Character::GetOxygen() const -> float
 	{
 		return m_Oxygen;
+	}
+	auto Character::SetHealth(float health) -> void
+	{
+		m_Health = health;
+	}
+	auto Character::SetOxygen(float oxygen) -> void
+	{
+		m_Oxygen = oxygen;
 	}
 } // namespace Redge
 

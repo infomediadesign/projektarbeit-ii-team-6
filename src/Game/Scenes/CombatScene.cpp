@@ -24,6 +24,9 @@ auto Redge::CombatScene::Update() -> void
 		pauseScene->SetBackScene(Host->SetScene(pauseScene));
 	}
 
+	if(IsKeyPressed(KEY_ENTER))
+		nextphase = true;
+
 	if(IsKeyDown(KEY_H)|| (CheckCollisionPointRec(GetMousePosition(),{PosHealslot.x,PosHealslot.y, static_cast<float>(healslot.GetTileWidth()*uiScale),static_cast<float>(healslot.GetTileHeight()*uiScale)}) && IsMouseButtonDown(MOUSE_BUTTON_LEFT))) healslottriggered = true;
 	else healslottriggered = false;
 
@@ -50,6 +53,20 @@ auto Redge::CombatScene::Update() -> void
 		ABS2 = 1;
 	}
 	else ABS2 = 0;
+
+	if(nextphase)
+	{
+		nextphase = false;
+		prepphase = !prepphase;
+	}
+	if(prepphase)
+	{
+
+	}
+	else
+	{
+
+	}
 
 	TSLweaponslot += GetFrameTime();
 	TSLpointdisplay += GetFrameTime();

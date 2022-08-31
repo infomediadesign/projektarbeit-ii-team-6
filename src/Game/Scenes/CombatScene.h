@@ -22,6 +22,11 @@ namespace Redge
 		auto SetBackScene(std::shared_ptr<Scene> scene) -> std::shared_ptr<Scene>;
 
 	private:
+
+		bool nextphase = false;
+		bool prepphase = 1;
+
+
 		std::shared_ptr<Character> m_Character{};
 		float m_MaxHealth;
 		float m_Health;

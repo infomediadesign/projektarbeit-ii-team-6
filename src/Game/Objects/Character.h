@@ -38,10 +38,16 @@ namespace Redge
 		auto IsColliding(const Vector2& center, float radius) const -> bool override;
 		auto IsColliding(const Vector2& point) const -> bool override;
 
+		//Combat Getter-Functions
 		auto GetMaxHealth() const -> float;
 		auto GetMaxOxygen() const -> float;
 		auto GetHealth() const -> float;
 		auto GetOxygen() const -> float;
+
+		//Combat Setter-Functions
+		auto SetHealth(float health) -> void;
+		auto SetOxygen(float oxygen) -> void;
+
 
 	private:
 		Character(Vector2 position, float speed, float maxHealth, float maxOxygen);
