@@ -94,6 +94,7 @@ namespace Redge
 
 	auto Cultist::DrawSprite(Rectangle destination) const -> void
 	{
+		m_Animation.DrawTileTo(0, 0, destination);
 		// TODO: Draw sprite
 	}
 } // namespace Redge

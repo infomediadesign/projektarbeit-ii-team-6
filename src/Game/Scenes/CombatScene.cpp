@@ -95,6 +95,16 @@ auto Redge::CombatScene::RenderUI() const -> void
 		{0,0},
 		0,
 		WHITE);
+
+	Rectangle enemyArea{};
+	enemyArea.width = 200;
+	enemyArea.height = 400;
+	enemyArea.x = static_cast<float>(GetScreenWidth() * 0.84) - enemyArea.width / 2;
+	enemyArea.y = static_cast<float>(GetScreenHeight() * 0.53) - enemyArea.height;
+	m_Enemy->DrawSprite(enemyArea);
+
+	// UI
+
 	weaponslot.DrawTileScaled(weaponslotframe,
 		0,
 		PosWeaponslot,

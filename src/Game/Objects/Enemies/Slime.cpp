@@ -50,7 +50,8 @@ namespace Redge
 				}));
 	}
 	static float Size = 6;
-	auto Slime::OnCollision(uint16_t id, const std::shared_ptr<Tiled::Object>& other, CollisionType collisionType) -> void
+	auto Slime::OnCollision(uint16_t id, const std::shared_ptr<Tiled::Object>& other, CollisionType collisionType)
+		-> void
 	{
 	}
 
@@ -61,7 +62,7 @@ namespace Redge
 
 	auto Slime::IsColliding(const Rectangle& rect) const -> bool
 	{
-		return CheckCollisionCircleRec(Position, Size,rect);
+		return CheckCollisionCircleRec(Position, Size, rect);
 	}
 
 	auto Slime::IsColliding(const Vector2& center, float radius) const -> bool
@@ -76,6 +77,7 @@ namespace Redge
 
 	auto Slime::DrawSprite(Rectangle destination) const -> void
 	{
+		m_Animation.DrawTileTo(0, 0, destination);
 		// TODO: Draw sprite
 	}
 } // namespace Redge
