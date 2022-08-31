@@ -109,6 +109,7 @@ auto Redge::CombatScene::Update() -> void
 		}
 		if(m_Character->GetOxygen()>0)m_Character->SetOxygen(m_Character->GetOxygen()-1); //Oxygen hardcoded
 		else m_Character->SetHealth(m_Character->GetHealth()-1);
+		if(m_Character->GetHealth() <=0) Host->SetScene(std::make_shared<MainMenu>(Host));
 		actionpoints = 3;
 		nextphase = true;
 	}
