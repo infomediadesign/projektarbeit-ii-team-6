@@ -25,6 +25,7 @@ namespace Redge
 
 		bool nextphase = false;
 		bool prepphase = 1;
+		uint16_t actionpoints = 3;
 
 
 		std::shared_ptr<Character> m_Character{};
