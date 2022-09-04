@@ -2,7 +2,6 @@
 
 #include "Game/Objects/Types/Collidable.h"
 #include "Tiled/Object.h"
-#include "Game/Scenes/CombatScene.h"
 
 namespace Redge
 {

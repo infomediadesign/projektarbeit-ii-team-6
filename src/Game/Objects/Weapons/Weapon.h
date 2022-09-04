@@ -1,5 +1,4 @@
 #pragma once
-#include "Game/Scenes/CombatScene.h"
 
 namespace Redge
 {
