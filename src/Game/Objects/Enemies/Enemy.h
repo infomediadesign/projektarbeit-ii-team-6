@@ -27,7 +27,7 @@ namespace Redge
 		auto GetBleedingDamage() -> float;
 		auto SetCold() -> void;
 		auto GetColdMultiplier() -> float;
-		auto CombatUpdate(Enemy& Enemy) -> void;
+		auto CombatUpdate() -> void;
 	};
 	class Enemy : public Tiled::Object, public ICollidable
 	{
