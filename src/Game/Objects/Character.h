@@ -45,6 +45,7 @@ namespace Redge
 		auto GetHealth() const -> float;
 		auto GetOxygen() const -> float;
 		auto GetInitiative() const -> float;
+		auto GetStatuseffects() -> Statuseffects&;
 
 		//Combat Setter-Functions
 		auto SetHealth(float health) -> void;
@@ -53,6 +54,8 @@ namespace Redge
 
 	private:
 		Character(Vector2 position, float speed, float maxHealth, float maxOxygen);
+
+		Statuseffects m_Statuseffects;
 
 		auto SetNextAnimationFrame() -> void;
 

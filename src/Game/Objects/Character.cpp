@@ -277,6 +277,10 @@ namespace Redge
 	{
 		return m_Initiative;
 	}
+	auto Character::GetStatuseffects() -> Statuseffects&
+	{
+		return m_Statuseffects;
+	}
 } // namespace Redge
 
 auto nlohmann::adl_serializer<std::shared_ptr<Redge::Character>>::from_json(const json& json)

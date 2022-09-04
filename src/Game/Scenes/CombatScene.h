@@ -5,6 +5,7 @@
 
 namespace Redge
 {
+
 	class CombatScene final : public Scene
 	{
 	public:
@@ -26,8 +27,6 @@ namespace Redge
 		bool nextphase = false;
 		bool prepphase = true;
 		uint16_t actionpoints = 3;
-		uint16_t damagemove1 = 20;
-		uint16_t damagemove2 = 0;
 
 
 		std::shared_ptr<Character> m_Character{};

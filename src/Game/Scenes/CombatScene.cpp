@@ -94,19 +94,36 @@ auto Redge::CombatScene::Update() -> void
 	{
 		if (m_Character->GetInitiative() > m_Enemy->GetInitiative())
 		{
-			m_Enemy->TakeDamage(damagemove1+damagemove2);
+			// Function Weapon Actions
 			if(m_Enemy->GetCurrentHp()<= 0) Host->SetScene(m_BackScene);
-			m_Character->SetHealth(m_Character->GetHealth()-m_Enemy->GetDamage());
+			m_Character->SetHealth(m_Character->GetHealth()-m_Enemy->GetDamage()*m_Enemy->GetStatuseffects().GetColdMultiplier());
 			if(m_Character->GetHealth() <=0) Host->SetScene(std::make_shared<MainMenu>(Host));
 		}
 		else
 		{
-			m_Character->SetHealth(m_Character->GetHealth()-m_Enemy->GetDamage());
+			m_Character->SetHealth(m_Character->GetHealth()-m_Enemy->GetDamage()*m_Enemy->GetStatuseffects().GetColdMultiplier());
 			if(m_Character->GetHealth() <=0) Host->SetScene(std::make_shared<MainMenu>(Host));
-			m_Enemy->TakeDamage(damagemove1+damagemove2);
+			// Function Weapon Actions
 			if(m_Enemy->GetCurrentHp()<= 0) Host->SetScene(m_BackScene);
 
 		}
+		if(m_Enemy->GetStatuseffects().burned)
+		{
+			m_Enemy->TakeDamage(10);
+		}
+		m_Enemy->TakeDamage(m_Enemy->GetStatuseffects().GetBleedingDamage());
+		if(m_Enemy->GetCurrentHp()<= 0) Host->SetScene(m_BackScene);
+
+		if(m_Character->GetStatuseffects().burned)
+		{
+			m_Character->SetHealth(m_Character->GetHealth()-10);
+		}
+		m_Character->SetHealth(m_Character->GetHealth()-m_Character->GetStatuseffects().GetBleedingDamage());
+		if(m_Character->GetHealth() <=0) Host->SetScene(std::make_shared<MainMenu>(Host));
+
+		m_Character->GetStatuseffects().CombatUpdate();
+		m_Enemy->GetStatuseffects().CombatUpdate();
+
 		if(m_Character->GetOxygen()>0)m_Character->SetOxygen(m_Character->GetOxygen()-1); //Oxygen hardcoded
 		else m_Character->SetHealth(m_Character->GetHealth()-1);
 		if(m_Character->GetHealth() <=0) Host->SetScene(std::make_shared<MainMenu>(Host));

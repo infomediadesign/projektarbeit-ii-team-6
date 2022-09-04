@@ -8,7 +8,7 @@ project("Crimson-Mine"
 # Custom Find<module>.cmake
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
-add_executable(${PROJECT_NAME})
+add_executable(${PROJECT_NAME} src/Game/Objects/Weapons/Firesword.cpp src/Game/Objects/Weapons/Firesword.h)
 
 file(GLOB_RECURSE PROJECT_SOURCE_FILES CONFIGURE_DEPENDS "${CMAKE_CURRENT_LIST_DIR}/src/*")
 target_sources(${PROJECT_NAME} PRIVATE ${PROJECT_SOURCE_FILES})
