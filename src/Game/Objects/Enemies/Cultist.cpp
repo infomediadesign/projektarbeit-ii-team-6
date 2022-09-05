@@ -5,7 +5,7 @@
 namespace Redge
 {
 	// NOTE: Culitst has 2 types of attacks and can't do damage via "Enemy" class
-	Cultist::Cultist(Vector2 position) : Enemy(position, 100, 15, 0)
+	Cultist::Cultist(Vector2 position) : Enemy(position, 100, 15, 15)
 	{
 	}
 

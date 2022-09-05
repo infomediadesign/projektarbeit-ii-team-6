@@ -47,6 +47,8 @@ namespace Redge
 
 		uint16_t uiScale = 4;
 
+		Raylib::Tileset Statuseffects = Raylib::Tileset("assets/UI/Combat/Debuffs.png", 4, 1);
+
 		Vector2 PosWeaponslot;
 		Raylib::Tileset weaponslot = Raylib::Tileset("assets/UI/Combat/Weaponslot.png", 4 ,1);
 		uint16_t weaponslotframe = 0;

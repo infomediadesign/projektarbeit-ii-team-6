@@ -11,12 +11,12 @@ namespace Redge
 		uint8_t burnedtimer = 0;
 
 		bool frozen = false;
-		uint8_t frozentimer = 0;
+		uint8_t frozentimer = 2;
 
 		uint8_t bleeding[4] = {};
 		const uint8_t bleedingtimer = 2;
 
-		uint8_t cold[3] = {0, 0 ,0};
+		uint8_t cold[3] = {};
 		const uint8_t coldtimer = 4;
 
 

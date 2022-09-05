@@ -1,7 +1,13 @@
 #include "CombatScene.h"
+
 #include "Game/Game.h"
+#include "Game/Objects/Enemies/Cultist.h"
 #include "MainMenu.h"
 #include "PauseScene.h"
+
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "UnreachableCode"
+#pragma ide diagnostic ignored "ConstantConditionsOC"
 
 Redge::CombatScene::CombatScene(Redge::Game* Host) : Scene(Host)
 {
@@ -96,11 +102,21 @@ auto Redge::CombatScene::Update() -> void
 		{
 			// Function Weapon Actions
 			if(m_Enemy->GetCurrentHp()<= 0) Host->SetScene(m_BackScene);
+
+
+			if(auto cultist = std::dynamic_pointer_cast<Cultist>(m_Enemy))
+			{
+				m_Character->GetStatuseffects().SetBurned(1);
+			}
 			m_Character->SetHealth(m_Character->GetHealth()-m_Enemy->GetDamage()*m_Enemy->GetStatuseffects().GetColdMultiplier());
 			if(m_Character->GetHealth() <=0) Host->SetScene(std::make_shared<MainMenu>(Host));
 		}
 		else
 		{
+			if(auto cultist = std::dynamic_pointer_cast<Cultist>(m_Enemy))
+			{
+				m_Character->GetStatuseffects().SetBurned(1);
+			}
 			m_Character->SetHealth(m_Character->GetHealth()-m_Enemy->GetDamage()*m_Enemy->GetStatuseffects().GetColdMultiplier());
 			if(m_Character->GetHealth() <=0) Host->SetScene(std::make_shared<MainMenu>(Host));
 			// Function Weapon Actions
@@ -109,14 +125,14 @@ auto Redge::CombatScene::Update() -> void
 		}
 		if(m_Enemy->GetStatuseffects().burned)
 		{
-			m_Enemy->TakeDamage(10);
+			m_Enemy->TakeDamage(5);
 		}
 		m_Enemy->TakeDamage(m_Enemy->GetStatuseffects().GetBleedingDamage());
 		if(m_Enemy->GetCurrentHp()<= 0) Host->SetScene(m_BackScene);
 
 		if(m_Character->GetStatuseffects().burned)
 		{
-			m_Character->SetHealth(m_Character->GetHealth()-10);
+			m_Character->SetHealth(m_Character->GetHealth()-5);
 		}
 		m_Character->SetHealth(m_Character->GetHealth()-m_Character->GetStatuseffects().GetBleedingDamage());
 		if(m_Character->GetHealth() <=0) Host->SetScene(std::make_shared<MainMenu>(Host));
@@ -202,6 +218,75 @@ auto Redge::CombatScene::RenderUI() const -> void
 		uiScale,
 		WHITE);
 
+	//StatusEffects
+	Vector2 statusPositionPlayer = Vector2{PosHPBarPlayer.x+Statuseffects.GetTileWidth() * uiScale, PosHPBarPlayer.y + HPBarPlayer.GetTileHeight() * uiScale+ Statuseffects.GetTileWidth()/2 * uiScale};
+		if(m_Character->GetStatuseffects().burned)
+		{
+			Statuseffects.DrawTileScaled(0,
+				0, statusPositionPlayer,
+				uiScale,
+				WHITE);
+			statusPositionPlayer.x += Statuseffects.GetTileWidth() *1.5 * uiScale;
+		}
+		if(m_Character->GetStatuseffects().GetBleedingDamage() > 0)
+		{
+			Statuseffects.DrawTileScaled(1,
+				0, statusPositionPlayer,
+				uiScale,
+				WHITE);
+			statusPositionPlayer.x += Statuseffects.GetTileWidth() *1.5 * uiScale;
+		}
+		if(m_Character->GetStatuseffects().GetColdMultiplier() < 1)
+		{
+			Statuseffects.DrawTileScaled(2,
+				0, statusPositionPlayer,
+				uiScale,
+				WHITE);
+			statusPositionPlayer.x += Statuseffects.GetTileWidth() *1.5 * uiScale;
+		}
+		if(m_Character->GetStatuseffects().frozen)
+		{
+			Statuseffects.DrawTileScaled(3,
+				0, statusPositionPlayer,
+				uiScale,
+				WHITE);
+			statusPositionPlayer.x += Statuseffects.GetTileWidth() *1.5 * uiScale;
+		}
+
+		Vector2 statusPositionEnemy = Vector2{PosHPBarEnemy.x+Statuseffects.GetTileWidth() * uiScale, PosHPBarEnemy.y + HPBarEnemy.GetTileHeight() * uiScale+ Statuseffects.GetTileWidth()/2 * uiScale};
+		if(m_Enemy->GetStatuseffects().burned)
+		{
+			Statuseffects.DrawTileScaled(0,
+				0, statusPositionEnemy,
+				uiScale,
+				WHITE);
+			statusPositionEnemy.x += Statuseffects.GetTileWidth() *1.5 * uiScale;
+		}
+		if(m_Enemy->GetStatuseffects().GetBleedingDamage() > 0)
+		{
+			Statuseffects.DrawTileScaled(1,
+				0, statusPositionEnemy,
+				uiScale,
+				WHITE);
+			statusPositionEnemy.x += Statuseffects.GetTileWidth() *1.5 * uiScale;
+		}
+		if(m_Enemy->GetStatuseffects().GetColdMultiplier() < 1)
+		{
+			Statuseffects.DrawTileScaled(2,
+				0, statusPositionEnemy,
+				uiScale,
+				WHITE);
+			statusPositionEnemy.x += Statuseffects.GetTileWidth() *1.5 * uiScale;
+		}
+		if(m_Enemy->GetStatuseffects().frozen)
+		{
+			Statuseffects.DrawTileScaled(3,
+				0, statusPositionEnemy,
+				uiScale,
+				WHITE);
+			statusPositionEnemy.x += Statuseffects.GetTileWidth() *1.5 * uiScale;
+		}
+
 	HPBarEnemy.DrawTileScaled(0,
 		1,
 		PosHPBarEnemy,
@@ -260,3 +345,5 @@ auto Redge::CombatScene::SetEnemy(std::shared_ptr<Enemy> enemy) -> void
 {
 	m_Enemy = std::move(enemy);
 }
+
+#pragma clang diagnostic pop
