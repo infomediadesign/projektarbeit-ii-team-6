@@ -4,6 +4,7 @@
 #include "Game/Objects/Enemies/Cultist.h"
 #include "MainMenu.h"
 #include "PauseScene.h"
+#include "functional"
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "UnreachableCode"
@@ -28,6 +29,10 @@ auto Redge::CombatScene::Update() -> void
 	m_EnemyHealth = m_Enemy->GetCurrentHp();
 
 	HPBarEnemyPercent = m_EnemyHealth/ m_EnemyMaxHealth;
+
+	SelectedMove Move1 = nullptr;
+	SelectedMove Move2 = nullptr;
+	SelectedMove Move3 = nullptr;
 
 	if (OldScreenWidth != GetScreenWidth() || OldScreenHeight != GetScreenHeight())
 		RelocateUI();
@@ -100,7 +105,10 @@ auto Redge::CombatScene::Update() -> void
 	{
 		if (m_Character->GetInitiative() > m_Enemy->GetInitiative())
 		{
-			// Function Weapon Actions
+			if(Move1 != nullptr) std::invoke(Move1, m_Character, *m_Enemy);
+			if(Move2 != nullptr) std::invoke(Move2, m_Character, *m_Enemy);
+			if(Move3 != nullptr) std::invoke(Move3, m_Character, *m_Enemy);
+
 			if(m_Enemy->GetCurrentHp()<= 0) Host->SetScene(m_BackScene);
 
 
@@ -108,7 +116,12 @@ auto Redge::CombatScene::Update() -> void
 			{
 				m_Character->GetStatuseffects().SetBurned(1);
 			}
-			m_Character->SetHealth(m_Character->GetHealth()-m_Enemy->GetDamage()*m_Enemy->GetStatuseffects().GetColdMultiplier());
+			if(m_Character->GetStatuseffects().frozen)
+			{
+				m_Character->SetHealth(m_Character->GetHealth()-(m_Enemy->GetDamage()*m_Enemy->GetStatuseffects().GetColdMultiplier())*2);
+				m_Character->GetStatuseffects().SetFrozen(false);
+			}
+			else m_Character->SetHealth(m_Character->GetHealth()-m_Enemy->GetDamage()*m_Enemy->GetStatuseffects().GetColdMultiplier());
 			if(m_Character->GetHealth() <=0) Host->SetScene(std::make_shared<MainMenu>(Host));
 		}
 		else
@@ -117,9 +130,18 @@ auto Redge::CombatScene::Update() -> void
 			{
 				m_Character->GetStatuseffects().SetBurned(1);
 			}
-			m_Character->SetHealth(m_Character->GetHealth()-m_Enemy->GetDamage()*m_Enemy->GetStatuseffects().GetColdMultiplier());
+			if(m_Character->GetStatuseffects().frozen)
+			{
+				m_Character->SetHealth(m_Character->GetHealth()-(m_Enemy->GetDamage()*m_Enemy->GetStatuseffects().GetColdMultiplier())*2);
+				m_Character->GetStatuseffects().SetFrozen(false);
+			}
+			else m_Character->SetHealth(m_Character->GetHealth()-m_Enemy->GetDamage()*m_Enemy->GetStatuseffects().GetColdMultiplier());
 			if(m_Character->GetHealth() <=0) Host->SetScene(std::make_shared<MainMenu>(Host));
-			// Function Weapon Actions
+
+			if(Move1 != nullptr) std::invoke(Move1, m_Character, *m_Enemy);
+			if(Move2 != nullptr) std::invoke(Move2, m_Character, *m_Enemy);
+			if(Move3 != nullptr) std::invoke(Move3, m_Character, *m_Enemy);
+
 			if(m_Enemy->GetCurrentHp()<= 0) Host->SetScene(m_BackScene);
 
 		}
@@ -325,6 +347,7 @@ auto Redge::CombatScene::SetBackScene(std::shared_ptr<Scene> scene) -> std::shar
 	m_BackScene.swap(scene);
 	return scene;
 }
+
 auto Redge::CombatScene::RelocateUI() -> void
 {
 	PosWeaponslot = {static_cast<float>(GetScreenWidth()/2 - weaponslot.GetTileWidth()*uiScale/2),static_cast<float>(weaponslot.GetTileHeight()/4*uiScale)};

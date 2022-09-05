@@ -30,6 +30,9 @@ namespace Redge
 
 
 		std::shared_ptr<Character> m_Character{};
+
+		using SelectedMove = void(Character::*)(Enemy&);
+
 		float m_MaxHealth;
 		float m_Health;
 		float m_MaxOxygen;

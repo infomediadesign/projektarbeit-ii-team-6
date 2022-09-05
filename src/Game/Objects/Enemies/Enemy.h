@@ -21,7 +21,7 @@ namespace Redge
 
 
 		auto SetBurned(uint8_t timer) -> void;
-		auto SetFrozen() -> void;
+		auto SetFrozen(bool state) -> void;
 		auto SetBleeding() -> void;
 		auto GetBleedingDamage() -> float;
 		auto SetCold() -> void;

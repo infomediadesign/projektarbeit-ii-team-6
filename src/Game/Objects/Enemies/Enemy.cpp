@@ -78,10 +78,11 @@ namespace Redge
 		burned = true;
 		burnedtimer += timer;
 	}
-	auto Statuseffects::SetFrozen() -> void
+	auto Statuseffects::SetFrozen(bool state) -> void
 	{
-		frozen = true;
-		frozentimer = 2;
+		frozen = state;
+		if(state) frozentimer = 2;
+		else frozentimer = 0;
 	}
 	auto Statuseffects::SetBleeding() -> void
 	{
