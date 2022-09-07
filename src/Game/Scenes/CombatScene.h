@@ -2,6 +2,8 @@
 #include "Game/Scene.h"
 #include "Raylib/Tileset.h"
 #include "Game/Objects/Character.h"
+#include "Game/Objects/Weapons/Weapon.h"
+#include "Game/Objects/Weapons/Firesword.h"
 
 namespace Redge
 {
@@ -23,17 +25,20 @@ namespace Redge
 		auto SetBackScene(std::shared_ptr<Scene> scene) -> std::shared_ptr<Scene>;
 
 	private:
-
 		bool nextphase = false;
 		bool prepphase = true;
-		uint16_t actionpoints = 3;
+		uint16_t actionpoints = 2;
+		bool m_swapped = false;
+		std::shared_ptr<Weapon> m_PreviousWeapon = nullptr;
+		std::shared_ptr<Weapon> m_SelectedWeapon = std::make_shared<Firesword>();
+		std::shared_ptr<Weapon> m_NextWeapon = nullptr;
 
 		std::shared_ptr<Character> m_Character{};
 
-		using SelectedMove = void(Character::*)(Enemy&);
-		SelectedMove m_Move1 = nullptr;
-		SelectedMove m_Move2 = nullptr;
-		SelectedMove m_Move3 = nullptr;
+		using SelectedMove = void(Weapon::*)(Enemy&);
+		std::vector<std::pair<std::shared_ptr<Weapon>, SelectedMove>> m_Moves{};
+
+
 
 		float m_MaxHealth;
 		float m_Health;
@@ -62,6 +67,7 @@ namespace Redge
 
 		Vector2 PosPointdisplay;
 		Raylib::Tileset pointdisplay = Raylib::Tileset("assets/UI/Combat/PointDisplay.png", 17, 1);
+		Raylib::Tileset energyindicator = Raylib::Tileset("assets/UI/Combat/EnergyIndicator.png",1,2);
 		uint16_t pointdisplayframe = 0;
 		float TSLpointdisplay = 0;
 		float FDpointdisplay = 0.10;

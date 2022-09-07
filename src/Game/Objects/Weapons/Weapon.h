@@ -1,4 +1,5 @@
 #pragma once
+#include "Raylib/Tileset.h"
 
 namespace Redge
 {
@@ -9,5 +10,12 @@ namespace Redge
 		virtual ~Weapon() = default;
 		virtual auto Attack1(Enemy& Enemy) -> void = 0;
 		virtual auto Attack2(Enemy& Enemy) -> void = 0;
+		uint8_t ApCostAttack1;
+		uint8_t ApCostAttack2;
+		uint8_t SpriteID;
+		Raylib::Tileset Weaponsprites16 = Raylib::Tileset("assets/UI/Combat/weaponItemsprites_x16.png", 10, 1);
+		Raylib::Tileset Weaponsprites10 = Raylib::Tileset("assets/UI/Combat/weaponItemsprites_x10.png", 10, 1);
+		Texture2D TooltippAttack1;
+		Texture2D TooltippAttack2;
 	};
 } // namespace Redge

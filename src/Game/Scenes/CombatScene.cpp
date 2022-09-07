@@ -30,6 +30,12 @@ auto Redge::CombatScene::Update() -> void
 
 	HPBarEnemyPercent = m_EnemyHealth/ m_EnemyMaxHealth;
 
+	if(IsKeyPressed(KEY_BACKSPACE)) //TODO dont use attacks when weapon is not existing
+	{
+		m_Moves.clear();
+		actionpoints = 2;
+	}
+
 	if (OldScreenWidth != GetScreenWidth() || OldScreenHeight != GetScreenHeight())
 		RelocateUI();
 	if (IsKeyPressed(KEY_ESCAPE))
@@ -43,7 +49,9 @@ auto Redge::CombatScene::Update() -> void
 			 {PosHealslot.x, PosHealslot.y, static_cast<float>(healslot.GetTileWidth() * uiScale),
 				 static_cast<float>(healslot.GetTileHeight() * uiScale)}) &&
 			IsMouseButtonDown(MOUSE_BUTTON_LEFT)))
-		healslottriggered = true;
+	{
+		if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT))healslottriggered = true;
+	}
 	else
 		healslottriggered = false;
 
@@ -57,9 +65,14 @@ auto Redge::CombatScene::Update() -> void
 	if (CheckCollisionPointRec(GetMousePosition(),
 			{PosAttackButton1.x, PosAttackButton1.y, static_cast<float>(attackbutton.GetTileWidth() * uiScale),
 				static_cast<float>(attackbutton.GetTileHeight() * uiScale)}) &&
-		IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+		(IsMouseButtonDown(MOUSE_BUTTON_LEFT)||IsMouseButtonReleased(MOUSE_BUTTON_LEFT)))
 	{
 		ABS1 = 2;
+		if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT) && actionpoints >= m_SelectedWeapon->ApCostAttack1)
+		{
+			m_Moves.emplace_back(m_SelectedWeapon, &Weapon::Attack1);
+			actionpoints -= m_SelectedWeapon->ApCostAttack1;
+		}
 	}
 	else if (CheckCollisionPointRec(GetMousePosition(),
 				 {PosAttackButton1.x, PosAttackButton1.y, static_cast<float>(attackbutton.GetTileWidth() * uiScale),
@@ -73,9 +86,14 @@ auto Redge::CombatScene::Update() -> void
 	if (CheckCollisionPointRec(GetMousePosition(),
 			{PosAttackButton2.x, PosAttackButton2.y, static_cast<float>(attackbutton.GetTileWidth() * uiScale),
 				static_cast<float>(attackbutton.GetTileHeight() * uiScale)}) &&
-		IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+		(IsMouseButtonDown(MOUSE_BUTTON_LEFT) || IsMouseButtonReleased(MOUSE_BUTTON_LEFT)))
 	{
 		ABS2 = 2;
+		if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT) && actionpoints >= m_SelectedWeapon->ApCostAttack2)
+		{
+			m_Moves.emplace_back(m_SelectedWeapon, &Weapon::Attack2);
+			actionpoints -= m_SelectedWeapon->ApCostAttack2;
+		}
 	}
 	else if (CheckCollisionPointRec(GetMousePosition(),
 				 {PosAttackButton2.x, PosAttackButton2.y, static_cast<float>(attackbutton.GetTileWidth() * uiScale),
@@ -94,16 +112,15 @@ auto Redge::CombatScene::Update() -> void
 
 	if (prepphase)
 	{
-		if (IsKeyPressed(KEY_ENTER) && actionpoints >= 3)
+		if (IsKeyPressed(KEY_ENTER) && actionpoints >= 0)
 			nextphase = true;
 	}
 	else
 	{
 		if (m_Character->GetInitiative() > m_Enemy->GetInitiative())
 		{
-			if(m_Move1 != nullptr) std::invoke(m_Move1, m_Character, *m_Enemy);
-			if(m_Move2 != nullptr) std::invoke(m_Move2, m_Character, *m_Enemy);
-			if(m_Move3 != nullptr) std::invoke(m_Move3, m_Character, *m_Enemy);
+			for (const auto& [weapon, move] : m_Moves)
+				std::invoke(move, weapon, *m_Enemy);
 
 			if(m_Enemy->GetCurrentHp()<= 0) Host->SetScene(m_BackScene);
 
@@ -134,13 +151,16 @@ auto Redge::CombatScene::Update() -> void
 			else m_Character->SetHealth(m_Character->GetHealth()-m_Enemy->GetDamage()*m_Enemy->GetStatuseffects().GetColdMultiplier());
 			if(m_Character->GetHealth() <=0) Host->SetScene(std::make_shared<MainMenu>(Host));
 
-			if(m_Move1 != nullptr) std::invoke(m_Move1, m_Character, *m_Enemy);
-			if(m_Move2 != nullptr) std::invoke(m_Move2, m_Character, *m_Enemy);
-			if(m_Move3 != nullptr) std::invoke(m_Move3, m_Character, *m_Enemy);
+			for (const auto& [weapon, move] : m_Moves)
+				std::invoke(move, weapon, *m_Enemy);
 
 			if(m_Enemy->GetCurrentHp()<= 0) Host->SetScene(m_BackScene);
 
 		}
+
+		m_Moves.clear();
+
+		actionpoints = 2;
 		if(m_Enemy->GetStatuseffects().burned)
 		{
 			m_Enemy->TakeDamage(5);
@@ -167,7 +187,6 @@ auto Redge::CombatScene::Update() -> void
 		if(m_Character->GetOxygen()>0)m_Character->SetOxygen(m_Character->GetOxygen()-1); //Oxygen hardcoded
 		else m_Character->SetHealth(m_Character->GetHealth()-1);
 		if(m_Character->GetHealth() <=0) Host->SetScene(std::make_shared<MainMenu>(Host));
-		actionpoints = 3;
 		nextphase = true;
 	}
 
@@ -179,8 +198,16 @@ auto Redge::CombatScene::Update() -> void
 		TSLweaponslot -= FDweaponslot;
 		if (weaponswap)
 		{
+			if(weaponslotframe >= 6 && !m_swapped)
+			{
+				m_swapped = true;
+				m_PreviousWeapon.swap(m_SelectedWeapon);
+				m_SelectedWeapon.swap(m_NextWeapon);
+			}
+
 			weaponslotframe = (weaponslotframe + 1) % weaponslot.GetTileCountX();
 		}
+		else m_swapped = false;
 	}
 
 	if (TSLpointdisplay >= FDpointdisplay)
@@ -211,6 +238,33 @@ auto Redge::CombatScene::RenderUI() const -> void
 	m_Enemy->DrawSprite(enemyArea);
 
 	// UI
+	if(m_NextWeapon != nullptr && (weaponslotframe <= 3 || weaponslotframe >= 7))
+	{
+		m_NextWeapon->Weaponsprites10.DrawTileScaled(m_NextWeapon->SpriteID,
+			0,
+			{PosWeaponslot.x + 4 * uiScale, PosWeaponslot.y + 8 * uiScale},
+			uiScale,
+			WHITE
+		);
+	}
+	if(m_SelectedWeapon != nullptr && (weaponslotframe <= 3 || weaponslotframe >= 7))
+	{
+		m_SelectedWeapon->Weaponsprites16.DrawTileScaled(m_SelectedWeapon->SpriteID,
+			0,
+			{PosWeaponslot.x + 35 * uiScale, PosWeaponslot.y + 5 * uiScale},
+			uiScale,
+			WHITE
+		);
+	}
+	if(m_PreviousWeapon != nullptr && (weaponslotframe <= 3 || weaponslotframe >= 7))
+	{
+		m_PreviousWeapon->Weaponsprites10.DrawTileScaled(m_PreviousWeapon->SpriteID,
+			0,
+			{PosWeaponslot.x +70 * uiScale, PosWeaponslot.y + 8 * uiScale},
+			uiScale,
+			WHITE
+		);
+	}
 
 	weaponslot.DrawTileScaled(weaponslotframe,
 		0,
@@ -224,6 +278,23 @@ auto Redge::CombatScene::RenderUI() const -> void
 		PosPointdisplay,
 		uiScale,
 		WHITE);
+
+	if(actionpoints == 2)
+	{
+		energyindicator.DrawTileScaled(0,
+			0,
+			{PosPointdisplay.x + (pointdisplay.GetTileWidth()/2-energyindicator.GetTileWidth()/2-1)*uiScale, PosPointdisplay.y + (pointdisplay.GetTileHeight()/2-energyindicator.GetTileHeight()/2)*uiScale},
+			uiScale,
+			WHITE);
+	}
+	if(actionpoints == 1)
+	{
+		energyindicator.DrawTileScaled(0,
+			1,
+			{PosPointdisplay.x + (pointdisplay.GetTileWidth()/2-energyindicator.GetTileWidth()/2-1)*uiScale, PosPointdisplay.y + (pointdisplay.GetTileHeight()/2-energyindicator.GetTileHeight()/2)*uiScale},
+			uiScale,
+			WHITE);
+	}
 
 	attackbutton.DrawTileScaled(0,
 		ABS1,

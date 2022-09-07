@@ -38,20 +38,20 @@ namespace Redge
 		return m_Damage;
 	}
 
-	auto Enemy::GetStatuseffects() -> Statuseffects
+	auto Enemy::GetStatuseffects() -> Statuseffects&
 	{
 		return m_Statuseffects;
 	}
 	auto Statuseffects::CombatUpdate() -> void
 	{
-		if (burned && burnedtimer > 0)
+		if (burnedtimer > 0)
 		{
 			burnedtimer--;
 		}
 		else
 			burned = false;
 
-		if (frozen && frozentimer > 0)
+		if (frozentimer > 0)
 		{
 			frozentimer--;
 		}

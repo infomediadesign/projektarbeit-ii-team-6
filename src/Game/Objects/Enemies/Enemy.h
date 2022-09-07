@@ -45,7 +45,7 @@ namespace Redge
 
 		[[nodiscard]] auto GetInitiative() const -> float;
 		[[nodiscard]] auto GetDamage() const -> float;
-		auto GetStatuseffects() -> Statuseffects;
+		auto GetStatuseffects() -> Statuseffects&;
 
 		virtual auto DrawSprite(Rectangle destination) const -> void = 0;
 
