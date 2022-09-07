@@ -19,7 +19,7 @@ namespace Redge
 		uint8_t cold[3] = {};
 		const uint8_t coldtimer = 4;
 
-		bool vine[5] = {true, true, true, true, true};
+		bool vine[5] = {};
 
 
 		auto SetBurned(uint8_t timer) -> void;

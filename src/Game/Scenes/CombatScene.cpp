@@ -310,6 +310,15 @@ auto Redge::CombatScene::RenderUI() const -> void
 				WHITE);
 			statusPositionEnemy.x += Statuseffects.GetTileWidth() *1.5 * uiScale;
 		}
+		if(m_Enemy->GetStatuseffects().GetVineDrain()>0)
+		{
+			Statuseffects.DrawTileScaled(4,
+				0, statusPositionEnemy,
+				uiScale,
+				WHITE);
+			statusPositionEnemy.x += Statuseffects.GetTileWidth() *1.5 * uiScale;
+		}
+
 
 	HPBarEnemy.DrawTileScaled(0,
 		1,
