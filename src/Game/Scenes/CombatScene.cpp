@@ -30,10 +30,6 @@ auto Redge::CombatScene::Update() -> void
 
 	HPBarEnemyPercent = m_EnemyHealth/ m_EnemyMaxHealth;
 
-	SelectedMove Move1 = nullptr;
-	SelectedMove Move2 = nullptr;
-	SelectedMove Move3 = nullptr;
-
 	if (OldScreenWidth != GetScreenWidth() || OldScreenHeight != GetScreenHeight())
 		RelocateUI();
 	if (IsKeyPressed(KEY_ESCAPE))
@@ -98,16 +94,16 @@ auto Redge::CombatScene::Update() -> void
 
 	if (prepphase)
 	{
-		if (IsKeyPressed(KEY_ENTER) && actionpoints == 3)
+		if (IsKeyPressed(KEY_ENTER) && actionpoints >= 3)
 			nextphase = true;
 	}
 	else
 	{
 		if (m_Character->GetInitiative() > m_Enemy->GetInitiative())
 		{
-			if(Move1 != nullptr) std::invoke(Move1, m_Character, *m_Enemy);
-			if(Move2 != nullptr) std::invoke(Move2, m_Character, *m_Enemy);
-			if(Move3 != nullptr) std::invoke(Move3, m_Character, *m_Enemy);
+			if(m_Move1 != nullptr) std::invoke(m_Move1, m_Character, *m_Enemy);
+			if(m_Move2 != nullptr) std::invoke(m_Move2, m_Character, *m_Enemy);
+			if(m_Move3 != nullptr) std::invoke(m_Move3, m_Character, *m_Enemy);
 
 			if(m_Enemy->GetCurrentHp()<= 0) Host->SetScene(m_BackScene);
 
@@ -138,9 +134,9 @@ auto Redge::CombatScene::Update() -> void
 			else m_Character->SetHealth(m_Character->GetHealth()-m_Enemy->GetDamage()*m_Enemy->GetStatuseffects().GetColdMultiplier());
 			if(m_Character->GetHealth() <=0) Host->SetScene(std::make_shared<MainMenu>(Host));
 
-			if(Move1 != nullptr) std::invoke(Move1, m_Character, *m_Enemy);
-			if(Move2 != nullptr) std::invoke(Move2, m_Character, *m_Enemy);
-			if(Move3 != nullptr) std::invoke(Move3, m_Character, *m_Enemy);
+			if(m_Move1 != nullptr) std::invoke(m_Move1, m_Character, *m_Enemy);
+			if(m_Move2 != nullptr) std::invoke(m_Move2, m_Character, *m_Enemy);
+			if(m_Move3 != nullptr) std::invoke(m_Move3, m_Character, *m_Enemy);
 
 			if(m_Enemy->GetCurrentHp()<= 0) Host->SetScene(m_BackScene);
 
@@ -150,6 +146,12 @@ auto Redge::CombatScene::Update() -> void
 			m_Enemy->TakeDamage(5);
 		}
 		m_Enemy->TakeDamage(m_Enemy->GetStatuseffects().GetBleedingDamage());
+		if(m_Enemy->GetStatuseffects().GetVineDrain()>0)
+		{
+			m_Enemy->TakeDamage(m_Enemy->GetStatuseffects().GetVineDrain());
+			if(m_Character->GetHealth()+m_Enemy->GetStatuseffects().GetVineDrain() <= m_Character->GetMaxHealth())m_Character->SetHealth(m_Character->GetHealth()+m_Enemy->GetStatuseffects().GetVineDrain());
+			else m_Character->SetHealth(m_Character->GetMaxHealth());
+		}
 		if(m_Enemy->GetCurrentHp()<= 0) Host->SetScene(m_BackScene);
 
 		if(m_Character->GetStatuseffects().burned)

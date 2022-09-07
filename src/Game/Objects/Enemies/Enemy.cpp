@@ -142,4 +142,26 @@ namespace Redge
 		}
 		return damage;
 	}
+	auto Statuseffects::GetVineDrain() -> float
+	{
+		float value = 0;
+		for (int i = 0; i < 5; i++)
+		{
+			if (vine[i])
+			{
+				value += 5;
+			}
+		}
+		return value;
+	}
+	auto Statuseffects::SetVineZero() -> void
+	{
+		for (int i = 0; i < 5; i++)
+		{
+			if (vine[i])
+			{
+				vine[i] = false;
+			}
+		}
+	}
 } // namespace Redge

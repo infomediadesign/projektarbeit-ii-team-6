@@ -19,6 +19,8 @@ namespace Redge
 		uint8_t cold[3] = {};
 		const uint8_t coldtimer = 4;
 
+		bool vine[5] = {true, true, true, true, true};
+
 
 		auto SetBurned(uint8_t timer) -> void;
 		auto SetFrozen(bool state) -> void;
@@ -26,6 +28,8 @@ namespace Redge
 		auto GetBleedingDamage() -> float;
 		auto SetCold() -> void;
 		auto GetColdMultiplier() -> float;
+		auto GetVineDrain()-> float;
+		auto SetVineZero() -> void;
 		auto CombatUpdate() -> void;
 	};
 	class Enemy : public Tiled::Object, public ICollidable

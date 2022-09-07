@@ -28,10 +28,12 @@ namespace Redge
 		bool prepphase = true;
 		uint16_t actionpoints = 3;
 
-
 		std::shared_ptr<Character> m_Character{};
 
 		using SelectedMove = void(Character::*)(Enemy&);
+		SelectedMove m_Move1 = nullptr;
+		SelectedMove m_Move2 = nullptr;
+		SelectedMove m_Move3 = nullptr;
 
 		float m_MaxHealth;
 		float m_Health;
@@ -50,10 +52,10 @@ namespace Redge
 
 		uint16_t uiScale = 4;
 
-		Raylib::Tileset Statuseffects = Raylib::Tileset("assets/UI/Combat/Debuffs.png", 4, 1);
+		Raylib::Tileset Statuseffects = Raylib::Tileset("assets/UI/Combat/Debuffs.png", 5, 1);
 
 		Vector2 PosWeaponslot;
-		Raylib::Tileset weaponslot = Raylib::Tileset("assets/UI/Combat/Weaponslot.png", 4 ,1);
+		Raylib::Tileset weaponslot = Raylib::Tileset("assets/UI/Combat/Weaponslot.png", 10 ,1);
 		uint16_t weaponslotframe = 0;
 		float TSLweaponslot = 0; //TSL -> Time since last
 		float FDweaponslot = 0.17; //FD -> Frame Duration
