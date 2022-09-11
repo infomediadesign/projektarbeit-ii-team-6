@@ -3,13 +3,14 @@
 
 namespace Redge
 {
+	class Character;
 	class Enemy;
 	class Weapon
 	{
 	public:
 		virtual ~Weapon() = default;
-		virtual auto Attack1(Enemy& Enemy) -> void = 0;
-		virtual auto Attack2(Enemy& Enemy) -> void = 0;
+		virtual auto Attack1(Enemy& Enemy, Character& Character) -> void = 0;
+		virtual auto Attack2(Enemy& Enemy, Character& Character) -> void = 0;
 		uint8_t ApCostAttack1;
 		uint8_t ApCostAttack2;
 		uint8_t SpriteID;

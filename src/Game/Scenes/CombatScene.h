@@ -4,6 +4,7 @@
 #include "Game/Objects/Character.h"
 #include "Game/Objects/Weapons/Weapon.h"
 #include "Game/Objects/Weapons/Firesword.h"
+#include "Game/Objects/Weapons/Firestaff.h"
 
 namespace Redge
 {
@@ -31,7 +32,7 @@ namespace Redge
 		bool m_swapped = false;
 		std::shared_ptr<Weapon> m_PreviousWeapon = nullptr;
 		std::shared_ptr<Weapon> m_SelectedWeapon = std::make_shared<Firesword>();
-		std::shared_ptr<Weapon> m_NextWeapon = nullptr;
+		std::shared_ptr<Weapon> m_NextWeapon = std::make_shared<Firestaff>();
 
 		std::shared_ptr<Character> m_Character{};
 
@@ -81,6 +82,8 @@ namespace Redge
 		Vector2 PosHealslot;
 		Raylib::Tileset healslot = Raylib::Tileset("assets/UI/Combat/HealSlot.png", 2, 1);
 		bool healslottriggered = false;
+		bool rendertooltipp1;
+		bool rendertooltipp2;
 
 		Vector2 PosHPBarEnemy;
 		Raylib::Tileset HPBarEnemy = Raylib::Tileset("assets/UI/Combat/HpBarCombatEnemy.png", 1,2 );

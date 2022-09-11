@@ -14,7 +14,7 @@ namespace Redge
 				TooltippAttack1 = LoadTexture("assets/UI/Combat/AttackDescription.png");
 				TooltippAttack2 = LoadTexture("assets/UI/Combat/AttackDescription.png");
 			};
-			auto Attack1(Enemy& Enemy) -> void override;
-			auto Attack2(Enemy& Enemy) -> void override;
+			auto Attack1(Enemy& Enemy, Character& Character) -> void override;
+			auto Attack2(Enemy& Enemy, Character& Character) -> void override;
 	};
 } // namespace Redge

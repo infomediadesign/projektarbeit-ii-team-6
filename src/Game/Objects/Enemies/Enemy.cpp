@@ -164,4 +164,19 @@ namespace Redge
 			}
 		}
 	}
+	auto Statuseffects::GetBurnedTimer() -> float
+	{
+		return burnedtimer;
+	}
+	auto Statuseffects::MultiplyBleedingTimer(float multiplier) -> void
+	{
+		bleedingtimer = bleedingtimer * multiplier;
+	}
+	auto Statuseffects::ClearBleeding() -> void
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			bleeding[i] = 0;
+		}
+	}
 } // namespace Redge

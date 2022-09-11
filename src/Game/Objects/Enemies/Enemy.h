@@ -1,5 +1,4 @@
 #pragma once
-
 #include "Game/Objects/Types/Collidable.h"
 #include "Tiled/Object.h"
 
@@ -14,7 +13,7 @@ namespace Redge
 		uint8_t frozentimer = 2;
 
 		uint8_t bleeding[4] = {};
-		const uint8_t bleedingtimer = 2;
+		uint8_t bleedingtimer = 2;
 
 		uint8_t cold[3] = {};
 		const uint8_t coldtimer = 4;
@@ -23,8 +22,11 @@ namespace Redge
 
 
 		auto SetBurned(uint8_t timer) -> void;
+		auto GetBurnedTimer() -> float;
 		auto SetFrozen(bool state) -> void;
 		auto SetBleeding() -> void;
+		auto ClearBleeding() -> void;
+		auto MultiplyBleedingTimer(float multiplier) -> void;
 		auto GetBleedingDamage() -> float;
 		auto SetCold() -> void;
 		auto GetColdMultiplier() -> float;
