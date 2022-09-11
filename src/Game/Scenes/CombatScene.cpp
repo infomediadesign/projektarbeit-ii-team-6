@@ -120,7 +120,7 @@ auto Redge::CombatScene::Update() -> void
 		if (m_Character->GetInitiative() > m_Enemy->GetInitiative())
 		{
 			for (const auto& [weapon, move] : m_Moves)
-				std::invoke(move, weapon, *m_Enemy);
+				std::invoke(move, weapon, *m_Enemy, *m_Character);
 
 			if(m_Enemy->GetCurrentHp()<= 0) Host->SetScene(m_BackScene);
 
@@ -152,7 +152,7 @@ auto Redge::CombatScene::Update() -> void
 			if(m_Character->GetHealth() <=0) Host->SetScene(std::make_shared<MainMenu>(Host));
 
 			for (const auto& [weapon, move] : m_Moves)
-				std::invoke(move, weapon, *m_Enemy);
+				std::invoke(move, weapon, *m_Enemy, *m_Character);
 
 			if(m_Enemy->GetCurrentHp()<= 0) Host->SetScene(m_BackScene);
 

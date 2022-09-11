@@ -36,7 +36,7 @@ namespace Redge
 
 		std::shared_ptr<Character> m_Character{};
 
-		using SelectedMove = void(Weapon::*)(Enemy&);
+		using SelectedMove = void(Weapon::*)(Enemy&, Character&);
 		std::vector<std::pair<std::shared_ptr<Weapon>, SelectedMove>> m_Moves{};
 
 
