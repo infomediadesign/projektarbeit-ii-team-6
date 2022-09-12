@@ -2166,7 +2166,7 @@
  "tilesets":[
         {
          "firstgid":1,
-         "source":"..\/Tilesets\/HubTest.tsj"
+         "source":"..\/Tilesets\/Hub.tsj"
         }, 
         {
          "firstgid":5569,
