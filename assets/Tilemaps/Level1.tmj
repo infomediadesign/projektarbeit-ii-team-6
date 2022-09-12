@@ -21366,6 +21366,42 @@
                  "width":64,
                  "x":416,
                  "y":-416
+                }, 
+                {
+                 "class":"",
+                 "height":0,
+                 "id":1475,
+                 "name":"loadLevel",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"level",
+                         "type":"string",
+                         "value":"assets\/Tilemaps\/HubTest.tmj"
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":1416,
+                 "y":-184
+                }, 
+                {
+                 "class":"",
+                 "height":0,
+                 "id":1477,
+                 "name":"loadLevel",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"level",
+                         "type":"string",
+                         "value":"assets\/Tilemaps\/Level2.tmj"
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":1500,
+                 "y":-96
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -25738,7 +25774,7 @@
          "y":0
         }],
  "nextlayerid":18,
- "nextobjectid":1475,
+ "nextobjectid":1478,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.0",
