@@ -55,6 +55,7 @@ auto Redge::CombatScene::Update() -> void
 	else
 		healslottriggered = false;
 
+	// TODO: Possibly check if there are any action points to even swap weapons
 	if (IsKeyDown(KEY_TAB) && weaponslotframe == 0)
 		weaponswap = true;
 	else if (weaponslotframe != 0)
@@ -73,6 +74,7 @@ auto Redge::CombatScene::Update() -> void
 		{
 			m_Moves.emplace_back(m_SelectedWeapon, &Weapon::Attack1);
 			actionpoints -= m_SelectedWeapon->ApCostAttack1;
+			m_LastUsedWeapon = m_SelectedWeapon;
 		}
 	}
 	else if (CheckCollisionPointRec(GetMousePosition(),
@@ -99,6 +101,7 @@ auto Redge::CombatScene::Update() -> void
 		{
 			m_Moves.emplace_back(m_SelectedWeapon, &Weapon::Attack2);
 			actionpoints -= m_SelectedWeapon->ApCostAttack2;
+			m_LastUsedWeapon = m_SelectedWeapon;
 		}
 	}
 	else if (CheckCollisionPointRec(GetMousePosition(),
@@ -222,9 +225,15 @@ auto Redge::CombatScene::Update() -> void
 		{
 			if(weaponslotframe >= 6 && !m_swapped)
 			{
+				if (m_LastUsedWeapon && m_LastUsedWeapon == m_SelectedWeapon)
+					actionpoints--; // NOTE: Remove 1 action point when swapping from the last used weapon
+
 				m_swapped = true;
 				m_PreviousWeapon.swap(m_SelectedWeapon);
 				m_SelectedWeapon.swap(m_NextWeapon);
+
+				if (m_LastUsedWeapon && m_LastUsedWeapon == m_SelectedWeapon)
+					actionpoints++; // NOTE: Add back 1 action point when swapping to the last used weapon
 			}
 
 			weaponslotframe = (weaponslotframe + 1) % weaponslot.GetTileCountX();

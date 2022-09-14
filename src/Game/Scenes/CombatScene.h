@@ -46,8 +46,7 @@ namespace Redge
 
 		using SelectedMove = void(Weapon::*)(Enemy&, Character&);
 		std::vector<std::pair<std::shared_ptr<Weapon>, SelectedMove>> m_Moves{};
-
-
+		std::shared_ptr<Weapon> m_LastUsedWeapon{};
 
 		float m_MaxHealth;
 		float m_Health;
