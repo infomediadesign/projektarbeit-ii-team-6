@@ -46,7 +46,7 @@ namespace Redge
 			scene->Update();
 
 			BeginDrawing();
-			ClearBackground(PINK);
+			ClearBackground(Color{18, 4, 11, 255});
 
 			BeginMode2D(scene->Camera);
 			scene->RenderWorld();
