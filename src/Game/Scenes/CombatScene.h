@@ -5,6 +5,14 @@
 #include "Game/Objects/Weapons/Weapon.h"
 #include "Game/Objects/Weapons/Firesword.h"
 #include "Game/Objects/Weapons/Firestaff.h"
+#include "Game/Objects/Weapons/Blooddagger.h"
+#include "Game/Objects/Weapons/Bloodstaff.h"
+#include "Game/Objects/Weapons/Icespear.h"
+#include "Game/Objects/Weapons/Waterstaff.h"
+#include "Game/Objects/Weapons/Druidstaff.h"
+#include "Game/Objects/Weapons/Druidtalisman.h"
+#include "Game/Objects/Weapons/Ironhammer.h"
+#include "Game/Objects/Weapons/Staffofearth.h"
 
 namespace Redge
 {
@@ -30,9 +38,9 @@ namespace Redge
 		bool prepphase = true;
 		uint16_t actionpoints = 2;
 		bool m_swapped = false;
-		std::shared_ptr<Weapon> m_PreviousWeapon = nullptr;
-		std::shared_ptr<Weapon> m_SelectedWeapon = std::make_shared<Firesword>();
-		std::shared_ptr<Weapon> m_NextWeapon = std::make_shared<Firestaff>();
+		std::shared_ptr<Weapon> m_PreviousWeapon = std::make_shared<Druidtalisman>();
+		std::shared_ptr<Weapon> m_SelectedWeapon = std::make_shared<Ironhammer>();
+		std::shared_ptr<Weapon> m_NextWeapon = std::make_shared<Staffofearth>();
 
 		std::shared_ptr<Character> m_Character{};
 
@@ -55,6 +63,8 @@ namespace Redge
 		float OldScreenHeight;
 
 		bool weaponswap = false;
+		bool drawtooltipp1 = false;
+		bool drawtooltipp2 = false;
 
 		uint16_t uiScale = 4;
 
@@ -64,7 +74,7 @@ namespace Redge
 		Raylib::Tileset weaponslot = Raylib::Tileset("assets/UI/Combat/Weaponslot.png", 10 ,1);
 		uint16_t weaponslotframe = 0;
 		float TSLweaponslot = 0; //TSL -> Time since last
-		float FDweaponslot = 0.17; //FD -> Frame Duration
+		float FDweaponslot = 0.10; //FD -> Frame Duration
 
 		Vector2 PosPointdisplay;
 		Raylib::Tileset pointdisplay = Raylib::Tileset("assets/UI/Combat/PointDisplay.png", 17, 1);

@@ -68,6 +68,7 @@ auto Redge::CombatScene::Update() -> void
 		(IsMouseButtonDown(MOUSE_BUTTON_LEFT)||IsMouseButtonReleased(MOUSE_BUTTON_LEFT)))
 	{
 		ABS1 = 2;
+		drawtooltipp1 = true;
 		if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT) && actionpoints >= m_SelectedWeapon->ApCostAttack1)
 		{
 			m_Moves.emplace_back(m_SelectedWeapon, &Weapon::Attack1);
@@ -79,9 +80,13 @@ auto Redge::CombatScene::Update() -> void
 					 static_cast<float>(attackbutton.GetTileHeight() * uiScale)}))
 	{
 		ABS1 = 1;
+		drawtooltipp1 = true;
 	}
 	else
+	{
 		ABS1 = 0;
+		drawtooltipp1 = false;
+	}
 
 	if (CheckCollisionPointRec(GetMousePosition(),
 			{PosAttackButton2.x, PosAttackButton2.y, static_cast<float>(attackbutton.GetTileWidth() * uiScale),
@@ -89,6 +94,7 @@ auto Redge::CombatScene::Update() -> void
 		(IsMouseButtonDown(MOUSE_BUTTON_LEFT) || IsMouseButtonReleased(MOUSE_BUTTON_LEFT)))
 	{
 		ABS2 = 2;
+		drawtooltipp2 = true;
 		if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT) && actionpoints >= m_SelectedWeapon->ApCostAttack2)
 		{
 			m_Moves.emplace_back(m_SelectedWeapon, &Weapon::Attack2);
@@ -100,9 +106,13 @@ auto Redge::CombatScene::Update() -> void
 					 static_cast<float>(attackbutton.GetTileHeight() * uiScale)}))
 	{
 		ABS2 = 1;
+		drawtooltipp2 = true;
 	}
 	else
+	{
 		ABS2 = 0;
+		drawtooltipp2 = false;
+	}
 
 	if (nextphase)
 	{
@@ -123,33 +133,45 @@ auto Redge::CombatScene::Update() -> void
 				std::invoke(move, weapon, *m_Enemy, *m_Character);
 
 			if(m_Enemy->GetCurrentHp()<= 0) Host->SetScene(m_BackScene);
-
-
-			if(auto cultist = std::dynamic_pointer_cast<Cultist>(m_Enemy))
+			if(!m_Enemy->GetStatuseffects().frozen)
 			{
-				m_Character->GetStatuseffects().SetBurned(1);
+				if (auto cultist = std::dynamic_pointer_cast<Cultist>(m_Enemy))
+				{
+					m_Character->GetStatuseffects().SetBurned(1);
+				}
+				if (m_Character->GetStatuseffects().frozen)
+				{
+					m_Character->SetHealth(m_Character->GetHealth() -
+						(m_Enemy->GetDamage() * m_Enemy->GetStatuseffects().GetColdMultiplier()) * 2);
+					m_Character->GetStatuseffects().SetFrozen(false);
+				}
+				else
+					m_Character->SetHealth(m_Character->GetHealth() -
+						m_Enemy->GetDamage() * m_Enemy->GetStatuseffects().GetColdMultiplier());
+				if (m_Character->GetHealth() <= 0)
+					Host->SetScene(std::make_shared<MainMenu>(Host));
 			}
-			if(m_Character->GetStatuseffects().frozen)
-			{
-				m_Character->SetHealth(m_Character->GetHealth()-(m_Enemy->GetDamage()*m_Enemy->GetStatuseffects().GetColdMultiplier())*2);
-				m_Character->GetStatuseffects().SetFrozen(false);
-			}
-			else m_Character->SetHealth(m_Character->GetHealth()-m_Enemy->GetDamage()*m_Enemy->GetStatuseffects().GetColdMultiplier());
-			if(m_Character->GetHealth() <=0) Host->SetScene(std::make_shared<MainMenu>(Host));
 		}
 		else
 		{
-			if(auto cultist = std::dynamic_pointer_cast<Cultist>(m_Enemy))
+			if(!m_Enemy->GetStatuseffects().frozen)
 			{
-				m_Character->GetStatuseffects().SetBurned(1);
+				if (auto cultist = std::dynamic_pointer_cast<Cultist>(m_Enemy))
+				{
+					m_Character->GetStatuseffects().SetBurned(1);
+				}
+				if (m_Character->GetStatuseffects().frozen)
+				{
+					m_Character->SetHealth(m_Character->GetHealth() -
+						(m_Enemy->GetDamage() * m_Enemy->GetStatuseffects().GetColdMultiplier()) * 2);
+					m_Character->GetStatuseffects().SetFrozen(false);
+				}
+				else
+					m_Character->SetHealth(m_Character->GetHealth() -
+						m_Enemy->GetDamage() * m_Enemy->GetStatuseffects().GetColdMultiplier());
+				if (m_Character->GetHealth() <= 0)
+					Host->SetScene(std::make_shared<MainMenu>(Host));
 			}
-			if(m_Character->GetStatuseffects().frozen)
-			{
-				m_Character->SetHealth(m_Character->GetHealth()-(m_Enemy->GetDamage()*m_Enemy->GetStatuseffects().GetColdMultiplier())*2);
-				m_Character->GetStatuseffects().SetFrozen(false);
-			}
-			else m_Character->SetHealth(m_Character->GetHealth()-m_Enemy->GetDamage()*m_Enemy->GetStatuseffects().GetColdMultiplier());
-			if(m_Character->GetHealth() <=0) Host->SetScene(std::make_shared<MainMenu>(Host));
 
 			for (const auto& [weapon, move] : m_Moves)
 				std::invoke(move, weapon, *m_Enemy, *m_Character);
@@ -296,16 +318,38 @@ auto Redge::CombatScene::RenderUI() const -> void
 			WHITE);
 	}
 
-	attackbutton.DrawTileScaled(0,
-		ABS1,
-		PosAttackButton1,
-		uiScale,
-		WHITE);
-	attackbutton.DrawTileScaled(0,
-		ABS2,
-		PosAttackButton2,
-		uiScale,
-		WHITE);
+	//Attacks
+	if(m_SelectedWeapon != nullptr)
+	{
+		m_SelectedWeapon->ButtonAttack1.DrawTileScaled(0,
+			ABS1,
+			PosAttackButton1,
+			uiScale-2,
+			WHITE);
+		m_SelectedWeapon->ButtonAttack2.DrawTileScaled(0,
+			ABS2,
+			PosAttackButton2,
+			uiScale-2,
+			WHITE);
+		if(drawtooltipp1)
+		{
+			DrawTexturePro(m_SelectedWeapon->TooltippAttack1,
+				Rectangle{0, 0, static_cast<float>(m_SelectedWeapon->TooltippAttack1.width), static_cast<float>(m_SelectedWeapon->TooltippAttack1.height)},
+				Rectangle{static_cast<float>(GetScreenWidth()/2-m_SelectedWeapon->TooltippAttack1.width/2*3),static_cast<float>(GetScreenHeight()/2-m_SelectedWeapon->TooltippAttack1.height/2*3), static_cast<float>(m_SelectedWeapon->TooltippAttack1.width*3), static_cast<float>(m_SelectedWeapon->TooltippAttack1.height*3)},
+				{0, 0},
+				0,
+				WHITE);
+		}
+		if(drawtooltipp2)
+		{
+			DrawTexturePro(m_SelectedWeapon->TooltippAttack2,
+				Rectangle{0, 0, static_cast<float>(m_SelectedWeapon->TooltippAttack2.width), static_cast<float>(m_SelectedWeapon->TooltippAttack2.height)},
+				Rectangle{static_cast<float>(GetScreenWidth()/2-m_SelectedWeapon->TooltippAttack2.width/2*3),static_cast<float>(GetScreenHeight()/2-m_SelectedWeapon->TooltippAttack2.height/2*3), static_cast<float>(m_SelectedWeapon->TooltippAttack2.width*3), static_cast<float>(m_SelectedWeapon->TooltippAttack2.height*3)},
+				{0, 0},
+				0,
+				WHITE);
+		}
+	}
 
 	healslot.DrawTileScaled(static_cast<int>(healslottriggered),
 		0,
@@ -390,6 +434,7 @@ auto Redge::CombatScene::RenderUI() const -> void
 			statusPositionEnemy.x += Statuseffects.GetTileWidth() *1.5 * uiScale;
 		}
 
+		//Health
 
 	HPBarEnemy.DrawTileScaled(0,
 		1,

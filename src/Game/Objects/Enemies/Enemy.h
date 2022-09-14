@@ -24,11 +24,16 @@ namespace Redge
 		auto SetBurned(uint8_t timer) -> void;
 		auto GetBurnedTimer() -> float;
 		auto SetFrozen(bool state) -> void;
+		auto GetFrozenTimer() -> float;
 		auto SetBleeding() -> void;
-		auto ClearBleeding() -> void;
+		auto ClearBleed() -> void;
+		auto ClearStatuseffects() -> void;
+		auto AddVine(uint8_t amount) -> void;
+
 		auto MultiplyBleedingTimer(float multiplier) -> void;
 		auto GetBleedingDamage() -> float;
 		auto SetCold() -> void;
+		auto ConsumeCold() -> float;
 		auto GetColdMultiplier() -> float;
 		auto GetVineDrain()-> float;
 		auto SetVineZero() -> void;
