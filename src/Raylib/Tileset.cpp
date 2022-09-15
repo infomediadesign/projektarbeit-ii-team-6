@@ -149,4 +149,8 @@ namespace Raylib
 
 		return Tileset(imagePath.string().c_str(), columns, rows);
 	}
+	auto Tileset::GetTexture() -> Texture2D
+	{
+		return m_Texture;
+	}
 } // namespace Raylib

@@ -31,7 +31,7 @@ namespace Tiled
 } // namespace Tiled
 
 template <>
-struct nlohmann::adl_serializer<std::unique_ptr<Tiled::Object>>
+struct nlohmann::adl_serializer<std::shared_ptr<Tiled::Object>>
 {
-	static auto from_json(const json& json) -> std::unique_ptr<Tiled::Object>;
+	static auto from_json(const json& json) -> std::shared_ptr<Tiled::Object>;
 };

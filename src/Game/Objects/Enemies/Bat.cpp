@@ -1,9 +1,10 @@
-#include "Game/Objects/Bat.h"
+#include "Bat.h"
+
 #include "Tiled/Layer.h"
 
 namespace Redge
 {
-	Bat::Bat(Vector2 position) : Object(position)
+	Bat::Bat(Vector2 position) : Enemy(position, 50, 15, 10)
 	{
 	}
 
@@ -47,6 +48,36 @@ namespace Redge
 					static_cast<float>(-m_Animation.GetTileWidth()) / 2,
 					static_cast<float>(-m_Animation.GetTileHeight()) / 2,
 				}));
+	}
+	static float Size = 2;
+	auto Bat::OnCollision(uint16_t id, const std::shared_ptr<Tiled::Object>& other, CollisionType collisionType) -> void
+	{
+	}
+
+	auto Bat::CheckCollision(ICollidable* other) const -> bool
+	{
+		return other->IsColliding(Position, Size);
+	}
+
+	auto Bat::IsColliding(const Rectangle& rect) const -> bool
+	{
+		return CheckCollisionCircleRec(Position, Size, rect);
+	}
+
+	auto Bat::IsColliding(const Vector2& center, float radius) const -> bool
+	{
+		return CheckCollisionCircles(center, radius, Position, Size);
+	}
+
+	auto Bat::IsColliding(const Vector2& point) const -> bool
+	{
+		return CheckCollisionPointCircle(point, Position, Size);
+	}
+
+	auto Bat::DrawSprite(Rectangle destination) const -> void
+	{
+		m_Animation.DrawTileTo(0, 0, destination);
+		// TODO: Draw sprite
 	}
 } // namespace Redge
 

@@ -36,6 +36,8 @@ namespace Raylib
 
 		static auto FromFile(const std::filesystem::path& file) -> Tileset;
 
+		auto GetTexture() -> Texture2D;
+
 	private:
 		Texture2D m_Texture{};
 		uint16_t m_TileCountX{};

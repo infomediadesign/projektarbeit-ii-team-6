@@ -1,11 +1,20 @@
 #include "Character.h"
 
+#include "Game/Game.h"
+#include "Game/Scenes/CombatScene.h"
+#include "Game/Scenes/MainMenu.h"
 #include "raymath.h"
 #include "Tiled/Layer.h"
 #include "Tiled/Property.h"
 
 namespace Redge
 {
+	auto Character::Create(Vector2 position, float speed, float maxHealth, float maxOxygen)
+		-> std::shared_ptr<Character>
+	{
+		return std::shared_ptr<Character>(new Character(position, speed, maxHealth, maxOxygen));
+	}
+
 	Character::Character(Vector2 position, float speed, float maxHealth, float maxOxygen) :
 		Tiled::Object(position), m_PreviousPosition(position), m_CharacterSpeed(speed), m_Health(maxHealth),
 		m_MaxHealth(maxHealth), m_Oxygen(maxOxygen), m_MaxOxygen(maxOxygen)
@@ -16,7 +25,7 @@ namespace Redge
 	{
 		// NOTE: utility key binds for now
 		if (IsKeyPressed(KEY_TAB))
-			m_PrimaryWeaponSelected = !m_PrimaryWeaponSelected;
+			; // m_PrimaryWeaponSelected = !m_PrimaryWeaponSelected;
 
 		if (IsKeyPressed(KEY_C))
 			++m_CrystalCount;
@@ -80,21 +89,29 @@ namespace Redge
 			m_SlowMove = false;
 		}
 
+		if (m_Enemy)
+		{
+			auto combatScene = std::make_shared<CombatScene>(scene->Host);
+			combatScene->SetBackScene(scene->Host->SetScene(combatScene));
+
+			combatScene->SetCharacter(shared_from_this());
+			combatScene->SetEnemy(m_Enemy);
+
+			// NOTE: Possibly do this when exiting combat?
+			layer.Objects.erase(m_EnemyId);
+
+			m_EnemyId = 0;
+			m_Enemy = nullptr;
+		}
+
 		if (m_Oxygen > 0)
 			m_Oxygen -= GetFrameTime();
 		else if (m_Health > 0)
 			m_Health -= GetFrameTime();
 		else
 		{
-			// Delete character
-			for (auto it = layer.Objects.begin(); it != layer.Objects.end(); ++it)
-			{
-				if (it->second.get() == this)
-				{
-					layer.Objects.erase(it);
-					break;
-				}
-			}
+			// TODO: replace with death scene
+			scene->Host->SetScene(std::make_shared<MainMenu>(scene->Host));
 		}
 
 		scene->Camera.target = Position;
@@ -172,32 +189,23 @@ namespace Redge
 			m_InventoryIcon.DrawTileScaled(0, 0, inventoryPos, inventoryScale);
 			inventoryPos.x -= elementPadding;
 		}
-
-		// Weapon slots
-
-		auto weaponPos = Vector2{20, static_cast<float>(GetScreenHeight() - 20)};
-		auto weaponScale = 3;
-
-		weaponPos.y -= m_WeaponSlots.GetTileHeight() * weaponScale;
-
-		if (!m_PrimaryWeaponSelected)
-		{
-			// HACK: Invert image
-			weaponPos.x += m_WeaponSlots.GetTileWidth() * weaponScale;
-			weaponPos.y += m_WeaponSlots.GetTileHeight() * weaponScale;
-			weaponScale *= -1;
-		}
-
-		m_WeaponSlots.DrawTileScaled(0, 0, weaponPos, weaponScale);
 	}
 
-	auto Character::OnCollision(Tiled::Object& other, CollisionType collisionType) -> void
+	auto Character::OnCollision(uint16_t id, const std::shared_ptr<Tiled::Object>& other, CollisionType collisionType)
+		-> void
 	{
 		if ((collisionType & CollisionTypeSolid) == CollisionTypeSolid)
 			m_DontMove = true;
 
 		if ((collisionType & CollisionTypeSlow) == CollisionTypeSlow)
 			m_SlowMove = true;
+
+		if ((collisionType & CollisionTypeEnemy) == CollisionTypeEnemy)
+		{
+			m_EnemyId = id;
+			m_Enemy = std::dynamic_pointer_cast<Enemy>(other);
+			assert(m_Enemy != nullptr);
+		}
 	}
 
 	auto Character::CheckCollision(ICollidable* other) const -> bool
@@ -252,9 +260,42 @@ namespace Redge
 			static_cast<float>(-m_Animations.GetTileHeight()) / 2,
 		};
 	}
+	auto Character::GetMaxHealth() const -> float
+	{
+		return m_MaxHealth;
+	}
+	auto Character::GetMaxOxygen() const -> float
+	{
+		return m_MaxOxygen;
+	}
+	auto Character::GetHealth() const -> float
+	{
+		return m_Health;
+	}
+	auto Character::GetOxygen() const -> float
+	{
+		return m_Oxygen;
+	}
+	auto Character::SetHealth(float health) -> void
+	{
+		m_Health = health;
+	}
+	auto Character::SetOxygen(float oxygen) -> void
+	{
+		m_Oxygen = oxygen;
+	}
+	auto Character::GetInitiative() const -> float
+	{
+		return m_Initiative;
+	}
+	auto Character::GetStatuseffects() -> Statuseffects&
+	{
+		return m_Statuseffects;
+	}
 } // namespace Redge
 
-auto nlohmann::adl_serializer<Redge::Character>::from_json(const json& json) -> Redge::Character
+auto nlohmann::adl_serializer<std::shared_ptr<Redge::Character>>::from_json(const json& json)
+	-> std::shared_ptr<Redge::Character>
 {
 	assert(json["point"].get<bool>());
 
@@ -280,5 +321,5 @@ auto nlohmann::adl_serializer<Redge::Character>::from_json(const json& json) -> 
 		json["y"].get<float>(),
 	};
 
-	return Redge::Character(pos, speed, health, oxygen);
+	return Redge::Character::Create(pos, speed, health, oxygen);
 }

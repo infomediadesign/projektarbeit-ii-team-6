@@ -1,4 +1,5 @@
 #include "Scene.h"
+#include "Game/Game.h"
 
 namespace Redge
 {
@@ -8,4 +9,5 @@ namespace Redge
 		Camera.offset.y = static_cast<float>(GetScreenHeight()) / 2;
 		Camera.zoom = 1;
 	}
+
 } // namespace Redge
