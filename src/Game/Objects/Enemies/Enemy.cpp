@@ -67,7 +67,7 @@ namespace Redge
 		}
 		for (int i = 0; i < 3; i++)
 		{
-			if(cold[i] > 0)
+			if (cold[i] > 0)
 			{
 				cold[i]--;
 			}
@@ -81,12 +81,13 @@ namespace Redge
 	auto Statuseffects::SetFrozen(bool state) -> void
 	{
 		frozen = state;
-		if(state)
+		if (state)
 		{
 			frozentimer = 2;
 			ConsumeCold();
 		}
-		else frozentimer = 0;
+		else
+			frozentimer = 0;
 	}
 	auto Statuseffects::SetBleeding() -> void
 	{
@@ -127,7 +128,7 @@ namespace Redge
 		float multiplier = 1;
 		for (int i = 0; i < 3; i++)
 		{
-			if(cold[i] > 0)
+			if (cold[i] > 0)
 			{
 				multiplier -= 0.15;
 			}
@@ -183,12 +184,13 @@ namespace Redge
 			bleeding[i] = 0;
 		}
 	}
-	auto Statuseffects::ConsumeCold() -> float // TODO Fix Function (for what ever reason cold array gets cleared while entering function)
+	auto Statuseffects::ConsumeCold()
+		-> float // TODO Fix Function (for what ever reason cold array gets cleared while entering function)
 	{
 		float count = 0;
 		for (int i = 0; i < 3; i++)
 		{
-			if(cold[i] > 0)
+			if (cold[i] > 0)
 			{
 				count += 1;
 				cold[i] = 0;
@@ -204,19 +206,22 @@ namespace Redge
 		frozen = false;
 		frozentimer = 2;
 
-		bleeding[4] = {};
+		for (auto& val : bleeding)
+			val = {};
 		bleedingtimer = 2;
 
-		cold[3] = {};
+		for (auto& val : cold)
+			val = {};
 		uint8_t coldtimer = 4;
 
-		vine[5] = {};
+		for (auto& val : vine)
+			val = {};
 	}
 	auto Statuseffects::AddVine(uint8_t amount) -> void
 	{
 		for (int i = 0; i < 5; i++)
 		{
-			if(amount > 0)
+			if (amount > 0)
 			{
 				if (!vine[i])
 				{
@@ -224,7 +229,8 @@ namespace Redge
 					vine[i] = true;
 				}
 			}
-			else break;
+			else
+				break;
 		}
 	}
 } // namespace Redge
