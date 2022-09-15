@@ -71,6 +71,10 @@ namespace Redge
 				SetNextAnimationFrame();
 			}
 		}
+
+		// NOTE: this will possibly be set in OnCollision
+		m_WasTakeSpikeDamage = m_IsCollidingSpikes;
+		m_IsCollidingSpikes = false;
 	}
 
 	auto Character::LateUpdate(Scene* scene, Tiled::ObjectLayer& layer) -> void
@@ -103,6 +107,9 @@ namespace Redge
 			m_EnemyId = 0;
 			m_Enemy = nullptr;
 		}
+
+		if (!m_WasTakeSpikeDamage && m_IsCollidingSpikes)
+			m_Health -= 5;
 
 		if (m_Oxygen > 0)
 			m_Oxygen -= GetFrameTime();
@@ -206,6 +213,9 @@ namespace Redge
 			m_Enemy = std::dynamic_pointer_cast<Enemy>(other);
 			assert(m_Enemy != nullptr);
 		}
+
+		if ((collisionType & CollisionTypeSpikes) == CollisionTypeSpikes)
+			m_IsCollidingSpikes = true;
 	}
 
 	auto Character::CheckCollision(ICollidable* other) const -> bool

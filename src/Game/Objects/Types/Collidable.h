@@ -17,6 +17,7 @@ namespace Redge
 		CollisionTypeSlow = bit(1),
 		CollisionTypeEnemy = bit(2),
 		CollisionTypeCharacter = bit(3),
+		CollisionTypeSpikes = bit(3),
 	};
 
 	class ICollidable

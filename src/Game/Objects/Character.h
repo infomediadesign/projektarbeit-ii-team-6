@@ -94,6 +94,9 @@ namespace Redge
 		std::array<std::unique_ptr<Item>, 5> m_Items{};
 
 		std::array<std::unique_ptr<Weapon>, 3> m_Weapons{};
+
+		bool m_IsCollidingSpikes = false;
+		bool m_WasTakeSpikeDamage = false;
 	};
 } // namespace Redge
 
