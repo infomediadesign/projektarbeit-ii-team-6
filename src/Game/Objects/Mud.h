@@ -11,7 +11,7 @@ namespace Redge
 	public:
 		explicit Mud(Vector2 position, Vector2 dimensions);
 
-		auto OnCollision(Tiled::Object& other, CollisionType collisionType) -> void override;
+		auto OnCollision(uint16_t id, const std::shared_ptr<Tiled::Object>& other, CollisionType collisionType) -> void override;
 		auto CheckCollision(ICollidable* other) const -> bool override;
 
 		[[nodiscard]] auto GetCollisionType() const -> CollisionType override;
