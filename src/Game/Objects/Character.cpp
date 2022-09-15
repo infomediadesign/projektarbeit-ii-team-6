@@ -215,7 +215,7 @@ namespace Redge
 
 	auto Character::GetCollisionType() const -> CollisionType
 	{
-		return CollisionTypeNone;
+		return CollisionTypeCharacter;
 	}
 
 	auto Character::IsColliding(const Rectangle& rect) const -> bool

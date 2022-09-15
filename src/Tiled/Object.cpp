@@ -9,6 +9,7 @@
 #include "Game/Objects/Torch.h"
 #include "Game/Objects/UpgradeStation.h"
 #include "Game/Objects/Wall.h"
+#include "Game/Objects/LoadLevel.h"
 
 #include <cassert>
 
@@ -79,6 +80,9 @@ auto nlohmann::adl_serializer<std::shared_ptr<Tiled::Object>>::from_json(const j
 
 	if (name == "spikes")
 		return std::make_unique<Redge::Spikes>(json.get<Redge::Spikes>());
+
+	if (name == "loadLevel")
+		return std::make_unique<Redge::LoadLevel>(json.get<Redge::LoadLevel>());
 
 	// TOOD: assert(!"Unhandled object type");
 	return std::make_unique<NullObject>();
