@@ -1,0 +1,14 @@
+{ "columns":12,
+ "image":"..\/Tilesets\/doorUp.png",
+ "imageheight":48,
+ "imagewidth":192,
+ "margin":0,
+ "name":"doorUp",
+ "spacing":0,
+ "tilecount":36,
+ "tiledversion":"1.9.0",
+ "tileheight":16,
+ "tilewidth":16,
+ "type":"tileset",
+ "version":"1.8"
+}
