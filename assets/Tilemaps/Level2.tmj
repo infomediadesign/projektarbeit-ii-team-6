@@ -4241,21 +4241,9 @@
         }, 
         {
          "draworder":"topdown",
-         "id":2,
-         "name":"stuff",
+         "id":9,
+         "name":"backgroundanimations",
          "objects":[
-                {
-                 "class":"",
-                 "height":0,
-                 "id":1,
-                 "name":"character",
-                 "point":true,
-                 "rotation":0,
-                 "visible":true,
-                 "width":0,
-                 "x":1824,
-                 "y":812
-                }, 
                 {
                  "class":"",
                  "height":0,
@@ -4435,8 +4423,7 @@
                  "width":0,
                  "x":1176,
                  "y":-648
-                },
-            
+                }, 
                 {
                  "class":"",
                  "height":0,
@@ -4448,7 +4435,8 @@
                  "width":0,
                  "x":1272,
                  "y":-776
-                }, 
+                },
+            
                 {
                  "class":"",
                  "height":0,
@@ -4628,8 +4616,7 @@
                  "width":0,
                  "x":1400,
                  "y":-248
-                },
-            
+                }, 
                 {
                  "class":"",
                  "height":0,
@@ -4641,7 +4628,8 @@
                  "width":0,
                  "x":1096,
                  "y":-424
-                }, 
+                },
+            
                 {
                  "class":"",
                  "height":0,
@@ -4821,8 +4809,7 @@
                  "width":0,
                  "x":1720,
                  "y":584
-                },
-            
+                }, 
                 {
                  "class":"",
                  "height":0,
@@ -4834,7 +4821,8 @@
                  "width":0,
                  "x":1928,
                  "y":584
-                }, 
+                },
+            
                 {
                  "class":"",
                  "height":0,
@@ -4858,6 +4846,29 @@
                  "width":0,
                  "x":1880,
                  "y":8
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":2,
+         "name":"stuff",
+         "objects":[
+                {
+                 "class":"",
+                 "height":0,
+                 "id":1,
+                 "name":"character",
+                 "point":true,
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":1824,
+                 "y":812
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -8113,8 +8124,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":9,
- "nextobjectid":60,
+ "nextlayerid":10,
+ "nextobjectid":110,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.0",
