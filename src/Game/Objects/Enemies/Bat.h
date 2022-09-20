@@ -30,6 +30,7 @@ namespace Redge
 		std::shared_ptr<Character> character;
 		float s_Speed = 120;
 		Raylib::Tileset m_Animation = Raylib::Tileset("assets/Entities/Bat.png", 6, 1);
+		Raylib::Tileset m_BattleAnimation = Raylib::Tileset("assets/UI/Combat/idle/batIdle.png", 6, 1);
 		mutable uint16_t m_AnimationFrame = 0;
 		static constexpr float s_FrameDuration = 0.07;
 		mutable float m_Frametime = 0;

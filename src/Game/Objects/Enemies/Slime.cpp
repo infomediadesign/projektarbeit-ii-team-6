@@ -77,14 +77,14 @@ namespace Redge
 
 	auto Slime::DrawSprite(Rectangle destination) const -> void
 	{
-		m_Animation.DrawTileTo(m_AnimationFrame, 0, destination);
+		m_BattleAnimation.DrawTileTo(m_AnimationFrame, 0, destination);
 
 		// HACK: This is a terrible hack that doesn't need to be (with use of mutable)
 		m_Frametime += GetFrameTime();
-		if (m_Frametime >= s_FrameDuration)
+		if (m_Frametime >= s_BattleFrameDuration)
 		{
-			m_Frametime -= s_FrameDuration;
-			++m_AnimationFrame %= m_Animation.GetTileCountX();
+			m_Frametime -= s_BattleFrameDuration;
+			++m_AnimationFrame %= m_BattleAnimation.GetTileCountX();
 		}
 	}
 } // namespace Redge
