@@ -289,6 +289,10 @@ namespace Redge
 	{
 		return m_Statuseffects;
 	}
+	auto Character::DrawSprite(Rectangle area) const -> void
+	{
+		m_Animations.DrawTileTo(0, 1, area);
+	}
 } // namespace Redge
 
 auto nlohmann::adl_serializer<std::shared_ptr<Redge::Character>>::from_json(const json& json)

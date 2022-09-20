@@ -51,6 +51,7 @@ namespace Redge
 		auto SetHealth(float health) -> void;
 		auto SetOxygen(float oxygen) -> void;
 
+		auto DrawSprite(Rectangle area) const -> void;
 
 	private:
 		Character(Vector2 position, float speed, float maxHealth, float maxOxygen);
