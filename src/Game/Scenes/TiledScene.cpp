@@ -56,4 +56,13 @@ namespace Redge
 
 		DrawText(fps.c_str(), topLeft.x, topLeft.y, fontSize, WHITE);
 	}
+
+	auto TiledScene::IsToxic() const -> bool
+	{
+		auto toxic = m_Level.Properties.find("toxic");
+		if (toxic == m_Level.Properties.end())
+			return false;
+
+		return std::get<bool>(toxic->second);
+	}
 } // namespace Redge

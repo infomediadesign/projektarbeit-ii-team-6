@@ -15,6 +15,8 @@ namespace Redge
 		auto RenderWorld() const -> void override;
 		auto RenderUI() const -> void override;
 
+		auto IsToxic() const -> bool override;
+
 	private:
 		Tiled::Map m_Level;
 	};

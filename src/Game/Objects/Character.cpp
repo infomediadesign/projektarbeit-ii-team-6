@@ -98,14 +98,17 @@ namespace Redge
 		if (!m_WasTakeSpikeDamage && m_IsCollidingSpikes)
 			m_Health -= 5;
 
-		if (m_Oxygen > 0)
-			m_Oxygen -= GetFrameTime();
-		else if (m_Health > 0)
-			m_Health -= GetFrameTime();
-		else
+		if (scene->IsToxic())
 		{
-			// TODO: replace with death scene
-			scene->Host->SetScene(std::make_shared<MainMenu>(scene->Host));
+			if (m_Oxygen > 0)
+				m_Oxygen -= GetFrameTime() / 3;
+			else if (m_Health > 0)
+				m_Health -= GetFrameTime() / 3;
+			else
+			{
+				// TODO: replace with death scene
+				scene->Host->SetScene(std::make_shared<MainMenu>(scene->Host));
+			}
 		}
 
 		scene->Camera.target = Position;
@@ -292,6 +295,10 @@ namespace Redge
 	auto Character::DrawSprite(Rectangle area) const -> void
 	{
 		m_Animations.DrawTileTo(0, 1, area);
+	}
+	auto Character::GetWeapon(uint8_t index) -> std::shared_ptr<Weapon>
+	{
+		return m_Weapons.at(index);
 	}
 } // namespace Redge
 

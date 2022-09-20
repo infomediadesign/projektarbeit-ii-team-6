@@ -1872,6 +1872,24 @@
                  "width":0,
                  "x":744,
                  "y":520
+                }, 
+                {
+                 "class":"",
+                 "height":0,
+                 "id":220,
+                 "name":"loadLevel",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"level",
+                         "type":"string",
+                         "value":"assets\/Tilemaps\/Level1.tmj"
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":768,
+                 "y":456
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -2158,10 +2176,10 @@
          "y":0
         }],
  "nextlayerid":8,
- "nextobjectid":219,
+ "nextobjectid":221,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.9.0",
+ "tiledversion":"1.9.1",
  "tileheight":16,
  "tilesets":[
         {

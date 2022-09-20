@@ -25776,8 +25776,14 @@
  "nextlayerid":18,
  "nextobjectid":1485,
  "orientation":"orthogonal",
+ "properties":[
+        {
+         "name":"toxic",
+         "type":"bool",
+         "value":true
+        }],
  "renderorder":"right-down",
- "tiledversion":"1.9.0",
+ "tiledversion":"1.9.1",
  "tileheight":16,
  "tilesets":[
         {

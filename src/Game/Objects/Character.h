@@ -6,6 +6,17 @@
 #include "Game/Objects/Weapons/Weapon.h"
 #include "Raylib/Tileset.h"
 #include "Tiled/Object.h"
+#include "Game/Objects/Weapons/Weapon.h"
+#include "Game/Objects/Weapons/Firesword.h"
+#include "Game/Objects/Weapons/Firestaff.h"
+#include "Game/Objects/Weapons/Blooddagger.h"
+#include "Game/Objects/Weapons/Bloodstaff.h"
+#include "Game/Objects/Weapons/Icespear.h"
+#include "Game/Objects/Weapons/Waterstaff.h"
+#include "Game/Objects/Weapons/Druidstaff.h"
+#include "Game/Objects/Weapons/Druidtalisman.h"
+#include "Game/Objects/Weapons/Ironhammer.h"
+#include "Game/Objects/Weapons/Staffofearth.h"
 
 namespace Redge
 {
@@ -46,6 +57,8 @@ namespace Redge
 		auto GetOxygen() const -> float;
 		auto GetInitiative() const -> float;
 		auto GetStatuseffects() -> Statuseffects&;
+
+		auto GetWeapon(uint8_t index) -> std::shared_ptr<Weapon>;
 
 		//Combat Setter-Functions
 		auto SetHealth(float health) -> void;
@@ -94,7 +107,11 @@ namespace Redge
 		Raylib::Tileset m_InventoryIcon = Raylib::Tileset("assets/UI/InventoryItem.png", 1, 1);
 		std::array<std::unique_ptr<Item>, 5> m_Items{};
 
-		std::array<std::unique_ptr<Weapon>, 3> m_Weapons{};
+		std::array<std::shared_ptr<Weapon>, 3> m_Weapons{
+			std::make_shared<Druidtalisman>(),
+			std::make_shared<Druidstaff>(),
+			std::make_shared<Ironhammer>(),
+		};
 
 		bool m_IsCollidingSpikes = false;
 		bool m_WasTakeSpikeDamage = false;
