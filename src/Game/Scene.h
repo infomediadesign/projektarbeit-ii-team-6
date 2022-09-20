@@ -1,7 +1,7 @@
 #pragma once
 
-#include "raylib.h"
 #include "memory"
+#include "raylib.h"
 
 namespace Redge
 {
@@ -16,6 +16,11 @@ namespace Redge
 
 		virtual auto RenderWorld() const -> void = 0;
 		virtual auto RenderUI() const -> void = 0;
+
+		[[nodiscard]] virtual auto IsToxic() const -> bool
+		{
+			return false;
+		}
 
 		Game* const Host;
 		Camera2D Camera{};
