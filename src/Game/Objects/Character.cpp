@@ -99,9 +99,9 @@ namespace Redge
 			m_Health -= 5;
 
 		if (m_Oxygen > 0)
-			m_Oxygen -= GetFrameTime();
+			m_Oxygen -= GetFrameTime() / 3;
 		else if (m_Health > 0)
-			m_Health -= GetFrameTime();
+			m_Health -= GetFrameTime() / 3;
 		else
 		{
 			// TODO: replace with death scene
