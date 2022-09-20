@@ -23,19 +23,6 @@ namespace Redge
 
 	auto Character::Update(Scene* scene, Tiled::ObjectLayer& layer) -> void
 	{
-		// NOTE: utility key binds for now
-		if (IsKeyPressed(KEY_TAB))
-			; // m_PrimaryWeaponSelected = !m_PrimaryWeaponSelected;
-
-		if (IsKeyPressed(KEY_C))
-			++m_CrystalCount;
-
-		if (IsKeyPressed(KEY_R))
-		{
-			m_Health = m_MaxHealth;
-			m_Oxygen = m_MaxOxygen;
-		}
-
 		Vector2 movement{};
 		movement.x -= static_cast<float>(IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT));
 		movement.x += static_cast<float>(IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT));
