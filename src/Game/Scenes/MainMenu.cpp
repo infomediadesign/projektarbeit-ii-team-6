@@ -21,7 +21,7 @@ namespace Redge
 		m_Play.SetArea(buttonArea);
 		buttonArea.y += buttonArea.height + 50;
 		if (m_Play.Update())
-			Host->SetScene(std::make_shared<TiledScene>(Host, "assets/Tilemaps/Level1.tmj"));
+			Host->SetScene(std::make_shared<TiledScene>(Host, "assets/Tilemaps/Hub.tmj"));
 
 		m_Settings.SetArea(buttonArea);
 		buttonArea.y += buttonArea.height + 50;
