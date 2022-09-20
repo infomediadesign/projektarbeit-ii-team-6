@@ -289,7 +289,7 @@ auto Redge::CombatScene::RenderUI() const -> void
 	{
 		m_SelectedWeapon->Weaponsprites16.DrawTileScaled(m_SelectedWeapon->SpriteID,
 			0,
-			{PosWeaponslot.x + 35 * uiScale, PosWeaponslot.y + 5 * uiScale},
+			{PosWeaponslot.x + 34 * uiScale, PosWeaponslot.y + 5 * uiScale},
 			uiScale,
 			WHITE
 		);
