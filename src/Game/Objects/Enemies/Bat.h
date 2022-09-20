@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Enemy.h"
 #include "Game/Objects/Character.h"
 #include "raylib.h"
 #include "Raylib/Tileset.h"
@@ -9,12 +10,21 @@
 namespace Redge
 {
 
-	class Bat final : public Tiled::Object
+	class Bat final : public Enemy
 	{
 	public:
 		Bat(Vector2 position);
 		auto Update(Scene* scene, Tiled::ObjectLayer& layer) -> void override;
 		auto Render() const -> void override;
+
+		auto OnCollision(uint16_t id, const std::shared_ptr<Tiled::Object>& other, CollisionType collisionType) -> void override;
+		auto CheckCollision(ICollidable* other) const -> bool override;
+
+		[[nodiscard]] auto IsColliding(const Rectangle& rect) const -> bool override;
+		[[nodiscard]] auto IsColliding(const Vector2& center, float radius) const -> bool override;
+		[[nodiscard]] auto IsColliding(const Vector2& point) const -> bool override;
+
+		auto DrawSprite(Rectangle destination) const -> void override;
 
 	private:
 		std::shared_ptr<Character> character;

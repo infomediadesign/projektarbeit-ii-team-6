@@ -7,7 +7,7 @@
 
 namespace Redge
 {
-	class Spikes final : public Tiled::Object
+	class Spikes final : public Tiled::Object, public ICollidable
 	{
 	public:
 		explicit Spikes(Vector2 position);
@@ -15,7 +15,18 @@ namespace Redge
 		auto Update(Scene* scene, Tiled::ObjectLayer& layer) -> void override;
 		auto RenderBelow() const -> void override;
 
+		auto OnCollision(uint16_t id, const std::shared_ptr<Tiled::Object>& other, CollisionType collisionType) -> void override;
+		auto CheckCollision(ICollidable* other) const -> bool override;
+
+		[[nodiscard]] auto GetCollisionType() const -> CollisionType override;
+
+		[[nodiscard]] auto IsColliding(const Rectangle& rect) const -> bool override;
+		[[nodiscard]] auto IsColliding(const Vector2& center, float radius) const -> bool override;
+		[[nodiscard]] auto IsColliding(const Vector2& point) const -> bool override;
+
 	private:
+		auto GetHitbox() const -> Rectangle;
+
 		static constexpr float s_LoopDuration = 5;
 		static constexpr float s_HiddenDuration = 2;
 		static constexpr float s_TransitionDuration = 0.2;

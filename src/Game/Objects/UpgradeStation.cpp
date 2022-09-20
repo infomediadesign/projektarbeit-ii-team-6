@@ -33,7 +33,7 @@ namespace Redge
 		m_Ghosts.DrawTile(m_AnimationFrame, m_AnimationColor, position);
 	}
 
-	auto UpgradeStation::OnCollision(Tiled::Object& other, CollisionType collisionType) -> void
+	auto UpgradeStation::OnCollision(uint16_t id, const std::shared_ptr<Tiled::Object>& other, CollisionType collisionType) -> void
 	{
 	}
 

@@ -1,7 +1,9 @@
 #pragma once
 
+#include "Game/Objects/Enemies/Enemy.h"
 #include "Game/Objects/Items/Item.h"
 #include "Game/Objects/Types/Collidable.h"
+#include "Game/Objects/Weapons/Weapon.h"
 #include "Raylib/Tileset.h"
 #include "Tiled/Object.h"
 
@@ -15,10 +17,11 @@ namespace Redge
 		Left,
 	};
 
-	class Character final : public Tiled::Object, public ICollidable
+	class Character final : public Tiled::Object, public ICollidable, public std::enable_shared_from_this<Character>
 	{
 	public:
-		Character(Vector2 position, float speed, float maxHealth, float maxOxygen);
+		static auto Create(Vector2 position, float speed, float maxHealth, float maxOxygen)
+			-> std::shared_ptr<Character>;
 
 		auto Update(Scene* scene, Tiled::ObjectLayer& layer) -> void override;
 		auto LateUpdate(Scene* scene, Tiled::ObjectLayer& layer) -> void override;
@@ -26,7 +29,8 @@ namespace Redge
 		auto RenderBelow() const -> void override;
 		auto RenderUI() const -> void override;
 
-		auto OnCollision(Tiled::Object& other, CollisionType collisionType) -> void override;
+		auto OnCollision(uint16_t id, const std::shared_ptr<Tiled::Object>& other, CollisionType collisionType)
+			-> void override;
 		auto CheckCollision(ICollidable* other) const -> bool override;
 
 		[[nodiscard]] auto GetCollisionType() const -> CollisionType override;
@@ -35,7 +39,24 @@ namespace Redge
 		auto IsColliding(const Vector2& center, float radius) const -> bool override;
 		auto IsColliding(const Vector2& point) const -> bool override;
 
+		//Combat Getter-Functions
+		auto GetMaxHealth() const -> float;
+		auto GetMaxOxygen() const -> float;
+		auto GetHealth() const -> float;
+		auto GetOxygen() const -> float;
+		auto GetInitiative() const -> float;
+		auto GetStatuseffects() -> Statuseffects&;
+
+		//Combat Setter-Functions
+		auto SetHealth(float health) -> void;
+		auto SetOxygen(float oxygen) -> void;
+
+
 	private:
+		Character(Vector2 position, float speed, float maxHealth, float maxOxygen);
+
+		Statuseffects m_Statuseffects;
+
 		auto SetNextAnimationFrame() -> void;
 
 		auto GetHitBox() const -> Rectangle;
@@ -53,6 +74,9 @@ namespace Redge
 		bool m_DontMove = false;
 		bool m_SlowMove = false;
 
+		uint16_t m_EnemyId{};
+		std::shared_ptr<Enemy> m_Enemy{};
+
 		float m_CharacterSpeed;
 		float m_SpeedMultiplier = 1;
 
@@ -61,6 +85,7 @@ namespace Redge
 		float m_Health;
 		float m_MaxOxygen;
 		float m_Oxygen;
+		float m_Initiative;
 
 		Raylib::Tileset m_CrystalIcon = Raylib::Tileset("assets/UI/CrystalIcon.png", 1, 1);
 		uint32_t m_CrystalCount = 0;
@@ -68,13 +93,15 @@ namespace Redge
 		Raylib::Tileset m_InventoryIcon = Raylib::Tileset("assets/UI/InventoryItem.png", 1, 1);
 		std::array<std::unique_ptr<Item>, 5> m_Items{};
 
-		Raylib::Tileset m_WeaponSlots = Raylib::Tileset("assets/UI/WeaponSlots.png", 1, 1);
-		bool m_PrimaryWeaponSelected = false;
+		std::array<std::unique_ptr<Weapon>, 3> m_Weapons{};
+
+		bool m_IsCollidingSpikes = false;
+		bool m_WasTakeSpikeDamage = false;
 	};
 } // namespace Redge
 
 template <>
-struct nlohmann::adl_serializer<Redge::Character>
+struct nlohmann::adl_serializer<std::shared_ptr<Redge::Character>>
 {
-	static auto from_json(const json& json) -> Redge::Character;
+	static auto from_json(const json& json) -> std::shared_ptr<Redge::Character>;
 };

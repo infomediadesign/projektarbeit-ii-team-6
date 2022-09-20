@@ -7,7 +7,7 @@ namespace Redge
 	{
 	}
 
-	auto Mud::OnCollision(Tiled::Object& other, CollisionType collisionType) -> void
+	auto Mud::OnCollision(uint16_t id, const std::shared_ptr<Tiled::Object>& other, CollisionType collisionType) -> void
 	{
 	}
 

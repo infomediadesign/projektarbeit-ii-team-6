@@ -1,14 +1,15 @@
 #include "Object.h"
 
-#include "Game/Objects/Bat.h"
 #include "Game/Objects/Character.h"
-#include "Game/Objects/Cultist.h"
 #include "Game/Objects/Mud.h"
-#include "Game/Objects/Slime.h"
+#include "Game/Objects/Enemies/Bat.h"
+#include "Game/Objects/Enemies/Cultist.h"
+#include "Game/Objects/Enemies/Slime.h"
 #include "Game/Objects/Spikes.h"
 #include "Game/Objects/Torch.h"
 #include "Game/Objects/UpgradeStation.h"
 #include "Game/Objects/Wall.h"
+#include "Game/Objects/LoadLevel.h"
 
 #include <cassert>
 
@@ -47,14 +48,14 @@ struct NullObject final : Tiled::Object
 	}
 };
 
-auto nlohmann::adl_serializer<std::unique_ptr<Tiled::Object>>::from_json(const json& json)
-	-> std::unique_ptr<Tiled::Object>
+auto nlohmann::adl_serializer<std::shared_ptr<Tiled::Object>>::from_json(const json& json)
+	-> std::shared_ptr<Tiled::Object>
 {
 	// TODO: Create objects from Tiled map data
 	const auto name = json["name"].get<std::string>();
 
 	if (name == "character")
-		return std::make_unique<Redge::Character>(json.get<Redge::Character>());
+		return json.get<std::shared_ptr<Redge::Character>>();
 
 	if (name == "slime")
 		return std::make_unique<Redge::Slime>(json.get<Redge::Slime>());
@@ -79,6 +80,9 @@ auto nlohmann::adl_serializer<std::unique_ptr<Tiled::Object>>::from_json(const j
 
 	if (name == "spikes")
 		return std::make_unique<Redge::Spikes>(json.get<Redge::Spikes>());
+
+	if (name == "loadLevel")
+		return std::make_unique<Redge::LoadLevel>(json.get<Redge::LoadLevel>());
 
 	// TOOD: assert(!"Unhandled object type");
 	return std::make_unique<NullObject>();
