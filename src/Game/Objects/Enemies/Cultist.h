@@ -32,9 +32,9 @@ namespace Redge
 		float s_Speed = 35;
 		Animation m_Direction = Animation::Down;
 		Raylib::Tileset m_Animation = Raylib::Tileset("assets/Entities/Cultist.png", 4, 4);
-		uint16_t m_AnimationFrame = 0;
+		mutable uint16_t m_AnimationFrame = 0;
 		static constexpr float s_FrameDuration = 0.30;
-		float m_Frametime = 0;
+		mutable float m_Frametime = 0;
 	};
 } // namespace Redge
 

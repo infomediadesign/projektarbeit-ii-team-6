@@ -30,9 +30,9 @@ namespace Redge
 		std::shared_ptr<Character> character;
 		float s_Speed = 60;
 		Raylib::Tileset m_Animation = Raylib::Tileset("assets/Entities/Slime.png", 8, 1);
-		uint16_t m_AnimationFrame = 0;
+		mutable uint16_t m_AnimationFrame = 0;
 		static constexpr float s_FrameDuration = 0.15;
-		float m_Frametime = 0;
+		mutable float m_Frametime = 0;
 	};
 } // namespace Redge
 
