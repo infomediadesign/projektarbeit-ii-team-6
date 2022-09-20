@@ -505,6 +505,9 @@ auto Redge::CombatScene::RelocateUI() -> void
 auto Redge::CombatScene::SetCharacter(std::shared_ptr<Character> character) -> void
 {
 	m_Character = std::move(character);
+	m_PreviousWeapon = m_Character->GetWeapon(0);
+	m_SelectedWeapon = m_Character->GetWeapon(1);
+	m_NextWeapon = m_Character->GetWeapon(2);
 }
 
 auto Redge::CombatScene::SetEnemy(std::shared_ptr<Enemy> enemy) -> void
