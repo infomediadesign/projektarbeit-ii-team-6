@@ -109,8 +109,8 @@ namespace Redge
 
 		std::array<std::shared_ptr<Weapon>, 3> m_Weapons{
 			std::make_shared<Druidtalisman>(),
-			std::make_shared<Druidstaff>(),
-			std::make_shared<Ironhammer>(),
+			std::make_shared<IceSpear>(),
+			std::make_shared<Waterstaff>(),
 		};
 
 		bool m_IsCollidingSpikes = false;

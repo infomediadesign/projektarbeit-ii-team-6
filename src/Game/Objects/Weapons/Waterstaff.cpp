@@ -3,10 +3,9 @@
 #include "Game/Objects/Character.h"
 auto Redge::Waterstaff::Attack1(Enemy& Enemy, Character& Character) -> void
 {
-	float consumed = Character.GetStatuseffects().ConsumeCold();
-	if(Character.GetHealth()+consumed*10 <= Character.GetMaxHealth())
+	if(Character.GetHealth()+20 <= Character.GetMaxHealth())
 	{
-		Character.SetHealth(Character.GetHealth()+consumed*10);
+		Character.SetHealth(Character.GetHealth()+20);
 	}
 	else Character.SetHealth(Character.GetMaxHealth());
 }
