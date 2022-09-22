@@ -104,9 +104,6 @@ namespace Redge
 		Raylib::Tileset m_CrystalIcon = Raylib::Tileset("assets/UI/CrystalIcon.png", 1, 1);
 		uint32_t m_CrystalCount = 0;
 
-		Raylib::Tileset m_InventoryIcon = Raylib::Tileset("assets/UI/InventoryItem.png", 1, 1);
-		std::array<std::unique_ptr<Item>, 5> m_Items{};
-
 		std::array<std::shared_ptr<Weapon>, 3> m_Weapons{
 			std::make_shared<Druidtalisman>(),
 			std::make_shared<IceSpear>(),
