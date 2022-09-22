@@ -540,7 +540,7 @@
          "startx":0,
          "starty":0,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":96,
          "x":0,
          "y":0
