@@ -77,7 +77,7 @@ namespace Redge
 
 	auto Slime::DrawSprite(Rectangle destination) const -> void
 	{
-		m_BattleAnimation.DrawTileTo(m_AnimationFrame, 0, destination);
+		m_BattleAnimation.DrawTileTo(m_BattleAnimationFrame, 0, destination);
 
 		// HACK: This is a terrible hack that doesn't need to be (with use of mutable)
 		m_BattleFrametime += GetFrameTime();

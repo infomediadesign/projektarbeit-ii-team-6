@@ -36,7 +36,7 @@ namespace Redge
 		float m_Frametime = 0;
 
 		mutable uint16_t m_BattleAnimationFrame = 0;
-		static constexpr float s_BattleFrameDuration = 0.3;
+		static constexpr float s_BattleFrameDuration = 0.07;
 		mutable float m_BattleFrametime = 0;
 	};
 } // namespace Redge
