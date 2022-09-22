@@ -1485,7 +1485,7 @@
                  "visible":true,
                  "width":0,
                  "x":504,
-                 "y":296
+                 "y":299
                 }, 
                 {
                  "class":"",
@@ -1509,7 +1509,7 @@
                  "visible":true,
                  "width":0,
                  "x":660,
-                 "y":600
+                 "y":602
                 }, 
                 {
                  "class":"",
@@ -1592,8 +1592,8 @@
                  "rotation":0,
                  "visible":true,
                  "width":0,
-                 "x":416,
-                 "y":392
+                 "x":417,
+                 "y":396
                 }, 
                 {
                  "class":"",
@@ -1616,8 +1616,8 @@
                  "rotation":0,
                  "visible":true,
                  "width":0,
-                 "x":580,
-                 "y":476
+                 "x":574,
+                 "y":485
                 }, 
                 {
                  "class":"",
@@ -1689,8 +1689,8 @@
                  "rotation":0,
                  "visible":true,
                  "width":0,
-                 "x":640,
-                 "y":552
+                 "x":641,
+                 "y":556
                 }, 
                 {
                  "class":"",
@@ -1714,7 +1714,7 @@
                  "visible":true,
                  "width":0,
                  "x":928,
-                 "y":552
+                 "y":555
                 }, 
                 {
                  "class":"",
@@ -1785,8 +1785,8 @@
                  "rotation":0,
                  "visible":true,
                  "width":0,
-                 "x":576,
-                 "y":460
+                 "x":578,
+                 "y":464
                 }, 
                 {
                  "class":"",
@@ -1833,8 +1833,8 @@
                  "rotation":0,
                  "visible":true,
                  "width":0,
-                 "x":1184,
-                 "y":304
+                 "x":1187,
+                 "y":310
                 },
             
                 {
@@ -2170,7 +2170,7 @@
          "startx":16,
          "starty":0,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":64,
          "x":0,
          "y":0
