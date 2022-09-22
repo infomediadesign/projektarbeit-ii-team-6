@@ -540,7 +540,7 @@
          "startx":0,
          "starty":0,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":96,
          "x":0,
          "y":0
@@ -619,7 +619,7 @@
         {
          "chunks":[
                 {
-                 "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6441, 6442, 6443, 0,
+                 "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6440, 6441, 6442, 6443, 0,
                     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6448, 6449, 6450, 0,
                     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -2179,7 +2179,7 @@
  "nextobjectid":221,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.9.1",
+ "tiledversion":"1.9.0",
  "tileheight":16,
  "tilesets":[
         {
