@@ -5,6 +5,7 @@
 #include "Game/Objects/Enemies/Bat.h"
 #include "Game/Objects/Enemies/Cultist.h"
 #include "Game/Objects/Enemies/Slime.h"
+#include "Game/Objects/Cactus.h"
 #include "Game/Objects/Spikes.h"
 #include "Game/Objects/NPC.h"
 #include "Game/Objects/Torch.h"
@@ -87,6 +88,9 @@ auto nlohmann::adl_serializer<std::shared_ptr<Tiled::Object>>::from_json(const j
 
 	if (name == "Scientist" || name == "Blacksmith" || name == "Shopkeeper" || name == "Banker")
 		return std::make_unique<Redge::NPC>(json.get<Redge::NPC>());
+
+	if (name == "Cactus1" || name == "Cactus2" || name == "Cactus3" || name == "Cactus4" || name == "Cactus5")
+		return std::make_unique<Redge::Cactus>(json.get<Redge::Cactus>());
 
 	// TOOD: assert(!"Unhandled object type");
 	return std::make_unique<NullObject>();
