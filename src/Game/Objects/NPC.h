@@ -8,7 +8,7 @@ namespace Redge
 	class NPC : public Tiled::Object
 	{
 	public:
-		NPC(Vector2 position, const char* file);
+		NPC(Vector2 position, const char* file, float frameDuration);
 
 		auto Update(Redge::Scene *scene, Tiled::ObjectLayer &layer) -> void override;
 		auto Render() const -> void override;
@@ -16,7 +16,7 @@ namespace Redge
 	private:
 		Raylib::Tileset m_Animations;
 		uint16_t m_AnimationFrame = 0;
-		static constexpr float s_FrameDuration = 0.2;
+		float m_FrameDuration = 0;
 		float m_Frametime = 0;
 	};
 } // namespace Redge
