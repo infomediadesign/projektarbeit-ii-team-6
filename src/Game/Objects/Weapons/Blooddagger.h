@@ -6,7 +6,7 @@ namespace Redge
 	class Blooddagger final: public Weapon
 	{
 	public:
-		Blooddagger()
+		Blooddagger() : Weapon("assets/UI/Combat/WeaponIdle/BlutDaggerIdle.png")
 		{
 			ApCostAttack1 = 1;
 			ApCostAttack2 = 1;

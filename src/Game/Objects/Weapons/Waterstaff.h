@@ -6,7 +6,7 @@ namespace Redge
 	class Waterstaff final: public Weapon
 	{
 	public:
-		Waterstaff()
+		Waterstaff() : Weapon("assets/UI/Combat/WeaponIdle/WasserStabIdle.png")
 		{
 			ApCostAttack1 = 2;
 			ApCostAttack2 = 1;

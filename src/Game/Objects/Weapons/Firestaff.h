@@ -5,7 +5,7 @@ namespace Redge
 	class Firestaff final : public Weapon
 	{
 	public:
-		Firestaff()
+		Firestaff() : Weapon("assets/UI/Combat/WeaponIdle/feuerstabIdle.png")
 		{
 			ApCostAttack1 = 2;
 			ApCostAttack2 = 2;

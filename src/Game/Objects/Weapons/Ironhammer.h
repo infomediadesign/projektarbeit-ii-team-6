@@ -6,7 +6,7 @@ namespace Redge
 	class Ironhammer final: public Weapon
 	{
 	public:
-		Ironhammer()
+		Ironhammer() : Weapon("assets/UI/Combat/WeaponIdle/EisenHammerIdle.png")
 		{
 			ApCostAttack1 = 2;
 			ApCostAttack2 = 2;

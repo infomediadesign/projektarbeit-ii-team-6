@@ -6,7 +6,7 @@ namespace Redge
 	class Firesword final: public Weapon
 	{
 		public:
-			Firesword()
+			Firesword() : Weapon("assets/UI/Combat/WeaponIdle/feuerSchwertIdle.png")
 			{
 				ApCostAttack1 = 1;
 				ApCostAttack2 = 1;

@@ -6,7 +6,7 @@ namespace Redge
 	class Druidstaff final: public Weapon
 	{
 	public:
-		Druidstaff()
+		Druidstaff() : Weapon("assets/UI/Combat/WeaponIdle/DruidenStabIdle.png")
 		{
 			ApCostAttack1 = 1;
 			ApCostAttack2 = 2;

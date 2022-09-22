@@ -6,7 +6,7 @@ namespace Redge
 	class IceSpear final: public Weapon
 	{
 	public:
-		IceSpear()
+		IceSpear() : Weapon("assets/UI/Combat/WeaponIdle/EisSpeerIdle.png")
 		{
 			ApCostAttack1 = 1;
 			ApCostAttack2 = 2;

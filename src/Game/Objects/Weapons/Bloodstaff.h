@@ -6,7 +6,7 @@ namespace Redge
 	class Bloodstaff final: public Weapon
 	{
 	public:
-		Bloodstaff()
+		Bloodstaff() : Weapon("assets/UI/Combat/WeaponIdle/BlutMagieStabIdle.png")
 		{
 			ApCostAttack1 = 2;
 			ApCostAttack2 = 2;

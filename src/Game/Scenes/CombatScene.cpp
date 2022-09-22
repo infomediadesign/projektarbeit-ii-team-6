@@ -269,11 +269,11 @@ auto Redge::CombatScene::RenderUI() const -> void
 	m_Enemy->DrawSprite(enemyArea);
 
 	Rectangle characterArea{};
-	characterArea.width = 200;
+	characterArea.width = 400;
 	characterArea.height = 400;
-	characterArea.x = static_cast<float>(GetScreenWidth() * 0.23) - characterArea.width / 2;
+	characterArea.x = static_cast<float>(GetScreenWidth() * 0.27) - characterArea.width / 2;
 	characterArea.y = static_cast<float>(GetScreenHeight() * 0.87) - characterArea.height;
-	m_Character->DrawSprite(characterArea);
+	m_SelectedWeapon->DrawSprite(characterArea);
 
 	// UI
 	if(m_NextWeapon != nullptr && (weaponslotframe <= 3 || weaponslotframe >= 7))

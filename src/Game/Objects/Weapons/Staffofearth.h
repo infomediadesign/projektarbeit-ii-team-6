@@ -6,7 +6,7 @@ namespace Redge
 	class Staffofearth final: public Weapon
 	{
 	public:
-		Staffofearth()
+		Staffofearth() : Weapon("assets/UI/Combat/WeaponIdle/StabDerErdeIdle.png")
 		{
 			ApCostAttack1 = 2;
 			ApCostAttack2 = 1;
