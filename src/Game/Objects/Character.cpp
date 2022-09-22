@@ -228,20 +228,22 @@ namespace Redge
 	{
 		auto offset = GetTextureOffset();
 
-		float width = m_Animations.GetTileWidth() * 0.8;
-		float height = m_Animations.GetTileHeight() + offset.y;
+		Rectangle hitbox{};
 
-		float posX = Position.x - width / 2;
-		float posY = Position.y;
+		hitbox.width = m_Animations.GetTileWidth() * 0.8;
+		hitbox.height = m_Animations.GetTileHeight() / 2;
 
-		return Rectangle{posX, posY, width, height};
+		hitbox.x = Position.x - hitbox.width / 2;
+		hitbox.y = Position.y - hitbox.height;
+
+		return hitbox;
 	}
 
 	auto Character::GetTextureOffset() const -> Vector2
 	{
 		return Vector2{
 			static_cast<float>(-m_Animations.GetTileWidth()) / 2,
-			static_cast<float>(-m_Animations.GetTileHeight()) / 2,
+			static_cast<float>(-m_Animations.GetTileHeight()),
 		};
 	}
 	auto Character::GetMaxHealth() const -> float
