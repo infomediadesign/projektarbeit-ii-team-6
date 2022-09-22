@@ -31,10 +31,13 @@ namespace Redge
 		float s_Speed = 60;
 		Raylib::Tileset m_Animation = Raylib::Tileset("assets/Entities/Slime.png", 8, 1);
 		Raylib::Tileset m_BattleAnimation = Raylib::Tileset("assets/UI/Combat/idle/slimeIdle.png", 3, 1);
-		mutable uint16_t m_AnimationFrame = 0;
+		uint16_t m_AnimationFrame = 0;
 		static constexpr float s_FrameDuration = 0.15;
+		float m_Frametime = 0;
+
+		mutable uint16_t m_BattleAnimationFrame = 0;
 		static constexpr float s_BattleFrameDuration = 0.3;
-		mutable float m_Frametime = 0;
+		mutable float m_BattleFrametime = 0;
 	};
 } // namespace Redge
 

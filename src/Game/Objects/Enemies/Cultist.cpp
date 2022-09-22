@@ -97,11 +97,11 @@ namespace Redge
 		m_BattleAnimation.DrawTileTo(m_AnimationFrame, 0, destination);
 
 		// HACK: This is a terrible hack that doesn't need to be (with use of mutable)
-		m_Frametime += GetFrameTime();
-		if (m_Frametime >= s_FrameDuration)
+		m_BattleFrametime += GetFrameTime();
+		if (m_BattleFrametime >= s_BattleFrameDuration)
 		{
-			m_Frametime -= s_FrameDuration;
-			++m_AnimationFrame %= m_BattleAnimation.GetTileCountX();
+			m_BattleFrametime -= s_BattleFrameDuration;
+			++m_BattleAnimationFrame %= m_BattleAnimation.GetTileCountX();
 		}
 	}
 } // namespace Redge
